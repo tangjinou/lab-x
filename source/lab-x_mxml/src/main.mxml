@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Application xmlns:mx="http://www.adobe.com/2006/mxml" layout="absolute" creationComplete="callLater(init)">
+	 <mx:Script>
+	 	<![CDATA[
+	 		import MainApplication;
+	 	    import mx.core.UIComponent;
+	 	    import flash.events.Event;
+			import flash.events.MouseEvent;
+	 		public function init():void{
+	 		   var uic:UIComponent = new UIComponent();
+			   var main:MainApplication = new MainApplication();
+			   
+			   stage.frameRate = 40
+	 		   stage.frameRate = 40;
+               stage.addEventListener(MouseEvent.MOUSE_DOWN,main.onMouseDown);
+               stage.addEventListener(MouseEvent.MOUSE_MOVE,main.onMouseMove);
+               stage.addEventListener(MouseEvent.MOUSE_UP,main.onMouseUp); 
+			   
+			   
+			   uic.addChild(main);
+               addChild(uic);
+	 		}
+	 	]]>
+	 </mx:Script>
+</mx:Application>
