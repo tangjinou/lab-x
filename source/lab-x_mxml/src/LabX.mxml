@@ -8,16 +8,13 @@
     	    	   
     		public function init():void{
     		    experiment1_textarea.text=ResourceManager.experiment1_text;
-    		    
     		    tab_navigator.addEventListener(IndexChangedEvent.CHANGE,indexChangeHandler);
-    		    
-    		   
     		}
     		
-    	   private function indexChangeHandler(event:IndexChangedEvent):void 
-           { 
+    	   	private function indexChangeHandler(event:IndexChangedEvent):void 
+           	{ 
            	  swf_loading(event.newIndex);
-           } 
+            } 
     		
     		
     		private function swf_loading(number:int):void{
