@@ -2,7 +2,8 @@
 <mx:Application xmlns:mx="http://www.adobe.com/2006/mxml" layout="absolute" creationComplete="callLater(init)">
 	 <mx:Script>
 	 	<![CDATA[
-	 		import cn.edu.zju.xlab.MainApplication;
+	 		import cn.edu.zju.labx.core.StageObjectsManager;
+	 		import cn.edu.zju.labx.MainApplication;
 	 	    import mx.core.UIComponent;
 	 	    import flash.events.Event;
 			import flash.events.MouseEvent;
