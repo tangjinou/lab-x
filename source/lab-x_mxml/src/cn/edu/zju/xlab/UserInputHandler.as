@@ -1,4 +1,4 @@
-package {
+package cn.edu.zju.xlab {
 	
 	import flash.display.Stage;
 	import flash.events.KeyboardEvent;
