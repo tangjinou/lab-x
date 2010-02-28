@@ -1,4 +1,4 @@
-package {
+package cn.edu.zju.xlab {
 	
 	import flash.events.Event;
 	import flash.events.MouseEvent;
