@@ -8,16 +8,13 @@
 			import flash.events.MouseEvent;
 	 		public function init():void{
 	 		   var uic:UIComponent = new UIComponent();
-			   var main:MainApplication = new MainApplication();
-			   
+			   var FirstExperiment:MainApplication = new MainApplication();
 			   stage.frameRate = 40
 	 		   stage.frameRate = 40;
-               stage.addEventListener(MouseEvent.MOUSE_DOWN,main.onMouseDown);
-               stage.addEventListener(MouseEvent.MOUSE_MOVE,main.onMouseMove);
-               stage.addEventListener(MouseEvent.MOUSE_UP,main.onMouseUp); 
-			   
-			   
-			   uic.addChild(main);
+               stage.addEventListener(MouseEvent.MOUSE_DOWN,FirstExperiment.onMouseDown);
+               stage.addEventListener(MouseEvent.MOUSE_MOVE,FirstExperiment.onMouseMove);
+               stage.addEventListener(MouseEvent.MOUSE_UP,FirstExperiment.onMouseUp); 
+			   uic.addChild(FirstExperiment);
                addChild(uic);
 	 		}
 	 	]]>

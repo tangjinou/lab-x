@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Application xmlns:mx="http://www.adobe.com/2006/mxml" layout="absolute" creationComplete="init()">
+
+    <mx:Script>
+    	<![CDATA[
+    	
+    	    import cn.edu.zju.xlab.utils.ResourceManager;
+    		
+    		public function init():void{
+    		    experiment1_textarea.text=ResourceManager.experiment1_text;
+    		}
+    		
+    		
+    	]]>
+    </mx:Script>
+
+	<mx:Canvas x="0" y="0" width="800" height="600" themeColor="#F8FAFC" borderColor="#F6F8FA" backgroundColor="#FBF7F7">            
+                    <mx:VDividedBox width="100%" height="100%">
+
+            			<mx:Canvas label="Canvas 1" width="100%" height="30%" color="0x323232" backgroundColor="#ACACAC">
+                		
+       					  <mx:TabNavigator id="tn"  width="100%" height="100%" color="0x323232" fontSize="12">
+
+            			   <mx:VBox label="实验 1" fontSize="12">
+                			<mx:TextArea id="experiment1_textarea" width="100%" height="100%" text="">
+                			</mx:TextArea>
+           				   </mx:VBox>
+
+            			  <mx:VBox label="实验 2" fontSize="12">
+               				 <mx:Label text="实验 2"/>
+            			  </mx:VBox>
+
+            			  <mx:VBox label="实验 3" fontSize="12">
+                			<mx:Label text="实验 3"/>
+            			  </mx:VBox>
+            			
+       				      </mx:TabNavigator>
+
+            		   </mx:Canvas>
+
+            			<mx:Canvas label="Canvas 2" width="100%" height="70%" backgroundColor="#F7F4F9" >
+                		<mx:Label text="Add components here" fontWeight="bold" textAlign="center" width="100%"/>
+            			</mx:Canvas>
+
+        			</mx:VDividedBox>
+
+
+
+
+        
+	</mx:Canvas>
+</mx:Application>
