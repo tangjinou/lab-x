@@ -39,10 +39,7 @@ package cn.edu.zju.xlab {
         
 		public function MainApplication()
 		{   
-			super();
-			
-			
-			trace("stage:"+stage==null);
+			super(320,240);
 			
 			//stage can't be setted here, it may cause some problem, I don't know why   :clarke
 //			stage.frameRate = 40;
