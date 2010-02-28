@@ -6,25 +6,31 @@ package cn.edu.zju.labx.core
 	import mx.collections.ArrayCollection;
 	import mx.events.CollectionEvent;
 	
-	public static class StageObjectsManager
+	public  class StageObjectsManager
 	{   
-		public var list:ArrayCollection =new ArrayCollection();
 		
-		public function StageObjectsManager()
+		public static function get getDefault():StageObjectsManager
 		{
+			if (instance == null)
+				instance = new StageObjectsManager();
+			return instance;	
 		}
+
+		protected  var instance:StageObjectsManager = null;
 		
-		public function addLabXObject(obj:LabXObject):void
+		public  var list:ArrayCollection =new ArrayCollection();
+				
+		public   function addLabXObject(obj:LabXObject):void
 		{
 			list.addItem(obj);
 		}
 		
-		public function removeLabXObject(obj:LabXObject):void
+		public  function removeLabXObject(obj:LabXObject):void
 		{
 			list.removeItemAt(obj);
 		}
 		
-		public function notify(event:LabXEvent):void {
+		public  function notify(event:LabXEvent):void {
 			
 		}
 
