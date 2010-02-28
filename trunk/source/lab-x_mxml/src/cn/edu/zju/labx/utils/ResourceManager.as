@@ -1,4 +1,4 @@
-package cn.edu.zju.xlab.utils
+package cn.edu.zju.labx.utils
 {
 	public class ResourceManager
 	{   
