@@ -4,7 +4,8 @@
     <mx:Script>
     	<![CDATA[
     		import mx.events.IndexChangedEvent;
-    	    import cn.edu.zju.xlab.utils.ResourceManager;
+    	    import cn.edu.zju.labx.utils.ResourceManager;
+    	    	   
     		public function init():void{
     		    experiment1_textarea.text=ResourceManager.experiment1_text;
     		    
