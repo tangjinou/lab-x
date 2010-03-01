@@ -16,12 +16,10 @@ package cn.edu.zju.labx.utils
 		
 		[Test] 
 		public function testDistanceToNumber3D():void{
-		   
 		   var number1:Number3D =new Number3D(0,0,0);
 		   var number2:Number3D =new Number3D(1,2,2);
            var result:Number=MathUtils.distanceToNumber3D(number1,number2);
 		   Assert.assertEquals(Number(3),result);
-
 		}
 		
 	}

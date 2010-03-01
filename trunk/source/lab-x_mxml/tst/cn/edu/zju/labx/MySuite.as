@@ -12,7 +12,6 @@ package cn.edu.zju.labx
     public class MySuite  
     {  
         public var t1:MathUtilsTest;
-        public var t2:SimpleMathTest;
         public function MySuite()  
         {  
         }  
