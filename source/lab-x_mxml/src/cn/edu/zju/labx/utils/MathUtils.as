@@ -27,9 +27,7 @@ package cn.edu.zju.labx.utils
 		public static function translate( transform:Matrix3D, distance:Number, axis:Number3D ):Number3D
 		{
 			var vector:Number3D = axis.clone();
-	
 			Matrix3D.rotateAxis( transform, vector );
-	
 			return new Number3D(
 				transform.n14 + distance * vector.x,
 				transform.n24 + distance * vector.y,
@@ -123,7 +121,5 @@ package cn.edu.zju.labx.utils
      			 }
     		 }
     	 }
-
 	   }
-	   
 }

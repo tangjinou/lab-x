@@ -12,7 +12,6 @@
             import flexunit.framework.TestSuite; 
  
             private var core:FlexUnitCore; 
- 
             public function runMe():void 
             { 
                 core=new FlexUnitCore(); 
@@ -20,7 +19,6 @@
                                 //如果你有多个TestSuite，那么就 
                                 //core.run(Suite1,Suite2,Suite3 ...) 
                 core.run(MySuite); 
- 
             } 
         ]]>  
     </mx:Script>  

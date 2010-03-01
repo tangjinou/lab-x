@@ -1,11 +1,12 @@
 package cn.edu.zju.labx.objects
 {
-	public class Ray extends LabXObject
+	public class Ray extends LabXObject implements ILabXListener
 	{
 		public function Ray()
 		{
-			super();
 		}
-		
+		public function handleLabXEvent(event:LabXEvent):void{
+			
+		}
 	}
 }
