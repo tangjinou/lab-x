@@ -4,7 +4,6 @@ package cn.edu.zju.labx.objects
 	{
 		public function Board()
 		{
-			super();
 		}
 		
 	}

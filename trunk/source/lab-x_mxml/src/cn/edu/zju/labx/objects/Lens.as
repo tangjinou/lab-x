@@ -1,10 +1,15 @@
 package cn.edu.zju.labx.objects
-{
-	public class Lens extends LabXObject
+{   
+	import cn.edu.zju.labx.events.ILabXListener;
+	import cn.edu.zju.labx.events.LabXEvent;
+	import cn.edu.zju.labx.objects.LabXObject;
+	
+	public class Lens extends LabXObject implements ILabXListener
 	{
 		public function Lens()
 		{
-			super();
+		}
+		public function handleLabXEvent(event:LabXEvent):void{
 		}
 		
 	}

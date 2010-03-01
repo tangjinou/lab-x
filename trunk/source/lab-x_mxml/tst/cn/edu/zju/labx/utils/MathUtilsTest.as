@@ -22,5 +22,10 @@ package cn.edu.zju.labx.utils
 		   Assert.assertEquals(Number(3),result);
 		}
 		
+		[Test]
+		public function testDistanceToMatrix3D():void{
+		   
+		}
+		
 	}
 }

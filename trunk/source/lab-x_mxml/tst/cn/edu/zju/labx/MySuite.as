@@ -1,5 +1,6 @@
 package cn.edu.zju.labx
 {
+	import cn.edu.zju.labx.core.StageObjectsManagerTest;
 	import cn.edu.zju.labx.utils.MathUtilsTest;
 	
 	[Suite]  
@@ -12,6 +13,7 @@ package cn.edu.zju.labx
     public class MySuite  
     {  
         public var t1:MathUtilsTest;
+        public var t2:StageObjectsManagerTest;
         public function MySuite()  
         {  
         }  

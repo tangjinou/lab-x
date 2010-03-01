@@ -14,13 +14,12 @@ package cn.edu.zju.labx.core
 		public function testStageObjectsManager():void{
 
 			var lens:Lens =new Lens();
-			assertTrue(lens ==null);
+			assertTrue(lens != null);
+			assertEquals(1,2);
 //			var ray:Ray =new Ray();
 //			StageObjectsManager.getDefault().addLabXObject(lens);
 //			StageObjectsManager.getDefault().addLabXObject(ray);
 //			assertEquals(2,StageObjectsManager.getdefault().list.length);
-
-			
 		}
 	}
 }
