@@ -19,10 +19,10 @@ package cn.edu.zju.labx.utils
 	        return Math.sqrt(x*x+y*y+z*z);
 		}
 		
-//		public static function distanceToMatrix3D( obj1:Matrix3D, obj2:Matrix3D ):Number
-//		{
-//			return distanceToNumber3D(matrix3DPosition(obj1), matrix3DPosition(obj2));
-//		}
+		public static function distanceToMatrix3D( obj1:Matrix3D, obj2:Matrix3D ):Number
+		{
+			return distanceToNumber3D(matrix3DPosition(obj1), matrix3DPosition(obj2));
+		}
 		
 		public static function translate( transform:Matrix3D, distance:Number, axis:Number3D ):Number3D
 		{
@@ -126,8 +126,4 @@ package cn.edu.zju.labx.utils
 
 	   }
 	   
-//	    public static function add(num1:Number,num2:Number):Number  
-//        {  
-//            return num1 + num2;  
-//        }  
 }
