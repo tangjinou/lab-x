@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<mx:Application xmlns:mx="http://www.adobe.com/2006/mxml" layout="absolute" creationComplete="init()">
+<mx:Application xmlns:mx="http://www.adobe.com/2006/mxml"  width="800" height="600" layout="absolute" creationComplete="init()">
 
     <mx:Script>
     	<![CDATA[
@@ -8,61 +8,47 @@
     	    	   
     		public function init():void{
     		    experiment1_textarea.text=ResourceManager.experiment1_text;
-    		    tab_navigator.addEventListener(IndexChangedEvent.CHANGE,indexChangeHandler);
+    		    tab_navigator.addEventListener(IndexChangedEvent.CHANGE,indexChangeHandler); 
     		}
-    		
     	   	private function indexChangeHandler(event:IndexChangedEvent):void 
            	{ 
            	  swf_loading(event.newIndex);
+//           	  swfLoad.width = mainCanvas.width;
+//           	  swfLoad.height = mainCanvas.height*0.7;
             } 
-    		
-    		
     		private function swf_loading(number:int):void{
-    			
     			switch(number){
     			  case 0: swfLoad.load(ResourceManager.experiment1_swf);break;
     			  case 1: swfLoad.load(ResourceManager.experiment2_swf);break;
     			  default :  break;
     			}
-    		    
     		}
-    		
-    		private function ok(e:Event):void
-			{
-       			 e.target.content.width=main.width;
-       			 e.target.content.height=main.height;
-			}
     	]]>
     </mx:Script>
 
-	<mx:Canvas x="0" y="0" width="800" height="600" themeColor="#F8FAFC" borderColor="#F6F8FA" backgroundColor="#FBF7F7">            
+	<mx:Canvas id="mainCanvas" x="0" y="0" width="800" height="600" themeColor="#F8FAFC" borderColor="#F6F8FA" backgroundColor="#FBF7F7">            
                     <mx:VDividedBox width="100%" height="100%">
 
-            			<mx:Canvas label="Canvas 1" width="100%" height="30%" color="0x323232" backgroundColor="#ACACAC">
-                		
+            		    <mx:Canvas label="Canvas 1" width="100%" height="20%" color="0x323232" backgroundColor="#ACACAC">
        					  <mx:TabNavigator id="tab_navigator"  width="100%" height="100%" color="0x323232" fontSize="12">
-
-            			   <mx:VBox label="实验 1" fontSize="12">
-                			<mx:TextArea id="experiment1_textarea" width="100%" height="100%" text="">
-                			</mx:TextArea>
-           				   </mx:VBox>
-
-            			  <mx:VBox label="实验 2" fontSize="12">
-               				 <mx:Label text="实验 2"/>
-            			  </mx:VBox>
-
-            			  <mx:VBox label="实验 3" fontSize="12">
-                			<mx:Label text="实验 3"/>
-            			  </mx:VBox>
-            			
+            			   		<mx:VBox label="实验 1" fontSize="12">
+                					<mx:TextArea id="experiment1_textarea" width="100%" height="100%">
+                					</mx:TextArea>
+           				   		</mx:VBox>
+            			  		<mx:VBox label="实验 2" fontSize="12">
+               				 		<mx:Label text="实验 2"/>
+            			 		</mx:VBox>
+            			  		<mx:VBox label="实验 3" fontSize="12">
+                					<mx:Label text="实验 3"/>
+            			  		</mx:VBox>
        				      </mx:TabNavigator>
 
             		   </mx:Canvas>
 
-            			<mx:Canvas id="main" label="Canvas2" width="100%" height="70%" backgroundColor="#F7F4F9" >
+            			<mx:Canvas id="main" label="Canvas2" width="100%" height="80%">
                 		   <mx:SWFLoader id="swfLoad"/>
             			</mx:Canvas>
-
+            			
         			</mx:VDividedBox>
 
 

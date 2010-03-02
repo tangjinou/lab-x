@@ -1,8 +1,9 @@
-package cn.edu.zju.labx {
+package {
 	
 	import flash.events.Event;
 	import flash.events.MouseEvent;
 	
+	import org.papervision3d.cameras.CameraType;
 	import org.papervision3d.lights.PointLight3D;
 	import org.papervision3d.materials.shadematerials.PhongMaterial;
 	import org.papervision3d.objects.DisplayObject3D;
@@ -12,8 +13,6 @@ package cn.edu.zju.labx {
 	import org.papervision3d.view.stats.StatsView;
 
 
-	[SWF( backgroundColor="#000000" )]
-	
 	public class MainApplication extends BasicView
 	{
 		private var inRay:Cylinder;
@@ -39,7 +38,7 @@ package cn.edu.zju.labx {
         
 		public function MainApplication()
 		{   
-			super(320,240);
+			super(800, 420, true, false, CameraType.FREE);
 			
 			//stage can't be setted here, it may cause some problem, I don't know why   :clarke
 //			stage.frameRate = 40;

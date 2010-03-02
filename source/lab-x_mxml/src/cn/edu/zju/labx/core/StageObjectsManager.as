@@ -1,14 +1,13 @@
 package cn.edu.zju.labx.core
 {
+	import cn.edu.zju.labx.events.ILabXListener;
 	import cn.edu.zju.labx.events.LabXEvent;
-	import cn.edu.zju.labx.objects.LabXObject;
 	
 	import mx.collections.ArrayCollection;
-	import mx.events.CollectionEvent;
 	
 	public  class StageObjectsManager
 	{   
-		
+		public var notify_count:int = 0;
 		public static function get getDefault():StageObjectsManager
 		{
 			if (instance == null)
@@ -16,22 +15,31 @@ package cn.edu.zju.labx.core
 			return instance;	
 		}
 
-		protected  var instance:StageObjectsManager = null;
+		protected static var instance:StageObjectsManager = null;
 		
 		public  var list:ArrayCollection =new ArrayCollection();
 				
-		public   function addLabXObject(obj:LabXObject):void
-		{
+		public   function addLabXObject(obj:ILabXListener):void
+		{   
 			list.addItem(obj);
 		}
 		
-		public  function removeLabXObject(obj:LabXObject):void
-		{
-			list.removeItemAt(obj);
+		public  function removeLabXObject(obj:ILabXListener):void
+		{   
+			list.removeItemAt(list.getItemIndex(obj));
 		}
 		
 		public  function notify(event:LabXEvent):void {
-			
+			//clear notify
+			notify_count= 0;
+			for(var index:int;index<list.length;index++){
+			   var obj:ILabXListener =list.getItemAt(index) as ILabXListener;
+			     notify_count++
+			     if(obj.handleLabXEvent(event)==false){
+			        break;
+			     }
+			     
+			}
 		}
 
 	}

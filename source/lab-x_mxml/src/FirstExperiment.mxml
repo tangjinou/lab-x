@@ -1,23 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<mx:Application xmlns:mx="http://www.adobe.com/2006/mxml" layout="absolute" creationComplete="callLater(init)">
+<mx:Application xmlns:mx="http://www.adobe.com/2006/mxml" layout="absolute" creationComplete="callLater(init)" width="800" height="600" xmlns:labx="cn.edu.zju.labx.*" xmlns:local="*">
 	 <mx:Script>
 	 	<![CDATA[
 	 		import cn.edu.zju.labx.core.StageObjectsManager;
-	 		import cn.edu.zju.labx.MainApplication;
+	 		import MainApplication;
 	 	    import mx.core.UIComponent;
 	 	    import flash.events.Event;
 			import flash.events.MouseEvent;
 	 		public function init():void{
 	 		   var uic:UIComponent = new UIComponent();
-			   var FirstExperiment:MainApplication = new MainApplication();
-			   stage.frameRate = 40
-	 		   stage.frameRate = 40;
-               stage.addEventListener(MouseEvent.MOUSE_DOWN,FirstExperiment.onMouseDown);
-               stage.addEventListener(MouseEvent.MOUSE_MOVE,FirstExperiment.onMouseMove);
-               stage.addEventListener(MouseEvent.MOUSE_UP,FirstExperiment.onMouseUp); 
-			   uic.addChild(FirstExperiment);
+//			   var FirstExperiment:MainApplication = new MainApplication();
+			   stage.frameRate = 40;
+               stage.addEventListener(MouseEvent.MOUSE_DOWN,firstExperiment.onMouseDown);
+               stage.addEventListener(MouseEvent.MOUSE_MOVE,firstExperiment.onMouseMove);
+               stage.addEventListener(MouseEvent.MOUSE_UP,firstExperiment.onMouseUp); 
+			   uic.addChild(firstExperiment);
                addChild(uic);
 	 		}
 	 	]]>
 	 </mx:Script>
+	 <local:MainApplication id="firstExperiment" x="0" y="0" />
 </mx:Application>

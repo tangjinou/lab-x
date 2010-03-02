@@ -1,4 +1,4 @@
-package cn.edu.zju.labx {
+package{
 	
 	import flash.display.Stage;
 	import flash.events.KeyboardEvent;
