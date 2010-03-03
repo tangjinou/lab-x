@@ -8,6 +8,8 @@ package cn.edu.zju.labx.core
 	
 	import mx.collections.ArrayCollection;
 	
+	import org.papervision3d.view.BasicView;
+	
 	public  class StageObjectsManager
 	{   
 		public var notify_count:int = 0;
@@ -21,8 +23,7 @@ package cn.edu.zju.labx.core
 		protected static var instance:StageObjectsManager = null;
 		
 		
-		
-		/*object listener*/
+		/*stage listener*/
 		///////////////////////////////////////////////////////
 		public  var list:ArrayCollection =new ArrayCollection();
 		public   function addLabXObject(obj:ILabXListener):void
@@ -75,7 +76,10 @@ package cn.edu.zju.labx.core
             this.z_min_offset = offset;
         }
         
+        /*gloab variable**/
         /////////////////////////////////////////////////////////////////
-        
+        public  var mainView:BasicView;
+        public  var stage_width:int;
+        public  var stage_height:int;
 	}   
 }

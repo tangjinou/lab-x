@@ -1,5 +1,6 @@
 package cn.edu.zju.labx.objects
 {   
+	import cn.edu.zju.labx.core.StageObjectsManager;
 	import cn.edu.zju.labx.events.ILabXListener;
 	import cn.edu.zju.labx.events.LabXEvent;
 	
@@ -31,10 +32,19 @@ package cn.edu.zju.labx.objects
 		}
 	    override public  function eventTriger(event:String):void{
 	    	if(event == MouseEvent.MOUSE_UP){
-                 this.moveRight(5);
+	    		 if(this.getMouse_x()>this.getScreen_x()){
+                    this.moveRight(this.x_min_offset);
+                 }
+                 else{
+                    this.moveLeft(this.x_min_offset);
+                 }
+//                  trace("mouse_X"+this.getView().);
+//                  trace("mouse_X"+this.getMouse_x());
+//                  this.x = this.getMouse_x()-this.getStageWidth()/2;
+//                  trace(this.x);
+//                  trace("sssssssss");
 	    	}
 	    }
-	    
 	     // should destribute the listener 
         override public function addEventListener(type:String, listener:Function,useCapture:Boolean = false, priority:int = 0, useWeakReference:Boolean = false):void
 		{   

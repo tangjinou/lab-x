@@ -8,14 +8,24 @@
 	 	    import flash.events.Event;
 			import flash.events.MouseEvent;
 	 		public function init():void{
+	 		   initStage();
+	 		   trace("stage_width:"+stage.width) ;
+	 		   trace("stage_height:"+stage.height) ;
 	 		   var uic:UIComponent = new UIComponent();
-			   stage.frameRate = 40;
+			   uic.addChild(testLabxObjectApplication);
+               addChild(uic);   
+               
+	 		} 
+	 		public function initStage():void{
+	 		   StageObjectsManager.getDefault.mainView=testLabxObjectApplication;
+	 		   stage.frameRate = 40;
 //               stage.addEventListener(MouseEvent.MOUSE_DOWN,onMouseDownHandler);
 //               stage.addEventListener(MouseEvent.MOUSE_MOVE,onMouseMoveHandler);
                stage.addEventListener(MouseEvent.MOUSE_UP,onMouseUpHandler); 
-			   uic.addChild(testLabxObjectApplication);
-               addChild(uic);   
-	 		} 
+	 		   StageObjectsManager.getDefault.stage_width=stage.width; 
+	 		   StageObjectsManager.getDefault.stage_height=stage.height; 
+	 		}
+	 		
 	 		public function onMouseDownHandler(event:MouseEvent):void{
 	 		    StageObjectsManager.getDefault.dispatchEvent(event);
 	 		}
