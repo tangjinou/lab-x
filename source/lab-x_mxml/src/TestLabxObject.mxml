@@ -19,11 +19,13 @@
 	 		public function initStage():void{
 	 		   StageObjectsManager.getDefault.mainView=testLabxObjectApplication;
 	 		   stage.frameRate = 40;
-//               stage.addEventListener(MouseEvent.MOUSE_DOWN,onMouseDownHandler);
+//              stage.addEventListener(MouseEvent.MOUSE_DOWN,onMouseDownHandler);
 //               stage.addEventListener(MouseEvent.MOUSE_MOVE,onMouseMoveHandler);
                stage.addEventListener(MouseEvent.MOUSE_UP,onMouseUpHandler); 
 	 		   StageObjectsManager.getDefault.stage_width=stage.width; 
 	 		   StageObjectsManager.getDefault.stage_height=stage.height; 
+	 		   StageObjectsManager.getDefault.mainView.camera.zoom =90;
+	 		   StageObjectsManager.getDefault.mainView.camera.x=stage.width/2;
 	 		}
 	 		
 	 		public function onMouseDownHandler(event:MouseEvent):void{
