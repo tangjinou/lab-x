@@ -45,7 +45,10 @@ package cn.edu.zju.labx.utils
 		}
 		
 		/**
-		 *   This should be checked~
+		   This computes an in-place complex-to-complex FFT 
+		   x and y are the real and imaginary arrays of 2^m points.
+		   dir =  1 gives forward transform
+		   dir = -1 gives reverse transform 
 		 ***/
 		public static function FFT(dir:Number, m:Number, x:Array, y:Array):void
    		{
@@ -121,5 +124,52 @@ package cn.edu.zju.labx.utils
      			 }
     		 }
     	 }
-	   }
+    	 
+    	public static function FFT2D(comp_arr:Array, nx:Number = NaN, ny:Number = NaN, dir:Number = 1):Boolean {
+        var i:Number, j:Number, m:Number, twopm:Number;
+        var real:Number, imag:Number;
+        var real_arr:Array = [];
+        var imag_arr:Array = [];
+
+        // Transform the rows
+        real = nx;
+        imag = nx;
+        if (isNaN(real) || isNaN(imag)) return false;
+        if (!(((nx-1)&nx)==0) || twopm!=nx) return false;
+        for (j=0;j<ny;j++) {
+            for (i=0;i<nx;i++) {
+                real_arr[i] = comp_arr[i][j].real;
+                imag_arr[i] = comp_arr[i][j].imag;
+            }
+            FFT(dir, m, real_arr, imag_arr);
+            for (i=0;i<nx;i++) {
+                comp_arr[i][j].real = real_arr[i];
+                comp_arr[i][j].imag = imag_arr[i];
+            }
+        }
+        real_arr = [];
+        imag_arr = [];
+
+        // Transform the columns
+        real = ny;
+        imag = ny;
+        if (isNaN(real) || isNaN(imag)) return false;
+        if (!(((ny-1)&ny)==0) || twopm!=ny) return false;
+        for (i=0;i<nx;i++) {
+            for (j=0;j<ny;j++) {
+                real_arr[j] = comp_arr[i][j].real;
+                imag_arr[j] = comp_arr[i][j].imag;
+            }
+            FFT(dir, m, real_arr, imag_arr);
+            for (j=0;j<ny;j++) {
+                comp_arr[i][j].real = real_arr[j];
+                comp_arr[i][j].imag = imag_arr[j];
+            }
+        }
+        real_arr = [];
+        imag_arr = [];
+
+        return true;
+    	}
+	 }
 }

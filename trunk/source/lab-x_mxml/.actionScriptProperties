@@ -14,6 +14,7 @@
 <application path="LabX.mxml"/>
 <application path="FirstExperiment.mxml"/>
 <application path="TestRunner.mxml"/>
+<application path="MyTest.mxml"/>
 </applications>
 <modules/>
 <buildCSSFiles/>
