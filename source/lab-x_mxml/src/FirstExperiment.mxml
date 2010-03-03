@@ -17,7 +17,7 @@
 			   uic.addChild(firstExperiment);
                addChild(uic);
 	 		}
-	 	]]>
+	 	]]> 
 	 </mx:Script>
 	 <local:MainApplication id="firstExperiment" x="0" y="0" />
 </mx:Application>
