@@ -7,13 +7,15 @@ package cn.edu.zju.labx.objects
 	{
 		public function Ray()
 		{
-			super();
+			super(this);
 		}
-		public function handleLabXEvent(event:LabXEvent):Boolean{
+	    
+	    public function handleLabXEvent(event:LabXEvent):Boolean{
 		   //TODO:
-		   
-		   
 		   return true;
 		}
+		
+	    override public  function eventTriger(event:String):void{
+	    }
 	}
 }

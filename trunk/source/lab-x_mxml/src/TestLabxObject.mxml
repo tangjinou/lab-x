@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Application xmlns:mx="http://www.adobe.com/2006/mxml" layout="absolute" creationComplete="callLater(init)" width="800" height="600" xmlns:labx="cn.edu.zju.labx.*" xmlns:local="*">
+	 <mx:Script>
+	 	<![CDATA[
+	 		import cn.edu.zju.labx.core.StageObjectsManager;
+	 		import TestLabxObjectApplication;
+	 	    import mx.core.UIComponent;
+	 	    import flash.events.Event;
+			import flash.events.MouseEvent;
+	 		public function init():void{
+	 		   var uic:UIComponent = new UIComponent();
+			   stage.frameRate = 40;
+//               stage.addEventListener(MouseEvent.MOUSE_DOWN,onMouseDownHandler);
+//               stage.addEventListener(MouseEvent.MOUSE_MOVE,onMouseMoveHandler);
+               stage.addEventListener(MouseEvent.MOUSE_UP,onMouseUpHandler); 
+			   uic.addChild(testLabxObjectApplication);
+               addChild(uic);   
+	 		} 
+	 		public function onMouseDownHandler(event:MouseEvent):void{
+	 		    StageObjectsManager.getDefault.dispatchEvent(event);
+	 		}
+	 		public function onMouseMoveHandler(event:MouseEvent):void{
+	 		    StageObjectsManager.getDefault.dispatchEvent(event);
+	 		}
+	 		public function onMouseUpHandler(event:MouseEvent):void{
+	 		    StageObjectsManager.getDefault.dispatchEvent(event);
+	 		}
+	 	]]> 
+	 </mx:Script>
+	<local:TestLabxObjectApplication  id="testLabxObjectApplication"  x="0" y="0"/>
+</mx:Application>
