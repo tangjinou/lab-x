@@ -38,6 +38,17 @@ package cn.edu.zju.labx.objects
                  else{
                     this.moveLeft(this.x_min_offset);
                  }
+                 trace("camera.x"+this.getView().camera.x);
+                 trace("camera.y"+this.getView().camera.y);
+                 trace("camera.z"+this.getView().camera.z);
+                 
+                 trace("viewport.x"+this.getView().viewport.x);
+                 trace("viewport.y"+this.getView().viewport.y);
+                 trace("camera.zoom"+this.getView().camera.zoom);
+                 
+                 trace("this.getMouse_x()"+this.getMouse_x());
+                 trace("this.getScreen_x()"+this.getScreen_x());
+                 
 //                  trace("mouse_X"+this.getView().);
 //                  trace("mouse_X"+this.getMouse_x());
 //                  this.x = this.getMouse_x()-this.getStageWidth()/2;

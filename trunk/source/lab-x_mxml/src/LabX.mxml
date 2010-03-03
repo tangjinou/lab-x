@@ -13,8 +13,8 @@
     	   	private function indexChangeHandler(event:IndexChangedEvent):void 
            	{ 
            	  swf_loading(event.newIndex);
-//           	  swfLoad.width = mainCanvas.width;
-//           	  swfLoad.height = mainCanvas.height*0.7;
+//            swfLoad.width = mainCanvas.width;
+//            swfLoad.height = mainCanvas.height*0.7;
             } 
     		private function swf_loading(number:int):void{
     			switch(number){
