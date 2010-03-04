@@ -23,9 +23,7 @@ package cn.edu.zju.labx.objects
 		   	len = new Cylinder(this.material,100,100,30,10);
 		   	this.addChild(len);
 		}
-		public function labXObjectPressHandler():void{
-		   
-		}
+
 	    public function handleLabXEvent(event:LabXEvent):Boolean{
 		   //TODO:
 		   return true;
