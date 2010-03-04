@@ -2,6 +2,8 @@
 <mx:Application xmlns:mx="http://www.adobe.com/2006/mxml" layout="absolute" creationComplete="callLater(init)" width="800" height="600" xmlns:labx="cn.edu.zju.labx.*" xmlns:local="*">
 	 <mx:Script>
 	 	<![CDATA[
+	 		import cn.edu.zju.labx.utils.ResourceManager;
+	 		import mx.controls.Image;
 	 		import cn.edu.zju.labx.core.StageObjectsManager;
 	 	    import mx.core.UIComponent;
 	 	    import flash.events.Event;
@@ -37,11 +39,12 @@
 	 	]]> 
 	 </mx:Script>
      <local:TestMainViewApplication id="testMainViewApplication"  />
-	
+	  
+	 
+	  
      <mx:HBox x="654" y="0" width="100%">
-     <mx:Button  label="zoom+" click="StageObjectsManager.getDefault.mainView.camera.zoom++"  icon="@Embed('../resource/picture/zoom_add.png')"/>
-     <mx:Button  label="zoom-" click="StageObjectsManager.getDefault.mainView.camera.zoom--" icon="@Embed('../resource/picture/zoom_min.png')"/>
+     <mx:Button  label="zoom+" click="StageObjectsManager.getDefault.mainView.camera.zoom++" />
+     <mx:Button  label="zoom-" click="StageObjectsManager.getDefault.mainView.camera.zoom--" />
      </mx:HBox>
-     
 
 </mx:Application>

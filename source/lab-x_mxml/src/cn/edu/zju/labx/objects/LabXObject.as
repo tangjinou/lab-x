@@ -23,6 +23,7 @@ package cn.edu.zju.labx.objects
 		   y_min_offset = StageObjectsManager.getDefault.y_min_offset;
 		   z_min_offset = StageObjectsManager.getDefault.z_min_offset;
 		}
+		
 		 protected function objectPressHandler(event:InteractiveScene3DEvent):void{
 		     StageObjectsManager.getDefault.setNextObjectListener(this);
 		 }

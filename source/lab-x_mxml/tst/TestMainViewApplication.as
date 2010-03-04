@@ -1,8 +1,11 @@
 package
 {
+	import cn.edu.zju.labx.objects.Board;
 	import cn.edu.zju.labx.objects.Lens;
 	
 	import flash.events.Event;
+	
+	import mx.skins.Border;
 	
 	import org.papervision3d.cameras.CameraType;
 	import org.papervision3d.materials.ColorMaterial;
@@ -15,6 +18,7 @@ package
 		
 		private var cube:Cube;
 		private var lens:Lens;
+		private var board:Board;
 		public function TestMainViewApplication(viewportWidth:Number=640, viewportHeight:Number=480, scaleToStage:Boolean=true, interactive:Boolean=false, cameraType:String="Target")
 		{
 			super(800, 420, true, false, CameraType.FREE);
@@ -36,6 +40,13 @@ package
             lens = new Lens(red);
             lens.y -=130;
             scene.addChild(lens);
+            
+            var white:ColorMaterial = new ColorMaterial(0xfffafa);
+			white.interactive = true;
+            board = new  Board(white);
+            board.x +=300
+            board.y -=120
+            scene.addChild(board);
 			startRendering();
 		}
 		
