@@ -21,6 +21,7 @@ package
 			viewport.interactive = true;
 			var blue:ColorMaterial = new ColorMaterial(0x0000FF);
 			var red:ColorMaterial = new ColorMaterial(0xFF0000);
+			red.interactive = true;
 			var materialsList:MaterialsList = new MaterialsList();
 			materialsList.addMaterial(blue,"front");
 			materialsList.addMaterial(blue,"back");
