@@ -3,7 +3,6 @@
 	 <mx:Script>
 	 	<![CDATA[
 	 		import cn.edu.zju.labx.core.StageObjectsManager;
-	 		import TestLabxObjectApplication;
 	 	    import mx.core.UIComponent;
 	 	    import flash.events.Event;
 			import flash.events.MouseEvent;
@@ -33,7 +32,6 @@
 	 		    StageObjectsManager.getDefault.dispatchEvent(event);
 	 		}
 	 		public function onMouseUpHandler(event:MouseEvent):void{
-	 			trace("ssssssssssssssssssssssssssssssssssssssssssss");
 	 		    StageObjectsManager.getDefault.dispatchEvent(event);
 	 		}
 	 	]]> 
@@ -41,7 +39,9 @@
      <local:TestMainViewApplication id="testMainViewApplication"  />
 	
      <mx:HBox x="654" y="0" width="100%">
-     <mx:Button  label="zoom+" click="StageObjectsManager.getDefault.mainView.camera.zoom++" />
-     <mx:Button  label="zoom-" click="StageObjectsManager.getDefault.mainView.camera.zoom--" />
+     <mx:Button  label="zoom+" click="StageObjectsManager.getDefault.mainView.camera.zoom++"  icon="@Embed('../resource/picture/zoom_add.png')"/>
+     <mx:Button  label="zoom-" click="StageObjectsManager.getDefault.mainView.camera.zoom--" icon="@Embed('../resource/picture/zoom_min.png')"/>
      </mx:HBox>
+     
+
 </mx:Application>
