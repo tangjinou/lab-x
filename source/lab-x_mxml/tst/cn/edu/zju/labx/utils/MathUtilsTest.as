@@ -39,8 +39,23 @@ package cn.edu.zju.labx.utils
 		[Test] 
 		public function testFFT2D_single_square():void{
 			var i:Number;
-			var complex:Complex = new Complex(1, 2);
-			Assert.assertEquals(1,complex.real);
+			var j:Number;
+			var rowIndex:Number = 8;
+			var colIndex:Number = 8;
+			var comp_arr:Array = new Array(rowIndex);
+
+			for (i = 0; i < rowIndex; i++)
+			{
+				comp_arr[i]=new Array(colIndex);
+				for (j = 0; j < colIndex; j++)
+				{
+					if (i < rowIndex/2 && j < colIndex/2)
+						comp_arr[i][j] = new Complex(1, 0);
+					else
+						comp_arr[i][j] = new Complex(0, 0);
+				}
+			}
+			Assert.assertEquals(1,1);
 		}
 		
 		[Test] 
