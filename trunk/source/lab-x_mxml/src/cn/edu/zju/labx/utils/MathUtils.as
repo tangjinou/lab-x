@@ -126,6 +126,18 @@ package cn.edu.zju.labx.utils
     		 }
     	 }
     	 
+    	 private static function log2(input:Number):Number{
+		    if(input<=0){
+		        return NaN;
+		    }else if((input&(input-1))==0){
+		        var a:int=0;
+		        while(input>1){input>>=1; ++a;}
+		        return a;
+		    }else{
+		        return Math.log(input)*Math.LOG2E;
+		    }
+		}
+		
     	 /**
 	     * @method  fft2D
 	     * @description  Performs a 2D fft in place given a complex 2D array.
@@ -138,7 +150,7 @@ package cn.edu.zju.labx.utils
 	     **/
     	 
     	public static function FFT2D(comp_arr:Array, nx:Number = NaN, ny:Number = NaN, dir:Number = 1):Boolean {
-        var i:Number, j:Number, m:Number, twopm:Number;
+        var i:Number, j:Number, m:Number;
         var real:Number, imag:Number;
         var real_arr:Array = [];
         var imag_arr:Array = [];
@@ -147,7 +159,8 @@ package cn.edu.zju.labx.utils
         real = nx;
         imag = nx;
         if (isNaN(real) || isNaN(imag)) return false;
-        if (!(((nx-1)&nx)==0) || twopm!=nx) return false;
+        if (!((nx-1)&nx)==0) return false;
+        m = log2(nx);
         for (j=0;j<ny;j++) {
             for (i=0;i<nx;i++) {
                 real_arr[i] = comp_arr[i][j].real;
@@ -166,7 +179,8 @@ package cn.edu.zju.labx.utils
         real = ny;
         imag = ny;
         if (isNaN(real) || isNaN(imag)) return false;
-        if (!(((ny-1)&ny)==0) || twopm!=ny) return false;
+        if (!((ny-1)&ny)==0) return false;
+        m = log2(ny);
         for (i=0;i<nx;i++) {
             for (j=0;j<ny;j++) {
                 real_arr[j] = comp_arr[i][j].real;
@@ -183,5 +197,6 @@ package cn.edu.zju.labx.utils
 
         return true;
     	}
+    	
 	 }
 }
