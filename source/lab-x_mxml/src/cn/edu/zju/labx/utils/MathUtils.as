@@ -50,6 +50,7 @@ package cn.edu.zju.labx.utils
 		   dir =  1 gives forward transform
 		   dir = -1 gives reverse transform 
 		 ***/
+		 
 		public static function FFT(dir:Number, m:Number, x:Array, y:Array):void
    		{
     		 //trace('Getting FFT');
@@ -124,6 +125,17 @@ package cn.edu.zju.labx.utils
      			 }
     		 }
     	 }
+    	 
+    	 /**
+	     * @method  fft2D
+	     * @description  Performs a 2D fft in place given a complex 2D array.
+	     * @usage  <pre>FFT2D(comp_arr, nx, ny, dir);</pre>
+	     * @param  comp_arr  (Array)  -- a 2d array, each element contains a {re:val, im:val} Complex object.
+	     * @param  nx  (Number)  -- an integer, the size of the array rows.
+	     * @param  ny  (Number)  -- an integer, the size of the array columns.
+	     * @param  dir  (Number)  -- the direction dir, 1 for forward, -1 for reverse.
+	     * @return  (Boolean)  -- returns false if there are memory problems or the dimensions are not powers of 2
+	     **/
     	 
     	public static function FFT2D(comp_arr:Array, nx:Number = NaN, ny:Number = NaN, dir:Number = 1):Boolean {
         var i:Number, j:Number, m:Number, twopm:Number;

@@ -36,7 +36,12 @@ package cn.edu.zju.labx.utils
 			}
 		}
 		
-		//TODO: add test for FFT2D
+		[Test] 
+		public function testFFT2D_single_square():void{
+			var i:Number;
+			var complex:Complex = new Complex(1, 2);
+			Assert.assertEquals(1,complex.real);
+		}
 		
 		[Test] 
 		public function testDistanceToNumber3D():void{
