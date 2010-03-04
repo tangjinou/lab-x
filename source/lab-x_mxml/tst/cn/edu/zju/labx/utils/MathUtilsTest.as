@@ -40,6 +40,7 @@ package cn.edu.zju.labx.utils
 		public function testFFT2D_single_square():void{
 			var i:Number;
 			var j:Number;
+			var res:Boolean;
 			var rowIndex:Number = 8;
 			var colIndex:Number = 8;
 			var comp_arr:Array = new Array(rowIndex);
@@ -49,13 +50,17 @@ package cn.edu.zju.labx.utils
 				comp_arr[i]=new Array(colIndex);
 				for (j = 0; j < colIndex; j++)
 				{
-					if (i < rowIndex/2 && j < colIndex/2)
+					//if (i < rowIndex/2 && j < colIndex/2)
 						comp_arr[i][j] = new Complex(1, 0);
-					else
-						comp_arr[i][j] = new Complex(0, 0);
+					//else
+						//comp_arr[i][j] = new Complex(0, 0);
 				}
 			}
-			Assert.assertEquals(1,1);
+
+			res = MathUtils.FFT2D(comp_arr, rowIndex, colIndex, 1);
+			Assert.assertEquals(true, res);
+			MathUtils.FFT2D(comp_arr, rowIndex, colIndex, -1);
+			
 		}
 		
 		[Test] 
