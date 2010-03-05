@@ -28,7 +28,7 @@ package cn.edu.zju.labx.core
 			StageObjectsManager.getDefault.addLabXObject(lens);
 			StageObjectsManager.getDefault.addLabXObject(new Board());
 			StageObjectsManager.getDefault.notify(new LabXEvent(ray, "this is event~"));
-//			assertEquals(3,StageObjectsManager.getDefault.notify_count);
+			assertEquals(2,StageObjectsManager.getDefault.notify_count);
 		}
 	}
 }

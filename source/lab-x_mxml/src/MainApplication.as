@@ -14,7 +14,6 @@ package {
 	import org.papervision3d.view.BasicView;
 	import org.papervision3d.view.stats.StatsView;
 
-
 	public class MainApplication extends BasicView
 	{
 		private var inRay:Cylinder;
@@ -154,7 +153,6 @@ package {
              	//clamp yaw
              	//if(camYaw > 355) camYaw = 355;
   				//if(camYaw < 185) camYaw = 185;
-               
                 previousMouseX = e.stageX;
                 previousMouseY = e.stageY;
              }

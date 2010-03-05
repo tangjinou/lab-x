@@ -45,5 +45,15 @@ package cn.edu.zju.labx.objects
 	       return this.y + StageObjectsManager.getDefault.stage_height/2;
 	    }
 	    
+	    /*********************************************************/
+	    
+	    public function setX_Platform(_x:Number):void{
+	       
+	    }
+	    
+	    public function get x_in_platform():Number{
+	       return 0;
+	    }
+	    
 	}
 }

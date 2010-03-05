@@ -34,7 +34,6 @@ package
 			materialsList.addMaterial(blue,"top");
 			materialsList.addMaterial(blue,"bottom");
 			cube =new Cube(materialsList,800,200,20);
-			
 			cube.y -=200;
 			scene.addChild(cube);
             lens = new Lens(red);

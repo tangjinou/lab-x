@@ -25,6 +25,11 @@ package cn.edu.zju.labx.core
          */ 
         public  var stage_height:Number;
         
+        /**
+        *  This var is for test, it has recorded the number of labXObject notify
+        * */
+        public  var notify_count:int=0;
+        
 		/**
 		 * Get the current mouse X axis position, coordinate is start from left-bottom of the main view
 		 */
@@ -92,7 +97,6 @@ package cn.edu.zju.labx.core
 			return objectList;
 		}
 		
-		
 		/**
 		 * *************************************************************************
 		 * LabX Event Manager
@@ -106,8 +110,11 @@ package cn.edu.zju.labx.core
 		
 		/**
 		 * add an LabX Event listener
+		 * 
+		 * 
+		 * This should be private,Because it only add when object added,what is your oppinion?
 		 */
-		public function addLabXEventListener(listener:ILabXListener):void
+		private function addLabXEventListener(listener:ILabXListener):void
 		{
 			listenerList.addItem(listener);
 		}
@@ -118,7 +125,7 @@ package cn.edu.zju.labx.core
 		 * @param obj listener to listen LabX Event
 		 * 
 		 */
-		public function removeLabXEventListener(listener:ILabXListener):void
+		private function removeLabXEventListener(listener:ILabXListener):void
 		{   
 			listenerList.removeItemAt(listenerList.getItemIndex(listener));
 		}
@@ -137,6 +144,7 @@ package cn.edu.zju.labx.core
 			     if(obj.handleLabXEvent(event)==false){
 			        break;
 			     }
+			     notify_count++;
 			}
 		}
 		
