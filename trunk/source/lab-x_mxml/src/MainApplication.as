@@ -1,5 +1,7 @@
 package {
 	
+	import cn.edu.zju.labx.core.UserInputHandler;
+	
 	import flash.events.Event;
 	import flash.events.MouseEvent;
 	
@@ -72,8 +74,6 @@ package {
 			outRay.moveRight(400);
 			outRay.roll(90);
 			pivotOutRay.addChild(outRay);
-			
-			var userInput:UserInputHandler = new UserInputHandler(stage);
 			
 			var stats:StatsView = new StatsView(renderer);
 			addChild(stats);

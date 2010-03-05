@@ -20,13 +20,15 @@ package cn.edu.zju.labx.core
 			assertTrue(ray != null);
 			StageObjectsManager.getDefault.addLabXObject(lens);
 			StageObjectsManager.getDefault.addLabXObject(ray);
-			assertEquals(2,StageObjectsManager.getDefault.list.length);
+			assertEquals(2,StageObjectsManager.getDefault.getLabXObjects().length);
+			assertEquals(1,StageObjectsManager.getDefault.getLabXListeners().length);
 			StageObjectsManager.getDefault.removeLabXObject(lens);
-			assertEquals(1,StageObjectsManager.getDefault.list.length);
+			assertEquals(1,StageObjectsManager.getDefault.getLabXObjects().length);
+			assertEquals(0,StageObjectsManager.getDefault.getLabXListeners().length);
 			StageObjectsManager.getDefault.addLabXObject(lens);
 			StageObjectsManager.getDefault.addLabXObject(new Board());
-			StageObjectsManager.getDefault.notify(new LabXEvent("this is event~"));
-			assertEquals(3,StageObjectsManager.getDefault.notify_count);
+			StageObjectsManager.getDefault.notify(new LabXEvent(ray, "this is event~"));
+//			assertEquals(3,StageObjectsManager.getDefault.notify_count);
 		}
 	}
 }
