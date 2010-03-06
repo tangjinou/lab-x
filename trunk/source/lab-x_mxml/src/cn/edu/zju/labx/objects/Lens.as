@@ -33,7 +33,7 @@ package cn.edu.zju.labx.objects
 //		   	this.addChild(lens);
             lens=new DAE(true);  
             lens.load("../resource/dae/lens.DAE",new MaterialsList( {all:this.material} ) );		
-            lens.addEventListener(FileLoadEvent.LOAD_COMPLETE,boxonloaded);  
+            lens.addEventListener(FileLoadEvent.LOAD_COMPLETE,daeFileOnloaded);  
 
 		}
 
@@ -77,11 +77,12 @@ package cn.edu.zju.labx.objects
 			lens.addEventListener(type, listener, useCapture, priority, useWeakReference);
 		}
 		
-	    private function boxonloaded(evt:FileLoadEvent):void{  
+	    private function daeFileOnloaded(evt:FileLoadEvent):void{  
 	    	addChild(lens);  
 	    	trace("assssssssssssssss");
 	    	trace(lens.childrenList());
-            lens.getChildByName("COLLADA_Scene").getChildByName("Box01").addEventListener(InteractiveScene3DEvent.OBJECT_PRESS, objectPressHandler);
+            lens.getChildByName("COLLADA_Scene").getChildByName("Sphere02").addEventListener(InteractiveScene3DEvent.OBJECT_PRESS, objectPressHandler);
+            lens.getChildByName("COLLADA_Scene").getChildByName("Sphere01").addEventListener(InteractiveScene3DEvent.OBJECT_PRESS, objectPressHandler);
         } 
 		
 	}

@@ -4,6 +4,9 @@ package cn.edu.zju.labx.objects
 	
 	import org.papervision3d.core.geom.renderables.Vertex3D;
 	import org.papervision3d.core.proto.MaterialObject3D;
+	import org.papervision3d.events.FileLoadEvent;
+	import org.papervision3d.materials.utils.MaterialsList;
+	import org.papervision3d.objects.parsers.DAE;
 	import org.papervision3d.objects.primitives.Cylinder;
 	
 	/**
@@ -17,13 +20,19 @@ package cn.edu.zju.labx.objects
 		private var endVertex:Vertex3D;
 		private var radius:Number;
 		
+		protected var ray:DAE; 
+		
 		public function Ray(material:MaterialObject3D=null, startVertex:Vertex3D=null, endVertex:Vertex3D=null, radius:Number=DEFAULT_RADIUS)
 		{
 			super(material);
 			this.startVertex = startVertex || new Vertex3D();
 			this.endVertex = endVertex || new Vertex3D();
 			this.radius = radius;
-			addDisplayObject();
+			
+			ray=new DAE(true);  
+            ray.load("../resource/dae/ray.DAE",new MaterialsList( {all:this.material} ) );		
+            ray.addEventListener(FileLoadEvent.LOAD_COMPLETE,daeFileOnloaded);  
+//			addDisplayObject();
 		}
 		
 		private function addDisplayObject():void
@@ -54,5 +63,9 @@ package cn.edu.zju.labx.objects
 			
 		   	this.addChild(ray);
 		}
+		
+		private function daeFileOnloaded(evt:FileLoadEvent):void{  
+	    	addChild(ray);  
+        } 
 	}
 }

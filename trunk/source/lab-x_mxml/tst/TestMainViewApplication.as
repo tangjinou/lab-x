@@ -2,10 +2,9 @@ package
 {
 	import cn.edu.zju.labx.objects.Board;
 	import cn.edu.zju.labx.objects.Lens;
+	import cn.edu.zju.labx.objects.Ray;
 	
 	import flash.events.Event;
-	
-	import mx.skins.Border;
 	
 	import org.papervision3d.cameras.CameraType;
 	import org.papervision3d.materials.ColorMaterial;
@@ -19,6 +18,7 @@ package
 		private var cube:Cube;
 		private var lens:Lens;
 		private var board:Board;
+		private var ray:Ray;
 		public function TestMainViewApplication(viewportWidth:Number=640, viewportHeight:Number=480, scaleToStage:Boolean=true, interactive:Boolean=false, cameraType:String="Target")
 		{
 			super(800, 420, true, false, CameraType.FREE);
@@ -36,6 +36,12 @@ package
 			cube =new Cube(materialsList,800,200,20);
 			cube.y -=200;
 			scene.addChild(cube);
+			
+			ray = new Ray(red);
+			ray.x -=300;
+			ray.y -=110;
+			scene.addChild(ray);
+			
             lens = new Lens(red);
             lens.y -=130;
             scene.addChild(lens);

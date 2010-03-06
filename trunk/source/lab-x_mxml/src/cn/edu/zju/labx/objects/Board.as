@@ -40,7 +40,7 @@ package cn.edu.zju.labx.objects
 			materialsList.addMaterial(material,"right");
 			materialsList.addMaterial(material,"top");
 			materialsList.addMaterial(material,"bottom");
-		   	cube = new Cube(materialsList,50,100,100);
+		   	cube = new Cube(materialsList,20,100,100);
 		   	this.addChild(cube);
 		}
 
