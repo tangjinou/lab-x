@@ -3,8 +3,14 @@
 	<mx:Script>
 		<![CDATA[
 			import mx.core.UIComponent;
+			import flash.events.Event;
+			import flash.events.MouseEvent;
 			public function init():void
 			{
+				stage.frameRate = 40;
+				stage.addEventListener(MouseEvent.MOUSE_DOWN,Demo.onMouseDown);
+				stage.addEventListener(MouseEvent.MOUSE_MOVE,Demo.onMouseMove);
+				stage.addEventListener(MouseEvent.MOUSE_UP,Demo.onMouseUp); 
 				var uic:UIComponent = new UIComponent();
 				uic.addChild(Demo);
             	addChild(uic);   
