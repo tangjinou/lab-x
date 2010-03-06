@@ -53,24 +53,26 @@ package
 			desk.addEventListener(FileLoadEvent.LOAD_COMPLETE, deskOnLoaded);
 			DAE(desk).addFileSearchPath("../assets/textures/desk");
             DAE(desk).load("../assets/models/desk.DAE");
-            desk.scale = 2;
+            desk.scale = 3;
 		}
 		
 		private function deskOnLoaded(evt:FileLoadEvent):void{    
-                scene.addChild(desk);  
-                camera.lookAt(desk);  
+                desk.moveDown(280);
+                desk.moveRight(200);
+                originPivot.addChild(desk);  
+                //camera.lookAt(desk);  
         } 
           
 		public function createObjects():void
 		{
 			originPivot = new DisplayObject3D();
 			originPivot.x = -300;
-			originPivot.y = -200;
 			originPivot.z = -100;
 			scene.addChild(originPivot);
 			
 			light = new PointLight3D(true);
-			light.y = 400;
+			light.y = 100;
+			light.z = -100;
 			originPivot.addChild(light);
 			
 			var shadeMaterialX:PhongMaterial = new PhongMaterial(light,0xFFFFFF,0xFF0000,100);
