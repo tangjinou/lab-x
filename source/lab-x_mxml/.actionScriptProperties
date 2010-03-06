@@ -11,10 +11,12 @@
 <sourceAttachmentPath/>
 </compiler>
 <applications>
+<application path="TestSimpleDemo.mxml"/>
+<application path="MyTest.mxml"/>
 <application path="LabX.mxml"/>
+<application path="TestDesk.mxml"/>
 <application path="FirstExperiment.mxml"/>
 <application path="TestRunner.mxml"/>
-<application path="MyTest.mxml"/>
 </applications>
 <modules/>
 <buildCSSFiles/>
