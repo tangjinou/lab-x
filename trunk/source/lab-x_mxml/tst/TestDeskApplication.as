@@ -9,7 +9,9 @@ package
 	import org.papervision3d.objects.DisplayObject3D;
 	import org.papervision3d.objects.primitives.Cylinder;
 	import org.papervision3d.view.BasicView;
-		
+	import org.papervision3d.objects.parsers.DAE;
+	import org.papervision3d.events.FileLoadEvent;
+	
 	public class TestDeskApplication extends BasicView
 	{
 		private var rotX:Number= 0.1; //higher is more rotation over x axis in simple orbit example
@@ -30,6 +32,10 @@ package
 		private var zAxis:Cylinder;
 		private var originPivot:DisplayObject3D;
 		
+		private var desk:DAE; 
+		import org.papervision3d.materials.ColorMaterial;
+		import org.papervision3d.materials.utils.MaterialsList;
+	
 		public function TestDeskApplication(viewportWidth:Number=640, viewportHeight:Number=480, scaleToStage:Boolean=true, interactive:Boolean=false, cameraType:String="Target")
 		{
 			super(800, 420, true, false, CameraType.FREE);
@@ -37,9 +43,24 @@ package
 			camera.zoom = 90;
 			
 			createObjects();
+			createDesk();
 			startRendering();
 		}
 		
+		public function createDesk():void
+		{
+			desk = new DAE();  
+			desk.addEventListener(FileLoadEvent.LOAD_COMPLETE, deskOnLoaded);
+			DAE(desk).addFileSearchPath("../assets/textures/desk");
+            DAE(desk).load("../assets/models/desk.DAE");
+            desk.scale = 2;
+		}
+		
+		private function deskOnLoaded(evt:FileLoadEvent):void{    
+                scene.addChild(desk);  
+                camera.lookAt(desk);  
+        } 
+          
 		public function createObjects():void
 		{
 			originPivot = new DisplayObject3D();
