@@ -21,6 +21,8 @@ package cn.edu.zju.labx.objects
 	{   
 //		protected var lens:Cylinder;
 	    protected var lens:DAE;  
+	    
+	    
 		public function Lens(material:MaterialObject3D=null)
 		{
 			super(material);
@@ -41,37 +43,14 @@ package cn.edu.zju.labx.objects
 		   //TODO:
 		   return true;
 		}
-	   public function hanleUserInputEvent(event:Event):void{
-	    	if(event.type == MouseEvent.MOUSE_UP){
-	    		 if(StageObjectsManager.getDefault.getMouse_x()>this.getScreen_x()){
-//                    this.moveRight(LabXConstant.X_MOVE_MIN);
-                    TweenLite.to(lens,2,{x:lens.x+LabXConstant.X_MOVE_MIN,z:this.z});
-                    lens.x += LabXConstant.X_MOVE_MIN;
-                 }
-                 else{
-//                    this.moveLeft(LabXConstant.X_MOVE_MIN);
-                    TweenLite.to(lens,2,{x:lens.x-LabXConstant.X_MOVE_MIN,z:this.z});
-                    lens.x -= LabXConstant.X_MOVE_MIN;
-                 }
-//                 trace("camera.x"+this.getView().camera.x);
-//                 trace("camera.y"+this.getView().camera.y);
-//                 trace("camera.z"+this.getView().camera.z);
-//                 
-//                 trace("viewport.x"+this.getView().viewport.x);
-//                 trace("viewport.y"+this.getView().viewport.y);
-//                 trace("camera.zoom"+this.getView().camera.zoom);
-//                 
-//                 trace("this.getMouse_x()"+this.getMouse_x());
-//                 trace("this.getScreen_x()"+this.getScreen_x());
-                 
-//                  trace("mouse_X"+this.getView().);
-//                  trace("mouse_X"+this.getMouse_x());
-//                  this.x = this.getMouse_x()-this.getStageWidth()/2;
-//                  trace(this.x);
-//                  trace("sssssssss");
-	    	}
+		
+	    public function hanleUserInputEvent(event:Event):void{
+	   	    if(userInputHandle!=null){
+	   	       userInputHandle.call(this,event);
+	   	    }
 	    }
-	     // should destribute the listener 
+	    
+	    // should destribute the listener 
         override public function addEventListener(type:String, listener:Function,useCapture:Boolean = false, priority:int = 0, useWeakReference:Boolean = false):void
 		{   
 			lens.addEventListener(type, listener, useCapture, priority, useWeakReference);
@@ -79,8 +58,7 @@ package cn.edu.zju.labx.objects
 		
 	    private function daeFileOnloaded(evt:FileLoadEvent):void{  
 	    	addChild(lens);  
-	    	trace("assssssssssssssss");
-	    	trace(lens.childrenList());
+//	    	trace(lens.childrenList());
             lens.getChildByName("COLLADA_Scene").getChildByName("Sphere02").addEventListener(InteractiveScene3DEvent.OBJECT_PRESS, objectPressHandler);
             lens.getChildByName("COLLADA_Scene").getChildByName("Sphere01").addEventListener(InteractiveScene3DEvent.OBJECT_PRESS, objectPressHandler);
         } 
