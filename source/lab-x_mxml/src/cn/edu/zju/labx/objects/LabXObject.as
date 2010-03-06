@@ -16,6 +16,12 @@ package cn.edu.zju.labx.objects
 	 */
 	public class LabXObject extends TriangleMesh3D
 	{
+		/**
+		 * This  Function is for add userInputHandle
+		 */ 
+		public var userInputHandle:Function;
+
+		
 		
 		public function LabXObject( material:MaterialObject3D, vertices:Array=null, faces:Array=null, name:String=null )
 		{

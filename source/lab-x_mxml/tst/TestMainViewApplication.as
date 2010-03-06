@@ -1,10 +1,13 @@
 package
 {
+	import cn.edu.zju.labx.core.LabXConstant;
+	import cn.edu.zju.labx.core.StageObjectsManager;
 	import cn.edu.zju.labx.objects.Board;
 	import cn.edu.zju.labx.objects.Lens;
 	import cn.edu.zju.labx.objects.Ray;
 	
 	import flash.events.Event;
+	import flash.events.MouseEvent;
 	
 	import org.papervision3d.cameras.CameraType;
 	import org.papervision3d.materials.ColorMaterial;
@@ -44,6 +47,7 @@ package
 			
             lens = new Lens(red);
             lens.y -=130;
+            lens.userInputHandle = lensListener;
             scene.addChild(lens);
             
             var white:ColorMaterial = new ColorMaterial(0xfffafa);
@@ -59,6 +63,21 @@ package
 		override protected function onRenderTick(event:Event = null):void
         {
             super.onRenderTick(event);
+        }
+        function lensListener(event:Event):void{
+           if(event is MouseEvent){
+	    		 if(StageObjectsManager.getDefault.getMouse_x()>lens.getScreen_x()){
+                     lens.moveRight(LabXConstant.X_MOVE_MIN);
+//                    TweenLite.to(lens,2,{x:lens.x+LabXConstant.X_MOVE_MIN,z:this.z});
+//                    lens.x += LabXConstant.X_MOVE_MIN;
+                 }
+                 else{
+                    lens.moveLeft(LabXConstant.X_MOVE_MIN);
+//                  TweenLite.to(lens,2,{x:lens.x-LabXConstant.X_MOVE_MIN,z:this.z});
+//                  lens.x -= LabXConstant.X_MOVE_MIN;
+                 }
+
+	    	}
         }
 		
 	}
