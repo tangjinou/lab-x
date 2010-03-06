@@ -17,7 +17,9 @@ package
 			viewport.interactive = true;
 			var material:FlatShadeMaterial = new FlatShadeMaterial(null, 0xcc0000);
 			material.interactive = true;
-			scene.addChild(new Lens(material));
+			var lens:Lens = new Lens(material);
+			lens.rotationY +=180;
+			scene.addChild(lens);
 			startRendering();
 		}
 		
