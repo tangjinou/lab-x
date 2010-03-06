@@ -1,6 +1,8 @@
 package
 {
+	import cn.edu.zju.labx.objects.Board;
 	import cn.edu.zju.labx.objects.Lens;
+	import cn.edu.zju.labx.objects.Ray;
 	
 	import flash.events.Event;
 	
@@ -18,8 +20,11 @@ package
 			var material:FlatShadeMaterial = new FlatShadeMaterial(null, 0xcc0000);
 			material.interactive = true;
 			var lens:Lens = new Lens(material);
-			lens.rotationY +=180;
-			scene.addChild(lens);
+			var ray:Ray = new Ray(material);
+			var board:Board = new Board(material);
+//			scene.addChild(lens);
+//            scene.addChild(ray);
+            scene.addChild(board);
 			startRendering();
 		}
 		
