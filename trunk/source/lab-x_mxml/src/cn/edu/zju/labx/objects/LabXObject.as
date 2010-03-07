@@ -1,5 +1,6 @@
 package cn.edu.zju.labx.objects
 {
+	import cn.edu.zju.labx.core.LabXConstant;
 	import cn.edu.zju.labx.core.StageObjectsManager;
 	import cn.edu.zju.labx.core.UserInputHandler;
 	import cn.edu.zju.labx.events.IUserInputListener;
@@ -34,6 +35,7 @@ package cn.edu.zju.labx.objects
 		protected function objectPressHandler(event:InteractiveScene3DEvent):void {
 			if (instanceOf(IUserInputListener)) {
 				UserInputHandler.getDefault.currentSelectedObject = this as IUserInputListener;
+//				this.x = StageObjectsManager.getDefault.getMouse_x()-LabXConstant.STAGE_WIDTH/2;
 			}
 		}
 		
