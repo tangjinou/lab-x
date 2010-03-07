@@ -59,6 +59,8 @@ package cn.edu.zju.labx.core{
 			{
 				this._currentSelectedObject.hanleUserInputEvent(e);
 				this._currentSelectedObject = null;
+			}else{
+				
 			}
 		}
 		

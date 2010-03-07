@@ -25,7 +25,7 @@ package
         private var camPitch:Number = 90;
         private var camYaw:Number = 270;
 
-        private var isOrbiting:Boolean;
+        private  var isOrbiting:Boolean;
         private var previousMouseX:Number;
         private var previousMouseY:Number;
         private var easePitch:Number = 90;
@@ -122,7 +122,6 @@ package
 			board.moveUp(board.height/2);
             originPivot.addChild(board);
             
-            
 			
 		}
 		
@@ -131,7 +130,6 @@ package
 			easePitch += (camPitch - easePitch) * easeOut;
            	easeYaw+= (camYaw - easeYaw) * easeOut;
             camera.orbit(easePitch, easeYaw);   
-            
 			super.onRenderTick();
 		}
 		
@@ -151,15 +149,12 @@ package
         {
              var differenceX:Number = e.stageX - previousMouseX;
              var differenceY:Number = e.stageY - previousMouseY;
-  			
-             if(isOrbiting){
+             if(isOrbiting==true && StageObjectsManager.getDefault.rotate_stage==true){
                 camPitch += differenceY;
                 camYaw += differenceX;
-  			
   				//clamp pitch
   				if(camPitch < 5) camPitch = 5;
   				if(camPitch > 175) camPitch = 175;
-            
              	//clamp yaw
              	//if(camYaw > 355) camYaw = 355;
   				//if(camYaw < 185) camYaw = 185;
