@@ -5,8 +5,9 @@ package cn.edu.zju.labx.core
 		/**
 		 * Constants for Stage
 		 */
-		public static const STAGE_HEIGHT:Number = 1000;
-		public static const STAGE_WIDTH:Number = 600;
+		public static const STAGE_HEIGHT:Number = 600;
+		public static const STAGE_WIDTH:Number = 1000;
+		public static const STAGE_DEPTH:Number = 600;
 		
 		/**
 		 * Constant for LabXObject and its sub classes
