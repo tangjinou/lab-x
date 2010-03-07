@@ -42,11 +42,17 @@ package
 	    private var board:Board;
 	    
 	    
+		import org.papervision3d.render.BasicRenderEngine;
+		import org.papervision3d.render.QuadrantRenderEngine;
+	
 		public function FirstExperimentApplication(viewportWidth:Number=LabXConstant.STAGE_WIDTH, viewportHeight:Number=LabXConstant.STAGE_HEIGHT, scaleToStage:Boolean=true, interactive:Boolean=false, cameraType:String="Target")
 		{
 			super(viewportWidth, viewportHeight, true, false, CameraType.FREE);
 			viewport.interactive = true;
 			camera.zoom = 90;
+
+			renderer = new QuadrantRenderEngine(QuadrantRenderEngine.CORRECT_Z_FILTER);
+			
 			createDesk();
 			createObjects();
 			startRendering();
@@ -63,7 +69,7 @@ package
 		}
 		
 		private function deskOnLoaded(evt:FileLoadEvent):void{    
-                desk.moveDown(LabXConstant.STAGE_HEIGHT/2);
+                desk.moveDown(LabXConstant.STAGE_HEIGHT/2-40);
                 desk.moveRight(LabXConstant.STAGE_WIDTH/2);
                 originPivot.addChild(desk);  
                 StageObjectsManager.getDefault.originPivot = originPivot;
