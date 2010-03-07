@@ -47,7 +47,24 @@ package cn.edu.zju.labx.objects
 	    public function hanleUserInputEvent(event:Event):void{
 	   	    if(userInputHandle!=null){
 	   	       userInputHandle.call(this,event);
+	   	       return;
 	   	    }
+	   	    //TODO:
+	   	    
+	   	   if(event is MouseEvent){
+	    		 if(StageObjectsManager.getDefault.getMouse_x()>this.getScreen_x()){
+//                      this.moveRight(LabXConstant.X_MOVE_MIN);
+//                    TweenLite.to(lens,2,{x:lens.x+LabXConstant.X_MOVE_MIN,z:this.z});
+//                    lens.x += LabXConstant.X_MOVE_MIN;
+					TweenLite.to(lens, 2, {x:StageObjectsManager.getDefault.getMouse_x(), z:this.z}); 
+                 }
+                 else{
+                    this.moveLeft(LabXConstant.X_MOVE_MIN);
+//                  TweenLite.to(lens,2,{x:lens.x-LabXConstant.X_MOVE_MIN,z:this.z});
+//                  lens.x -= LabXConstant.X_MOVE_MIN;
+                 }
+
+	    	}
 	    }
 	    
 	    // should destribute the listener 
