@@ -1,18 +1,24 @@
 package
 {
-	import cn.edu.zju.labx.core.UserInputHandler;
 	import cn.edu.zju.labx.core.LabXConstant;
+	
+	import flash.display.Bitmap;
+	import flash.display.Loader;
 	import flash.events.Event;
 	import flash.events.MouseEvent;
+	import flash.net.URLRequest;
 	
 	import org.papervision3d.cameras.CameraType;
+	import org.papervision3d.events.FileLoadEvent;
 	import org.papervision3d.lights.PointLight3D;
+	import org.papervision3d.materials.BitmapMaterial;
 	import org.papervision3d.materials.shadematerials.PhongMaterial;
+	import org.papervision3d.materials.shaders.PhongShader;
+	import org.papervision3d.materials.shaders.ShadedMaterial;
 	import org.papervision3d.objects.DisplayObject3D;
+	import org.papervision3d.objects.parsers.DAE;
 	import org.papervision3d.objects.primitives.Cylinder;
 	import org.papervision3d.view.BasicView;
-	import org.papervision3d.objects.parsers.DAE;
-	import org.papervision3d.events.FileLoadEvent;
 	
 	public class FirstExperimentApplication extends BasicView
 	{
@@ -50,16 +56,31 @@ package
 		}
 		
 		public function createDesk():void
-		{
-			desk = new DAE();  
-			desk.addEventListener(FileLoadEvent.LOAD_COMPLETE, deskOnLoaded);
-			DAE(desk).addFileSearchPath("../assets/textures/desk");
-            DAE(desk).load("../assets/models/desk.DAE");
-            desk.scale = 3;
-            desk.scaleX = 6;
+		{			
+			var imgLoader:Loader = new Loader();
+			imgLoader.contentLoaderInfo.addEventListener(Event.COMPLETE, deskTextureLoadComplete);
+			imgLoader.load(new URLRequest("../assets/textures/desk/0003.jpg"));
 		}
 		
-		private function deskOnLoaded(evt:FileLoadEvent):void{    
+		private function deskTextureLoadComplete(e:Event):void
+		{
+			var bitmap:Bitmap = e.target.content as Bitmap;
+			
+			var bitmapMaterial:BitmapMaterial = new BitmapMaterial(bitmap.bitmapData);
+			var shader:PhongShader = new PhongShader(light,0xFFFFFF,0x000000,100);
+			var shadedMaterial:ShadedMaterial = new ShadedMaterial(bitmapMaterial, shader);
+//			var materialsList:MaterialsList = new MaterialsList();
+//			materialsList.addMaterial(shadedMaterial, "__-_Default");
+			desk = new DAE();  
+			desk.addEventListener(FileLoadEvent.LOAD_COMPLETE, deskOnLoaded);
+			//DAE(desk).addFileSearchPath("../assets/textures/desk");
+            DAE(desk).load("../assets/models/desk.DAE", new MaterialsList({all:shadedMaterial}));
+		}
+		
+		private function deskOnLoaded(evt:FileLoadEvent):void{ 
+			    desk.scale = 3;
+            	desk.scaleX = 6;
+            	//TODO: calculate desk scale related to LabXConstant 
                 desk.moveDown(LabXConstant.STAGE_HEIGHT/2);
                 desk.moveRight(LabXConstant.STAGE_WIDTH/2);
                 originPivot.addChild(desk);  
