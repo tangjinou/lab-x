@@ -1,20 +1,17 @@
 package
 {
 	import cn.edu.zju.labx.core.LabXConstant;
+	import cn.edu.zju.labx.core.StageObjectsManager;
+	import cn.edu.zju.labx.objects.Lens;
 	
-	import flash.display.Bitmap;
-	import flash.display.Loader;
 	import flash.events.Event;
 	import flash.events.MouseEvent;
-	import flash.net.URLRequest;
 	
 	import org.papervision3d.cameras.CameraType;
 	import org.papervision3d.events.FileLoadEvent;
 	import org.papervision3d.lights.PointLight3D;
-	import org.papervision3d.materials.BitmapMaterial;
+	import org.papervision3d.materials.ColorMaterial;
 	import org.papervision3d.materials.shadematerials.PhongMaterial;
-	import org.papervision3d.materials.shaders.PhongShader;
-	import org.papervision3d.materials.shaders.ShadedMaterial;
 	import org.papervision3d.objects.DisplayObject3D;
 	import org.papervision3d.objects.parsers.DAE;
 	import org.papervision3d.objects.primitives.Cylinder;
@@ -38,62 +35,39 @@ package
 		private var xAxis:Cylinder;
 		private var yAxis:Cylinder;
 		private var zAxis:Cylinder;
-		private var originPivot:DisplayObject3D;
+		public  var originPivot:DisplayObject3D;
 		
 		private var desk:DAE; 
-		import org.papervision3d.materials.ColorMaterial;
-		import org.papervision3d.materials.utils.MaterialsList;
-	
+
+	    
+	    
+	    private var lens:Lens;
+	    
 		public function FirstExperimentApplication(viewportWidth:Number=LabXConstant.STAGE_WIDTH, viewportHeight:Number=LabXConstant.STAGE_HEIGHT, scaleToStage:Boolean=true, interactive:Boolean=false, cameraType:String="Target")
 		{
 			super(viewportWidth, viewportHeight, true, false, CameraType.FREE);
 			viewport.interactive = true;
 			camera.zoom = 90;
-			
-			createObjects();
 			createDesk();
+			createObjects();
 			startRendering();
 		}
 		
-		// below code used for shader, don't remove - will
-/*		public function createDesk():void
-		{			
-			var imgLoader:Loader = new Loader();
-			imgLoader.contentLoaderInfo.addEventListener(Event.COMPLETE, deskTextureLoadComplete);
-			imgLoader.load(new URLRequest("../assets/textures/desk/0003.jpg"));
-		}
-		
-		private function deskTextureLoadComplete(e:Event):void
-		{
-			var bitmap:Bitmap = e.target.content as Bitmap;
-			
-			var bitmapMaterial:BitmapMaterial = new BitmapMaterial(bitmap.bitmapData);
-			var shader:PhongShader = new PhongShader(light,0xFFFFFF,0x464646,100);
-			var shadedMaterial:ShadedMaterial = new ShadedMaterial(bitmapMaterial, shader);
-
-			var materialsList:MaterialsList = new MaterialsList();
-			materialsList.addMaterial(shadedMaterial, "all");
-
-			desk = new DAE();  
-			desk.addEventListener(FileLoadEvent.LOAD_COMPLETE, deskOnLoaded);
-			//DAE(desk).addFileSearchPath("../assets/textures/desk");
-            DAE(desk).load("../assets/models/desk.DAE", materialsList);
-		}*/
 		public function createDesk():void
 		{
 			desk = new DAE();  
 			desk.addEventListener(FileLoadEvent.LOAD_COMPLETE, deskOnLoaded);
 			DAE(desk).addFileSearchPath("../assets/textures/desk");
             DAE(desk).load("../assets/models/desk.DAE");
+            desk.scale = 3;
+            desk.scaleX = 6;
 		}
 		
-		private function deskOnLoaded(evt:FileLoadEvent):void{ 
-			    desk.scale = 3;
-            	desk.scaleX = 6;
-            	//TODO: calculate desk scale related to LabXConstant 
+		private function deskOnLoaded(evt:FileLoadEvent):void{    
                 desk.moveDown(LabXConstant.STAGE_HEIGHT/2);
                 desk.moveRight(LabXConstant.STAGE_WIDTH/2);
                 originPivot.addChild(desk);  
+                StageObjectsManager.getDefault.originPivot = originPivot;
                 //camera.lookAt(desk);  
         } 
           
@@ -106,7 +80,7 @@ package
 			light = new PointLight3D(true);
 			light.y = 100;
 			light.z = -100;
-			scene.addChild(light);
+			originPivot.addChild(light);
 			
 			var shadeMaterialX:PhongMaterial = new PhongMaterial(light,0xFFFFFF,0xFF0000,100);
 			var shadeMaterialY:PhongMaterial = new PhongMaterial(light,0xFFFFFF,0xFF00,100);
@@ -125,7 +99,17 @@ package
 			zAxis = new Cylinder(shadeMaterialZ, 1, LabXConstant.STAGE_DEPTH/5);
 			zAxis.moveForward(LabXConstant.STAGE_DEPTH/10);
 			zAxis.pitch(90);
-			originPivot.addChild(zAxis);		
+			originPivot.addChild(zAxis);	
+			
+			/*Create Lens*/	
+			var blue:ColorMaterial = new ColorMaterial(0x0000FF);
+			blue.interactive = true;
+			lens = new Lens(blue);
+			lens.moveRight(LabXConstant.DESK_WIDTH/2);
+			lens.moveUp(lens.height/2);
+			
+//            lens.y -=130;
+            originPivot.addChild(lens);
 			
 		}
 		

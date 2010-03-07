@@ -6,11 +6,11 @@ package cn.edu.zju.labx.core
 	
 	import mx.collections.ArrayCollection;
 	
+	import org.papervision3d.objects.DisplayObject3D;
 	import org.papervision3d.view.BasicView;
 	
 	public  class StageObjectsManager
 	{   
-		
        /**
         * Man view of the application
         */
@@ -30,21 +30,39 @@ package cn.edu.zju.labx.core
         * */
         public  var notify_count:int=0;
         
+        /***
+        * 
+        *  This is origin Pivot ,should be seted in view;
+        */  
+        public  var originPivot:DisplayObject3D;
+        
 		/**
 		 * Get the current mouse X axis position, coordinate is start from left-bottom of the main view
 		 */
 		public function getMouse_x():int{
-	       return mainView.mouseX;
+	       return  mainView.mouseX;
+	    }
+	    
+	     /**
+		 * Get the current mouse X axis position, coordinate is start from originPivot.x
+		 */
+	    public function getMouse_originPivot_relative_x():int{
+	       return getMouse_x()-(LabXConstant.STAGE_WIDTH/2)-originPivot.x;
 	    }
 	    
 	    /**
 		 * Get the current mouse Y axis position, coordinate is start from left-bottom of the main view
 		 */
 	    public function getMouse_y():int{
-	       return mainView.mouseY;
+	       return  mainView.mouseY;
 	    }
-        
-        
+	    
+	     /**
+		 * Get the current mouse Y axis position, coordinate is start start from originPivot.y
+		 */
+	    public function getMouse_originPivot_relative_y():int{
+	       return getMouse_y()-(LabXConstant.STAGE_HEIGHT/2)-originPivot.y;
+	    }
         
 		/*************************************************************************
 		 * Sigleton Method to make sure there are only one StageObjectManager 

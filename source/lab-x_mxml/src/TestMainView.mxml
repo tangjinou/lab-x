@@ -2,6 +2,7 @@
 <mx:Application xmlns:mx="http://www.adobe.com/2006/mxml" layout="absolute" creationComplete="callLater(init)" width="800" height="600" xmlns:labx="cn.edu.zju.labx.*" xmlns:local="*">
 	 <mx:Script>
 	 	<![CDATA[
+	 		import cn.edu.zju.labx.objects.Lens;
 	 		import cn.edu.zju.labx.core.UserInputHandler;
 	 		import cn.edu.zju.labx.utils.ResourceManager;
 	 		import mx.controls.Image;
