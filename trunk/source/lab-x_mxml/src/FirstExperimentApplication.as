@@ -56,11 +56,12 @@ package
 			DAE(desk).addFileSearchPath("../assets/textures/desk");
             DAE(desk).load("../assets/models/desk.DAE");
             desk.scale = 3;
+            desk.scaleX = 6;
 		}
 		
 		private function deskOnLoaded(evt:FileLoadEvent):void{    
-                desk.moveDown(280);
-                desk.moveRight(200);
+                desk.moveDown(LabXConstant.STAGE_HEIGHT/2);
+                desk.moveRight(LabXConstant.STAGE_WIDTH/2);
                 originPivot.addChild(desk);  
                 //camera.lookAt(desk);  
         } 
