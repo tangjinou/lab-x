@@ -55,7 +55,8 @@ package
 			startRendering();
 		}
 		
-		public function createDesk():void
+		// below code used for shader, don't remove - will
+/*		public function createDesk():void
 		{			
 			var imgLoader:Loader = new Loader();
 			imgLoader.contentLoaderInfo.addEventListener(Event.COMPLETE, deskTextureLoadComplete);
@@ -70,10 +71,20 @@ package
 			var shader:PhongShader = new PhongShader(light,0xFFFFFF,0x464646,100);
 			var shadedMaterial:ShadedMaterial = new ShadedMaterial(bitmapMaterial, shader);
 
+			var materialsList:MaterialsList = new MaterialsList();
+			materialsList.addMaterial(shadedMaterial, "all");
+
 			desk = new DAE();  
 			desk.addEventListener(FileLoadEvent.LOAD_COMPLETE, deskOnLoaded);
 			//DAE(desk).addFileSearchPath("../assets/textures/desk");
-            DAE(desk).load("../assets/models/desk.DAE", new MaterialsList({all:shadedMaterial}));
+            DAE(desk).load("../assets/models/desk.DAE", materialsList);
+		}*/
+		public function createDesk():void
+		{
+			desk = new DAE();  
+			desk.addEventListener(FileLoadEvent.LOAD_COMPLETE, deskOnLoaded);
+			DAE(desk).addFileSearchPath("../assets/textures/desk");
+            DAE(desk).load("../assets/models/desk.DAE");
 		}
 		
 		private function deskOnLoaded(evt:FileLoadEvent):void{ 
