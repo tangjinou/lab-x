@@ -14,7 +14,7 @@ package {
 	import org.papervision3d.view.BasicView;
 	import org.papervision3d.view.stats.StatsView;
 
-	public class MainApplication extends BasicView
+	public class FirstExperimentApplication extends BasicView
 	{
 		private var inRay:Cylinder;
 		private var outRay:Cylinder;
@@ -37,7 +37,7 @@ package {
         private var easeYaw:Number = 270;
         private var easeOut:Number = 0.1;
         
-		public function MainApplication()
+		public function FirstExperimentApplication()
 		{   
 			super(800, 420, true, false, CameraType.FREE);
 			
