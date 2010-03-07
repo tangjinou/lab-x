@@ -5,8 +5,6 @@ package cn.edu.zju.labx.core{
 	import flash.events.KeyboardEvent;
 	import flash.events.MouseEvent;
 	import flash.ui.Keyboard;
-	
-	import org.papervision3d.objects.DisplayObject3D;
 
 	public class UserInputHandler 
 	{	

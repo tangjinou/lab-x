@@ -1,6 +1,5 @@
 package cn.edu.zju.labx.objects
 {   
-	import cn.edu.zju.labx.core.LabXConstant;
 	import cn.edu.zju.labx.core.StageObjectsManager;
 	import cn.edu.zju.labx.events.ILabXListener;
 	import cn.edu.zju.labx.events.IUserInputListener;
@@ -20,7 +19,11 @@ package cn.edu.zju.labx.objects
 	public class Lens extends LabXObject implements ILabXListener ,IUserInputListener
 	{   
 //		protected var lens:Cylinder;
-	    protected var lens:DAE;  
+	    protected var lens:DAE;
+	    
+	    public var width:Number =120;
+	    public var height:Number=120;
+   
 	    
 	    
 		public function Lens(material:MaterialObject3D=null)
@@ -28,7 +31,8 @@ package cn.edu.zju.labx.objects
 			super(material);
 			createChildren();
 			addEventListener(InteractiveScene3DEvent.OBJECT_PRESS, objectPressHandler);
-
+			
+			
 		}
 		public function createChildren():void{
 //		   	lens = new Cylinder(this.material,100,100,30,10);
@@ -50,10 +54,15 @@ package cn.edu.zju.labx.objects
 	   	       return;
 	   	    }
 	   	    if(event is MouseEvent){
-	   	   	     TweenLite.to(lens, 0, {x:StageObjectsManager.getDefault.getMouse_x()-LabXConstant.STAGE_WIDTH/2, z:this.z});
-	   	   	     this.x = StageObjectsManager.getDefault.getMouse_x()-LabXConstant.STAGE_WIDTH/2; 
-	   	   	     trace("this.x"+this.x);
-	   	   	     trace("Mouse_x:"+StageObjectsManager.getDefault.getMouse_x());
+//	   	    	 var mouseEvent:MouseEvent = event as MouseEvent;
+//	   	   	     TweenLite.to(lens, 0, {x:StageObjectsManager.getDefault.getMouse_x()-LabXConstant.STAGE_WIDTH/2, z:this.z});
+	   	   	     this.x = StageObjectsManager.getDefault.getMouse_originPivot_relative_x(); 
+//	   	   	     trace("this.x"+this.x);
+//               trace("x:"+mouseEvent.localX);
+//	   	   	     trace("Mouse_x:"+StageObjectsManager.getDefault.getMouse_x());
+//	   	   	     trace(StageObjectsManager.getDefault.getMouse_originPivot_relative_x());
+//                 trace(StageObjectsManager.getDefault.getMouse_x());
+//                 trace(StageObjectsManager.getDefault.getMouse_originPivot_relative_x());
 	    	}
 	    	
 	    }
