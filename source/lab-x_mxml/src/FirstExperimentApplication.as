@@ -107,17 +107,17 @@ package
 			originPivot.addChild(zAxis);	
 			
 			/*Create Lens*/	
-			var blue:ColorMaterial = new ColorMaterial(0x0000FF);
-			blue.interactive = true;
-			lens = new Lens(blue);
+			var shadeMaterialLens:PhongMaterial = new PhongMaterial(light,0xFFFFFF,0x6ccff8,100);
+			shadeMaterialLens.interactive = true;
+			lens = new Lens(shadeMaterialLens);
 			lens.moveRight(LabXConstant.DESK_WIDTH/2);
 			lens.moveUp(lens.height/2);
 			originPivot.addChild(lens);
 			
 			/*create Board*/
-			var white:ColorMaterial = new ColorMaterial(0xfffafa);
-			white.interactive = true;
-			board = new  Board(white);
+			var shadeMaterialBoard:PhongMaterial = new PhongMaterial(light,0xFFFFFF,0xe1e1e1,100);
+			shadeMaterialBoard.interactive = true;
+			board = new  Board(shadeMaterialBoard);
 			board.moveRight(LabXConstant.DESK_WIDTH);
 			board.moveUp(board.height/2);
             originPivot.addChild(board);
