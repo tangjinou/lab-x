@@ -25,7 +25,7 @@ package
         private var camPitch:Number = 90;
         private var camYaw:Number = 270;
 
-        private  var isOrbiting:Boolean;
+        public static  var isOrbiting:Boolean;
         private var previousMouseX:Number;
         private var previousMouseY:Number;
         private var easePitch:Number = 90;
@@ -41,7 +41,6 @@ package
 	    private var lens:Lens;
 	    private var board:Board;
 	    
-	    
 		import org.papervision3d.render.BasicRenderEngine;
 		import org.papervision3d.render.QuadrantRenderEngine;
 	
@@ -51,7 +50,7 @@ package
 			viewport.interactive = true;
 			camera.zoom = 90;
 
-			renderer = new QuadrantRenderEngine(QuadrantRenderEngine.CORRECT_Z_FILTER);
+//			renderer = new QuadrantRenderEngine(QuadrantRenderEngine.CORRECT_Z_FILTER);
 			
 			createDesk();
 			createObjects();
