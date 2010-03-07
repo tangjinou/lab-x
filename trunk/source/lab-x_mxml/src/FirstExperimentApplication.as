@@ -2,6 +2,7 @@ package
 {
 	import cn.edu.zju.labx.core.LabXConstant;
 	import cn.edu.zju.labx.core.StageObjectsManager;
+	import cn.edu.zju.labx.objects.Board;
 	import cn.edu.zju.labx.objects.Lens;
 	
 	import flash.events.Event;
@@ -36,12 +37,10 @@ package
 		private var yAxis:Cylinder;
 		private var zAxis:Cylinder;
 		public  var originPivot:DisplayObject3D;
-		
 		private var desk:DAE; 
-
-	    
-	    
 	    private var lens:Lens;
+	    private var board:Board;
+	    
 	    
 		public function FirstExperimentApplication(viewportWidth:Number=LabXConstant.STAGE_WIDTH, viewportHeight:Number=LabXConstant.STAGE_HEIGHT, scaleToStage:Boolean=true, interactive:Boolean=false, cameraType:String="Target")
 		{
@@ -107,9 +106,17 @@ package
 			lens = new Lens(blue);
 			lens.moveRight(LabXConstant.DESK_WIDTH/2);
 			lens.moveUp(lens.height/2);
+			originPivot.addChild(lens);
 			
-//            lens.y -=130;
-            originPivot.addChild(lens);
+			/*create Board*/
+			var white:ColorMaterial = new ColorMaterial(0xfffafa);
+			white.interactive = true;
+			board = new  Board(white);
+			board.moveRight(LabXConstant.DESK_WIDTH);
+			board.moveUp(board.height/2);
+            originPivot.addChild(board);
+            
+            
 			
 		}
 		

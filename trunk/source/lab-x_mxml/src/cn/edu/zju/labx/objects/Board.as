@@ -19,6 +19,11 @@ package cn.edu.zju.labx.objects
 	{   
 		protected var cube:Cube;
 		
+	    public var height:int;
+	    public var width:int;
+	    public var depth:int;
+
+		
 		/**
 		 * Create a board
 		 * 
@@ -40,7 +45,10 @@ package cn.edu.zju.labx.objects
 			materialsList.addMaterial(material,"right");
 			materialsList.addMaterial(material,"top");
 			materialsList.addMaterial(material,"bottom");
-		   	cube = new Cube(materialsList,20,100,100);
+            height=100;
+	        width=20;
+	        depth=100;
+		   	cube = new Cube(materialsList,width,depth,height);
 		   	this.addChild(cube);
 		}
 
