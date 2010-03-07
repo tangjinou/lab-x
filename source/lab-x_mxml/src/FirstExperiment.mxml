@@ -3,7 +3,7 @@
 	 <mx:Script>
 	 	<![CDATA[
 	 		import cn.edu.zju.labx.core.StageObjectsManager;
-	 		import MainApplication;
+	 		import FirstExperimentApplication;
 	 	    import mx.core.UIComponent;
 	 	    import flash.events.Event;
 			import flash.events.MouseEvent;
@@ -11,13 +11,13 @@
 	 		   var uic:UIComponent = new UIComponent();
 //			   var FirstExperiment:MainApplication = new MainApplication();
 			   stage.frameRate = 40;
-               stage.addEventListener(MouseEvent.MOUSE_DOWN,firstExperiment.onMouseDown);
-               stage.addEventListener(MouseEvent.MOUSE_MOVE,firstExperiment.onMouseMove);
-               stage.addEventListener(MouseEvent.MOUSE_UP,firstExperiment.onMouseUp); 
+               stage.addEventListener(MouseEvent.MOUSE_DOWN, firstExperiment.onMouseDown);
+               stage.addEventListener(MouseEvent.MOUSE_MOVE, firstExperiment.onMouseMove);
+               stage.addEventListener(MouseEvent.MOUSE_UP, firstExperiment.onMouseUp); 
 			   uic.addChild(firstExperiment);
                addChild(uic);
 	 		}
 	 	]]> 
 	 </mx:Script>
-	 <local:MainApplication id="firstExperiment" x="0" y="0" />
+	 <local:FirstExperimentApplication id="firstExperiment" x="0" y="0" />
 </mx:Application>
