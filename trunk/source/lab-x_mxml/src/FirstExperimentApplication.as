@@ -67,10 +67,9 @@ package
 			var bitmap:Bitmap = e.target.content as Bitmap;
 			
 			var bitmapMaterial:BitmapMaterial = new BitmapMaterial(bitmap.bitmapData);
-			var shader:PhongShader = new PhongShader(light,0xFFFFFF,0x000000,100);
+			var shader:PhongShader = new PhongShader(light,0xFFFFFF,0x464646,100);
 			var shadedMaterial:ShadedMaterial = new ShadedMaterial(bitmapMaterial, shader);
-//			var materialsList:MaterialsList = new MaterialsList();
-//			materialsList.addMaterial(shadedMaterial, "__-_Default");
+
 			desk = new DAE();  
 			desk.addEventListener(FileLoadEvent.LOAD_COMPLETE, deskOnLoaded);
 			//DAE(desk).addFileSearchPath("../assets/textures/desk");
@@ -96,7 +95,7 @@ package
 			light = new PointLight3D(true);
 			light.y = 100;
 			light.z = -100;
-			originPivot.addChild(light);
+			scene.addChild(light);
 			
 			var shadeMaterialX:PhongMaterial = new PhongMaterial(light,0xFFFFFF,0xFF0000,100);
 			var shadeMaterialY:PhongMaterial = new PhongMaterial(light,0xFFFFFF,0xFF00,100);
