@@ -49,22 +49,13 @@ package cn.edu.zju.labx.objects
 	   	       userInputHandle.call(this,event);
 	   	       return;
 	   	    }
-	   	    //TODO:
-	   	    
-	   	   if(event is MouseEvent){
-	    		 if(StageObjectsManager.getDefault.getMouse_x()>this.getScreen_x()){
-//                      this.moveRight(LabXConstant.X_MOVE_MIN);
-//                    TweenLite.to(lens,2,{x:lens.x+LabXConstant.X_MOVE_MIN,z:this.z});
-//                    lens.x += LabXConstant.X_MOVE_MIN;
-					TweenLite.to(lens, 2, {x:StageObjectsManager.getDefault.getMouse_x(), z:this.z}); 
-                 }
-                 else{
-                    this.moveLeft(LabXConstant.X_MOVE_MIN);
-//                  TweenLite.to(lens,2,{x:lens.x-LabXConstant.X_MOVE_MIN,z:this.z});
-//                  lens.x -= LabXConstant.X_MOVE_MIN;
-                 }
-
+	   	    if(event is MouseEvent){
+	   	   	     TweenLite.to(lens, 0, {x:StageObjectsManager.getDefault.getMouse_x()-LabXConstant.STAGE_WIDTH/2, z:this.z});
+	   	   	     this.x = StageObjectsManager.getDefault.getMouse_x()-LabXConstant.STAGE_WIDTH/2; 
+	   	   	     trace("this.x"+this.x);
+	   	   	     trace("Mouse_x:"+StageObjectsManager.getDefault.getMouse_x());
 	    	}
+	    	
 	    }
 	    
 	    // should destribute the listener 
