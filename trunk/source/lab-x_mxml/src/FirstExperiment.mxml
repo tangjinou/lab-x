@@ -9,25 +9,34 @@
 	 	    import mx.core.UIComponent;
 	 	    import flash.events.Event;
 			import flash.events.MouseEvent;
+			public var camera_yaw:int=0;
 	 		public function init():void{
 	 		   StageObjectsManager.getDefault.mainView=firstExperiment;	
 	 		   Mouse3D.enabled = true;
 	 		   firstExperiment.viewport.interactive = true; 
 	 		   var uic:UIComponent = new UIComponent();
-//			   var FirstExperiment:MainApplication = new MainApplication();
 			   stage.frameRate = 40;
-//               stage.addEventListener(MouseEvent.MOUSE_DOWN, firstExperiment.onMouseDown);
-//               stage.addEventListener(MouseEvent.MOUSE_MOVE, firstExperiment.onMouseMove);
+               stage.addEventListener(MouseEvent.MOUSE_DOWN, firstExperiment.onMouseDown);
+               stage.addEventListener(MouseEvent.MOUSE_MOVE, firstExperiment.onMouseMove);
                stage.addEventListener(MouseEvent.MOUSE_UP, UserInputHandler.getDefault.mouseUpHandler); 
 			   uic.addChild(firstExperiment);
                addChild(uic);
+	 		}
+	 		public function open_stage_rotate():void{
+	 			StageObjectsManager.getDefault.rotate_stage=true;
+	 		}
+	 		public function close_stage_rotate():void{
+	 		    StageObjectsManager.getDefault.rotate_stage=false;
+	 		    //TODO: need reset the view
 	 		}
 	 	]]> 
 	 </mx:Script>
 	 <local:FirstExperimentApplication id="firstExperiment" x="0" y="0" />
 	 
-	 <mx:HBox x="560" y="0" width="100%">
-     <mx:Button  label="zoom+" click="StageObjectsManager.getDefault.mainView.camera.zoom++" icon="@Embed('../resource/picture/zoom_add.png')"/>
-     <mx:Button  label="zoom-" click="StageObjectsManager.getDefault.mainView.camera.zoom--" icon="@Embed('../resource/picture/zoom_min.png')"/>
+	 <mx:HBox x="0" y="0" width="100%">
+	  <mx:Button  label="Y+" click="open_stage_rotate()" icon="@Embed('../resource/picture/zoom_add.png')"/>
+      <mx:Button  label="Y-" click="close_stage_rotate()" icon="@Embed('../resource/picture/zoom_min.png')"/>
+      <mx:Button  label="zoom+" click="StageObjectsManager.getDefault.mainView.camera.zoom++" icon="@Embed('../resource/picture/zoom_add.png')"/>
+      <mx:Button  label="zoom-" click="StageObjectsManager.getDefault.mainView.camera.zoom--" icon="@Embed('../resource/picture/zoom_min.png')"/>
      </mx:HBox>
 </mx:Application>

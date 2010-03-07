@@ -30,6 +30,11 @@ package cn.edu.zju.labx.core
         * */
         public  var notify_count:int=0;
         
+        /**
+        *  This is for stage rotate, if true can rotate
+        */
+        public var rotate_stage:Boolean=true;
+        
         /***
         * 
         *  This is origin Pivot ,should be seted in view;
