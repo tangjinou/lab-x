@@ -1,6 +1,7 @@
 package
 {
 	import cn.edu.zju.labx.core.UserInputHandler;
+	import cn.edu.zju.labx.core.LabXConstant;
 	import flash.events.Event;
 	import flash.events.MouseEvent;
 	
@@ -37,9 +38,9 @@ package
 		import org.papervision3d.materials.ColorMaterial;
 		import org.papervision3d.materials.utils.MaterialsList;
 	
-		public function FirstExperimentApplication(viewportWidth:Number=640, viewportHeight:Number=480, scaleToStage:Boolean=true, interactive:Boolean=false, cameraType:String="Target")
+		public function FirstExperimentApplication(viewportWidth:Number=LabXConstant.STAGE_WIDTH, viewportHeight:Number=LabXConstant.STAGE_HEIGHT, scaleToStage:Boolean=true, interactive:Boolean=false, cameraType:String="Target")
 		{
-			super(800, 420, true, false, CameraType.FREE);
+			super(viewportWidth, viewportHeight, true, false, CameraType.FREE);
 			viewport.interactive = true;
 			camera.zoom = 90;
 			
@@ -67,8 +68,7 @@ package
 		public function createObjects():void
 		{
 			originPivot = new DisplayObject3D();
-			originPivot.x = -300;
-			originPivot.z = -100;
+			originPivot.x = -LabXConstant.STAGE_WIDTH/2
 			scene.addChild(originPivot);
 			
 			light = new PointLight3D(true);
@@ -80,18 +80,18 @@ package
 			var shadeMaterialY:PhongMaterial = new PhongMaterial(light,0xFFFFFF,0xFF00,100);
 			var shadeMaterialZ:PhongMaterial = new PhongMaterial(light,0xFFFFFF,0xFF,100);
 			
-			xAxis = new Cylinder(shadeMaterialX, 5, 200);
-			xAxis.moveRight(100);
+			xAxis = new Cylinder(shadeMaterialX, 1, LabXConstant.STAGE_WIDTH/5);
+			xAxis.moveRight(LabXConstant.STAGE_WIDTH/10);
 			xAxis.roll(90);
 
 			originPivot.addChild(xAxis);
 	
-			yAxis = new Cylinder(shadeMaterialY, 5, 200);
-			yAxis.moveUp(100);
+			yAxis = new Cylinder(shadeMaterialY, 1, LabXConstant.STAGE_HEIGHT/5);
+			yAxis.moveUp(LabXConstant.STAGE_HEIGHT/10);
 			originPivot.addChild(yAxis);
 			
-			zAxis = new Cylinder(shadeMaterialZ, 5, 200);
-			zAxis.moveForward(100);
+			zAxis = new Cylinder(shadeMaterialZ, 1, LabXConstant.STAGE_DEPTH/5);
+			zAxis.moveForward(LabXConstant.STAGE_DEPTH/10);
 			zAxis.pitch(90);
 			originPivot.addChild(zAxis);		
 			
