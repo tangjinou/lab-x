@@ -33,9 +33,9 @@
 	 </mx:Script>
 	 <local:FirstExperimentApplication id="firstExperiment" x="0" y="0" />
 	 <mx:HBox x="0" y="0" width="100%">
-	  <mx:Button  label="open_stage_rotate" click="open_stage_rotate()" icon="@Embed('../resource/picture/open_stage_rotate.png')"/>
-      <mx:Button  label="close_stage_rotate" click="close_stage_rotate()" icon="@Embed('../resource/picture/stop.jpg')"/>
-      <mx:Button  label="zoom+" click="StageObjectsManager.getDefault.mainView.camera.zoom++" icon="@Embed('../resource/picture/zoom_add.png')"/>
-      <mx:Button  label="zoom-" click="StageObjectsManager.getDefault.mainView.camera.zoom--" icon="@Embed('../resource/picture/zoom_min.png')"/>
+	  <mx:Button  label="open_stage_rotate" click="open_stage_rotate()" icon="@Embed('../assets/icon/open_stage_rotate.png')"/>
+      <mx:Button  label="close_stage_rotate" click="close_stage_rotate()" icon="@Embed('../assets/icon/stop.jpg')"/>
+      <mx:Button  label="zoom+" click="StageObjectsManager.getDefault.mainView.camera.zoom++" icon="@Embed('../assets/icon/zoom_add.png')"/>
+      <mx:Button  label="zoom-" click="StageObjectsManager.getDefault.mainView.camera.zoom--" icon="@Embed('../assets/icon/zoom_min.png')"/>
      </mx:HBox>
 </mx:Application>

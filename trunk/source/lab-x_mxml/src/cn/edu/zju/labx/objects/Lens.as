@@ -4,6 +4,7 @@ package cn.edu.zju.labx.objects
 	import cn.edu.zju.labx.events.ILabXListener;
 	import cn.edu.zju.labx.events.IUserInputListener;
 	import cn.edu.zju.labx.events.LabXEvent;
+	import cn.edu.zju.labx.utils.ResourceManager;
 	
 	import com.greensock.*;
 	
@@ -24,8 +25,6 @@ package cn.edu.zju.labx.objects
 	    public var width:Number =120;
 	    public var height:Number=120;
    
-	    
-	    
 		public function Lens(material:MaterialObject3D=null)
 		{
 			super(material);
@@ -38,7 +37,7 @@ package cn.edu.zju.labx.objects
 //		   	lens = new Cylinder(this.material,100,100,30,10);
 //		   	this.addChild(lens);
             lens=new DAE(true);  
-            lens.load("../resource/dae/lens.DAE",new MaterialsList( {all:this.material} ) );		
+            lens.load(ResourceManager.LENS_DAE_URL,new MaterialsList( {all:this.material} ) );		
             lens.addEventListener(FileLoadEvent.LOAD_COMPLETE,daeFileOnloaded);  
 
 		}

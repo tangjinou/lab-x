@@ -1,6 +1,7 @@
 package cn.edu.zju.labx.objects
 {   
 	import cn.edu.zju.labx.utils.MathUtils;
+	import cn.edu.zju.labx.utils.ResourceManager;
 	
 	import org.papervision3d.core.geom.renderables.Vertex3D;
 	import org.papervision3d.core.proto.MaterialObject3D;
@@ -30,7 +31,7 @@ package cn.edu.zju.labx.objects
 			this.radius = radius;
 			
 			ray=new DAE(true);  
-            ray.load("../resource/dae/ray.DAE",new MaterialsList( {all:this.material} ) );		
+            ray.load(ResourceManager.RAY_DAE_URL,new MaterialsList( {all:this.material} ) );		
             ray.addEventListener(FileLoadEvent.LOAD_COMPLETE,daeFileOnloaded);  
 //			addDisplayObject();
 		}
