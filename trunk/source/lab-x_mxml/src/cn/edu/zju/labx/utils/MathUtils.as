@@ -1,6 +1,7 @@
 package cn.edu.zju.labx.utils
 {
 	import org.papervision3d.core.math.Matrix3D;
+	import org.papervision3d.core.math.Number2D;
 	import org.papervision3d.core.math.Number3D;
 	
 	public final class MathUtils
@@ -197,6 +198,48 @@ package cn.edu.zju.labx.utils
 
         return true;
     	}
-    	
-	 }
+	 
+		 /**
+		  * Calculate the intersaction of two lines.
+		  * @usage: MathUtil.calculateIntersaction(a, b, c, d); 
+		  * 
+		  * @param a (Number2D) first point in first line
+		  * @param b (Number2D) second point in first line
+		  * @param m (Number2D) first point in first line
+		  * @param n (Number2D) second point in second line
+		  * 
+		  */
+		 public static function calculateIntersaction(a:Number2D, b:Number2D, m:Number2D, n:Number2D):Number2D
+		 {
+			var result:Number2D = new Number2D();
+			
+			var x1:Number = a.x;
+			var y1:Number = a.y;
+			
+			var x2:Number = m.x;
+			var y2:Number = m.y;
+			
+			var x1v:Number = b.x - a.x;
+			var y1v:Number = b.y - a.y;
+			
+			var x2v:Number = n.x - m.x;
+			var y2v:Number = n.y - m.y;
+			
+			if (x1v*y2v == x2v*y1v)
+			{
+				return null;
+			}
+			if (y1v == 0) 
+			{
+				result.y = a.y;
+				result.x = x2v/y2v * (result.y-y2) + x2;
+				return result;
+			}
+			
+			result.y = ((x2 - x1)*y1v*y2v + x1v*y2v*y1-x2v*y1v*y2)/(x1v*y2v-x2v*y1v);
+			result.x = x1v*(result.y-y1)/y1v + x1;
+			
+			return result;
+		}
+	}
 }
