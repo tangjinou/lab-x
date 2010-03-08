@@ -2,6 +2,7 @@ package cn.edu.zju.labx.utils
 {
 	import flexunit.framework.Assert;
 	
+	import org.papervision3d.core.math.Number2D;
 	import org.papervision3d.core.math.Number3D;
 	
 	
@@ -74,6 +75,53 @@ package cn.edu.zju.labx.utils
 		[Test]
 		public function testDistanceToMatrix3D():void{
 		   
+		}
+		
+		[Test]
+		public function testCalculateIntersaction():void {
+			var result:Number2D;
+			
+			//parallel
+			var a:Number2D = new Number2D(0, 0);
+			var b:Number2D = new Number2D(1, 1);
+			var m:Number2D = new Number2D(1, 2);
+			var n:Number2D = new Number2D(2, 3);
+			
+			result = MathUtils.calculateIntersaction(a, b, m, n);
+			Assert.assertEquals(null, result);
+			
+			a = new Number2D(0, 0);
+			b = new Number2D(1, 0);
+			m = new Number2D(1, 2);
+			n = new Number2D(2, 1);
+			
+			result = MathUtils.calculateIntersaction(a, b, m, n);
+			Assert.assertEquals(3, result.x);
+			Assert.assertEquals(0, result.y);
+			
+			a = new Number2D(0, 0);
+			b = new Number2D(0, 1);
+			m = new Number2D(1, 2);
+			n = new Number2D(2, 1);
+			result = MathUtils.calculateIntersaction(a, b, m, n);
+			Assert.assertEquals(0, result.x);
+			Assert.assertEquals(3, result.y);
+			
+			a = new Number2D(0, 0);
+			b = new Number2D(-1, -1);
+			m = new Number2D(1, 2);
+			n = new Number2D(1, 5);
+			result = MathUtils.calculateIntersaction(a, b, m, n);
+			Assert.assertEquals(1, result.x);
+			Assert.assertEquals(1, result.y);
+			
+			a = new Number2D(10, 15);
+			b = new Number2D(20, 5);
+			m = new Number2D(-10, -20);
+			n = new Number2D(-20, -5);
+			result = MathUtils.calculateIntersaction(a, b, m, n);
+			Assert.assertEquals(-120, result.x);
+			Assert.assertEquals(145, result.y);
 		}
 		
 	}
