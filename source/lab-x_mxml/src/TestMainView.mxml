@@ -36,8 +36,8 @@
 	 
 	  
      <mx:HBox x="560" y="0" width="100%">
-     <mx:Button  label="zoom+" click="StageObjectsManager.getDefault.mainView.camera.zoom++" icon="@Embed('../resource/picture/zoom_add.png')"/>
-     <mx:Button  label="zoom-" click="StageObjectsManager.getDefault.mainView.camera.zoom--" icon="@Embed('../resource/picture/zoom_min.png')"/>
+     <mx:Button  label="zoom+" click="StageObjectsManager.getDefault.mainView.camera.zoom++" icon="@Embed('../assets/icon/picture/zoom_add.png')"/>
+     <mx:Button  label="zoom-" click="StageObjectsManager.getDefault.mainView.camera.zoom--" icon="@Embed('../assets/icon/picture/zoom_min.png')"/>
      </mx:HBox>
 
 </mx:Application>
