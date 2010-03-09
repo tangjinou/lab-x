@@ -4,7 +4,7 @@ package cn.edu.zju.labx.objects
 	
 	public class LineRay
 	{
-		var _logic:RayLogic 
+		var _logic:RayLogic; 
 		public function LineRay(logic:RayLogic)
 		{
 			_logic = logic;
