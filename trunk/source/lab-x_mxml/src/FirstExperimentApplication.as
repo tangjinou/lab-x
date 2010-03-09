@@ -50,7 +50,7 @@ package
 			viewport.interactive = true;
 			camera.zoom = 90;
 
-			renderer = new QuadrantRenderEngine(QuadrantRenderEngine.CORRECT_Z_FILTER);
+//			renderer = new QuadrantRenderEngine(QuadrantRenderEngine.CORRECT_Z_FILTER);
 			
 			createDesk();
 			createObjects();

@@ -16,9 +16,9 @@
 	 		   firstExperiment.viewport.interactive = true; 
 	 		   var uic:UIComponent = new UIComponent();
 			   stage.frameRate = 40;
-               stage.addEventListener(MouseEvent.MOUSE_DOWN, firstExperiment.onMouseDown);
-               stage.addEventListener(MouseEvent.MOUSE_MOVE, firstExperiment.onMouseMove);
-               stage.addEventListener(MouseEvent.MOUSE_UP, UserInputHandler.getDefault.mouseUpHandler); 
+                stage.addEventListener(MouseEvent.MOUSE_DOWN, UserInputHandler.getDefault.mouseDownHandler);
+            	stage.addEventListener(MouseEvent.MOUSE_MOVE, UserInputHandler.getDefault.mouseMoveHandler);
+            	stage.addEventListener(MouseEvent.MOUSE_UP, UserInputHandler.getDefault.mouseUpHandler);
 			   uic.addChild(firstExperiment);
                addChild(uic);
 	 		}
