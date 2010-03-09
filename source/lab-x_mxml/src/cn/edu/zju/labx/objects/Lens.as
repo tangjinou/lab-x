@@ -49,8 +49,9 @@ package cn.edu.zju.labx.objects
 //		   	lens = new Cylinder(this.material,100,100,30,10);
 //		   	this.addChild(lens);
             lens=new DAE(true);  
+            lens.addEventListener(FileLoadEvent.LOAD_COMPLETE,daeFileOnloaded);
             lens.load(ResourceManager.LENS_DAE_URL,new MaterialsList( {all:this.material} ) );		
-            lens.addEventListener(FileLoadEvent.LOAD_COMPLETE,daeFileOnloaded);  
+              
 		}
 
 		public function handleLabXEvent(event:LabXEvent):Boolean

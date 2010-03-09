@@ -104,17 +104,19 @@ package
 			xAxis = new Cylinder(shadeMaterialX, 1, LabXConstant.STAGE_WIDTH/5);
 			xAxis.moveRight(LabXConstant.STAGE_WIDTH/10);
 			xAxis.roll(90);
-
 			originPivot.addChild(xAxis);
-	
+			equipmentLayer.addDisplayObject3D(xAxis, true);
+			
 			yAxis = new Cylinder(shadeMaterialY, 1, LabXConstant.STAGE_HEIGHT/5);
 			yAxis.moveUp(LabXConstant.STAGE_HEIGHT/10);
 			originPivot.addChild(yAxis);
+			equipmentLayer.addDisplayObject3D(yAxis, true);
 			
 			zAxis = new Cylinder(shadeMaterialZ, 1, LabXConstant.STAGE_DEPTH/5);
 			zAxis.moveForward(LabXConstant.STAGE_DEPTH/10);
 			zAxis.pitch(90);
 			originPivot.addChild(zAxis);
+			equipmentLayer.addDisplayObject3D(zAxis, true);
 			
 			/*Create Light*/
 //			var shadeMaterial:PhongMaterial = new PhongMaterial(light,0xFF0000,0xFF0000,100);
