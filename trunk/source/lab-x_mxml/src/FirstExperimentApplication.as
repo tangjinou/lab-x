@@ -2,6 +2,7 @@ package
 {
 	import cn.edu.zju.labx.core.LabXConstant;
 	import cn.edu.zju.labx.core.StageObjectsManager;
+	import cn.edu.zju.labx.core.UserInputHandler;
 	import cn.edu.zju.labx.objects.Board;
 	import cn.edu.zju.labx.objects.Lens;
 	
@@ -11,7 +12,6 @@ package
 	import org.papervision3d.cameras.CameraType;
 	import org.papervision3d.events.FileLoadEvent;
 	import org.papervision3d.lights.PointLight3D;
-	import org.papervision3d.materials.ColorMaterial;
 	import org.papervision3d.materials.shadematerials.PhongMaterial;
 	import org.papervision3d.objects.DisplayObject3D;
 	import org.papervision3d.objects.parsers.DAE;
@@ -137,8 +137,10 @@ package
             isOrbiting = true;
             previousMouseX = e.stageX;
             previousMouseY = e.stageY;
+            if(StageObjectsManager.getDefault.rotate_stage==false){
+                UserInputHandler.getDefault.mouseDownHandler(e);
+            }
         }
-  
         public function onMouseUp(e:MouseEvent):void
         {
              isOrbiting = false;
@@ -160,6 +162,9 @@ package
                 previousMouseX = e.stageX;
                 previousMouseY = e.stageY;
              }
+            if(StageObjectsManager.getDefault.rotate_stage==false){
+                UserInputHandler.getDefault.mouseMoveHandler(e);
+            }
         }
 		
 	}
