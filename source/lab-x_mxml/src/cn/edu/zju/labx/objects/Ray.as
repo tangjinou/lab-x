@@ -50,7 +50,6 @@ package cn.edu.zju.labx.objects
 			if(lineRays==null){
 			  return;
 			}
-			
 			for(var i:int=0;i<lineRays.length;i++){
 			  if(lineRays.getItemAt(i) is LineRay)
 			  {
@@ -58,7 +57,7 @@ package cn.edu.zju.labx.objects
 			  }
 			  var lineMaterial:LineMaterial = new LineMaterial(0xFF0000,1);
 			  var lines:Lines3D = new Lines3D(lineMaterial);
-			  lines.addLine(new Line3D(lines, lineMaterial, lineBold, this.startVertex, this.endVertex));
+			  lines.addLine(new Line3D(lines, lineMaterial, lineBold, lineRay.start_point, lineRay.end_point));
 		   	  addChild(lines);
 		    }
 		}

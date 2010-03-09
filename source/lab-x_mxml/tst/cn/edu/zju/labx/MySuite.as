@@ -3,6 +3,7 @@ package cn.edu.zju.labx
 	import cn.edu.zju.labx.core.StageObjectsManagerTest;
 	import cn.edu.zju.labx.logicObject.LensLogicTest;
 	import cn.edu.zju.labx.logicObject.RayLogicTest;
+	import cn.edu.zju.labx.objects.LineRaysTest;
 	import cn.edu.zju.labx.utils.MathUtilsTest;
 	
 	[Suite]  
@@ -17,8 +18,9 @@ package cn.edu.zju.labx
         public var t1:MathUtilsTest;
         public var t2:StageObjectsManagerTest;
         
-        public var t3:RayLogicTest;
-        public var t4:LensLogicTest;
+//        public var t3:RayLogicTest;
+//        public var t4:LensLogicTest;
+        public var t5:LineRaysTest;
         
         public function MySuite()  
         {  
