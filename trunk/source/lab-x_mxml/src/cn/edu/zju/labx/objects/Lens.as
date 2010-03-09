@@ -25,6 +25,11 @@ package cn.edu.zju.labx.objects
 	    public var width:Number =120;
 	    public var height:Number=120;
    
+		/**
+		 * To store the old Mouse X position;
+		 */
+	    public var oldMouseX:Number = -1;
+	    
 		public function Lens(material:MaterialObject3D=null)
 		{
 			super(material);
@@ -53,15 +58,16 @@ package cn.edu.zju.labx.objects
 	   	       return;
 	   	    }
 	   	    if(event is MouseEvent){
-//	   	    	 var mouseEvent:MouseEvent = event as MouseEvent;
-//	   	   	     TweenLite.to(lens, 0, {x:StageObjectsManager.getDefault.getMouse_x()-LabXConstant.STAGE_WIDTH/2, z:this.z});
-	   	   	     this.x = StageObjectsManager.getDefault.getMouse_originPivot_relative_x(); 
-//	   	   	     trace("this.x"+this.x);
-//               trace("x:"+mouseEvent.localX);
-//	   	   	     trace("Mouse_x:"+StageObjectsManager.getDefault.getMouse_x());
-//	   	   	     trace(StageObjectsManager.getDefault.getMouse_originPivot_relative_x());
-//                 trace(StageObjectsManager.getDefault.getMouse_x());
-//                 trace(StageObjectsManager.getDefault.getMouse_originPivot_relative_x());
+	   	   	     var mouseEvent:MouseEvent = event as MouseEvent;
+	   	    	 if (mouseEvent.type == MouseEvent.MOUSE_DOWN) {
+	   	    	 	oldMouseX = mouseEvent.stageX;
+	   	    	 } else if (mouseEvent.type == MouseEvent.MOUSE_UP) {
+	   	    	 	oldMouseX = -1;
+	   	    	 } else if ((mouseEvent.type == MouseEvent.MOUSE_MOVE) && (oldMouseX != -1)) {
+	   	    	 	var xMove:Number = mouseEvent.stageX - oldMouseX;
+	   	    	 	this.x += xMove;
+	   	    	 	oldMouseX = mouseEvent.stageX;
+	   	    	 }
 	    	}
 	    	
 	    }
