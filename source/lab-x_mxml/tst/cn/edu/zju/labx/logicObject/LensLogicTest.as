@@ -20,7 +20,6 @@ package cn.edu.zju.labx.logicObject
 			assertEquals(1, lens.position.x);
 			assertEquals(1, lens.position.y);
 			assertEquals(1, lens.position.z);
-			
 			lens.position = new Number3D(100, 200, 300);
 			assertEquals(100, lens.position.x);
 			assertEquals(200, lens.position.y);
