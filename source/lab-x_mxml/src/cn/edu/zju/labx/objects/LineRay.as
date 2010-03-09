@@ -39,5 +39,9 @@ package cn.edu.zju.labx.objects
 		   return _logic.vector;
 		}
 		
+		public function get logic():RayLogic
+	    {
+	    	return this._logic;
+	    }
 	}
 }

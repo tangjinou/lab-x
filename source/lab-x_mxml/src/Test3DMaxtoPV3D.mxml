@@ -39,8 +39,6 @@
 	 <local:Test3DMaxtoPV3DApplication id="test3DMaxtoPV3DApplication" />
 	  
      <mx:HBox x="560" y="0" width="100%">
-     <mx:Button  label="zoom+" click="StageObjectsManager.getDefault.mainView.camera.zoom++" icon="@Embed('../assets/icon/zoom_add.png')"/>
-     <mx:Button  label="zoom-" selected="false" click="StageObjectsManager.getDefault.mainView.camera.zoom--" icon="@Embed('../resource/icon/zoom_min.png')"/>
      </mx:HBox>
 
 </mx:Application>

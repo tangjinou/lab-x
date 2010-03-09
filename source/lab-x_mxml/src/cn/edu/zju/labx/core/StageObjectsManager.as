@@ -117,7 +117,7 @@ package cn.edu.zju.labx.core
 			if(obj is ILabXListener) {
 				addLabXEventListener(obj as ILabXListener);
 			}
-//			originPivot.addChild(obj);
+//			if(originPivot != null)originPivot.addChild(obj);
 		}
 		
 		/**
@@ -132,7 +132,7 @@ package cn.edu.zju.labx.core
 			if(obj is ILabXListener) {
 				removeLabXEventListener(obj as ILabXListener);
 			}
-//			originPivot.removeChild(obj);
+//			if(originPivot != null)originPivot.removeChild(obj);
 		}
 
 		public function getLabXObjects():ArrayCollection

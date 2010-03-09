@@ -5,9 +5,12 @@ package cn.edu.zju.labx.objects
 	import cn.edu.zju.labx.events.IUserInputListener;
 	import cn.edu.zju.labx.events.LabXEvent;
 	import cn.edu.zju.labx.logicObject.RayLogic;
+	import cn.edu.zju.labx.utils.ResourceManager;
 	
 	import flash.events.Event;
 	import flash.events.MouseEvent;
+	
+	import mx.collections.ArrayCollection;
 	
 	import org.flintparticles.threeD.geom.Vector3D;
 	import org.papervision3d.core.math.Number3D;
@@ -51,8 +54,10 @@ package cn.edu.zju.labx.objects
 		
 		public function getRay():Ray
 		{
-       	 	var ray:RayLogic = new RayLogic(new Number3D(this.x, this.y, this.z), new Vector3D(1, 0, 0)); 
-			return new Ray();
+       	 	var ray:RayLogic = new RayLogic(new Number3D(this.x, this.y, this.z), new Vector3D(1, 0, 0));
+       	 	var rayArray:ArrayCollection = new ArrayCollection();
+       	 	rayArray.addItem(ray);
+			return new Ray(null, rayArray, this.x);
 		}
 		
 		public function setRay(ray:Ray):void
