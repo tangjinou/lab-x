@@ -27,9 +27,9 @@ package cn.edu.zju.labx.objects
 		
 		public function get end_point():Vertex3D{
 		   if(endPoint ==null){
-		     var x:Number= _length * Math.cos(_logic.vector.x)+_logic.point.x;
-		     var y:Number= _length * Math.cos(_logic.vector.y)+_logic.point.y;
-		     var z:Number= _length * Math.cos(_logic.vector.z)+_logic.point.z;
+		     var x:Number= _length * _logic.vector.x+_logic.point.x;
+		     var y:Number= _length * _logic.vector.y+_logic.point.y;
+		     var z:Number= _length * _logic.vector.z+_logic.point.z;
 		     endPoint =new Vertex3D(x,y,z);
 		   }
            return endPoint;		
