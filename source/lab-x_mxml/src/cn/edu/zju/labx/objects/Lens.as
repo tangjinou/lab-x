@@ -51,7 +51,6 @@ package cn.edu.zju.labx.objects
             lens=new DAE(true);  
             lens.load(ResourceManager.LENS_DAE_URL,new MaterialsList( {all:this.material} ) );		
             lens.addEventListener(FileLoadEvent.LOAD_COMPLETE,daeFileOnloaded);  
-
 		}
 
 		public function handleLabXEvent(event:LabXEvent):Boolean
@@ -109,7 +108,7 @@ package cn.edu.zju.labx.objects
 		}
 		
 	    private function daeFileOnloaded(evt:FileLoadEvent):void{  
-	    	addChild(lens);  
+	    	this.addChild(lens);  
 //	    	trace(lens.childrenList());
             lens.getChildByName("COLLADA_Scene").getChildByName("Sphere02").addEventListener(InteractiveScene3DEvent.OBJECT_PRESS, objectPressHandler);
             lens.getChildByName("COLLADA_Scene").getChildByName("Sphere01").addEventListener(InteractiveScene3DEvent.OBJECT_PRESS, objectPressHandler);

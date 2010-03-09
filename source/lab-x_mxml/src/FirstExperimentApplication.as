@@ -3,10 +3,10 @@ package
 	import cn.edu.zju.labx.core.LabXConstant;
 	import cn.edu.zju.labx.core.StageObjectsManager;
 	import cn.edu.zju.labx.core.UserInputHandler;
-	import cn.edu.zju.labx.utils.ResourceManager;
 	import cn.edu.zju.labx.objects.Board;
 	import cn.edu.zju.labx.objects.Lens;
 	import cn.edu.zju.labx.objects.Ray;
+	import cn.edu.zju.labx.utils.ResourceManager;
 	
 	import flash.events.Event;
 	import flash.events.MouseEvent;
@@ -19,6 +19,8 @@ package
 	import org.papervision3d.objects.parsers.DAE;
 	import org.papervision3d.objects.primitives.Cylinder;
 	import org.papervision3d.view.BasicView;
+	import org.papervision3d.view.layer.ViewportLayer;
+	import org.papervision3d.view.layer.util.ViewportLayerSortMode;
 	
 	public class FirstExperimentApplication extends BasicView
 	{
@@ -42,17 +44,23 @@ package
 		private var desk:DAE; 
 	    public var lens:Lens;
 	    private var board:Board;
-	    
-		import org.papervision3d.render.BasicRenderEngine;
-		import org.papervision3d.render.QuadrantRenderEngine;
 	
+		private var deskLayer:ViewportLayer;
+		private var equipmentLayer:ViewportLayer;
+		
 		public function FirstExperimentApplication(viewportWidth:Number=LabXConstant.STAGE_WIDTH, viewportHeight:Number=LabXConstant.STAGE_HEIGHT, scaleToStage:Boolean=true, interactive:Boolean=false, cameraType:String="Target")
 		{
 			super(viewportWidth, viewportHeight, true, false, CameraType.FREE);
 			viewport.interactive = true;
 			camera.zoom = 90;
-
-//			renderer = new QuadrantRenderEngine(QuadrantRenderEngine.CORRECT_Z_FILTER);
+			
+			equipmentLayer = new ViewportLayer(viewport,null);
+			deskLayer = new ViewportLayer(viewport,null);
+			viewport.containerSprite.addLayer(equipmentLayer);
+			viewport.containerSprite.addLayer(deskLayer);
+			viewport.containerSprite.sortMode = ViewportLayerSortMode.INDEX_SORT;
+			equipmentLayer.layerIndex = 1;
+			deskLayer.layerIndex = 2;
 			
 			createDesk();
 			createObjects();
@@ -69,12 +77,13 @@ package
             desk.scaleX = 6;
 		}
 		
-		private function deskOnLoaded(evt:FileLoadEvent):void{    
-                desk.moveDown(LabXConstant.STAGE_HEIGHT/2-40);
-                desk.moveRight(LabXConstant.STAGE_WIDTH/2);
-                originPivot.addChild(desk);  
-                StageObjectsManager.getDefault.originPivot = originPivot;
-                //camera.lookAt(desk);  
+		private function deskOnLoaded(evt:FileLoadEvent):void{
+            desk.moveDown(LabXConstant.STAGE_HEIGHT/2-40);
+            desk.moveRight(LabXConstant.STAGE_WIDTH/2);
+            originPivot.addChild(desk);
+            deskLayer.addDisplayObject3D(desk, true);
+            StageObjectsManager.getDefault.originPivot = originPivot;
+             //camera.lookAt(desk);  
         } 
           
 		public function createObjects():void
@@ -87,7 +96,7 @@ package
 			light.y = 100;
 			light.z = -100;
 			originPivot.addChild(light);
-			
+
 			var shadeMaterialX:PhongMaterial = new PhongMaterial(light,0xFFFFFF,0xFF0000,100);
 			var shadeMaterialY:PhongMaterial = new PhongMaterial(light,0xFFFFFF,0xFF00,100);
 			var shadeMaterialZ:PhongMaterial = new PhongMaterial(light,0xFFFFFF,0xFF,100);
@@ -112,6 +121,7 @@ package
 			var ray:Ray = new Ray();
 			ray.displayRays();	
 			originPivot.addChild(ray);
+			equipmentLayer.addDisplayObject3D(ray, true);
 			
 			/*Create Lens*/	
 			var shadeMaterialLens:PhongMaterial = new PhongMaterial(light,0xFFFFFF,0x6ccff8,100);
@@ -120,6 +130,7 @@ package
 			lens.moveRight(LabXConstant.DESK_WIDTH/2);
 			lens.moveUp(lens.height/2);
 			originPivot.addChild(lens);
+			equipmentLayer.addDisplayObject3D(lens, true);
 			
 			/*create Board*/
 			var shadeMaterialBoard:PhongMaterial = new PhongMaterial(light,0xFFFFFF,0xe1e1e1,100);
@@ -128,6 +139,7 @@ package
 			board.moveRight(LabXConstant.DESK_WIDTH);
 			board.moveUp(board.height/2);
             originPivot.addChild(board);
+            equipmentLayer.addDisplayObject3D(board, true);
             
 			
 		}
@@ -137,6 +149,15 @@ package
 			easePitch += (camPitch - easePitch) * easeOut;
            	easeYaw+= (camYaw - easeYaw) * easeOut;
             camera.orbit(easePitch, easeYaw);   
+            if (camera.y < originPivot.y)
+            {
+            	equipmentLayer.layerIndex = 1;
+				deskLayer.layerIndex = 2;
+            }else
+            {
+            	equipmentLayer.layerIndex = 2;
+				deskLayer.layerIndex = 1;
+            }
 			super.onRenderTick();
 		}
 		
