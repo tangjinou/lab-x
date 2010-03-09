@@ -21,7 +21,7 @@ package cn.edu.zju.labx.objects
 			_length= length;
 		}
 		
-		public function setLineRay(startPoint:Vertex3D,endPoint:Vertex3D){
+		public function newLineRay(startPoint:Vertex3D,endPoint:Vertex3D){
 		    this.endPoint = endPoint;
 		    this._length  = MathUtils.distanceToNumber3D(startPoint.toNumber3D(),endPoint.toNumber3D());
 		    var cosx:Number  = (endPoint.x - startPoint.x)/_length;
