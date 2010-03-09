@@ -66,7 +66,7 @@ package cn.edu.zju.labx.core{
 		
 		public function mouseMoveHandler (e:MouseEvent):void
 		{
-			if (this._currentSelectedObject != null) {
+			if (mouseDown && this._currentSelectedObject != null) {
 				this._currentSelectedObject.hanleUserInputEvent(e);
 			}
 		}

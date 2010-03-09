@@ -68,7 +68,24 @@ package cn.edu.zju.labx.core
 	    public function getMouse_originPivot_relative_y():int{
 	       return getMouse_y()-(LabXConstant.STAGE_HEIGHT/2)-originPivot.y;
 	    }
-        
+	    
+	    
+	    /**
+	     * Get the X axis in Pivot corrdinate from stage corridinate
+	     */
+		public function getPivotX(stageX:Number):Number
+		{
+			return stageX - originPivot.x - (LabXConstant.STAGE_WIDTH/2);
+		}
+		
+		/**
+	     * Get the Y axis in Pivot corrdinate from stage corridinate
+	     */
+		public function getPivotY(stageY:Number):Number
+		{
+			return stageY - originPivot.y - (LabXConstant.STAGE_HEIGHT/2);
+		}
+		        
 		/*************************************************************************
 		 * Sigleton Method to make sure there are only one StageObjectManager 
 		 * in an application
@@ -99,6 +116,7 @@ package cn.edu.zju.labx.core
 			if(obj is ILabXListener) {
 				addLabXEventListener(obj as ILabXListener);
 			}
+			originPivot.addChild(obj);
 		}
 		
 		/**
@@ -113,6 +131,7 @@ package cn.edu.zju.labx.core
 			if(obj is ILabXListener) {
 				removeLabXEventListener(obj as ILabXListener);
 			}
+			originPivot.removeChild(obj);
 		}
 
 		public function getLabXObjects():ArrayCollection
