@@ -1,6 +1,7 @@
 package cn.edu.zju.labx.objects
 {
 	import cn.edu.zju.labx.core.StageObjectsManager;
+	import cn.edu.zju.labx.utils.ResourceManager;
 	import cn.edu.zju.labx.events.IUserInputListener;
 	import cn.edu.zju.labx.events.LabXEvent;
 	import cn.edu.zju.labx.logicObject.RayLogic;
@@ -15,6 +16,8 @@ package cn.edu.zju.labx.objects
 	import org.papervision3d.materials.utils.MaterialsList;
 	import org.papervision3d.objects.parsers.DAE;
 	import org.papervision3d.objects.primitives.Cube;
+	import org.papervision3d.events.FileLoadEvent;
+	import org.papervision3d.objects.parsers.DAE;
 
 	public class LightSource extends LabXObject implements IUserInputListener, IRayMaker
 	{

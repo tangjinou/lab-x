@@ -82,7 +82,7 @@ package
 			var yellowMaterial:ColorMaterial = new ColorMaterial(0xFFFFFF);
 			var startVertex:Vertex3D = new Vertex3D(lightSource.x, lightSource.y, lightSource.z);
 			var endVertex:Vertex3D = new Vertex3D(lens.x, lightSource.y, lens.z);
-			var ray:Ray = new Ray(yellowMaterial, startVertex, endVertex, 5);
+			var ray:Ray = new Ray();  //TODO: need to be fixed by TJO
 			StageObjectsManager.getDefault.addLabXObject(ray);
 		}
 		
