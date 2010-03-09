@@ -1,6 +1,5 @@
 package cn.edu.zju.labx.objects
 {   
-	import cn.edu.zju.labx.core.StageObjectsManager;
 	import cn.edu.zju.labx.events.ILabXListener;
 	import cn.edu.zju.labx.events.IUserInputListener;
 	import cn.edu.zju.labx.events.LabXEvent;
@@ -17,7 +16,7 @@ package cn.edu.zju.labx.objects
 	import org.papervision3d.materials.utils.MaterialsList;
 	import org.papervision3d.objects.parsers.DAE;
 	
-	public class Lens extends LabXObject implements ILabXListener ,IUserInputListener
+	public class Lens extends LabXObject implements ILabXListener ,IUserInputListener, IRayMaker
 	{   
 //		protected var lens:Cylinder;
 	    protected var lens:DAE;
@@ -49,7 +48,20 @@ package cn.edu.zju.labx.objects
 
 	    public function handleLabXEvent(event:LabXEvent):Boolean{
 		   //TODO:
+//		   var ray:Ray = event.previousXObject.getRawRay();
+		   
 		   return true;
+		}
+		
+		public function getRay():Ray
+		{
+//       	 	var ray:RayLogic = new RayLogic(new Number3D(this.x, this.y, this.z), new Vector3D(1, 0, 0)); 
+			return null;
+		}
+		
+		public function setRay(ray:Ray):void
+		{
+			
 		}
 		
 	    public function hanleUserInputEvent(event:Event):void{

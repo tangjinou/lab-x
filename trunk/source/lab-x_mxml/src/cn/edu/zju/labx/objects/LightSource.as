@@ -1,17 +1,24 @@
 package cn.edu.zju.labx.objects
 {
-	import cn.edu.zju.labx.events.ILabXListener;
+	import cn.edu.zju.labx.core.StageObjectsManager;
 	import cn.edu.zju.labx.events.IUserInputListener;
 	import cn.edu.zju.labx.events.LabXEvent;
+	import cn.edu.zju.labx.logicObject.RayLogic;
 	
 	import flash.events.Event;
+	import flash.events.MouseEvent;
 	
+	import org.flintparticles.threeD.geom.Vector3D;
+	import org.papervision3d.core.math.Number3D;
 	import org.papervision3d.core.proto.MaterialObject3D;
 	import org.papervision3d.materials.utils.MaterialsList;
 	import org.papervision3d.objects.primitives.Cube;
 
-	public class LightSource extends LabXObject implements ILabXListener, IUserInputListener
+	public class LightSource extends LabXObject implements IUserInputListener, IRayMaker
 	{
+		
+		var isOn:Boolean = false;
+		
 		public function LightSource(material:MaterialObject3D=null)
 		{
 			super(material);
@@ -32,15 +39,38 @@ package cn.edu.zju.labx.objects
 		   	this.addChild(cube);
 		}
 		
-		public function handleLabXEvent(event:LabXEvent):Boolean
+		public function getRay():Ray
 		{
-			//TODO:
-			return true;
+       	 	var ray:RayLogic = new RayLogic(new Number3D(this.x, this.y, this.z), new Vector3D(1, 0, 0)); 
+			return new Ray();
+		}
+		
+		public function setRay(ray:Ray):void
+		{
+			
 		}
 		
 		public  function hanleUserInputEvent(event:Event):void
 		{
-			//TODO:
+			if (userInputHandle != null)
+			{
+				userInputHandle.call(this, event);
+			}
+			
+			if (event is MouseEvent)
+			{
+				 var mouseEvent:MouseEvent = event as MouseEvent;
+	   	    	 if (mouseEvent.type == MouseEvent.MOUSE_UP)
+	   	    	 {
+	   	    	 	isOn = !isOn;
+	   	    	 }
+	   	    	 
+	   	    	 if (isOn)
+	   	    	 {
+	   	    	 	StageObjectsManager.getDefault.notify(new LabXEvent(this));
+	   	    	 }
+			}
+			
 		}
 	}
 }
