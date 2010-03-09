@@ -1,10 +1,10 @@
 package cn.edu.zju.labx.objects
 {
 	import cn.edu.zju.labx.logicObject.RayLogic;
+	import cn.edu.zju.labx.utils.MathUtils;
 	
 	import org.flintparticles.threeD.geom.Vector3D;
 	import org.papervision3d.core.geom.renderables.Vertex3D;
-	import org.papervision3d.core.math.Number3D;
 	
 	public class LineRay
 	{
@@ -19,6 +19,15 @@ package cn.edu.zju.labx.objects
 		{
 			_logic = logic;
 			_length= length;
+		}
+		
+		public function LineRay(startPoint:Vertex3D,endPoint:Vertex3D){
+		    this.endPoint = endPoint;
+		    this._length  = MathUtils.distanceToNumber3D(startPoint.toNumber3D(),endPoint.toNumber3D());
+		    var cosx:Number  = (endPoint.x - startPoint.x)/_length;
+		    var cosy:Number  = (endPoint.y - startPoint.y)/_length;
+		    var cosz:Number  = (endPoint.z - startPoint.z)/_length;
+		    _logic =new RayLogic(startPoint.toNumber3D(),new Vector3D(cosx,cosy,cosz));
 		}
 		
 		public function get start_point():Vertex3D{
