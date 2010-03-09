@@ -19,6 +19,9 @@ package cn.edu.zju.labx.objects
 		  assertEquals(0, lineRays.end_point.x);
 		  assertEquals(101, lineRays.end_point.y);
 		  assertEquals(203, lineRays.end_point.z);
+		  
+		  
+		  
        }
 	}
 }
