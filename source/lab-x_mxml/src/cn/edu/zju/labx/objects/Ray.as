@@ -47,6 +47,10 @@ package cn.edu.zju.labx.objects
 		
 		public function displayRays():void
 		{
+			if(lineRays==null){
+			  return;
+			}
+			
 			for(var i:int=0;i<lineRays.length;i++){
 			  if(lineRays.getItemAt(i) is LineRay)
 			  {
