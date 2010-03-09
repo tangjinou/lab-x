@@ -27,9 +27,12 @@ package cn.edu.zju.labx.logicObject
 		public function RayLogic(point:Number3D=null, vector:Vector3D=null)
 		{
 			this._point = point || new Number3D();
-			this._vector = vector || new Vector3D(1,1,1);
+			this._vector = vector || new Vector3D(1,0,0);
 		}
 		
+		/**
+		 * Check whether the point is on Ray or not
+		 */
 		public function isPointOnRay(point:Number3D):Boolean
 		{
 			var bXY:Boolean = ((point.x - this._point.x) * this._vector.y == (point.y - this._point.y)*this._vector.x);

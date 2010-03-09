@@ -5,6 +5,7 @@ package cn.edu.zju.labx.core
 	import cn.edu.zju.labx.objects.LabXObject;
 	
 	import mx.collections.ArrayCollection;
+	import mx.collections.Sort;
 	import mx.controls.TextArea;
 	
 	import org.papervision3d.objects.DisplayObject3D;
@@ -160,6 +161,24 @@ package cn.edu.zju.labx.core
 		private function addLabXEventListener(listener:ILabXListener):void
 		{
 			listenerList.addItem(listener);
+			if (listenerList.sort == null) {
+				var sorter:Sort = new Sort();
+				sorter.compareFunction = function compareValues(a:Object, b:Object, fields:Array = null):int
+				{
+					if (a == null && b == null) return 0;
+					if (a == null) return 1;
+					if (b == null) return -1;
+					var objA:LabXObject = a as LabXObject;
+					var objB:LabXObject = b as LabXObject;
+					
+					if (objA.x > objB.x)return 1;
+					if (objA.x < objB.x)return -1;
+					
+					return 0;
+				};
+				listenerList.sort = sorter;
+				listenerList.refresh();
+			}
 		}
 		
 		/**
