@@ -11,7 +11,9 @@ package cn.edu.zju.labx.objects
 	import org.flintparticles.threeD.geom.Vector3D;
 	import org.papervision3d.core.math.Number3D;
 	import org.papervision3d.core.proto.MaterialObject3D;
+	import org.papervision3d.events.FileLoadEvent;
 	import org.papervision3d.materials.utils.MaterialsList;
+	import org.papervision3d.objects.parsers.DAE;
 	import org.papervision3d.objects.primitives.Cube;
 
 	public class LightSource extends LabXObject implements IUserInputListener, IRayMaker
@@ -69,7 +71,6 @@ package cn.edu.zju.labx.objects
 	   	    	 {
 	   	    	 	isOn = !isOn;
 	   	    	 }
-	   	    	 
 	   	    	 if (isOn)
 	   	    	 {
 	   	    	 	StageObjectsManager.getDefault.notify(new LabXEvent(this));
@@ -77,9 +78,8 @@ package cn.edu.zju.labx.objects
 			}
 			
 		}
-		
 	    private function daeFileOnloaded(evt:FileLoadEvent):void{  
-	    	addChild(ray);  
+	    	addChild(light);  
         } 
 	}
 }

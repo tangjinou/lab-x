@@ -5,6 +5,7 @@ package
 	import cn.edu.zju.labx.core.UserInputHandler;
 	import cn.edu.zju.labx.objects.Board;
 	import cn.edu.zju.labx.objects.Lens;
+	import cn.edu.zju.labx.objects.Ray;
 	
 	import flash.events.Event;
 	import flash.events.MouseEvent;
@@ -103,7 +104,13 @@ package
 			zAxis = new Cylinder(shadeMaterialZ, 1, LabXConstant.STAGE_DEPTH/5);
 			zAxis.moveForward(LabXConstant.STAGE_DEPTH/10);
 			zAxis.pitch(90);
-			originPivot.addChild(zAxis);	
+			originPivot.addChild(zAxis);
+			
+			/*Create Light*/
+//			var shadeMaterial:PhongMaterial = new PhongMaterial(light,0xFF0000,0xFF0000,100);
+			var ray:Ray = new Ray();
+			ray.displayRays();	
+			originPivot.addChild(ray);
 			
 			/*Create Lens*/	
 			var shadeMaterialLens:PhongMaterial = new PhongMaterial(light,0xFFFFFF,0x6ccff8,100);
