@@ -38,7 +38,7 @@ package
 		private var zAxis:Cylinder;
 		public  var originPivot:DisplayObject3D;
 		private var desk:DAE; 
-	    private var lens:Lens;
+	    public var lens:Lens;
 	    private var board:Board;
 	    
 		import org.papervision3d.render.BasicRenderEngine;
