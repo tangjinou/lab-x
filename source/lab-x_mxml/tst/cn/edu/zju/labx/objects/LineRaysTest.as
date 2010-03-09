@@ -26,7 +26,7 @@ package cn.edu.zju.labx.objects
        	   var startPonit:Vertex3D = new Vertex3D(0,0,0);
        	   var endPoint:Vertex3D = new Vertex3D(1,1,1);
            var lineRays:LineRay = new LineRay();
-           lineRays.setLineRay(startPonit,endPoint);
+           lineRays.newLineRay(startPonit,endPoint);
            
            
        }
