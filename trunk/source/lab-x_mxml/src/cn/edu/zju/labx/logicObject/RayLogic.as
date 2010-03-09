@@ -30,7 +30,12 @@ package cn.edu.zju.labx.logicObject
 			this._vector = vector || new Vector3D(1,1,1);
 		}
 		
-		
+		public function isPointOnRay(point:Number3D):Boolean
+		{
+			var bXY:Boolean = ((point.x - this._point.x) * this._vector.y == (point.y - this._point.y)*this._vector.x);
+			var bXZ:Boolean = ((point.x - this._point.x) * this._vector.z == (point.z - this._point.z)*this._vector.x);
+			return (bXY && bXZ);
+		}
 		
 		/**
 		 ****************************************************************************
