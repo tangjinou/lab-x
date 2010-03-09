@@ -52,7 +52,7 @@ package
 			lightSource = new LightSource(redMaterial);
 			lightSource.x = 50;
 			StageObjectsManager.getDefault.addLabXObject(lightSource);
-			
+			StageObjectsManager.getDefault.originPivot.addChild(lightSource);
 //			trace("lightSource.sceneX:" + lightSource.sceneX);
 //			trace("lightSource.sceneY:" + lightSource.sceneY);
 //			trace("lightSource.sceneZ:" + lightSource.sceneZ);
@@ -67,6 +67,7 @@ package
 			lens = new Lens(greenMaterial);
 			lens.x = LabXConstant.STAGE_WIDTH/4;
 			StageObjectsManager.getDefault.addLabXObject(lens);
+			StageObjectsManager.getDefault.originPivot.addChild(lens);
 		}
 		
 		private function addBoard():void
@@ -75,6 +76,7 @@ package
 			board = new Board(blueMaterial);
 			board.x = LabXConstant.STAGE_WIDTH/2;
 			StageObjectsManager.getDefault.addLabXObject(board);
+			StageObjectsManager.getDefault.originPivot.addChild(board);
 		}
 		
 		private function addRay():void
