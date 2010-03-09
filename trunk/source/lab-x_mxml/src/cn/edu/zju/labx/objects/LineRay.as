@@ -15,13 +15,13 @@ package cn.edu.zju.labx.objects
 		 */
 		var endPoint:Vertex3D;
 		
-		public function LineRay(logic:RayLogic,length:Number=1200)
+		public function LineRay(logic:RayLogic=null,length:Number=1200)
 		{
 			_logic = logic;
 			_length= length;
 		}
 		
-		public function LineRay(startPoint:Vertex3D,endPoint:Vertex3D){
+		public function setLineRay(startPoint:Vertex3D,endPoint:Vertex3D){
 		    this.endPoint = endPoint;
 		    this._length  = MathUtils.distanceToNumber3D(startPoint.toNumber3D(),endPoint.toNumber3D());
 		    var cosx:Number  = (endPoint.x - startPoint.x)/_length;
