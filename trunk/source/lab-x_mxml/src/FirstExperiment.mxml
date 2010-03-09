@@ -11,8 +11,9 @@
 			import flash.events.MouseEvent;
 			public var camera_yaw:int=0;
 	 		public function init():void{
-	 		   public_board.text="公告栏";
+	 		   message_box.text="公告栏";
 	 		   StageObjectsManager.getDefault.mainView=firstExperiment;	
+	 		   StageObjectsManager.getDefault.messageBox=message_box;
 	 		   Mouse3D.enabled = true;
 	 		   firstExperiment.viewport.interactive = true; 
 	 		   var uic:UIComponent = new UIComponent();
@@ -25,14 +26,21 @@
 	 		}
 	 		public function open_stage_rotate():void{
 	 			StageObjectsManager.getDefault.rotate_stage=true;
+	 			StageObjectsManager.getDefault.addMessage("视角旋转打开");
 	 		}
 	 		public function close_stage_rotate():void{
 	 		    StageObjectsManager.getDefault.rotate_stage=false;
+	 		    StageObjectsManager.getDefault.addMessage("视角旋转关闭");
 	 		    //TODO: need reset the view
 	 		}
 	 		
 	 		public function checkBoxChanged():void{
 	 		   firstExperiment.lens.visible=lens_checkBox.selected;
+	 		   if(lens_checkBox.selected==true){
+                  StageObjectsManager.getDefault.addMessage("增加透镜");
+               }else{
+                  StageObjectsManager.getDefault.addMessage("移除透镜");
+               }
                //TODO: need remove the stage listerner
 	 		}
 	 		
@@ -41,7 +49,7 @@
 	 <local:FirstExperimentApplication id="firstExperiment" x="0" y="0" />
 	 <mx:HBox x="10" y="554" width="780" height="36">
      </mx:HBox>
-	 <mx:TextArea x="10" y="10" width="289" height="97" id="public_board" fontSize="12" backgroundColor="#A69B9B" cornerRadius="1" borderStyle="solid" borderColor="#F31207" themeColor="#F0FF00" alpha="1.0" borderThickness="2"/>
+	 <mx:TextArea  x="10" y="10" width="289" height="97" editable="false" id="message_box" fontSize="12" backgroundColor="#A69B9B" cornerRadius="1" borderStyle="solid" borderColor="#F31207" themeColor="#F0FF00" alpha="1.0" borderThickness="2"/>
 	 <mx:Button  label="open_stage_rotate" click="open_stage_rotate()" icon="@Embed('../assets/icon/open_stage_rotate.png')" x="10" y="554"/>
 	 <mx:Button  label="close_stage_rotate" click="close_stage_rotate()" icon="@Embed('../assets/icon/stop.png')" x="189" y="554"/>
 	 <mx:Button  label="zoom+" click="StageObjectsManager.getDefault.mainView.camera.zoom++" icon="@Embed('../assets/icon/zoom_add.png')" x="368" y="554"/>

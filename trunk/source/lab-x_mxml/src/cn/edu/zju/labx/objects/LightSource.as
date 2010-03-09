@@ -19,9 +19,14 @@ package cn.edu.zju.labx.objects
 		
 		var isOn:Boolean = false;
 		
+		protected var light:DAE; 
+		
 		public function LightSource(material:MaterialObject3D=null)
 		{
 			super(material);
+			light=new DAE(true);  
+            light.load(ResourceManager.RAY_DAE_URL,new MaterialsList( {all:this.material} ) );		
+			light.addEventListener(FileLoadEvent.LOAD_COMPLETE,daeFileOnloaded);  
 			createDisplayObject();
 		}
 		
@@ -72,5 +77,9 @@ package cn.edu.zju.labx.objects
 			}
 			
 		}
+		
+	    private function daeFileOnloaded(evt:FileLoadEvent):void{  
+	    	addChild(ray);  
+        } 
 	}
 }
