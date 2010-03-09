@@ -3,6 +3,7 @@ package
 	import cn.edu.zju.labx.core.LabXConstant;
 	import cn.edu.zju.labx.core.StageObjectsManager;
 	import cn.edu.zju.labx.core.UserInputHandler;
+	import cn.edu.zju.labx.utils.ResourceManager;
 	import cn.edu.zju.labx.objects.Board;
 	import cn.edu.zju.labx.objects.Lens;
 	import cn.edu.zju.labx.objects.Ray;
@@ -62,8 +63,8 @@ package
 		{
 			desk = new DAE();  
 			desk.addEventListener(FileLoadEvent.LOAD_COMPLETE, deskOnLoaded);
-			DAE(desk).addFileSearchPath("../assets/textures/desk");
-            DAE(desk).load("../assets/models/desk.DAE");
+			DAE(desk).addFileSearchPath(ResourceManager.DESK_TEXTURE_DIR);
+            DAE(desk).load(ResourceManager.DESK_DAE_URL);
             desk.scale = 3;
             desk.scaleX = 6;
 		}
