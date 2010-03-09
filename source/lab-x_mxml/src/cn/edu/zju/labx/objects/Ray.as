@@ -23,12 +23,10 @@ package cn.edu.zju.labx.objects
 		private var endVertex:Vertex3D;
 		private var radius:Number;
 		
-		var lineRay1:LineRay;
-		var lineRay2:LineRay;
 		var startX:Number;
 		var endX:Number;
 		
-		protected var ray:DAE; 
+		var lineRays:ArrayCollection =new ArrayCollection();
 		
 		public function Ray(material:MaterialObject3D=null, lineRays:ArrayCollection =null, startX:Number=0, endX:Number=0)
 		{
@@ -36,15 +34,17 @@ package cn.edu.zju.labx.objects
 			this.startVertex = startVertex || new Vertex3D();
 			this.endVertex = endVertex || new Vertex3D();
 			this.radius = radius;
-			
-			ray=new DAE(true);  
-            ray.load(ResourceManager.RAY_DAE_URL,new MaterialsList( {all:this.material} ) );		
-            ray.addEventListener(FileLoadEvent.LOAD_COMPLETE,daeFileOnloaded);  
+            this.lineRays= lineRays;
 //			addDisplayObject();
-
-
-			this.lineRay1 = lineRay1;
-			this.lineRay2 = lineRay2;
+		}
+		
+		public function getLineRays():ArrayCollection
+		{
+		    return lineRays;
+		}
+		
+		public function setLineRays(lineRays:ArrayCollection):void{
+		   this.lineRays= lineRays;
 		}
 		
 		private function addDisplayObject():void
@@ -73,11 +73,8 @@ package cn.edu.zju.labx.objects
 				ray.roll(rollAngle); 
 			}
 			
-		   	this.addChild(ray);
+		   	addChild(ray);
 		}
-		
-		private function daeFileOnloaded(evt:FileLoadEvent):void{  
-	    	addChild(ray);  
-        } 
+        
 	}
 }

@@ -5,6 +5,7 @@ package cn.edu.zju.labx.core
 	import cn.edu.zju.labx.objects.LabXObject;
 	
 	import mx.collections.ArrayCollection;
+	import mx.controls.TextArea;
 	
 	import org.papervision3d.objects.DisplayObject3D;
 	import org.papervision3d.view.BasicView;
@@ -189,6 +190,19 @@ package cn.edu.zju.labx.core
 			     notify_count++;
 			}
 		}
+		
+		
+		/**
+		 *  This is the MessageBox
+		 **/
+		 public var messageBox:TextArea;
+		 public function addMessage(msg:String):void{
+		    messageBox.text+="\n"+msg;
+		    messageBox.verticalScrollPosition=messageBox.maxVerticalScrollPosition;
+		 }
+		 public function clearMessage(msg:String):void{
+		    messageBox.text="公告栏";
+		 }
 		
 		
 //	    private var labXObjectListener:LabXObject =null;
