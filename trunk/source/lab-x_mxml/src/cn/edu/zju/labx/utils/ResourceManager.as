@@ -18,10 +18,14 @@ package cn.edu.zju.labx.utils
 		[Embed (source="../assets/icon/zoom_min.png")]
 		public static const zoom_min_png:Class;
 		
-		public static const LENS_DAE_URL:String = "../assets/3dMax/lens.DAE";
+		public static const LENS_DAE_URL:String = "../assets/models/lens.DAE";
 		
-		public static const RAY_DAE_URL:String = "../assets/3dMax/ray.DAE";
+		public static const RAY_DAE_URL:String = "../assets/models/ray.DAE";
+		
+		public static const DESK_DAE_URL:String = "../assets/models/desk.DAE";
 
+		public static const DESK_TEXTURE_DIR:String = "../assets/textures/desk";
+		
 		public function ResourceManager()
 		{
 		}
