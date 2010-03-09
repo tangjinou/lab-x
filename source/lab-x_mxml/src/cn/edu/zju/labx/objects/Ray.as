@@ -3,6 +3,8 @@ package cn.edu.zju.labx.objects
 	import cn.edu.zju.labx.utils.MathUtils;
 	import cn.edu.zju.labx.utils.ResourceManager;
 	
+	import mx.collections.ArrayCollection;
+	
 	import org.papervision3d.core.geom.renderables.Vertex3D;
 	import org.papervision3d.core.proto.MaterialObject3D;
 	import org.papervision3d.events.FileLoadEvent;
@@ -21,9 +23,14 @@ package cn.edu.zju.labx.objects
 		private var endVertex:Vertex3D;
 		private var radius:Number;
 		
+		var lineRay1:LineRay;
+		var lineRay2:LineRay;
+		var startX:Number;
+		var endX:Number;
+		
 		protected var ray:DAE; 
 		
-		public function Ray(material:MaterialObject3D=null, startVertex:Vertex3D=null, endVertex:Vertex3D=null, radius:Number=DEFAULT_RADIUS)
+		public function Ray(material:MaterialObject3D=null, lineRays:ArrayCollection =null, startX:Number=0, endX:Number=0)
 		{
 			super(material);
 			this.startVertex = startVertex || new Vertex3D();
@@ -34,6 +41,10 @@ package cn.edu.zju.labx.objects
             ray.load(ResourceManager.RAY_DAE_URL,new MaterialsList( {all:this.material} ) );		
             ray.addEventListener(FileLoadEvent.LOAD_COMPLETE,daeFileOnloaded);  
 //			addDisplayObject();
+
+
+			this.lineRay1 = lineRay1;
+			this.lineRay2 = lineRay2;
 		}
 		
 		private function addDisplayObject():void

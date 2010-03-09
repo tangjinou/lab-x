@@ -5,6 +5,8 @@ package cn.edu.zju.labx.core{
 	import flash.events.KeyboardEvent;
 	import flash.events.MouseEvent;
 	import flash.ui.Keyboard;
+	
+	import org.papervision3d.core.utils.virtualmouse.VirtualMouseMouseEvent;
 
 	public class UserInputHandler 
 	{	
@@ -45,6 +47,10 @@ package cn.edu.zju.labx.core{
 		
 		public function mouseDownHandler (e:MouseEvent):void
 		{
+			if (e is VirtualMouseMouseEvent)
+			{
+				return;
+			}
 			mouseDown = true;
 			if (this._currentSelectedObject != null)
 			{
@@ -54,6 +60,10 @@ package cn.edu.zju.labx.core{
 		
 		public function mouseUpHandler (e:MouseEvent):void
 		{
+			if (e is VirtualMouseMouseEvent)
+			{
+				return;
+			}
 			mouseDown = false;
 			if (this._currentSelectedObject != null)
 			{
@@ -66,11 +76,10 @@ package cn.edu.zju.labx.core{
 		
 		public function mouseMoveHandler (e:MouseEvent):void
 		{
-			if (mouseDown && this._currentSelectedObject != null) {
+			if ((!(e is VirtualMouseMouseEvent)) && mouseDown && (this._currentSelectedObject != null)) {
 				this._currentSelectedObject.hanleUserInputEvent(e);
 			}
 		}
-		
 		
 		/**
 		 * **********************************************************************

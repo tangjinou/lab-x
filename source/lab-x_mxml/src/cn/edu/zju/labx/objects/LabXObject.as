@@ -1,6 +1,5 @@
 package cn.edu.zju.labx.objects
 {
-	import cn.edu.zju.labx.core.LabXConstant;
 	import cn.edu.zju.labx.core.StageObjectsManager;
 	import cn.edu.zju.labx.core.UserInputHandler;
 	import cn.edu.zju.labx.events.IUserInputListener;
@@ -23,7 +22,9 @@ package cn.edu.zju.labx.objects
 		public var userInputHandle:Function;
 
 		
-		
+		/**
+		 * Create an LabX Object
+		 */
 		public function LabXObject( material:MaterialObject3D, vertices:Array=null, faces:Array=null, name:String=null )
 		{
 		   super(material, vertices, faces, null );
