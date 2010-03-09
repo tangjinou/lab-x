@@ -24,11 +24,13 @@ package cn.edu.zju.labx.objects
        
        public function testLineRays2():void{
        	   var startPonit:Vertex3D = new Vertex3D(0,0,0);
-       	   var endPoint:Vertex3D = new Vertex3D(1,1,1);
+       	   var endPoint:Vertex3D = new Vertex3D(1,2,2);
            var lineRays:LineRay = new LineRay();
            lineRays.newLineRay(startPonit,endPoint);
-           
-           
+           assertEquals(3,lineRays._length);
+           assertEquals(0.3333333333333333,lineRays.vector.x);
+           assertEquals(0.6666666666666666,lineRays.vector.y);
+           assertEquals(0.6666666666666666,lineRays.vector.z);
        }
 	}
 }
