@@ -44,7 +44,7 @@ package cn.edu.zju.labx.objects
 			lens.z = 150;
 			StageObjectsManager.getDefault.addLabXObject(lens);
 			
-			var focusPoint:Number3D = new Number3D(lens.x + 10, 200, 150);
+			var focusPoint:Number3D = new Number3D(lens.x + 20, 200, 150);
 			
 			var lineRays:ArrayCollection = new ArrayCollection();
 			lineRays.addItem(new LineRay(new RayLogic(new Number3D(0, 10, 250), new Vector3D(1, 0, 0))));
@@ -65,7 +65,7 @@ package cn.edu.zju.labx.objects
 			
 			for each (var lineRay:LineRay in resultRay.getLineRays())
 			{
-//				assertTrue(lineRay.logic.isPointOnRay(focusPoint));
+				assertTrue(lineRay.logic.isPointOnRay(focusPoint));
 			} 
 		}
 		

@@ -5,7 +5,6 @@ package cn.edu.zju.labx.logicObject
 	import flexunit.framework.TestCase;
 	
 	import org.flintparticles.threeD.geom.Vector3D;
-	import org.papervision3d.core.math.Number2D;
 	import org.papervision3d.core.math.Number3D;
 	
 	public class LensLogicTest extends TestCase
@@ -42,6 +41,9 @@ package cn.edu.zju.labx.logicObject
 			
 			var lens:LensLogic = new LensLogic(new Number3D(50, 100, 200), 10);
 			var ray:RayLogic = new RayLogic(new Number3D(0, 100, 200), new Vector3D(1, 0, 0));
+			
+			var focusPoint:Number3D = new Number3D(50 + 10, 100, 200)
+			
 			rayResult = lens.calculateRayAfterLens(ray);
 			//first check
 			assertEquals(50, rayResult.point.x);
@@ -52,6 +54,8 @@ package cn.edu.zju.labx.logicObject
 			assertEquals(1, resultVector.x);
 			assertEquals(0, resultVector.y);
 			assertEquals(0, resultVector.z);
+			
+			assertTrue(rayResult.isPointOnRay(focusPoint));
 			
 			//second check
 			ray = new RayLogic(new Number3D(0, 0, 0), new Vector3D(1, 0, 0));
@@ -64,6 +68,10 @@ package cn.edu.zju.labx.logicObject
 			assertEquals(10, resultVector.y/resultVector.x);
 			assertEquals(20, resultVector.z/resultVector.x);
 			
+			//parallal should across focus point
+			assertTrue(rayResult.isPointOnRay(focusPoint));
+			
+			
 			//third check
 			ray = new RayLogic(new Number3D(0, 0, 0), new Vector3D(1, 1, 1));
 			rayResult = lens.calculateRayAfterLens(ray);
@@ -74,6 +82,7 @@ package cn.edu.zju.labx.logicObject
 			resultVector = rayResult.vector;
 			assertEquals(6, resultVector.y/resultVector.x);
 			assertEquals(16, resultVector.z/resultVector.x);
+			
 		}
 		
 		

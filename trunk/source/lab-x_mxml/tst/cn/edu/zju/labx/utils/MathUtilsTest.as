@@ -1,7 +1,12 @@
 package cn.edu.zju.labx.utils
 {
+	import cn.edu.zju.labx.core.LabXConstant;
+	import cn.edu.zju.labx.logicObject.RayLogic;
+	
 	import flexunit.framework.Assert;
 	
+	import org.flexunit.asserts.assertTrue;
+	import org.flintparticles.threeD.geom.Vector3D;
 	import org.papervision3d.core.math.Number2D;
 	import org.papervision3d.core.math.Number3D;
 	
@@ -122,6 +127,20 @@ package cn.edu.zju.labx.utils
 			result = MathUtils.calculateIntersaction(a, b, m, n);
 			Assert.assertEquals(-120, result.x);
 			Assert.assertEquals(145, result.y);
+			
+			a = new Number2D(100, 155);
+			b = new Number2D(256, 523);
+			m = new Number2D(-10, -20);
+			n = new Number2D(-20, -5);
+			result = MathUtils.calculateIntersaction(a, b, m, n);
+			assertTrue(Math.abs(result.x-11.893687707641192 ) < LabXConstant.NUMBER_PRECISION);
+			assertTrue(Math.abs(result.y+52.840531561461795) < LabXConstant.NUMBER_PRECISION);
+			
+//			var r1:RayLogic = new RayLogic(new Number3D(100, 155, 0), new Vector3D(156, 368, 0));
+//			assertTrue(r1.isPointOnRay(new Number3D(result.x, result.y, 0)));
+//			
+//			var r2:RayLogic = new RayLogic(new Number3D(-20, -5, 0), new Vector3D(10, -15, 0));
+//			assertTrue(r2.isPointOnRay(new Number3D(result.x, result.y, 0)));
 		}
 		
 	}

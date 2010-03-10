@@ -40,8 +40,6 @@ package cn.edu.zju.labx.logicObject
 		{
 			var precisionXY:Number = ((point.x - this._point.x) * this._vector.y - (point.y - this._point.y)*this._vector.x);
 			var precisionXZ:Number = ((point.x - this._point.x) * this._vector.z - (point.z - this._point.z)*this._vector.x);
-			trace("XY: " + precisionXY);
-			trace("XZ: " + precisionXZ);
 			return ((Math.abs(precisionXY) < LabXConstant.NUMBER_PRECISION) && (Math.abs(precisionXZ) < LabXConstant.NUMBER_PRECISION));
 		}
 		
