@@ -10,14 +10,20 @@ package cn.edu.zju.labx.events
 	 */
 	public class LabXEvent extends Event
 	{
-		public var previousXObject:LabXObject;
+		
+		public static const LIGHT_ON:String = "LightOn";
+		public static const LIGHT_OFF:String = "LightOff";
+		
+		public static const XOBJECT_MOVE:String = "LabXObjectMove";
+		
+		public var currentXObject:LabXObject;
 		
 		/**
 		 * Create a LabX Event indicated the given LabX have changed
 		 */
 		public function LabXEvent(labXObject:LabXObject, type:String="default", bubbles:Boolean=false, cancelable:Boolean=false)
 		{
-			this.previousXObject = labXObject;
+			this.currentXObject = labXObject;
 			super(type, bubbles, cancelable);
 		}
 	}

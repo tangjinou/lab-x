@@ -1,5 +1,6 @@
 package cn.edu.zju.labx.objects
 {
+	import cn.edu.zju.labx.core.StageObjectsManager;
 	import cn.edu.zju.labx.events.LabXEvent;
 	import cn.edu.zju.labx.logicObject.RayLogic;
 	
@@ -9,12 +10,20 @@ package cn.edu.zju.labx.objects
 	
 	import org.flintparticles.threeD.geom.Vector3D;
 	import org.papervision3d.core.math.Number3D;
+	import org.papervision3d.objects.DisplayObject3D;
 
 	public class LensTest extends TestCase
 	{
 		public function LensTest(methodName:String=null)
 		{
 			super(methodName);
+		}
+		
+		override public function setUp():void
+		{
+			StageObjectsManager.getDefault.getLabXListeners().removeAll();
+			StageObjectsManager.getDefault.getLabXObjects().removeAll();
+			StageObjectsManager.getDefault.originPivot = new DisplayObject3D();
 		}
 		
 		public function testCreateLens():void
@@ -33,6 +42,7 @@ package cn.edu.zju.labx.objects
 			lens.x = 100;
 			lens.y = 200;
 			lens.z = 150;
+			StageObjectsManager.getDefault.addLabXObject(lens);
 			
 			var focusPoint:Number3D = new Number3D(lens.x + 20, 200, 150);
 			
@@ -42,9 +52,12 @@ package cn.edu.zju.labx.objects
 			var oldRay:Ray = new Ray(null, lineRays, 20);
 			
 			var rayMaker:MockRayMaker = new MockRayMaker()
+			rayMaker.x = 0;
 			rayMaker.setRay(oldRay);
 			
-			lens.handleLabXEvent(new LabXEvent(rayMaker));
+			StageObjectsManager.getDefault.addLabXObject(rayMaker);
+			
+			lens.handleLabXEvent(new LabXEvent(rayMaker, LabXEvent.LIGHT_ON));
 			var resultRay:Ray = lens.getRay();
 			
 //			assertEquals(100, ray.startX);

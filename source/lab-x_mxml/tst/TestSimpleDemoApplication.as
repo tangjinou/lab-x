@@ -2,13 +2,18 @@ package
 {
 	import cn.edu.zju.labx.core.LabXConstant;
 	import cn.edu.zju.labx.core.StageObjectsManager;
+	import cn.edu.zju.labx.logicObject.RayLogic;
 	import cn.edu.zju.labx.objects.Board;
 	import cn.edu.zju.labx.objects.Lens;
 	import cn.edu.zju.labx.objects.LightSource;
+	import cn.edu.zju.labx.objects.LineRay;
 	import cn.edu.zju.labx.objects.Ray;
 	
+	import mx.collections.ArrayCollection;
+	
+	import org.flintparticles.threeD.geom.Vector3D;
 	import org.papervision3d.cameras.CameraType;
-	import org.papervision3d.core.geom.renderables.Vertex3D;
+	import org.papervision3d.core.math.Number3D;
 	import org.papervision3d.materials.ColorMaterial;
 	import org.papervision3d.objects.DisplayObject3D;
 	import org.papervision3d.view.BasicView;
@@ -42,13 +47,15 @@ package
 			addLightSource();
 			addLens();
 			addBoard();
-//			addRay(originPivot);
+//			addRay();
 //			addRayAfterLens();
 		}
 		
 		private function addLightSource():void 
 		{
 			var redMaterial:ColorMaterial = new ColorMaterial(0xFF0000);
+			redMaterial.interactive = true;
+			
 			lightSource = new LightSource(redMaterial);
 			lightSource.x = 50;
 			StageObjectsManager.getDefault.addLabXObject(lightSource);
@@ -82,10 +89,14 @@ package
 		private function addRay():void
 		{
 			var yellowMaterial:ColorMaterial = new ColorMaterial(0xFFFFFF);
-			var startVertex:Vertex3D = new Vertex3D(lightSource.x, lightSource.y, lightSource.z);
-			var endVertex:Vertex3D = new Vertex3D(lens.x, lightSource.y, lens.z);
+			var lineRay1:LineRay = new LineRay(new RayLogic(new Number3D(0, 0, 0), new Vector3D(1, 0, 0)));
+			var lineRay2:LineRay = new LineRay(new RayLogic(new Number3D(0, 20, 0), new Vector3D(1, 0, 0)));
+			var lineRays:ArrayCollection = new ArrayCollection();
+			lineRays.addItem(lineRay1); 
+			lineRays.addItem(lineRay2); 
 			var ray:Ray = new Ray();  //TODO: need to be fixed by TJO
 			StageObjectsManager.getDefault.addLabXObject(ray);
+			StageObjectsManager.getDefault.originPivot.addChild(board);
 		}
 		
 		private function addRayAfterLens():void
