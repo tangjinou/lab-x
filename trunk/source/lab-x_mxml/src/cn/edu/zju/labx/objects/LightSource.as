@@ -1,7 +1,6 @@
 package cn.edu.zju.labx.objects
 {
 	import cn.edu.zju.labx.core.StageObjectsManager;
-	import cn.edu.zju.labx.utils.ResourceManager;
 	import cn.edu.zju.labx.events.IUserInputListener;
 	import cn.edu.zju.labx.events.LabXEvent;
 	import cn.edu.zju.labx.logicObject.RayLogic;
@@ -16,18 +15,18 @@ package cn.edu.zju.labx.objects
 	import org.papervision3d.core.math.Number3D;
 	import org.papervision3d.core.proto.MaterialObject3D;
 	import org.papervision3d.events.FileLoadEvent;
+	import org.papervision3d.events.InteractiveScene3DEvent;
 	import org.papervision3d.materials.utils.MaterialsList;
-	import org.papervision3d.objects.parsers.DAE;
-	import org.papervision3d.objects.primitives.Cube;
-	import org.papervision3d.events.FileLoadEvent;
 	import org.papervision3d.objects.parsers.DAE;
 
 	public class LightSource extends LabXObject implements IUserInputListener, IRayMaker
 	{
 		
-		var isOn:Boolean = false;
-		
-		protected var light:DAE; 
+		private var isOn:Boolean = false;
+		protected var light:DAE;
+	    public var height:Number =100;
+	    public var width:Number =60;
+		public var ray:Ray; 
 		
 		public function LightSource(material:MaterialObject3D=null)
 		{
@@ -35,21 +34,22 @@ package cn.edu.zju.labx.objects
 			light=new DAE(true);  
             light.load(ResourceManager.RAY_DAE_URL,new MaterialsList( {all:this.material} ) );		
 			light.addEventListener(FileLoadEvent.LOAD_COMPLETE,daeFileOnloaded);  
+			addEventListener(InteractiveScene3DEvent.OBJECT_PRESS, objectPressHandler);
 			createDisplayObject();
 		}
-		
 		private function createDisplayObject():void
-		{
-			var materialsList:MaterialsList = new MaterialsList();
-			materialsList.addMaterial(material,"front");
-			materialsList.addMaterial(material,"back");
-			materialsList.addMaterial(material,"left");
-			materialsList.addMaterial(material,"right");
-			materialsList.addMaterial(material,"top");
-			materialsList.addMaterial(material,"bottom");
-			
-			var cube:Cube =new Cube(materialsList,5,100,100);
-		   	this.addChild(cube);
+		{   
+			createRay();
+		}
+		
+		public function createRay():void{
+		   	ray = new Ray();
+			addChild(ray);
+			var royLogic1:RayLogic = new RayLogic(new Number3D(this.x,this.y+30,this.z),new Vector3D(0.866,0.5,0));
+			var lineRay:LineRay = new LineRay(royLogic1);
+			var lineRays:ArrayCollection =new ArrayCollection();
+			lineRays.addItem(lineRay);
+			ray.setLineRays(lineRays);
 		}
 		
 		public function getRay():Ray
@@ -70,6 +70,7 @@ package cn.edu.zju.labx.objects
 			if (userInputHandle != null)
 			{
 				userInputHandle.call(this, event);
+				return;
 			}
 			
 			if (event is MouseEvent)
@@ -80,14 +81,29 @@ package cn.edu.zju.labx.objects
 	   	    	 	isOn = !isOn;
 	   	    	 }
 	   	    	 if (isOn)
-	   	    	 {
+	   	    	 {  
+	   	    	 	ray.displayRays();
 	   	    	 	StageObjectsManager.getDefault.notify(new LabXEvent(this));
+//	   	    	 	isOn = !isOn;
 	   	    	 }
 			}
 			
 		}
+		
+		// should destribute the listener 
+        override public function addEventListener(type:String, listener:Function,useCapture:Boolean = false, priority:int = 0, useWeakReference:Boolean = false):void
+		{   
+//			light.getChildByName("COLLADA_Scene").getChildByName("Cylinder01").addEventListener(InteractiveScene3DEvent.OBJECT_PRESS, objectPressHandler);
+//		    light.getChildByName("COLLADA_Scene").getChildByName("Cylinder02").addEventListener(InteractiveScene3DEvent.OBJECT_PRESS, objectPressHandler);
+		}
+		
+		
 	    private function daeFileOnloaded(evt:FileLoadEvent):void{  
 	    	addChild(light);  
+//	    	trace("beigin~~~~~~~~~~~~~");
+//			trace(light.childrenList());
+//			trace("end~~~~~~~~~~~~~");
+			light.getChildByName("COLLADA_Scene").addEventListener(InteractiveScene3DEvent.OBJECT_PRESS, objectPressHandler);
         } 
 	}
 }

@@ -15,7 +15,7 @@ package cn.edu.zju.labx.objects
 		 */
 		var endPoint:Vertex3D;
 		
-		public function LineRay(logic:RayLogic=null,length:Number=1200)
+		public function LineRay(logic:RayLogic=null,length:Number=3200)
 		{
 			_logic = logic;
 			_length= length;

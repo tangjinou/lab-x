@@ -119,8 +119,9 @@ package
 			originPivot.addChild(zAxis);
 			equipmentLayer.addDisplayObject3D(zAxis, true);
 			
-			/*Create Light*/
+			/*Create lightSource*/
 			var shadeMaterial:PhongMaterial = new PhongMaterial(light,0xFF0000,0xFF0000,100);
+			shadeMaterial.interactive = true;
 			var lightSource:LightSource = new LightSource(shadeMaterial);
 			lightSource.moveUp(lightSource.height/2);	
 			lightSource.moveRight(50);
