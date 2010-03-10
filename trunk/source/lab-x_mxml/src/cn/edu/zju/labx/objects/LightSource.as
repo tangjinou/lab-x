@@ -99,6 +99,7 @@ package cn.edu.zju.labx.objects
 		   	    	 {
 //		   	    	 	StageObjectsManager.getDefault.originPivot.addChild(getRay());
 		   	    	 	StageObjectsManager.getDefault.notify(new LabXEvent(this, LabXEvent.LIGHT_ON));
+		   	    	 	ray.displayRays();
 		   	    	 } else {
 		   	    	 	StageObjectsManager.getDefault.originPivot.removeChild(getRay());
 //		   	    	 	StageObjectsManager.getDefault.notify(new LabXEvent(this, LabXEvent.LIGHT_OFF));
