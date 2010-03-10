@@ -18,7 +18,6 @@ package
 	import org.papervision3d.objects.DisplayObject3D;
 	import org.papervision3d.objects.parsers.DAE;
 	import org.papervision3d.objects.primitives.Cylinder;
-	import org.papervision3d.render.QuadrantRenderEngine;
 	import org.papervision3d.view.BasicView;
 	import org.papervision3d.view.layer.ViewportLayer;
 	import org.papervision3d.view.layer.util.ViewportLayerSortMode;
@@ -130,14 +129,18 @@ package
 			originPivot.addChild(lightSource);
 			equipmentLayer.addDisplayObject3D(lightSource, true);
 			
+			StageObjectsManager.getDefault.addLabXObject(lightSource);
+			
 			/*Create Lens*/	
 			var shadeMaterialLens:PhongMaterial = new PhongMaterial(light,0xFFFFFF,0x6ccff8,100);
 			shadeMaterialLens.interactive = true;
-			lens = new Lens(shadeMaterialLens);
+			lens = new Lens(shadeMaterialLens, 100);
 			lens.moveRight(LabXConstant.DESK_WIDTH/2);
 			lens.moveUp(lens.height/2);
 			originPivot.addChild(lens);
 			equipmentLayer.addDisplayObject3D(lens, true);
+			
+			StageObjectsManager.getDefault.addLabXObject(lens);
 			
 			/*create Board*/
 			var shadeMaterialBoard:PhongMaterial = new PhongMaterial(light,0xFFFFFF,0xe1e1e1,100);
@@ -147,6 +150,7 @@ package
 			board.moveUp(board.height/2);
             originPivot.addChild(board);
             equipmentLayer.addDisplayObject3D(board, true);
+            StageObjectsManager.getDefault.addLabXObject(board);
             
 			
 		}

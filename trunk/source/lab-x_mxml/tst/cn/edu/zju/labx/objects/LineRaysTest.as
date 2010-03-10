@@ -1,5 +1,6 @@
 package cn.edu.zju.labx.objects
 {
+	import cn.edu.zju.labx.core.LabXConstant;
 	import cn.edu.zju.labx.logicObject.RayLogic;
 	
 	import flexunit.framework.TestCase;
@@ -18,8 +19,8 @@ package cn.edu.zju.labx.objects
 		  assertEquals(200, rayLogic.point.z);
 		  var lineRays:LineRay = new LineRay(rayLogic,10);
 		  assertEquals(0, lineRays.end_point.x);
-		  assertEquals(101, lineRays.end_point.y);
-		  assertEquals(203, lineRays.end_point.z);
+		  assertTrue(Math.abs(lineRays.end_point.y-103.16227766016839) < LabXConstant.NUMBER_PRECISION);
+		  assertTrue(Math.abs(lineRays.end_point.z-209.48683298050514) < LabXConstant.NUMBER_PRECISION);
        }
        
        public function testLineRays2():void{

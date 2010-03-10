@@ -4,7 +4,6 @@ package cn.edu.zju.labx.objects
 	
 	import org.papervision3d.core.geom.Lines3D;
 	import org.papervision3d.core.geom.renderables.Line3D;
-	import org.papervision3d.core.geom.renderables.Vertex3D;
 	import org.papervision3d.core.proto.MaterialObject3D;
 	import org.papervision3d.materials.special.LineMaterial;
 	
@@ -15,25 +14,19 @@ package cn.edu.zju.labx.objects
 	{
 		public static const DEFAULT_RADIUS:uint = 2;
 		
-		private var startVertex:Vertex3D;
-		private var endVertex:Vertex3D;
 		public var lineBold:Number=5;
 		
 		var startX:Number;
-		var endX:Number;
+		var _endX:Number;
 		//This array is in for lineRay
 		var lineRays:ArrayCollection =new ArrayCollection();
 		
 		public function Ray(material:MaterialObject3D=null, lineRays:ArrayCollection =null, startX:Number=0, endX:Number=0)
 		{
 			super(material);
-			this.startVertex = startVertex || new Vertex3D();
-			this.endVertex = endVertex || new Vertex3D();
 			this.lineBold = lineBold;
             this.lineRays= lineRays;
-            startVertex = new Vertex3D(0,0,0);
-            endVertex = new Vertex3D(250,50,0);
-            displayRays();
+//            displayRays();
 		}
 		
 		public function getLineRays():ArrayCollection
@@ -43,6 +36,12 @@ package cn.edu.zju.labx.objects
 		
 		public function setLineRays(lineRays:ArrayCollection):void{
 		   this.lineRays= lineRays;
+		}
+		
+		public function set endX(endx:Number):void
+		{
+			this._endX = endx;
+			displayRays();
 		}
 		
 		public function displayRays():void

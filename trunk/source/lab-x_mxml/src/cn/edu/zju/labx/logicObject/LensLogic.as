@@ -64,14 +64,14 @@ package cn.edu.zju.labx.logicObject
 				resultRay.vector.z = 0;
 			}
 			else if (xyIntersaction == null) {
-				resultRay.vector.x = xzIntersaction.x;
+				resultRay.vector.x = xzIntersaction.x-intersection.x;
 				resultRay.vector.y = 0;
-				resultRay.vector.z = xzIntersaction.y;
+				resultRay.vector.z = xzIntersaction.y-intersection.z;
 			} 
 			else if (xzIntersaction == null)
 			{
-				resultRay.vector.x = xyIntersaction.x;
-				resultRay.vector.y = xyIntersaction.y;
+				resultRay.vector.x = xyIntersaction.x-intersection.x;
+				resultRay.vector.y = xyIntersaction.y-intersection.y;
 				resultRay.vector.z = 0;
 			}
 			else
@@ -81,6 +81,7 @@ package cn.edu.zju.labx.logicObject
 				resultRay.vector.z = xzIntersaction.y-intersection.z;
 			}
 			
+			resultRay.vector  = resultRay.vector.normalize();
 			return resultRay;
 		}
 		
