@@ -7,7 +7,6 @@ package
 	import cn.edu.zju.labx.objects.Lens;
 	import cn.edu.zju.labx.objects.LightSource;
 	import cn.edu.zju.labx.utils.ResourceManager;
-	import cn.edu.zju.labx.utils.ResourceManager;
 	
 	import flash.events.Event;
 	import flash.events.MouseEvent;
@@ -19,6 +18,7 @@ package
 	import org.papervision3d.objects.DisplayObject3D;
 	import org.papervision3d.objects.parsers.DAE;
 	import org.papervision3d.objects.primitives.Cylinder;
+	import org.papervision3d.render.QuadrantRenderEngine;
 	import org.papervision3d.view.BasicView;
 	import org.papervision3d.view.layer.ViewportLayer;
 	import org.papervision3d.view.layer.util.ViewportLayerSortMode;
@@ -62,6 +62,8 @@ package
 			viewport.containerSprite.sortMode = ViewportLayerSortMode.INDEX_SORT;
 			equipmentLayer.layerIndex = 1;
 			deskLayer.layerIndex = 2;
+			
+//			renderer = new QuadrantRenderEngine();
 			
 			createDesk();
 			createObjects();
