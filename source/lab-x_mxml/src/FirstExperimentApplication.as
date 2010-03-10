@@ -5,7 +5,8 @@ package
 	import cn.edu.zju.labx.core.UserInputHandler;
 	import cn.edu.zju.labx.objects.Board;
 	import cn.edu.zju.labx.objects.Lens;
-	import cn.edu.zju.labx.objects.Ray;
+	import cn.edu.zju.labx.objects.LightSource;
+	import cn.edu.zju.labx.utils.ResourceManager;
 	import cn.edu.zju.labx.utils.ResourceManager;
 	
 	import flash.events.Event;
@@ -119,11 +120,12 @@ package
 			equipmentLayer.addDisplayObject3D(zAxis, true);
 			
 			/*Create Light*/
-//			var shadeMaterial:PhongMaterial = new PhongMaterial(light,0xFF0000,0xFF0000,100);
-			var ray:Ray = new Ray();
-			ray.displayRays();	
-			originPivot.addChild(ray);
-			equipmentLayer.addDisplayObject3D(ray, true);
+			var shadeMaterial:PhongMaterial = new PhongMaterial(light,0xFF0000,0xFF0000,100);
+			var lightSource:LightSource = new LightSource(shadeMaterial);
+			lightSource.moveUp(lightSource.height/2);	
+			lightSource.moveRight(50);
+			originPivot.addChild(lightSource);
+			equipmentLayer.addDisplayObject3D(lightSource, true);
 			
 			/*Create Lens*/	
 			var shadeMaterialLens:PhongMaterial = new PhongMaterial(light,0xFFFFFF,0x6ccff8,100);
