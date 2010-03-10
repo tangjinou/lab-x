@@ -44,25 +44,24 @@ package cn.edu.zju.labx.objects
 		
 		public function createRay():void{
 		   	ray = new Ray();
-			addChild(ray);
 			
 			var royLogic1:RayLogic = new RayLogic(new Number3D(this.x,this.y+40,this.z),new Vector3D(1,0,0));
 			var lineRay1:LineRay = new LineRay(royLogic1);
 			
-			var royLogic2:RayLogic = new RayLogic(new Number3D(this.x,this.y+10,this.z),new Vector3D(1,0,0));
+			var royLogic2:RayLogic = new RayLogic(new Number3D(this.x,this.y-10,this.z),new Vector3D(1,0,0));
 			var lineRay2:LineRay = new LineRay(royLogic2);
-			
-			var royLogic3:RayLogic = new RayLogic(new Number3D(this.x,this.y+25,this.z+15),new Vector3D(1,0,0));
-			var lineRay3:LineRay = new LineRay(royLogic3);
-			
-			var royLogic4:RayLogic = new RayLogic(new Number3D(this.x,this.y+25,this.z-15),new Vector3D(1,0,0));
-			var lineRay4:LineRay = new LineRay(royLogic4);
+//			
+//			var royLogic3:RayLogic = new RayLogic(new Number3D(this.x,this.y+25,this.z+15),new Vector3D(1,0,0));
+//			var lineRay3:LineRay = new LineRay(royLogic3);
+//			
+//			var royLogic4:RayLogic = new RayLogic(new Number3D(this.x,this.y+25,this.z-15),new Vector3D(1,0,0));
+//			var lineRay4:LineRay = new LineRay(royLogic4);
 			
 			var lineRays:ArrayCollection =new ArrayCollection();
 			lineRays.addItem(lineRay1);
 			lineRays.addItem(lineRay2);
-			lineRays.addItem(lineRay3);
-			lineRays.addItem(lineRay4);
+//			lineRays.addItem(lineRay3);
+//			lineRays.addItem(lineRay4);
 			
 			ray.setLineRays(lineRays);
 		}
@@ -99,6 +98,7 @@ package cn.edu.zju.labx.objects
 		   	    	 {
 //		   	    	 	StageObjectsManager.getDefault.originPivot.addChild(getRay());
 		   	    	 	StageObjectsManager.getDefault.notify(new LabXEvent(this, LabXEvent.LIGHT_ON));
+		   	    	 	StageObjectsManager.getDefault.originPivot.addChild(ray);
 		   	    	 	ray.displayRays();
 		   	    	 } else {
 		   	    	 	StageObjectsManager.getDefault.originPivot.removeChild(getRay());

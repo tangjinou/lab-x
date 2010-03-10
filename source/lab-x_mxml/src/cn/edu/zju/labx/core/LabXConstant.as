@@ -29,6 +29,8 @@ package cn.edu.zju.labx.core
 		public static const Y_MOVE_MIN:Number = 5;
 		public static const Z_MOVE_MIN:Number = 5;
 		
+		public static const NUMBER_PRECISION:Number = 0.000001;
+		
 		
 
 	}

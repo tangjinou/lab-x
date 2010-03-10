@@ -6,6 +6,7 @@ package cn.edu.zju.labx.objects
 	import cn.edu.zju.labx.events.IUserInputListener;
 	import cn.edu.zju.labx.events.LabXEvent;
 	import cn.edu.zju.labx.logicObject.LensLogic;
+	import cn.edu.zju.labx.logicObject.RayLogic;
 	import cn.edu.zju.labx.utils.ResourceManager;
 	
 	import com.greensock.*;
@@ -64,7 +65,11 @@ package cn.edu.zju.labx.objects
 				if (obj != null && obj is IRayMaker)
 				{
 					makeAnNewRay(obj as IRayMaker);
-					if(this._ray != null)StageObjectsManager.getDefault.originPivot.addChild(this._ray);
+					if(this._ray != null)
+					{
+						StageObjectsManager.getDefault.originPivot.addChild(this._ray);
+						this._ray.displayRays();
+					}
 				}
 			}
 			else if (event.type == LabXEvent.LIGHT_OFF)
@@ -85,9 +90,12 @@ package cn.edu.zju.labx.objects
 				var newLineRays:ArrayCollection = new ArrayCollection();
 				for each (var oldLineRay:LineRay in oldRay.getLineRays())
 				{
-					newLineRays.addItem(new LineRay(lensLogic.calculateRayAfterLens(oldLineRay.logic)));
+					var resultLogic:RayLogic = lensLogic.calculateRayAfterLens(oldLineRay.logic);
+					var num:Number3D = new Number3D(this.x + this._focus, this.y, this.z);
+					var b:Boolean = resultLogic.isPointOnRay(num);
+					newLineRays.addItem(new LineRay(resultLogic));
 				}
-				this._ray = new Ray(null, newLineRays, this.x, 0);
+				this._ray = new Ray(null, newLineRays, 0, 0);
 			}
 		}
 		
