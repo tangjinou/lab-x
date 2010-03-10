@@ -32,8 +32,8 @@ package cn.edu.zju.labx.objects
 		{
 			super(material);
 			light=new DAE(true);  
-            light.load(ResourceManager.RAY_DAE_URL,new MaterialsList( {all:this.material} ) );		
 			light.addEventListener(FileLoadEvent.LOAD_COMPLETE,daeFileOnloaded);  
+			light.load(ResourceManager.RAY_DAE_URL,new MaterialsList( {all:this.material} ) );		
 			addEventListener(InteractiveScene3DEvent.OBJECT_PRESS, objectPressHandler);
 			createDisplayObject();
 		}
@@ -100,10 +100,9 @@ package cn.edu.zju.labx.objects
 		
 	    private function daeFileOnloaded(evt:FileLoadEvent):void{  
 	    	addChild(light);  
-//	    	trace("beigin~~~~~~~~~~~~~");
 //			trace(light.childrenList());
-//			trace("end~~~~~~~~~~~~~");
-			light.getChildByName("COLLADA_Scene").addEventListener(InteractiveScene3DEvent.OBJECT_PRESS, objectPressHandler);
+			light.getChildByName("COLLADA_Scene").getChildByName("Cylinder01").addEventListener(InteractiveScene3DEvent.OBJECT_PRESS, objectPressHandler);
+            light.getChildByName("COLLADA_Scene").getChildByName("Cylinder02").addEventListener(InteractiveScene3DEvent.OBJECT_PRESS, objectPressHandler);
         } 
 	}
 }

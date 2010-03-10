@@ -110,7 +110,9 @@ package cn.edu.zju.labx.objects
 		
 	    private function daeFileOnloaded(evt:FileLoadEvent):void{  
 	    	this.addChild(lens);  
-//	    	trace(lens.childrenList());
+//	        trace("beigin~~~~~~~~~~~~~");
+			trace(lens.childrenList());
+//			trace("end~~~~~~~~~~~~~");
 			this.useOwnContainer = true;
             lens.getChildByName("COLLADA_Scene").getChildByName("Sphere02").addEventListener(InteractiveScene3DEvent.OBJECT_PRESS, objectPressHandler);
             lens.getChildByName("COLLADA_Scene").getChildByName("Sphere01").addEventListener(InteractiveScene3DEvent.OBJECT_PRESS, objectPressHandler);
