@@ -74,8 +74,8 @@ package cn.edu.zju.labx.objects
 			}
 			else if (event.type == LabXEvent.LIGHT_OFF)
 			{
-				this._ray = null;
 				StageObjectsManager.getDefault.originPivot.removeChild(this._ray);
+				this._ray = null;
 			} 
 			return true;
 		}
@@ -85,7 +85,7 @@ package cn.edu.zju.labx.objects
 			var oldRay:Ray = rayMaker.getRay();
 			if(oldRay != null)
 			{
-				oldRay.endX = this.x;
+				oldRay.EndX = this.x;
 				var lensLogic:LensLogic = new LensLogic(new Number3D(this.x, this.y, this.z), this._focus);
 				var newLineRays:ArrayCollection = new ArrayCollection();
 				for each (var oldLineRay:LineRay in oldRay.getLineRays())
@@ -125,6 +125,7 @@ package cn.edu.zju.labx.objects
 	   	    	 	var xMove:Number = mouseEvent.stageX - oldMouseX;
 	   	    	 	this.x += xMove;
 	   	    	 	oldMouseX = mouseEvent.stageX;
+	   	    	 	StageObjectsManager.getDefault.notify(new LabXEvent(this, LabXEvent.XOBJECT_MOVE));
 	   	    	 }
 	    	}
 	    	

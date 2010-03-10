@@ -44,7 +44,7 @@ package cn.edu.zju.labx.objects
 		
 		public function createRay():void{
 		   	ray = new Ray();
-			addChild(ray);
+//			addChild(ray);
 			
 			var royLogic1:RayLogic = new RayLogic(new Number3D(this.x,this.y+40,this.z),new Vector3D(1,0,0));
 			var lineRay1:LineRay = new LineRay(royLogic1);
@@ -97,12 +97,12 @@ package cn.edu.zju.labx.objects
 	   	    	 	isOn = !isOn;
 		   	    	 if (isOn)
 		   	    	 {
-//		   	    	 	StageObjectsManager.getDefault.originPivot.addChild(getRay());
+		   	    	 	StageObjectsManager.getDefault.originPivot.addChild(getRay());
 		   	    	 	StageObjectsManager.getDefault.notify(new LabXEvent(this, LabXEvent.LIGHT_ON));
 		   	    	 	ray.EndX=1000;
 		   	    	 } else {
 		   	    	 	StageObjectsManager.getDefault.originPivot.removeChild(getRay());
-//		   	    	 	StageObjectsManager.getDefault.notify(new LabXEvent(this, LabXEvent.LIGHT_OFF));
+		   	    	 	StageObjectsManager.getDefault.notify(new LabXEvent(this, LabXEvent.LIGHT_OFF));
 		   	    	 }
 	   	    	 }
 			}
