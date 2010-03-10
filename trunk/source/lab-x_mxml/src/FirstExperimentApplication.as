@@ -47,6 +47,9 @@ package
 	
 		private var deskLayer:ViewportLayer;
 		private var equipmentLayer:ViewportLayer;
+		private var lensLayer:ViewportLayer;
+		private var lightSourceLayer:ViewportLayer;
+		private var boardLayer:ViewportLayer;
 		
 		public function FirstExperimentApplication(viewportWidth:Number=LabXConstant.STAGE_WIDTH, viewportHeight:Number=LabXConstant.STAGE_HEIGHT, scaleToStage:Boolean=true, interactive:Boolean=false, cameraType:String="Target")
 		{
@@ -62,7 +65,15 @@ package
 			equipmentLayer.layerIndex = 1;
 			deskLayer.layerIndex = 2;
 			
-//			renderer = new QuadrantRenderEngine();
+			lensLayer = new ViewportLayer(viewport,null);
+			lightSourceLayer = new ViewportLayer(viewport,null);
+			boardLayer = new ViewportLayer(viewport,null);
+			equipmentLayer.addLayer(lensLayer);
+			equipmentLayer.addLayer(lightSourceLayer);
+			equipmentLayer.addLayer(boardLayer);
+			equipmentLayer.sortMode = ViewportLayerSortMode.Z_SORT;
+			
+			lensLayer.alpha = 0.5;
 			
 			createDesk();
 			createObjects();
@@ -127,7 +138,7 @@ package
 			lightSource.moveUp(lightSource.height/2);	
 			lightSource.moveRight(50);
 			originPivot.addChild(lightSource);
-			equipmentLayer.addDisplayObject3D(lightSource, true);
+			lightSourceLayer.addDisplayObject3D(lightSource, true);
 			
 			StageObjectsManager.getDefault.addLabXObject(lightSource);
 			
@@ -138,7 +149,7 @@ package
 			lens.moveRight(LabXConstant.DESK_WIDTH/2);
 			lens.moveUp(lens.height/2);
 			originPivot.addChild(lens);
-			equipmentLayer.addDisplayObject3D(lens, true);
+			lensLayer.addDisplayObject3D(lens, true);
 			
 			StageObjectsManager.getDefault.addLabXObject(lens);
 			
@@ -149,7 +160,7 @@ package
 			board.moveRight(LabXConstant.DESK_WIDTH);
 			board.moveUp(board.height/2);
             originPivot.addChild(board);
-            equipmentLayer.addDisplayObject3D(board, true);
+            boardLayer.addDisplayObject3D(board, true);
             StageObjectsManager.getDefault.addLabXObject(board);
             
 			
