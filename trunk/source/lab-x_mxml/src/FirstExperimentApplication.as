@@ -37,9 +37,6 @@ package
         private var easeOut:Number = 0.1;
         
 		private var light:PointLight3D;
-		private var xAxis:Cylinder;
-		private var yAxis:Cylinder;
-		private var zAxis:Cylinder;
 		public  var originPivot:DisplayObject3D;
 		private var desk:DAE; 
 	    public var lens:Lens;
@@ -57,6 +54,7 @@ package
 			viewport.interactive = true;
 			camera.zoom = 90;
 			
+			// create top level viewportLayers
 			equipmentLayer = new ViewportLayer(viewport,null);
 			deskLayer = new ViewportLayer(viewport,null);
 			viewport.containerSprite.addLayer(equipmentLayer);
@@ -65,6 +63,7 @@ package
 			equipmentLayer.layerIndex = 1;
 			deskLayer.layerIndex = 2;
 			
+			// create second level viewportLayers under equipmentLayers
 			lensLayer = new ViewportLayer(viewport,null);
 			lightSourceLayer = new ViewportLayer(viewport,null);
 			boardLayer = new ViewportLayer(viewport,null);
@@ -73,6 +72,7 @@ package
 			equipmentLayer.addLayer(boardLayer);
 			equipmentLayer.sortMode = ViewportLayerSortMode.Z_SORT;
 			
+			// special effects on certain layers
 			lensLayer.alpha = 0.5;
 			
 			createDesk();
@@ -110,26 +110,6 @@ package
 			light.z = -100;
 			originPivot.addChild(light);
 
-			var shadeMaterialX:PhongMaterial = new PhongMaterial(light,0xFFFFFF,0xFF0000,100);
-			var shadeMaterialY:PhongMaterial = new PhongMaterial(light,0xFFFFFF,0xFF00,100);
-			var shadeMaterialZ:PhongMaterial = new PhongMaterial(light,0xFFFFFF,0xFF,100);
-			
-			xAxis = new Cylinder(shadeMaterialX, 1, LabXConstant.STAGE_WIDTH/5);
-			xAxis.moveRight(LabXConstant.STAGE_WIDTH/10);
-			xAxis.roll(90);
-			originPivot.addChild(xAxis);
-			equipmentLayer.addDisplayObject3D(xAxis, true);
-			
-			yAxis = new Cylinder(shadeMaterialY, 1, LabXConstant.STAGE_HEIGHT/5);
-			yAxis.moveUp(LabXConstant.STAGE_HEIGHT/10);
-			originPivot.addChild(yAxis);
-			equipmentLayer.addDisplayObject3D(yAxis, true);
-			
-			zAxis = new Cylinder(shadeMaterialZ, 1, LabXConstant.STAGE_DEPTH/5);
-			zAxis.moveForward(LabXConstant.STAGE_DEPTH/10);
-			zAxis.pitch(90);
-			originPivot.addChild(zAxis);
-			equipmentLayer.addDisplayObject3D(zAxis, true);
 			
 			/*Create lightSource*/
 			var shadeMaterial:PhongMaterial = new PhongMaterial(light,0xFF0000,0xFF0000,100);
