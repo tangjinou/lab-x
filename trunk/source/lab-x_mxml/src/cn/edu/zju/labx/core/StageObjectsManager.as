@@ -115,6 +115,13 @@ package cn.edu.zju.labx.core
 		public function addLabXObject(obj:LabXObject):void
 		{
 			objectList.addItem(obj);
+			if (objectList.sort == null) {
+				var sorter:Sort = new Sort();
+				sorter.compareFunction = compareValues;
+				objectList.sort = sorter;
+				objectList.refresh();
+			}
+			
 			if(obj is ILabXListener) {
 				addLabXEventListener(obj as ILabXListener);
 			}
@@ -134,6 +141,16 @@ package cn.edu.zju.labx.core
 				removeLabXEventListener(obj as ILabXListener);
 			}
 //			if(originPivot != null)originPivot.removeChild(obj);
+		}
+		
+		public function getPreviousXObject(obj:LabXObject):LabXObject
+		{
+			var index:int = objectList.getItemIndex(obj);
+			if ((index > 0) && (index < objectList.length))
+			{
+				return objectList.getItemAt(index-1) as LabXObject;
+			}
+			return null;
 		}
 
 		public function getLabXObjects():ArrayCollection
@@ -163,19 +180,7 @@ package cn.edu.zju.labx.core
 			listenerList.addItem(listener);
 			if (listenerList.sort == null) {
 				var sorter:Sort = new Sort();
-				sorter.compareFunction = function compareValues(a:Object, b:Object, fields:Array = null):int
-				{
-					if (a == null && b == null) return 0;
-					if (a == null) return 1;
-					if (b == null) return -1;
-					var objA:LabXObject = a as LabXObject;
-					var objB:LabXObject = b as LabXObject;
-					
-					if (objA.x > objB.x)return 1;
-					if (objA.x < objB.x)return -1;
-					
-					return 0;
-				};
+				sorter.compareFunction = compareValues;
 				listenerList.sort = sorter;
 				listenerList.refresh();
 			}
@@ -201,14 +206,29 @@ package cn.edu.zju.labx.core
 		 * Dispatch LabX Event 
 		 */
 		public  function notify(event:LabXEvent):void {
+			notify_count = 0;
 			for(var index:int;index<listenerList.length;index++){
-			   var obj:ILabXListener =listenerList.getItemAt(index) as ILabXListener;
-			     if(obj.handleLabXEvent(event)==false){
-			        break;
-			     }
-			     notify_count++;
+				var obj:ILabXListener =listenerList.getItemAt(index) as ILabXListener;
+			    if(obj.handleLabXEvent(event)==false){
+			       break;
+			    }
+			    notify_count++;
 			}
 		}
+		
+		private function compareValues(a:Object, b:Object, fields:Array = null):int
+		{
+			if (a == null && b == null) return 0;
+			if (a == null) return 1;
+			if (b == null) return -1;
+			var objA:LabXObject = a as LabXObject;
+			var objB:LabXObject = b as LabXObject;
+			
+			if (objA.x > objB.x)return 1;
+			if (objA.x < objB.x)return -1;
+			
+			return 0;
+		};
 		
 		
 		/**

@@ -54,10 +54,11 @@ package cn.edu.zju.labx.objects
 		
 		public function getRay():Ray
 		{
-       	 	var ray:RayLogic = new RayLogic(new Number3D(this.x, this.y, this.z), new Vector3D(1, 0, 0));
-       	 	var rayArray:ArrayCollection = new ArrayCollection();
-       	 	rayArray.addItem(ray);
-			return new Ray(null, rayArray, this.x);
+//       	 	var ray:RayLogic = new RayLogic(new Number3D(this.x, this.y, this.z), new Vector3D(1, 0, 0));
+//       	 	var rayArray:ArrayCollection = new ArrayCollection();
+//       	 	rayArray.addItem(ray);
+//			return new Ray(null, rayArray, this.x);
+			return ray;
 		}
 		
 		public function setRay(ray:Ray):void
@@ -79,15 +80,16 @@ package cn.edu.zju.labx.objects
 	   	    	 if (mouseEvent.type == MouseEvent.MOUSE_UP)
 	   	    	 {
 	   	    	 	isOn = !isOn;
-	   	    	 }
-	   	    	 if (isOn)
-	   	    	 {  
-	   	    	 	ray.displayRays();
-	   	    	 	StageObjectsManager.getDefault.notify(new LabXEvent(this));
-//	   	    	 	isOn = !isOn;
+		   	    	 if (isOn)
+		   	    	 {
+//		   	    	 	StageObjectsManager.getDefault.originPivot.addChild(getRay());
+		   	    	 	StageObjectsManager.getDefault.notify(new LabXEvent(this, LabXEvent.LIGHT_ON));
+		   	    	 } else {
+		   	    	 	StageObjectsManager.getDefault.originPivot.removeChild(getRay());
+//		   	    	 	StageObjectsManager.getDefault.notify(new LabXEvent(this, LabXEvent.LIGHT_OFF));
+		   	    	 }
 	   	    	 }
 			}
-			
 		}
 		
 		// should destribute the listener 

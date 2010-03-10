@@ -1,6 +1,7 @@
 package cn.edu.zju.labx.objects
 {   
 	import cn.edu.zju.labx.core.LabXConstant;
+	import cn.edu.zju.labx.core.StageObjectsManager;
 	import cn.edu.zju.labx.events.ILabXListener;
 	import cn.edu.zju.labx.events.IUserInputListener;
 	import cn.edu.zju.labx.events.LabXEvent;
@@ -23,8 +24,8 @@ package cn.edu.zju.labx.objects
 	
 	public class Lens extends LabXObject implements ILabXListener ,IUserInputListener, IRayMaker
 	{   
-		var _ray:Ray  = null;
-		var _focus:Number = LabXConstant.LENS_DEFAULT_FOCAL_LENGTH;
+		private var _ray:Ray  = null;
+		private var _focus:Number = LabXConstant.LENS_DEFAULT_FOCAL_LENGTH;
 		
 		
 //		protected var lens:Cylinder;
@@ -56,10 +57,30 @@ package cn.edu.zju.labx.objects
 
 		public function handleLabXEvent(event:LabXEvent):Boolean
 		{
-			if (event.previousXObject is IRayMaker)
+			if ((event.type == LabXEvent.LIGHT_ON) || (event.type == LabXEvent.XOBJECT_MOVE))
 			{
-				var rayMaker:IRayMaker = event.previousXObject as IRayMaker;
-				var oldRay:Ray = rayMaker.getRay();
+				if(this._ray != null)StageObjectsManager.getDefault.originPivot.removeChild(this._ray);
+				var obj:LabXObject = StageObjectsManager.getDefault.getPreviousXObject(this);
+				if (obj != null && obj is IRayMaker)
+				{
+					makeAnNewRay(obj as IRayMaker);
+					if(this._ray != null)StageObjectsManager.getDefault.originPivot.addChild(this._ray);
+				}
+			}
+			else if (event.type == LabXEvent.LIGHT_OFF)
+			{
+				this._ray = null;
+				StageObjectsManager.getDefault.originPivot.removeChild(this._ray);
+			} 
+			return true;
+		}
+		
+		private function makeAnNewRay(rayMaker:IRayMaker):void
+		{
+			var oldRay:Ray = rayMaker.getRay();
+			if(oldRay != null)
+			{
+				oldRay.endX = this.x;
 				var lensLogic:LensLogic = new LensLogic(new Number3D(this.x, this.y, this.z), this._focus);
 				var newLineRays:ArrayCollection = new ArrayCollection();
 				for each (var oldLineRay:LineRay in oldRay.getLineRays())
@@ -68,7 +89,6 @@ package cn.edu.zju.labx.objects
 				}
 				this._ray = new Ray(null, newLineRays, this.x, 0);
 			}
-			return true;
 		}
 		
 		public function getRay():Ray
@@ -93,7 +113,7 @@ package cn.edu.zju.labx.objects
 	   	    	 	oldMouseX = mouseEvent.stageX;
 	   	    	 } else if (mouseEvent.type == MouseEvent.MOUSE_UP) {
 	   	    	 	oldMouseX = -1;
-	   	    	 } else if ((mouseEvent.type == MouseEvent.MOUSE_MOVE) && (oldMouseX != -1)) {
+	   	    	 } else if ((mouseEvent.type == MouseEvent.MOUSE_MOVE) && (oldMouseX != -1) && mouseEvent.buttonDown) {
 	   	    	 	var xMove:Number = mouseEvent.stageX - oldMouseX;
 	   	    	 	this.x += xMove;
 	   	    	 	oldMouseX = mouseEvent.stageX;
