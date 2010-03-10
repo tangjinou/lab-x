@@ -44,11 +44,12 @@ package cn.edu.zju.labx.objects
 		
 		public function createRay():void{
 		   	ray = new Ray();
+			addChild(ray);
 			
 			var royLogic1:RayLogic = new RayLogic(new Number3D(this.x,this.y+40,this.z),new Vector3D(1,0,0));
 			var lineRay1:LineRay = new LineRay(royLogic1);
 			
-			var royLogic2:RayLogic = new RayLogic(new Number3D(this.x,this.y-10,this.z),new Vector3D(1,0,0));
+			var royLogic2:RayLogic = new RayLogic(new Number3D(this.x,this.y+10,this.z),new Vector3D(1,0,0));
 			var lineRay2:LineRay = new LineRay(royLogic2);
 //			
 //			var royLogic3:RayLogic = new RayLogic(new Number3D(this.x,this.y+25,this.z+15),new Vector3D(1,0,0));
@@ -98,8 +99,7 @@ package cn.edu.zju.labx.objects
 		   	    	 {
 //		   	    	 	StageObjectsManager.getDefault.originPivot.addChild(getRay());
 		   	    	 	StageObjectsManager.getDefault.notify(new LabXEvent(this, LabXEvent.LIGHT_ON));
-		   	    	 	StageObjectsManager.getDefault.originPivot.addChild(ray);
-		   	    	 	ray.displayRays();
+		   	    	 	ray.EndX=1000;
 		   	    	 } else {
 		   	    	 	StageObjectsManager.getDefault.originPivot.removeChild(getRay());
 //		   	    	 	StageObjectsManager.getDefault.notify(new LabXEvent(this, LabXEvent.LIGHT_OFF));
@@ -119,6 +119,7 @@ package cn.edu.zju.labx.objects
 	    private function daeFileOnloaded(evt:FileLoadEvent):void{  
 	    	addChild(light);  
 //			trace(light.childrenList());
+			this.useOwnContainer = true;
 			light.getChildByName("COLLADA_Scene").getChildByName("Cylinder01").addEventListener(InteractiveScene3DEvent.OBJECT_PRESS, objectPressHandler);
             light.getChildByName("COLLADA_Scene").getChildByName("Cylinder02").addEventListener(InteractiveScene3DEvent.OBJECT_PRESS, objectPressHandler);
         } 
