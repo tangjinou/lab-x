@@ -8,12 +8,12 @@ package cn.edu.zju.labx.objects
 	
 	public class LineRay
 	{
-		var _logic:RayLogic; 
-		var _length:Number;
+		protected var _logic:RayLogic; 
+		protected var _length:Number;
 		/**
 		 *  This is for line's end point
 		 */
-		var endPoint:Vertex3D;
+		private var endPoint:Vertex3D;
 		
 		public function LineRay(logic:RayLogic=null,length:Number=3200)
 		{
@@ -21,7 +21,7 @@ package cn.edu.zju.labx.objects
 			_length= length;
 		}
 		
-		public function newLineRay(startPoint:Vertex3D,endPoint:Vertex3D){
+		public function newLineRay(startPoint:Vertex3D,endPoint:Vertex3D):void{
 		    this.endPoint = endPoint;
 		    this._length  = MathUtils.distanceToNumber3D(startPoint.toNumber3D(),endPoint.toNumber3D());
 		    var cosx:Number  = (endPoint.x - startPoint.x)/_length;
@@ -42,6 +42,15 @@ package cn.edu.zju.labx.objects
 		     endPoint =new Vertex3D(x,y,z);
 		   }
            return endPoint;		
+		}
+		
+		public function set end_point(endPoint:Vertex3D):void{
+		   	this.endPoint = endPoint;
+		    this._length  = MathUtils.distanceToNumber3D(start_point.toNumber3D(),endPoint.toNumber3D());
+		    var cosx:Number  = (endPoint.x - start_point.x)/_length;
+		    var cosy:Number  = (endPoint.y - start_point.y)/_length;
+		    var cosz:Number  = (endPoint.z - start_point.z)/_length;
+		    _logic.vector = new  Vector3D(cosx,cosy,cosz);
 		}
 		
 		public function get vector():Vector3D{
