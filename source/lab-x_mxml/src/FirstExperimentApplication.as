@@ -212,7 +212,7 @@ package
         
 		public function onMouseMove(e:MouseEvent):void
         {
-        	if (e is VirtualMouseMouseEvent)return;
+        	if (e is VirtualMouseMouseEvent || (!e.buttonDown))return;
              var differenceX:Number = e.stageX - previousMouseX;
              var differenceY:Number = e.stageY - previousMouseY;
              if(isOrbiting==true && StageObjectsManager.getDefault.rotate_stage==true){
