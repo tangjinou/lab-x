@@ -14,7 +14,6 @@ package cn.edu.zju.labx.core{
 		public static var keyLeft:Boolean;
 		public static var keyForward:Boolean;
 		public static var keyBackward:Boolean;
-		public static var mouseDown:Boolean;
 //		public static var camMode:String;
 //		public static var randomCamActive:Boolean;
 		
@@ -51,7 +50,6 @@ package cn.edu.zju.labx.core{
 			{
 				return;
 			}
-			mouseDown = true;
 			if (this._currentSelectedObject != null)
 			{
 				this._currentSelectedObject.hanleUserInputEvent(e);
@@ -64,7 +62,6 @@ package cn.edu.zju.labx.core{
 			{
 				return;
 			}
-			mouseDown = false;
 			if (this._currentSelectedObject != null)
 			{
 				this._currentSelectedObject.hanleUserInputEvent(e);
@@ -76,7 +73,7 @@ package cn.edu.zju.labx.core{
 		
 		public function mouseMoveHandler (e:MouseEvent):void
 		{
-			if ((!(e is VirtualMouseMouseEvent)) && mouseDown && (this._currentSelectedObject != null)) {
+			if ((this._currentSelectedObject != null) && (!(e is VirtualMouseMouseEvent)) && e.buttonDown) {
 				this._currentSelectedObject.hanleUserInputEvent(e);
 			}
 		}

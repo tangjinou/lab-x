@@ -2,6 +2,7 @@ package cn.edu.zju.labx.objects
 {   
 	import cn.edu.zju.labx.core.LabXConstant;
 	import cn.edu.zju.labx.core.StageObjectsManager;
+	import cn.edu.zju.labx.core.UserInputHandler;
 	import cn.edu.zju.labx.events.ILabXListener;
 	import cn.edu.zju.labx.events.IUserInputListener;
 	import cn.edu.zju.labx.events.LabXEvent;
@@ -12,6 +13,7 @@ package cn.edu.zju.labx.objects
 	import com.greensock.*;
 	
 	import flash.events.Event;
+	import flash.events.KeyboardEvent;
 	import flash.events.MouseEvent;
 	
 	import mx.collections.ArrayCollection;
@@ -88,13 +90,21 @@ package cn.edu.zju.labx.objects
 				for each (var oldLineRay:LineRay in oldRay.getLineRays())
 				{
 					var resultLogic:RayLogic = lensLogic.calculateRayAfterLens(oldLineRay.logic);
-					var num:Number3D = new Number3D(this.x + this._focus, this.y, this.z);
-					var b:Boolean = resultLogic.isPointOnRay(num);
-					newLineRays.addItem(new LineRay(resultLogic));
+					if (isRayOnLens(resultLogic))newLineRays.addItem(new LineRay(resultLogic));
 				}
 				return  new Ray(null, newLineRays, 0, 0);
 			}
 			return null;
+		}
+		
+		private function isRayOnLens(ray:RayLogic):Boolean
+		{
+			if (ray == null) return false;
+			if (Math.abs(ray.vector.x) < LabXConstant.NUMBER_PRECISION) return false;
+       	 	var x:Number = this.x;
+        	var y:Number = (this.x-ray.point.x)*ray.vector.y/ray.vector.x + ray.point.y;
+        	if (Math.abs(this.y - y) < this.height/2) return true;
+        	return false;
 		}
 		
 		public function getRay():Ray
@@ -113,7 +123,8 @@ package cn.edu.zju.labx.objects
 	   	       userInputHandle.call(this,event);
 	   	       return;
 	   	    }
-	   	    if(event is MouseEvent){
+	   	    if(event is MouseEvent)
+	   	    {
 	   	   	     var mouseEvent:MouseEvent = event as MouseEvent;
 	   	    	 if (mouseEvent.type == MouseEvent.MOUSE_DOWN) {
 	   	    	 	oldMouseX = mouseEvent.stageX;
@@ -121,14 +132,29 @@ package cn.edu.zju.labx.objects
 	   	    	 	oldMouseX = -1;
 	   	    	 } else if ((mouseEvent.type == MouseEvent.MOUSE_MOVE) && (oldMouseX != -1) && mouseEvent.buttonDown) {
 	   	    	 	var xMove:Number = mouseEvent.stageX - oldMouseX;
-	   	    	 	if (StageObjectsManager.getDefault.mainView.camera.z > 0)xMove = -xMove; //when camera is on the other side, x should reverse
-	   	    	 	this.x += xMove;
-	   	    	 	oldMouseX = mouseEvent.stageX;
-	   	    	 	StageObjectsManager.getDefault.addMessage("lens move:"+xMove);
-	   	    	 	StageObjectsManager.getDefault.notify(new LabXEvent(this, LabXEvent.XOBJECT_MOVE));
+	   	    	 	if (Math.abs(xMove) < 10)return;
+	   	    	 	internalMove(xMove);
+       	 			oldMouseX = mouseEvent.stageX;
 	   	    	 }
+	    	} else if (event is KeyboardEvent)
+	    	{
+	    		var keyBoradEvent:KeyboardEvent = event as KeyboardEvent;
+	    		if(UserInputHandler.keyLeft || UserInputHandler.keyRight)
+	    		{
+	    			var xMoveKey:Number = LabXConstant.X_MOVE_MIN;
+	    			if(UserInputHandler.keyLeft)xMoveKey = -xMoveKey;
+	    			internalMove(xMoveKey);
+	    		} 
 	    	}
 	    	
+	    }
+	    
+	    private function internalMove(xMove:Number):void
+	    {
+	    	if (StageObjectsManager.getDefault.mainView.camera.z > 0)xMove = -xMove; //when camera is on the other side, x should reverse
+       	 	this.x += xMove;
+       	 	StageObjectsManager.getDefault.addMessage("lens move:"+xMove);
+       	 	StageObjectsManager.getDefault.notify(new LabXEvent(this, LabXEvent.XOBJECT_MOVE));
 	    }
 	    
 	    // should destribute the listener 
