@@ -23,9 +23,9 @@ package cn.edu.zju.labx.objects
 		public var endX:Number;
 		
 		//This array is in for lineRay
-		var lineRays:ArrayCollection =new ArrayCollection();
+		private var lineRays:ArrayCollection =new ArrayCollection();
 		
-		var lines:Lines3D = null;
+		private var lines:Lines3D = null;
 		
 		public function Ray(material:MaterialObject3D=null, lineRays:ArrayCollection =null, startX:Number=0, endX:Number=0)
 		{
