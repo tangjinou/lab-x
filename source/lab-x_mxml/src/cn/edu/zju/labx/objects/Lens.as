@@ -13,7 +13,9 @@ package cn.edu.zju.labx.objects
 	
 	import flash.events.Event;
 	import flash.events.MouseEvent;
+	
 	import mx.collections.ArrayCollection;
+	
 	import org.papervision3d.core.math.Number3D;
 	import org.papervision3d.core.proto.MaterialObject3D;
 	import org.papervision3d.events.FileLoadEvent;
@@ -56,13 +58,15 @@ package cn.edu.zju.labx.objects
 
 		public function handleLabXEvent(event:LabXEvent):Boolean
 		{
-			if ((event.type == LabXEvent.LIGHT_ON) || (event.type == LabXEvent.XOBJECT_MOVE))
+			if(this._ray != null)StageObjectsManager.getDefault.originPivot.removeChild(this._ray);
+			this._ray = null;
+			
+			if (event.type != LabXEvent.LIGHT_OFF)
 			{
-				if(this._ray != null)StageObjectsManager.getDefault.originPivot.removeChild(this._ray);
 				var obj:LabXObject = StageObjectsManager.getDefault.getPreviousXObject(this);
 				if (obj != null && obj is IRayMaker)
 				{
-					makeAnNewRay(obj as IRayMaker);
+					this._ray = makeAnNewRay(obj as IRayMaker);
 					if(this._ray != null)
 					{
 						StageObjectsManager.getDefault.originPivot.addChild(this._ray);
@@ -70,15 +74,10 @@ package cn.edu.zju.labx.objects
 					}
 				}
 			}
-			else if (event.type == LabXEvent.LIGHT_OFF)
-			{
-				StageObjectsManager.getDefault.originPivot.removeChild(this._ray);
-				this._ray = null;
-			} 
 			return true;
 		}
 		
-		private function makeAnNewRay(rayMaker:IRayMaker):void
+		private function makeAnNewRay(rayMaker:IRayMaker):Ray
 		{
 			var oldRay:Ray = rayMaker.getRay();
 			if(oldRay != null)
@@ -93,8 +92,9 @@ package cn.edu.zju.labx.objects
 					var b:Boolean = resultLogic.isPointOnRay(num);
 					newLineRays.addItem(new LineRay(resultLogic));
 				}
-				this._ray = new Ray(null, newLineRays, 0, 0);
+				return  new Ray(null, newLineRays, 0, 0);
 			}
+			return null;
 		}
 		
 		public function getRay():Ray

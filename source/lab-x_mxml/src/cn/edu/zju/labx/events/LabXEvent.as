@@ -15,6 +15,8 @@ package cn.edu.zju.labx.events
 		public static const LIGHT_OFF:String = "LightOff";
 		
 		public static const XOBJECT_MOVE:String = "LabXObjectMove";
+		public static const XOBJECT_ADD:String = "LabXObjectAdd";
+		public static const XOBJECT_REMOVE:String = "LabXObjectRemove";
 		
 		public var currentXObject:LabXObject;
 		
