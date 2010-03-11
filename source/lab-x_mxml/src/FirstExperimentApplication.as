@@ -54,7 +54,17 @@ package
 			viewport.interactive = true;
 			camera.zoom = 90;
 			
-			// create top level viewportLayers
+			createTopLevelViewportLayers();
+			createSecondLevelViewportLayers();
+			createSpecialEffectsOnLayers();
+			
+			createDesk();
+			createObjects();
+			startRendering();
+		}
+		
+		public function createTopLevelViewportLayers():void
+		{
 			equipmentLayer = new ViewportLayer(viewport,null);
 			deskLayer = new ViewportLayer(viewport,null);
 			StageObjectsManager.getDefault.equipmentLayer = equipmentLayer;
@@ -64,8 +74,10 @@ package
 			viewport.containerSprite.sortMode = ViewportLayerSortMode.INDEX_SORT;
 			equipmentLayer.layerIndex = 1;
 			deskLayer.layerIndex = 2;
-			
-			// create second level viewportLayers under equipmentLayers
+		}
+		
+		public function createSecondLevelViewportLayers():void
+		{
 			lensLayer = new ViewportLayer(viewport,null);
 			lightSourceLayer = new ViewportLayer(viewport,null);
 			boardLayer = new ViewportLayer(viewport,null);
@@ -79,13 +91,11 @@ package
 			equipmentLayer.addLayer(boardLayer);
 			equipmentLayer.addLayer(rayLayer);
 			equipmentLayer.sortMode = ViewportLayerSortMode.Z_SORT;
-			
-			// special effects on certain layers
+		}
+		
+		public function createSpecialEffectsOnLayers():void
+		{
 			lensLayer.alpha = 0.5;
-			
-			createDesk();
-			createObjects();
-			startRendering();
 		}
 		
 		public function createDesk():void
