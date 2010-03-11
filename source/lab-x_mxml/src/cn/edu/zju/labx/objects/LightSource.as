@@ -103,6 +103,7 @@ package cn.edu.zju.labx.objects
 		   	    	 	ray.EndX=1000;
 		   	    	 } else {
 		   	    	 	StageObjectsManager.getDefault.originPivot.removeChild(getRay());
+		   	    	 	this.ray = null;
 		   	    	 	StageObjectsManager.getDefault.notify(new LabXEvent(this, LabXEvent.LIGHT_OFF));
 		   	    	 }
 	   	    	 }
