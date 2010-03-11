@@ -17,7 +17,7 @@ package cn.edu.zju.labx.objects
 	{
 		public static const DEFAULT_RADIUS:uint = 2;
 		
-		public var lineBold:Number=5;
+		public var lineBold:Number=2;
 		
 		public var startX:Number;
 		public var endX:Number;
@@ -72,7 +72,7 @@ package cn.edu.zju.labx.objects
 			if(lines!=null){
 			  removeChild(lines);
 			}
-			var lineMaterial:LineMaterial = new LineMaterial(0xFF0000,1);
+			var lineMaterial:LineMaterial = new LineMaterial(0xffffff,1);
 			lines = new Lines3D(lineMaterial);
 			for(var i:int=0;i<lineRays.length;i++){
 			  if(lineRays.getItemAt(i) is LineRay)
