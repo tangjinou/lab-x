@@ -129,7 +129,6 @@ package
   				//clamp pitch
   				if(camPitch < 5) camPitch = 5;
   				if(camPitch > 175) camPitch = 175;
-            
              	//clamp yaw
              	//if(camYaw > 355) camYaw = 355;
   				//if(camYaw < 185) camYaw = 185;
