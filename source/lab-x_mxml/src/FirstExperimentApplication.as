@@ -54,6 +54,7 @@ package
 			viewport.interactive = true;
 			camera.zoom = 90;
 			
+			
 			// create top level viewportLayers
 			equipmentLayer = new ViewportLayer(viewport,null);
 			deskLayer = new ViewportLayer(viewport,null);
@@ -95,7 +96,6 @@ package
             desk.moveRight(LabXConstant.STAGE_WIDTH/2);
             originPivot.addChild(desk);
             deskLayer.addDisplayObject3D(desk, true);
-            StageObjectsManager.getDefault.originPivot = originPivot;
              //camera.lookAt(desk);  
         } 
           
@@ -104,6 +104,7 @@ package
 			originPivot = new DisplayObject3D();
 			originPivot.x = -LabXConstant.STAGE_WIDTH/2
 			scene.addChild(originPivot);
+			StageObjectsManager.getDefault.originPivot = originPivot;
 			
 			light = new PointLight3D(true);
 			light.y = 100;
@@ -118,7 +119,6 @@ package
 			lightSource.moveUp(lightSource.height/2);	
 			lightSource.moveRight(50);
 			originPivot.addChild(lightSource);
-			lightSource.createRay();
 			lightSourceLayer.addDisplayObject3D(lightSource, true);
 			
 			StageObjectsManager.getDefault.addLabXObject(lightSource);
