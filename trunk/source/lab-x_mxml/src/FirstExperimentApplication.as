@@ -12,6 +12,7 @@ package
 	import flash.events.MouseEvent;
 	
 	import org.papervision3d.cameras.CameraType;
+	import org.papervision3d.core.utils.virtualmouse.VirtualMouseMouseEvent;
 	import org.papervision3d.events.FileLoadEvent;
 	import org.papervision3d.lights.PointLight3D;
 	import org.papervision3d.materials.shadematerials.PhongMaterial;
@@ -195,6 +196,7 @@ package
 		
 		public function onMouseDown(e:MouseEvent):void
         {
+        	if (e is VirtualMouseMouseEvent)return;
             isOrbiting = true;
             previousMouseX = e.stageX;
             previousMouseY = e.stageY;
@@ -204,11 +206,13 @@ package
         }
         public function onMouseUp(e:MouseEvent):void
         {
+        	if (e is VirtualMouseMouseEvent)return;
              isOrbiting = false;
         }
         
 		public function onMouseMove(e:MouseEvent):void
         {
+        	if (e is VirtualMouseMouseEvent)return;
              var differenceX:Number = e.stageX - previousMouseX;
              var differenceY:Number = e.stageY - previousMouseY;
              if(isOrbiting==true && StageObjectsManager.getDefault.rotate_stage==true){
