@@ -38,10 +38,10 @@
 	 		   firstExperiment.lens.visible=lens_checkBox.selected;
 	 		   if(lens_checkBox.selected==true){
                   StageObjectsManager.getDefault.addMessage("增加透镜.");
-                  StageObjectsManager.getDefault.removeLabXObject(firstExperiment.lens);
+//                  StageObjectsManager.getDefault.removeLabXObject(firstExperiment.lens);
                }else{
                   StageObjectsManager.getDefault.addMessage("移除透镜.");
-                  StageObjectsManager.getDefault.addLabXObject(firstExperiment.lens);
+//                  StageObjectsManager.getDefault.addLabXObject(firstExperiment.lens);
                }
                //TODO: need remove the stage listerner
 	 		}

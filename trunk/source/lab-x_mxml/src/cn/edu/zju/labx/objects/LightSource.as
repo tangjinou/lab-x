@@ -96,7 +96,8 @@ package cn.edu.zju.labx.objects
 	   	    	 {
 	   	    	 	isOn = !isOn;
 		   	    	 if (isOn)
-		   	    	 {
+		   	    	 {  
+		   	    	 	createRay();
 		   	    	 	StageObjectsManager.getDefault.originPivot.addChild(getRay());
 		   	    	 	StageObjectsManager.getDefault.notify(new LabXEvent(this, LabXEvent.LIGHT_ON));
 		   	    	 	ray.EndX=1000;
