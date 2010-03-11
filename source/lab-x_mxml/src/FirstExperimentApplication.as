@@ -127,7 +127,18 @@ package
 			var shadeMaterialLens:PhongMaterial = new PhongMaterial(light,0xFFFFFF,0x6ccff8,100);
 			shadeMaterialLens.interactive = true;
 			lens = new Lens(shadeMaterialLens, 100);
-			lens.moveRight(LabXConstant.DESK_WIDTH/2);
+			lens.moveRight(LabXConstant.DESK_WIDTH/3);
+			lens.moveUp(lens.height/2);
+			originPivot.addChild(lens);
+			lensLayer.addDisplayObject3D(lens, true);
+			
+			StageObjectsManager.getDefault.addLabXObject(lens);
+			
+			/*Create second Lens*/	
+			var shadeMaterialLens2:PhongMaterial = new PhongMaterial(light,0xFFFFFF,0x6ccff8,100);
+			shadeMaterialLens2.interactive = true;
+			lens = new Lens(shadeMaterialLens2, -100);
+			lens.moveRight(LabXConstant.DESK_WIDTH/3 + 200);
 			lens.moveUp(lens.height/2);
 			originPivot.addChild(lens);
 			lensLayer.addDisplayObject3D(lens, true);

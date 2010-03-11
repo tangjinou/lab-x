@@ -61,7 +61,7 @@ package cn.edu.zju.labx.objects
 		   {  
 		   	  var rayMaker:IRayMaker =obj as IRayMaker;
 		   	  var oldRay:Ray = rayMaker.getRay();
-		   	  oldRay.EndX = this.x;
+		   	  if(oldRay != null)oldRay.EndX = this.x;
 		   }
 		   
 		   return true;

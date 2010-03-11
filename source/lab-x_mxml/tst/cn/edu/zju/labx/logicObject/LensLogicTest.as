@@ -85,7 +85,36 @@ package cn.edu.zju.labx.logicObject
 			
 		}
 		
-		
+		public function testCalculateRayAfterLensWithMinusFocus():void
+		{
+			var rayResult:RayLogic;
+			var resultVector:Vector3D;
+			
+			var lens:LensLogic = new LensLogic(new Number3D(50, 100, 200), -10);
+			var ray:RayLogic = new RayLogic(new Number3D(0, 100, 200), new Vector3D(1, 0, 0));
+			
+			var focusPoint:Number3D = new Number3D(50 - 10, 100, 200)
+			
+			rayResult = lens.calculateRayAfterLens(ray);
+			assertTrue(rayResult.isPointOnRay(focusPoint));
+			
+			ray = new RayLogic(new Number3D(0, 0, 0), new Vector3D(1, 0, 0));
+			rayResult = lens.calculateRayAfterLens(ray);
+			
+			assertTrue(rayResult.isPointOnRay(focusPoint));
+			
+			
+			ray = new RayLogic(focusPoint, new Vector3D(2, 3, 1));
+			rayResult = lens.calculateRayAfterLens(ray);
+			
+			assertEquals(1, rayResult.vector.x);
+			
+			ray = new RayLogic(focusPoint, new Vector3D(3, 5, 6));
+			rayResult = lens.calculateRayAfterLens(ray);
+			
+			assertEquals(1, rayResult.vector.x);
+			
+		}
 		
 	}
 }
