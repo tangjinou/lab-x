@@ -35,13 +35,25 @@
 	 		}
 	 		
 	 		public function checkBoxChanged():void{
-	 		   firstExperiment.lens.visible=lens_checkBox.selected;
+	 		   firstExperiment.convexLens.visible=lens_checkBox.selected;
 	 		   if(lens_checkBox.selected==true){
-                  StageObjectsManager.getDefault.addMessage("增加透镜.");
-//                  StageObjectsManager.getDefault.removeLabXObject(firstExperiment.lens);
+                  StageObjectsManager.getDefault.addMessage("增加凸透镜.");
+                  StageObjectsManager.getDefault.addLabXObject(firstExperiment.convexLens);
                }else{
-                  StageObjectsManager.getDefault.addMessage("移除透镜.");
-//                  StageObjectsManager.getDefault.addLabXObject(firstExperiment.lens);
+                  StageObjectsManager.getDefault.addMessage("移除凸透镜.");
+                  StageObjectsManager.getDefault.removeLabXObject(firstExperiment.convexLens);
+               }
+               //TODO: need remove the stage listerner
+	 		}
+	 		
+	 		public function checkBoxChanged2():void{
+	 		   firstExperiment.concaveLens.visible=lens_checkBox2.selected;
+	 		   if(lens_checkBox2.selected==true){
+                  StageObjectsManager.getDefault.addMessage("增加凹透镜.");
+                  StageObjectsManager.getDefault.addLabXObject(firstExperiment.concaveLens);
+               }else{
+                  StageObjectsManager.getDefault.addMessage("移除凹透镜.");
+                  StageObjectsManager.getDefault.removeLabXObject(firstExperiment.concaveLens);
                }
                //TODO: need remove the stage listerner
 	 		}
@@ -56,7 +68,8 @@
 	 <mx:Button  label="close_stage_rotate" click="close_stage_rotate()" icon="@Embed('../assets/icon/stop.png')" x="189" y="554"/>
 	 <mx:Button  label="zoom+" click="StageObjectsManager.getDefault.mainView.camera.zoom++" icon="@Embed('../assets/icon/zoom_add.png')" x="368" y="554"/>
 	 <mx:Button  label="zoom-" click="StageObjectsManager.getDefault.mainView.camera.zoom--" icon="@Embed('../assets/icon/zoom_min.png')" x="476" y="554"/>
-	 <mx:CheckBox id="lens_checkBox" selected="true" x="681" y="9" label="透镜" width="109" color="#B4ADA4" fontSize="12" change="checkBoxChanged()"/>
+	 <mx:CheckBox id="lens_checkBox" selected="true" x="681" y="30" label="凸透镜" width="109" color="#B4ADA4" fontSize="12" change="checkBoxChanged()"/>
+	 <mx:CheckBox id="lens_checkBox2" selected="true" x="681" y="9" label="凹透镜" width="109" color="#B4ADA4" fontSize="12" change="checkBoxChanged2()"/>
 	 <mx:Panel y="445" width="192" height="155" layout="absolute" color="#070707" horizontalCenter="394" borderColor="#050404">
 	 </mx:Panel>
 	 <local:BoardView id="boardView"/>

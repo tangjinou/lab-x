@@ -2,6 +2,7 @@ package cn.edu.zju.labx.core
 {
 	import cn.edu.zju.labx.events.ILabXListener;
 	import cn.edu.zju.labx.events.LabXEvent;
+	import cn.edu.zju.labx.objects.IRayMaker;
 	import cn.edu.zju.labx.objects.LabXObject;
 	
 	import mx.collections.ArrayCollection;
@@ -154,6 +155,11 @@ package cn.edu.zju.labx.core
 		 */
 		public function removeLabXObject(obj:LabXObject):void
 		{
+			if (obj is IRayMaker)
+			{
+				var rayMaker:IRayMaker = obj as IRayMaker;
+				if(rayMaker.getRay() != null)this.originPivot.removeChild(rayMaker.getRay());
+			}
 			objectList.removeItemAt(objectList.getItemIndex(obj));
 			if(obj is ILabXListener) {
 				removeLabXEventListener(obj as ILabXListener);
