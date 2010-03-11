@@ -96,6 +96,7 @@ package
 		public function createSpecialEffectsOnLayers():void
 		{
 			lensLayer.alpha = 0.5;
+			rayLayer.alpha = 0.5;
 		}
 		
 		public function createDesk():void
