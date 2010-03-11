@@ -96,7 +96,7 @@ package
 		
 		public function createSpecialEffectsOnLayers():void
 		{
-			lensLayer.alpha = 0.5;
+			lensLayer.alpha = 0.7;
 			rayLayer.alpha = 0.5;
 		}
 		
