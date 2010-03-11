@@ -17,7 +17,6 @@ package
 	import org.papervision3d.materials.shadematerials.PhongMaterial;
 	import org.papervision3d.objects.DisplayObject3D;
 	import org.papervision3d.objects.parsers.DAE;
-	import org.papervision3d.objects.primitives.Cylinder;
 	import org.papervision3d.view.BasicView;
 	import org.papervision3d.view.layer.ViewportLayer;
 	import org.papervision3d.view.layer.util.ViewportLayerSortMode;
@@ -47,6 +46,7 @@ package
 		private var lensLayer:ViewportLayer;
 		private var lightSourceLayer:ViewportLayer;
 		private var boardLayer:ViewportLayer;
+		private var rayLayer:ViewportLayer;
 		
 		public function FirstExperimentApplication(viewportWidth:Number=LabXConstant.STAGE_WIDTH, viewportHeight:Number=LabXConstant.STAGE_HEIGHT, scaleToStage:Boolean=true, interactive:Boolean=false, cameraType:String="Target")
 		{
@@ -54,10 +54,11 @@ package
 			viewport.interactive = true;
 			camera.zoom = 90;
 			
-			
 			// create top level viewportLayers
 			equipmentLayer = new ViewportLayer(viewport,null);
 			deskLayer = new ViewportLayer(viewport,null);
+			StageObjectsManager.getDefault.equipmentLayer = equipmentLayer;
+			StageObjectsManager.getDefault.deskLayer = deskLayer;
 			viewport.containerSprite.addLayer(equipmentLayer);
 			viewport.containerSprite.addLayer(deskLayer);
 			viewport.containerSprite.sortMode = ViewportLayerSortMode.INDEX_SORT;
@@ -68,9 +69,15 @@ package
 			lensLayer = new ViewportLayer(viewport,null);
 			lightSourceLayer = new ViewportLayer(viewport,null);
 			boardLayer = new ViewportLayer(viewport,null);
+			rayLayer = new ViewportLayer(viewport, null);
+			StageObjectsManager.getDefault.lensLayer = lensLayer;
+			StageObjectsManager.getDefault.lightSourceLayer = lightSourceLayer;
+			StageObjectsManager.getDefault.boardLayer = boardLayer;
+			StageObjectsManager.getDefault.rayLayer = rayLayer;
 			equipmentLayer.addLayer(lensLayer);
 			equipmentLayer.addLayer(lightSourceLayer);
 			equipmentLayer.addLayer(boardLayer);
+			equipmentLayer.addLayer(rayLayer);
 			equipmentLayer.sortMode = ViewportLayerSortMode.Z_SORT;
 			
 			// special effects on certain layers

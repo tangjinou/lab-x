@@ -8,6 +8,8 @@ package cn.edu.zju.labx.objects
 	import org.papervision3d.core.proto.MaterialObject3D;
 	import org.papervision3d.materials.special.LineMaterial;
 	
+	import cn.edu.zju.labx.core.StageObjectsManager;
+	
 	/**
 	 * Ray is a LabX Object represent the light transform between LabXObjects
 	 */
@@ -79,6 +81,7 @@ package cn.edu.zju.labx.objects
 			  	lines.addLine(new Line3D(lines, lineMaterial, lineBold, lineRay.start_point, lineRay.end_point));
 			  }
 		    }
+		    StageObjectsManager.getDefault.rayLayer.addDisplayObject3D(lines, true);
 		    addChild(lines);
 	    }
         

@@ -10,6 +10,7 @@ package cn.edu.zju.labx.core
 	
 	import org.papervision3d.objects.DisplayObject3D;
 	import org.papervision3d.view.BasicView;
+	import org.papervision3d.view.layer.ViewportLayer;
 	
 	public  class StageObjectsManager
 	{   
@@ -43,6 +44,21 @@ package cn.edu.zju.labx.core
         */  
         public  var originPivot:DisplayObject3D;
         
+        /***
+        * 
+        *  Definition for different viewport layers for z-sorting ,should be newed in main application;
+        */         
+        
+        /** first level layers **/
+        public var deskLayer:ViewportLayer;
+		public var equipmentLayer:ViewportLayer;
+		
+		/** second level layers **/
+		public var lensLayer:ViewportLayer;
+		public var lightSourceLayer:ViewportLayer;
+		public var boardLayer:ViewportLayer;
+		public var rayLayer:ViewportLayer;
+		
 		/**
 		 * Get the current mouse X axis position, coordinate is start from left-bottom of the main view
 		 */
