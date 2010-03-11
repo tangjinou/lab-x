@@ -11,6 +11,10 @@ package
 	import flash.events.Event;
 	import flash.events.MouseEvent;
 	
+	import flash.filters.BlurFilter;
+	import flash.filters.DropShadowFilter;
+	import flash.filters.GlowFilter;
+	
 	import org.papervision3d.cameras.CameraType;
 	import org.papervision3d.core.utils.virtualmouse.VirtualMouseMouseEvent;
 	import org.papervision3d.events.FileLoadEvent;
@@ -97,7 +101,14 @@ package
 		public function createSpecialEffectsOnLayers():void
 		{
 			lensLayer.alpha = 0.7;
-			rayLayer.alpha = 0.5;
+			//rayLayer.alpha = 0.5;
+			
+			var bf:BlurFilter = new BlurFilter(3,3,1);
+			var growFilter_2:GlowFilter = new GlowFilter(0x00ffff, 2, 20, 10, 2, 3, true, false);
+			var growFilter_b_2:GlowFilter = new GlowFilter(0x00ffff, 2, 16, 10, 3, 9, false, false);
+			var dropShadow_2:DropShadowFilter = new DropShadowFilter(0, 360, 0x000fff, 1, 70, 70, 5, 3, false, false, false);
+			rayLayer.filters = [growFilter_2,growFilter_b_2,dropShadow_2];
+			
 		}
 		
 		public function createDesk():void
