@@ -125,6 +125,8 @@ package cn.edu.zju.labx.core
 			if(obj is ILabXListener) {
 				addLabXEventListener(obj as ILabXListener);
 			}
+			
+			this.notify(new LabXEvent(null, LabXEvent.XOBJECT_ADD));
 //			if(originPivot != null)originPivot.addChild(obj);
 		}
 		
@@ -140,6 +142,7 @@ package cn.edu.zju.labx.core
 			if(obj is ILabXListener) {
 				removeLabXEventListener(obj as ILabXListener);
 			}
+			this.notify(new LabXEvent(null, LabXEvent.XOBJECT_REMOVE));
 //			if(originPivot != null)originPivot.removeChild(obj);
 		}
 		
@@ -207,6 +210,11 @@ package cn.edu.zju.labx.core
 		 */
 		public  function notify(event:LabXEvent):void {
 			notify_count = 0;
+			if (event.type == LabXEvent.XOBJECT_MOVE)
+			{
+				listenerList.refresh();
+				objectList.refresh();
+			}
 			for(var index:int;index<listenerList.length;index++){
 				var obj:ILabXListener =listenerList.getItemAt(index) as ILabXListener;
 			    if(obj.handleLabXEvent(event)==false){
