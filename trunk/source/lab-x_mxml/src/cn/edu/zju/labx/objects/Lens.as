@@ -121,6 +121,7 @@ package cn.edu.zju.labx.objects
 	   	    	 	oldMouseX = -1;
 	   	    	 } else if ((mouseEvent.type == MouseEvent.MOUSE_MOVE) && (oldMouseX != -1) && mouseEvent.buttonDown) {
 	   	    	 	var xMove:Number = mouseEvent.stageX - oldMouseX;
+	   	    	 	if (StageObjectsManager.getDefault.mainView.camera.z > 0)xMove = -xMove;
 	   	    	 	this.x += xMove;
 	   	    	 	oldMouseX = mouseEvent.stageX;
 	   	    	 	StageObjectsManager.getDefault.addMessage("lens move:"+xMove);
