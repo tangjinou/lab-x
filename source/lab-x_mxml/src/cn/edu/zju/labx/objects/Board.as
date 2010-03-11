@@ -1,5 +1,6 @@
 package cn.edu.zju.labx.objects
 {   
+    import cn.edu.zju.labx.core.StageObjectsManager;
     import cn.edu.zju.labx.events.ILabXListener;
     import cn.edu.zju.labx.events.IUserInputListener;
     import cn.edu.zju.labx.events.LabXEvent;
@@ -55,6 +56,14 @@ package cn.edu.zju.labx.objects
 		
 	    public function handleLabXEvent(event:LabXEvent):Boolean{
 		   //TODO:
+		   var obj:LabXObject = StageObjectsManager.getDefault.getPreviousXObject(this);
+		   if (obj != null && obj is IRayMaker)
+		   {  
+		   	  var rayMaker:IRayMaker =obj as IRayMaker;
+		   	  var oldRay:Ray = rayMaker.getRay();
+		   	  oldRay.EndX = this.x;
+		   }
+		   
 		   return true;
 		}
 		

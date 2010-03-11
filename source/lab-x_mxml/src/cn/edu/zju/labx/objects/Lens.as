@@ -13,9 +13,7 @@ package cn.edu.zju.labx.objects
 	
 	import flash.events.Event;
 	import flash.events.MouseEvent;
-	
 	import mx.collections.ArrayCollection;
-	
 	import org.papervision3d.core.math.Number3D;
 	import org.papervision3d.core.proto.MaterialObject3D;
 	import org.papervision3d.events.FileLoadEvent;
@@ -125,6 +123,7 @@ package cn.edu.zju.labx.objects
 	   	    	 	var xMove:Number = mouseEvent.stageX - oldMouseX;
 	   	    	 	this.x += xMove;
 	   	    	 	oldMouseX = mouseEvent.stageX;
+	   	    	 	StageObjectsManager.getDefault.addMessage("lens move:"+xMove);
 	   	    	 	StageObjectsManager.getDefault.notify(new LabXEvent(this, LabXEvent.XOBJECT_MOVE));
 	   	    	 }
 	    	}
@@ -140,7 +139,7 @@ package cn.edu.zju.labx.objects
 	    private function daeFileOnloaded(evt:FileLoadEvent):void{  
 	    	this.addChild(lens);  
 //	        trace("beigin~~~~~~~~~~~~~");
-			trace(lens.childrenList());
+//			trace(lens.childrenList());
 //			trace("end~~~~~~~~~~~~~");
 			this.useOwnContainer = true;
             lens.getChildByName("COLLADA_Scene").getChildByName("Sphere02").addEventListener(InteractiveScene3DEvent.OBJECT_PRESS, objectPressHandler);

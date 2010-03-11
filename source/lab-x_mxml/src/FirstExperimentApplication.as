@@ -112,12 +112,13 @@ package
 
 			
 			/*Create lightSource*/
-			var shadeMaterial:PhongMaterial = new PhongMaterial(light,0xFF0000,0xFF0000,100);
+			var shadeMaterial:PhongMaterial = new PhongMaterial(light,0xFFFFFF,0x6ccff8,100);
 			shadeMaterial.interactive = true;
 			var lightSource:LightSource = new LightSource(shadeMaterial);
 			lightSource.moveUp(lightSource.height/2);	
 			lightSource.moveRight(50);
 			originPivot.addChild(lightSource);
+			lightSource.createRay();
 			lightSourceLayer.addDisplayObject3D(lightSource, true);
 			
 			StageObjectsManager.getDefault.addLabXObject(lightSource);
