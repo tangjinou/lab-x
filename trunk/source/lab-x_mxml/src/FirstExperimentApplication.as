@@ -4,6 +4,8 @@ package
 	import cn.edu.zju.labx.core.StageObjectsManager;
 	import cn.edu.zju.labx.core.UserInputHandler;
 	import cn.edu.zju.labx.objects.Board;
+	import cn.edu.zju.labx.objects.ConcaveLens;
+	import cn.edu.zju.labx.objects.ConvexLens;
 	import cn.edu.zju.labx.objects.Lens;
 	import cn.edu.zju.labx.objects.LightSource;
 	import cn.edu.zju.labx.utils.ResourceManager;
@@ -157,22 +159,26 @@ package
 			/*Create Lens*/	
 			var shadeMaterialLens:PhongMaterial = new PhongMaterial(light,0xFFFFFF,0x6ccff8,100);
 			shadeMaterialLens.interactive = true;
-			concaveLens = new Lens(shadeMaterialLens, -100);
+			
+			concaveLens = new ConcaveLens(shadeMaterialLens, -100);
 			concaveLens.moveRight(LabXConstant.DESK_WIDTH/3);
 			concaveLens.moveUp(concaveLens.height/2);
 			originPivot.addChild(concaveLens);
 			lensLayer.addDisplayObject3D(concaveLens, true);
+			
 			
 			StageObjectsManager.getDefault.addLabXObject(concaveLens);
 			
 			/*Create second Lens*/	
 			var shadeMaterialLens2:PhongMaterial = new PhongMaterial(light,0xFFFFFF,0x6ccff8,100);
 			shadeMaterialLens2.interactive = true;
-			convexLens = new Lens(shadeMaterialLens2, 100);
+
+			convexLens = new ConvexLens(shadeMaterialLens2, 100);
 			convexLens.moveRight(LabXConstant.DESK_WIDTH/3 + 200);
 			convexLens.moveUp(convexLens.height/2);
 			originPivot.addChild(convexLens);
 			lensLayer.addDisplayObject3D(convexLens, true);
+
 			
 			StageObjectsManager.getDefault.addLabXObject(convexLens);
 			

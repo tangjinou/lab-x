@@ -1,0 +1,30 @@
+package cn.edu.zju.labx.objects
+{
+	import cn.edu.zju.labx.core.LabXConstant;
+	
+    import cn.edu.zju.labx.utils.ResourceManager;
+	
+	import org.papervision3d.core.proto.MaterialObject3D;
+	import org.papervision3d.events.FileLoadEvent;
+	import org.papervision3d.events.InteractiveScene3DEvent;
+
+	public class ConvexLens extends Lens
+	{
+		public function ConvexLens(material:MaterialObject3D=null, focus:Number=LabXConstant.LENS_DEFAULT_FOCAL_LENGTH)
+		{   
+			lens_dae_url = ResourceManager.CONVEX_LENS_DAE_URL;
+			super(material, focus);
+		}
+		
+	    override protected function daeFileOnloaded(evt:FileLoadEvent):void{  
+	    	this.addChild(lens);  
+//	        trace("beigin~~~~~~~~~~~~~");
+//			trace(lens.childrenList());
+//			trace("end~~~~~~~~~~~~~");
+			this.useOwnContainer = true;
+            lens.getChildByName("COLLADA_Scene").getChildByName("Sphere02").addEventListener(InteractiveScene3DEvent.OBJECT_PRESS, objectPressHandler);
+            lens.getChildByName("COLLADA_Scene").getChildByName("Sphere01").addEventListener(InteractiveScene3DEvent.OBJECT_PRESS, objectPressHandler);
+        } 
+		
+	}
+}

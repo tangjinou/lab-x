@@ -36,6 +36,8 @@ package cn.edu.zju.labx.objects
 	    
 	    public var width:Number =120;
 	    public var height:Number=120;
+	    
+	    private var LENS_DAE_URL:String;
    
 		/**
 		 * To store the old Mouse X position;
@@ -54,8 +56,12 @@ package cn.edu.zju.labx.objects
 //		   	this.addChild(lens);
             lens=new DAE(true);  
             lens.addEventListener(FileLoadEvent.LOAD_COMPLETE,daeFileOnloaded);
-            lens.load(ResourceManager.LENS_DAE_URL,new MaterialsList( {all:this.material} ) );		
+            lens.load(LENS_DAE_URL,new MaterialsList( {all:this.material} ) );		
               
+		}
+		
+		public function set lens_dae_url(url:String):void{
+		     this.LENS_DAE_URL =url;
 		}
 
 		public function handleLabXEvent(event:LabXEvent):Boolean
@@ -163,14 +169,7 @@ package cn.edu.zju.labx.objects
 			lens.addEventListener(type, listener, useCapture, priority, useWeakReference);
 		}
 		
-	    private function daeFileOnloaded(evt:FileLoadEvent):void{  
-	    	this.addChild(lens);  
-//	        trace("beigin~~~~~~~~~~~~~");
-//			trace(lens.childrenList());
-//			trace("end~~~~~~~~~~~~~");
-			this.useOwnContainer = true;
-            lens.getChildByName("COLLADA_Scene").getChildByName("Sphere02").addEventListener(InteractiveScene3DEvent.OBJECT_PRESS, objectPressHandler);
-            lens.getChildByName("COLLADA_Scene").getChildByName("Sphere01").addEventListener(InteractiveScene3DEvent.OBJECT_PRESS, objectPressHandler);
+	    protected function daeFileOnloaded(evt:FileLoadEvent):void{  
         } 
 		
 	}
