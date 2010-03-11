@@ -18,7 +18,9 @@ package cn.edu.zju.labx.utils
 		[Embed (source="../assets/icon/zoom_min.png")]
 		public static const zoom_min_png:Class;
 		
-		public static const LENS_DAE_URL:String = "../assets/models/lens.DAE";
+		public static const CONVEX_LENS_DAE_URL:String = "../assets/models/lens_convex.DAE";
+		
+		public static const CONCAVE_LENS_DAE_URL:String = "../assets/models/lens_concave.DAE";
 		
 		public static const RAY_DAE_URL:String = "../assets/models/ray.DAE";
 		
