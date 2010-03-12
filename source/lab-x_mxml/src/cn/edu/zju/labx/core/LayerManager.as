@@ -30,5 +30,20 @@ package cn.edu.zju.labx.core
 				instance = new LayerManager();
 			return instance;
 		}
+		
+		public function viewLayerChange():void{
+		    
+		    
+		  if (StageObjectsManager.getDefault.mainView.camera.y < StageObjectsManager.getDefault.originPivot.y)
+            {
+            	equipmentLayer.layerIndex = 1;
+				deskLayer.layerIndex = 2;
+            }else
+            {
+            	equipmentLayer.layerIndex = 2;
+				deskLayer.layerIndex = 1;
+            }
+		
+		}
 	}
 }

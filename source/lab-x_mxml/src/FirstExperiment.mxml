@@ -12,7 +12,7 @@
 			public var camera_yaw:int=0;
 	 		public function init():void{
 	 		   message_box.text="公告栏";
-	 		   StageObjectsManager.getDefault.mainView=firstExperiment;	
+//	 		   StageObjectsManager.getDefault.mainView=firstExperiment;	
 	 		   StageObjectsManager.getDefault.messageBox=message_box;
 	 		   Mouse3D.enabled = true;
 	 		   firstExperiment.viewport.interactive = true; 
