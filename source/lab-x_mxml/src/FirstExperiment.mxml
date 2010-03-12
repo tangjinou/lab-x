@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<mx:Application xmlns:mx="http://www.adobe.com/2006/mxml" backgroundColor="black" layout="absolute" creationComplete="callLater(init)" width="1000" height="600" xmlns:labx="cn.edu.zju.labx.*" xmlns:local="*" borderColor="#CD1A02">
+<mx:Application xmlns:mx="http://www.adobe.com/2006/mxml" backgroundColor="black" layout="absolute" creationComplete="callLater(init)" width="1000" height="600" xmlns:labx="cn.edu.zju.labx.*" xmlns:local="*" borderColor="#CD1A02" fontWeight="bold" fontSize="12">
 	 <mx:Script>
 	 	<![CDATA[
 	 		import org.papervision3d.core.utils.Mouse3D;
@@ -71,6 +71,7 @@
 	 <mx:CheckBox id="lens_checkBox2" selected="true" x="681" y="9" label="凹透镜" width="109" color="#B4ADA4" fontSize="12" change="checkBoxChanged2()"/>
 	 <mx:Panel y="30" width="208" height="126" layout="absolute" color="#070707" horizontalCenter="0" borderColor="#67F509" alpha="0.79">
 	     <mx:TextArea  x="0" y="0" width="188" height="86" editable="false" id="message_box" fontSize="12" backgroundColor="#A69B9B" cornerRadius="1" borderStyle="solid" borderColor="#F31207" themeColor="#F0FF00" alpha="1.0" borderThickness="2"/>
+	     <mx:Label x="128" y="56" text="LabX" width="60" color="#DFF4F4" fontFamily="Arial" fontWeight="bold" fontSize="21"/>
 	 </mx:Panel>
 	 <mx:ApplicationControlBar width="20" height="44" x="490" y="0">
 	 </mx:ApplicationControlBar>
