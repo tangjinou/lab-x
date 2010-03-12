@@ -23,6 +23,12 @@
                stage.addEventListener(MouseEvent.MOUSE_UP, UserInputHandler.getDefault.mouseUpHandler);
 			   uic.addChild(firstExperiment);
                addChild(uic);
+               
+                move_up.xTo = 0 - moveText.width + 6;
+                move_up.repeatCount = 10; //loop
+                move_up.repeatDelay = 1000; //loop time
+                move_up.duration = 10000; //the time of scroll onc
+                move_up.play();
 	 		}
 	 		public function open_stage_rotate():void{
 	 			StageObjectsManager.getDefault.rotate_stage=true;
@@ -61,18 +67,39 @@
 	 	]]> 
 	 </mx:Script>
 	 <local:FirstExperimentApplication id="firstExperiment" x="0" y="0" />
-	 <mx:HBox x="10" y="554" width="780" height="36">
-     </mx:HBox>
-	 <mx:Button  label="open_stage_rotate" click="open_stage_rotate()" icon="@Embed('../assets/icon/open_stage_rotate.png')" x="10" y="554"/>
-	 <mx:Button  label="close_stage_rotate" click="close_stage_rotate()" icon="@Embed('../assets/icon/stop.png')" x="201" y="554"/>
-	 <mx:Button  label="zoom+" click="StageObjectsManager.getDefault.mainView.camera.zoom++" icon="@Embed('../assets/icon/zoom_add.png')" x="394" y="554"/>
-	 <mx:Button  label="zoom-" click="StageObjectsManager.getDefault.mainView.camera.zoom--" icon="@Embed('../assets/icon/zoom_min.png')" x="502" y="554"/>
-	 <mx:CheckBox id="lens_checkBox" selected="true" x="681" y="30" label="凸透镜" width="109" color="#B4ADA4" fontSize="12" change="checkBoxChanged()"/>
-	 <mx:CheckBox id="lens_checkBox2" selected="true" x="681" y="9" label="凹透镜" width="109" color="#B4ADA4" fontSize="12" change="checkBoxChanged2()"/>
-	 <mx:Panel y="30" width="208" height="126" layout="absolute" color="#070707" horizontalCenter="0" borderColor="#67F509" alpha="0.79">
+     <mx:VBox horizontalGap="10" verticalAlign="bottom" x="937" y="10">
+     <mx:Button  click="open_stage_rotate()" icon="@Embed('../assets/icon/open_stage_rotate.png')"  toolTip="open_stage_rotate" />
+	 <mx:Button  click="close_stage_rotate()" icon="@Embed('../assets/icon/stop.png')" toolTip="close_stage_rotate"/>
+	 <mx:Button  click="StageObjectsManager.getDefault.mainView.camera.zoom++" icon="@Embed('../assets/icon/zoom_add.png')" toolTip="zoom+"/>
+	 <mx:Button  click="StageObjectsManager.getDefault.mainView.camera.zoom--" icon="@Embed('../assets/icon/zoom_min.png')" toolTip="zoom-"/>
+     </mx:VBox>
+	 
+	 <mx:VBox horizontalGap="10" verticalAlign="bottom" x="929" y="536">
+	 <mx:CheckBox id="lens_checkBox"  selected="true"  label="凸透镜"  color="#B4ADA4" fontSize="12" change="checkBoxChanged()"/>
+	 <mx:CheckBox id="lens_checkBox2" selected="true" label="凹透镜" color="#B4ADA4" fontSize="12" change="checkBoxChanged2()"/>
+	 </mx:VBox>
+	 
+	 
+	 <mx:Panel y="30" width="208" height="126" layout="absolute" color="#070707" horizontalCenter="-386" borderColor="#67F509" alpha="0.79">
 	     <mx:TextArea  x="0" y="0" width="188" height="86" editable="false" id="message_box" fontSize="12" backgroundColor="#A69B9B" cornerRadius="1" borderStyle="solid" borderColor="#F31207" themeColor="#F0FF00" alpha="1.0" borderThickness="2"/>
 	     <mx:Label text="LabX" width="60" color="#DFF4F4" fontFamily="Arial" fontWeight="bold" fontSize="21" x="107" y="46"/>
 	 </mx:Panel>
-	 <mx:ApplicationControlBar width="20" height="44" x="490" y="0">
+	 <mx:ApplicationControlBar width="20" height="44" x="104" y="0">
 	 </mx:ApplicationControlBar>
+	 <mx:Panel y="30" width="208" height="126" layout="absolute" color="#070707" horizontalCenter="-126" borderColor="#F90483" alpha="0.79">
+	     <mx:TextArea  x="0" y="0" width="188" height="86" editable="false"  fontSize="12" backgroundColor="#A69B9B" cornerRadius="1" borderStyle="solid" borderColor="#F31207" themeColor="#F0FF00" alpha="1.0" borderThickness="2"/>
+	     <mx:Label text="LabX" width="60" color="#DFF4F4" fontFamily="Arial" fontWeight="bold" fontSize="21" x="107" y="46"/>
+	 </mx:Panel>
+	 <mx:ApplicationControlBar width="20" height="44" x="364" y="0">
+	 </mx:ApplicationControlBar>
+	 
+	 
+	 <mx:Text id="moveText" width="594" horizontalCenter="0" height="25"
+                 text="welcome to the labx, you could press stop button,then move the objects" 
+                 fontSize="15" color="#FF0000" y="553">
+     </mx:Text>
+	 
+	 
+	 <mx:Move id="move_up" target="{moveText}" />
+	 
 </mx:Application>
