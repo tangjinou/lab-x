@@ -200,9 +200,10 @@ package
 		
 		override protected function onRenderTick(e:Event=null):void
 		{
-			easePitch += (camPitch - easePitch) * easeOut;
-           	easeYaw+= (camYaw - easeYaw) * easeOut;
-            camera.orbit(easePitch, easeYaw);   
+//			easePitch += (camPitch - easePitch) * easeOut;
+//          easeYaw+= (camYaw - easeYaw) * easeOut;
+//          camera.orbit(easePitch, easeYaw);
+			camera.orbit(camPitch, camYaw);
             StageObjectsManager.getDefault.layerManager.viewLayerChange();
 			super.onRenderTick();
 		}
