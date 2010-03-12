@@ -75,8 +75,8 @@ package
 		{
 			equipmentLayer = new ViewportLayer(viewport,null);
 			deskLayer = new ViewportLayer(viewport,null);
-			StageObjectsManager.getDefault.equipmentLayer = equipmentLayer;
-			StageObjectsManager.getDefault.deskLayer = deskLayer;
+			StageObjectsManager.getDefault.layerManager.equipmentLayer = equipmentLayer;
+			StageObjectsManager.getDefault.layerManager.deskLayer = deskLayer;
 			viewport.containerSprite.addLayer(equipmentLayer);
 			viewport.containerSprite.addLayer(deskLayer);
 			viewport.containerSprite.sortMode = ViewportLayerSortMode.INDEX_SORT;
@@ -90,10 +90,10 @@ package
 			lightSourceLayer = new ViewportLayer(viewport,null);
 			boardLayer = new ViewportLayer(viewport,null);
 			rayLayer = new ViewportLayer(viewport, null);
-			StageObjectsManager.getDefault.lensLayer = lensLayer;
-			StageObjectsManager.getDefault.lightSourceLayer = lightSourceLayer;
-			StageObjectsManager.getDefault.boardLayer = boardLayer;
-			StageObjectsManager.getDefault.rayLayer = rayLayer;
+			StageObjectsManager.getDefault.layerManager.lensLayer = lensLayer;
+			StageObjectsManager.getDefault.layerManager.lightSourceLayer = lightSourceLayer;
+			StageObjectsManager.getDefault.layerManager.boardLayer = boardLayer;
+			StageObjectsManager.getDefault.layerManager.rayLayer = rayLayer;
 			equipmentLayer.addLayer(lensLayer);
 			equipmentLayer.addLayer(lightSourceLayer);
 			equipmentLayer.addLayer(boardLayer);

@@ -81,7 +81,7 @@ package cn.edu.zju.labx.objects
 			  	lines.addLine(new Line3D(lines, lineMaterial, lineBold, lineRay.start_point, lineRay.end_point));
 			  }
 		    }
-		    StageObjectsManager.getDefault.rayLayer.addDisplayObject3D(lines, true);
+		    StageObjectsManager.getDefault.layerManager.rayLayer.addDisplayObject3D(lines, true);
 		    addChild(lines);
 	    }
         
