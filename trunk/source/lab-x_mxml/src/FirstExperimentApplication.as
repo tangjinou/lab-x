@@ -12,7 +12,6 @@ package
 	
 	import flash.events.Event;
 	import flash.events.MouseEvent;
-	
 	import flash.filters.BlurFilter;
 	import flash.filters.DropShadowFilter;
 	import flash.filters.GlowFilter;
@@ -61,6 +60,10 @@ package
 			super(viewportWidth, viewportHeight, true, false, CameraType.FREE);
 			viewport.interactive = true;
 			camera.zoom = 90;
+			/**
+			 *  set the mainView here ,if not it will make some problems
+			 */ 
+			StageObjectsManager.getDefault.mainView = this;
 			
 			createTopLevelViewportLayers();
 			createSecondLevelViewportLayers();
@@ -200,15 +203,7 @@ package
 			easePitch += (camPitch - easePitch) * easeOut;
            	easeYaw+= (camYaw - easeYaw) * easeOut;
             camera.orbit(easePitch, easeYaw);   
-            if (camera.y < originPivot.y)
-            {
-            	equipmentLayer.layerIndex = 1;
-				deskLayer.layerIndex = 2;
-            }else
-            {
-            	equipmentLayer.layerIndex = 2;
-				deskLayer.layerIndex = 1;
-            }
+            StageObjectsManager.getDefault.layerManager.viewLayerChange();
 			super.onRenderTick();
 		}
 		
