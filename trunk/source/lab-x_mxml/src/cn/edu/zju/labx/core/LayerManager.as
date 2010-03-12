@@ -31,8 +31,10 @@ package cn.edu.zju.labx.core
 			return instance;
 		}
 		
+		/***
+		 *  It will be called in onRenderTick
+		 */ 
 		public function viewLayerChange():void{
-		    
 		    
 		  if (StageObjectsManager.getDefault.mainView.camera.y < StageObjectsManager.getDefault.originPivot.y)
             {
