@@ -70,7 +70,8 @@
 	 <mx:Button  label="zoom-" click="StageObjectsManager.getDefault.mainView.camera.zoom--" icon="@Embed('../assets/icon/zoom_min.png')" x="476" y="554"/>
 	 <mx:CheckBox id="lens_checkBox" selected="true" x="681" y="30" label="凸透镜" width="109" color="#B4ADA4" fontSize="12" change="checkBoxChanged()"/>
 	 <mx:CheckBox id="lens_checkBox2" selected="true" x="681" y="9" label="凹透镜" width="109" color="#B4ADA4" fontSize="12" change="checkBoxChanged2()"/>
-	 <mx:Panel y="445" width="192" height="155" layout="absolute" color="#070707" horizontalCenter="394" borderColor="#050404">
+	 <mx:Panel y="30" width="208" height="126" layout="absolute" color="#070707" horizontalCenter="0" borderColor="#67F509" alpha="0.79">
 	 </mx:Panel>
-	 <local:BoardView id="boardView"/>
+	 <mx:ApplicationControlBar width="20" height="44" x="490" y="0">
+	 </mx:ApplicationControlBar>
 </mx:Application>
