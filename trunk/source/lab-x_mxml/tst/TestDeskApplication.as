@@ -1,16 +1,18 @@
 package
 {
+	import cn.edu.zju.labx.objects.SplitterBeam;
+	
 	import flash.events.Event;
 	import flash.events.MouseEvent;
 	
 	import org.papervision3d.cameras.CameraType;
+	import org.papervision3d.events.FileLoadEvent;
 	import org.papervision3d.lights.PointLight3D;
 	import org.papervision3d.materials.shadematerials.PhongMaterial;
 	import org.papervision3d.objects.DisplayObject3D;
+	import org.papervision3d.objects.parsers.DAE;
 	import org.papervision3d.objects.primitives.Cylinder;
 	import org.papervision3d.view.BasicView;
-	import org.papervision3d.objects.parsers.DAE;
-	import org.papervision3d.events.FileLoadEvent;
 	
 	public class TestDeskApplication extends BasicView
 	{
@@ -92,7 +94,13 @@ package
 			zAxis = new Cylinder(shadeMaterialZ, 5, 200);
 			zAxis.moveForward(100);
 			zAxis.pitch(90);
-			originPivot.addChild(zAxis);		
+			originPivot.addChild(zAxis);
+			
+			
+			var shadeMaterialLens:PhongMaterial = new PhongMaterial(light,0xFFFFFF,0x6ccff8,100);
+			shadeMaterialLens.interactive = true;
+			var beam:SplitterBeam =new SplitterBeam(shadeMaterialLens);
+			originPivot.addChild(beam);		
 			
 		}
 		
