@@ -22,7 +22,6 @@ package
 	import org.papervision3d.objects.parsers.DAE;
 	import org.papervision3d.view.BasicView;
 	import org.papervision3d.view.layer.ViewportLayer;
-	import org.papervision3d.view.layer.util.ViewportLayerSortMode;
 	
 	public class FirstExperimentApplication extends BasicView
 	{
@@ -47,10 +46,6 @@ package
 	
 		private var deskLayer:ViewportLayer;
 		private var equipmentLayer:ViewportLayer;
-		private var lensLayer:ViewportLayer;
-		private var lightSourceLayer:ViewportLayer;
-		private var boardLayer:ViewportLayer;
-		private var rayLayer:ViewportLayer;
 		
 		public function FirstExperimentApplication(viewportWidth:Number=LabXConstant.STAGE_WIDTH, viewportHeight:Number=LabXConstant.STAGE_HEIGHT, scaleToStage:Boolean=true, interactive:Boolean=false, cameraType:String="Target")
 		{
@@ -61,26 +56,12 @@ package
 			 *  set the mainView here ,if not it will make some problems
 			 */ 
 			StageObjectsManager.getDefault.mainView = this;
-			
-			createTopLevelViewportLayers();
-			
+			StageObjectsManager.getDefault.layerManager.initViewportLayers();
+			deskLayer = StageObjectsManager.getDefault.layerManager.deskLayer;
+			equipmentLayer = StageObjectsManager.getDefault.layerManager.equipmentLayer;
 			createDesk();
 			createObjects();
 			startRendering();
-		}
-		
-		public function createTopLevelViewportLayers():void
-		{
-			equipmentLayer = new ViewportLayer(viewport,null);
-			deskLayer = new ViewportLayer(viewport,null);
-			StageObjectsManager.getDefault.layerManager.equipmentLayer = equipmentLayer;
-			StageObjectsManager.getDefault.layerManager.deskLayer = deskLayer;
-			viewport.containerSprite.addLayer(equipmentLayer);
-			viewport.containerSprite.addLayer(deskLayer);
-			viewport.containerSprite.sortMode = ViewportLayerSortMode.INDEX_SORT;
-			equipmentLayer.layerIndex = 1;
-			deskLayer.layerIndex = 2;
-			equipmentLayer.sortMode = ViewportLayerSortMode.Z_SORT;
 		}
 
 		
@@ -99,7 +80,6 @@ package
             desk.moveRight(LabXConstant.STAGE_WIDTH/2);
             originPivot.addChild(desk);
             deskLayer.addDisplayObject3D(desk, true);
-             //camera.lookAt(desk);  
         } 
           
 		public function createObjects():void
@@ -123,33 +103,24 @@ package
 			lightSource.moveRight(50);
 			originPivot.addChild(lightSource);
 			equipmentLayer.addDisplayObject3D(lightSource, true);
-			
 			StageObjectsManager.getDefault.addLabXObject(lightSource);
 			
 			/*Create Lens*/	
 			var shadeMaterialLens:PhongMaterial = new PhongMaterial(light,0xFFFFFF,0x6ccff8,100);
 			shadeMaterialLens.interactive = true;
-			
 			concaveLens = new ConcaveLens(shadeMaterialLens, -100);
 			concaveLens.moveRight(LabXConstant.DESK_WIDTH/3);
 			concaveLens.moveUp(concaveLens.height/2);
 			originPivot.addChild(concaveLens);
-			//equipmentLayer.addDisplayObject3D(concaveLens, true);
-			
-			
 			StageObjectsManager.getDefault.addLabXObject(concaveLens);
 			
 			/*Create second Lens*/	
 			var shadeMaterialLens2:PhongMaterial = new PhongMaterial(light,0xFFFFFF,0x6ccff8,100);
 			shadeMaterialLens2.interactive = true;
-
 			convexLens = new ConvexLens(shadeMaterialLens2, 100);
 			convexLens.moveRight(LabXConstant.DESK_WIDTH/3 + 200);
 			convexLens.moveUp(convexLens.height/2);
 			originPivot.addChild(convexLens);
-			//equipmentLayer.addDisplayObject3D(convexLens, true);
-
-			
 			StageObjectsManager.getDefault.addLabXObject(convexLens);
 			
 			/*create Board*/
