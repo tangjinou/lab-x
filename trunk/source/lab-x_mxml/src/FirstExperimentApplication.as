@@ -27,7 +27,7 @@ package
 	{
 		private var rotX:Number= 0.1; //higher is more rotation over x axis in simple orbit example
         private var rotY:Number= 0.1; //higher is more rotation over y axis in simple orbit example
-        private var camPitch:Number = 90;
+        private var camPitch:Number = 60;
         private var camYaw:Number = 270;
 
         public static  var isOrbiting:Boolean;
