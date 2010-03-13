@@ -71,12 +71,12 @@
 	 </mx:Script>
 	 <local:FirstExperimentApplication id="firstExperiment" x="0" y="0" />
      <mx:VBox horizontalGap="10" verticalAlign="bottom" x="937" y="10">
-     <mx:Button  click="open_stage_rotate()" icon="@Embed('../assets/icon/open_stage_rotate.png')"  toolTip="open_stage_rotate" />
-	 <mx:Button  click="close_stage_rotate()" icon="@Embed('../assets/icon/stop.png')" toolTip="close_stage_rotate"/>
-	 <mx:Button  click="StageObjectsManager.getDefault.mainView.camera.zoom++" icon="@Embed('../assets/icon/zoom_add.png')" toolTip="zoom+"/>
-	 <mx:Button  click="StageObjectsManager.getDefault.mainView.camera.zoom--" icon="@Embed('../assets/icon/zoom_min.png')" toolTip="zoom-"/>
-     <mx:Button  id="rotate_left" enabled="false" icon="@Embed('../assets/icon/rotate_left.png')"  disabledIcon="@Embed('../assets/icon/rotate_left_disable.png')"  toolTip="rotate left"/>
-     <mx:Button  id="rotate_right" enabled="false" icon="@Embed('../assets/icon/rotate_right.png')" disabledIcon="@Embed('../assets/icon/rotate_right_disable.png')" toolTip="rotate right"/>
+     <mx:Button  click="open_stage_rotate()"  icon="@Embed('../assets/icon/open_stage_rotate.png')"  toolTip="open_stage_rotate" />
+	 <mx:Button  click="close_stage_rotate()" icon="@Embed('../assets/icon/stop.png')"  toolTip="close_stage_rotate"/>
+	 <mx:Button  buttonDown="StageObjectsManager.getDefault.mainView.camera.zoom++" autoRepeat="true" icon="@Embed('../assets/icon/zoom_add.png')" toolTip="zoom+"/>
+	 <mx:Button  buttonDown="StageObjectsManager.getDefault.mainView.camera.zoom--" autoRepeat="true" icon="@Embed('../assets/icon/zoom_min.png')" toolTip="zoom-"/>
+     <mx:Button  buttonDown="StageObjectsManager.getDefault.rotate_left()"  autoRepeat="true" id="rotate_left" enabled="false" icon="@Embed('../assets/icon/rotate_left.png')"  disabledIcon="@Embed('../assets/icon/rotate_left_disable.png')"  toolTip="rotate left"/>
+     <mx:Button  buttonDown="StageObjectsManager.getDefault.rotate_right()"  autoRepeat="true" id="rotate_right" enabled="false" icon="@Embed('../assets/icon/rotate_right.png')" disabledIcon="@Embed('../assets/icon/rotate_right_disable.png')" toolTip="rotate right"/>
      </mx:VBox>
 	 
 	 <mx:VBox horizontalGap="10" verticalAlign="bottom" x="929" y="536">

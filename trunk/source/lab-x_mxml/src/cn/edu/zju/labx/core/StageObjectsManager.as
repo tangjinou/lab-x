@@ -278,15 +278,21 @@ package cn.edu.zju.labx.core
 		 public var rotate_left_button:Button;
 		 
 		 
+		 private var labXObjectSelected:LabXObject;
+		 
 		 public function objectPressHandlerHook(event:InteractiveScene3DEvent,labXObject:LabXObject):void{
 		       rotate_right_button.enabled=true;
 		       rotate_left_button.enabled=true;
+		       labXObjectSelected = labXObject;
 		 } 
 		 
 		 
 		 public function objectUnPressHandler():void{
-		    rotate_right_button.enabled=false;
-		    rotate_left_button.enabled=false;
+		 	
+		 	   if(labXObjectSelected == null){
+		       rotate_right_button.enabled=false;
+		       rotate_left_button.enabled=false;
+		       }
 		 }
 		 
 		
@@ -296,6 +302,26 @@ package cn.edu.zju.labx.core
 		public function get layerManager():LayerManager{
 		
 		   return LayerManager.getDefault;
+		}
+		
+		
+		public function rotate_left():void{
+//		   if(labXObjectSelected!=null&&UserInputHandler.getDefault.currentSelectedObject!=null){
+		   if(labXObjectSelected!=null){
+		     labXObjectSelected.rotationY++;
+		   }
+		   else{
+//		     this.originPivot.rotationY++;
+		   }
+		}
+		
+		public function rotate_right():void{
+//		   if(labXObjectSelected!=null&&UserInputHandler.getDefault.currentSelectedObject!=null){
+           if(labXObjectSelected!=null){
+		     labXObjectSelected.rotationY--;
+		   }else{
+//		     this.originPivot.rotationY--;
+		   }
 		}
 		
 //	    private var labXObjectListener:LabXObject =null;
