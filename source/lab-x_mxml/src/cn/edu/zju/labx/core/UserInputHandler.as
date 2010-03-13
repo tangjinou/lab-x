@@ -97,6 +97,10 @@ package cn.edu.zju.labx.core{
 			}
 		}
 		
+		public function get currentSelectedObject():IUserInputListener{
+		   return this._currentSelectedObject;
+		}
+		
 		/**
 		 * **********************************************************************
 		 * *************KeyBoard Handle Part    ************************************
