@@ -128,6 +128,7 @@ package
 			beam.moveRight(LabXConstant.DESK_WIDTH/5);
 			beam.moveUp(beam.height/2);
 			originPivot.addChild(beam);
+			equipmentLayer.addDisplayObject3D(beam, true);
 			StageObjectsManager.getDefault.addLabXObject(beam);
 			
 			
