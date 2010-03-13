@@ -8,6 +8,7 @@ package
 	import cn.edu.zju.labx.objects.ConvexLens;
 	import cn.edu.zju.labx.objects.Lens;
 	import cn.edu.zju.labx.objects.LightSource;
+	import cn.edu.zju.labx.objects.SplitterBeam;
 	import cn.edu.zju.labx.utils.ResourceManager;
 	
 	import flash.display.Bitmap;
@@ -119,6 +120,17 @@ package
 			var imgLoader:Loader = new Loader();
 			imgLoader.contentLoaderInfo.addEventListener(Event.COMPLETE,loadLightSourceTextureComplete);
 			imgLoader.load(new URLRequest("../assets/textures/metal.jpg"));
+			
+			/*Create SplitterBeam*/
+			var shadeMaterialLens:PhongMaterial = new PhongMaterial(light,0xFFFFFF,0x6ccff8,100);
+			shadeMaterialLens.interactive = true;
+			var beam:SplitterBeam =new SplitterBeam(shadeMaterialLens);
+			beam.moveRight(LabXConstant.DESK_WIDTH/5);
+			beam.moveUp(beam.height/2);
+			originPivot.addChild(beam);
+			StageObjectsManager.getDefault.addLabXObject(beam);
+			
+			
 			
 			/*Create Lens*/	
 			var shadeMaterialLens:PhongMaterial = new PhongMaterial(light,0xFFFFFF,0x6ccff8,100);
