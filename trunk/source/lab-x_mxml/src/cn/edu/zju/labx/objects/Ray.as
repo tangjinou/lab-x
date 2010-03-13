@@ -7,8 +7,12 @@ package cn.edu.zju.labx.objects
 	import org.papervision3d.core.geom.renderables.Vertex3D;
 	import org.papervision3d.core.proto.MaterialObject3D;
 	import org.papervision3d.materials.special.LineMaterial;
-	
+	import org.papervision3d.view.layer.ViewportLayer;
+		
 	import cn.edu.zju.labx.core.StageObjectsManager;
+	import flash.filters.BlurFilter;
+	import flash.filters.DropShadowFilter;
+	import flash.filters.GlowFilter;
 	
 	/**
 	 * Ray is a LabX Object represent the light transform between LabXObjects
@@ -81,7 +85,14 @@ package cn.edu.zju.labx.objects
 			  	lines.addLine(new Line3D(lines, lineMaterial, lineBold, lineRay.start_point, lineRay.end_point));
 			  }
 		    }
-		    StageObjectsManager.getDefault.layerManager.rayLayer.addDisplayObject3D(lines, true);
+		    var effectLayer:ViewportLayer = new ViewportLayer(StageObjectsManager.getDefault.mainView.viewport, null);
+			effectLayer.addDisplayObject3D(lines, true);
+			var bf:BlurFilter = new BlurFilter(3,3,1);
+			var growFilter_2:GlowFilter = new GlowFilter(0x00ffff, 2, 20, 10, 2, 3, true, false);
+			var growFilter_b_2:GlowFilter = new GlowFilter(0x00ffff, 2, 16, 10, 3, 9, false, false);
+			var dropShadow_2:DropShadowFilter = new DropShadowFilter(0, 360, 0x000fff, 1, 70, 70, 5, 3, false, false, false);
+			effectLayer.filters = [growFilter_2,growFilter_b_2,dropShadow_2];
+			StageObjectsManager.getDefault.layerManager.equipmentLayer.addLayer(effectLayer);
 		    addChild(lines);
 	    }
         
