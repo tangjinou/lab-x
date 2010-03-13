@@ -10,14 +10,20 @@ package
 	import cn.edu.zju.labx.objects.LightSource;
 	import cn.edu.zju.labx.utils.ResourceManager;
 	
+	import flash.display.Bitmap;
+	import flash.display.Loader;
 	import flash.events.Event;
 	import flash.events.MouseEvent;
+	import flash.net.URLRequest;
 	
 	import org.papervision3d.cameras.CameraType;
 	import org.papervision3d.core.utils.virtualmouse.VirtualMouseMouseEvent;
 	import org.papervision3d.events.FileLoadEvent;
 	import org.papervision3d.lights.PointLight3D;
 	import org.papervision3d.materials.shadematerials.PhongMaterial;
+	import org.papervision3d.materials.BitmapMaterial;
+	import org.papervision3d.materials.shaders.ShadedMaterial;
+	import org.papervision3d.materials.shaders.PhongShader;
 	import org.papervision3d.objects.DisplayObject3D;
 	import org.papervision3d.objects.parsers.DAE;
 	import org.papervision3d.view.BasicView;
@@ -81,6 +87,21 @@ package
             deskLayer.addDisplayObject3D(desk, true);
         } 
           
+        private function loadLightSourceTextureComplete(evt:Event):void
+        {
+        	var bitmap:Bitmap = evt.target.content as Bitmap;
+			var bitmapMaterial:BitmapMaterial = new BitmapMaterial(bitmap.bitmapData);
+//			var shader:PhongShader = new PhongShader(light,0xFFFFFF,0x464646,100);
+//			var shadedMaterial:ShadedMaterial = new ShadedMaterial(bitmapMaterial, shader);
+			bitmapMaterial.interactive = true;
+			var lightSource:LightSource = new LightSource(bitmapMaterial);
+			lightSource.moveUp(lightSource.height/2);	
+			lightSource.moveRight(50);
+			originPivot.addChild(lightSource);
+			equipmentLayer.addDisplayObject3D(lightSource, true);
+			StageObjectsManager.getDefault.addLabXObject(lightSource);
+        	
+        }
 		public function createObjects():void
 		{
 			originPivot = new DisplayObject3D();
@@ -95,14 +116,9 @@ package
 
 			
 			/*Create lightSource*/
-			var shadeMaterial:PhongMaterial = new PhongMaterial(light,0xFFFFFF,0x6ccff8,100);
-			shadeMaterial.interactive = true;
-			var lightSource:LightSource = new LightSource(shadeMaterial);
-			lightSource.moveUp(lightSource.height/2);	
-			lightSource.moveRight(50);
-			originPivot.addChild(lightSource);
-			equipmentLayer.addDisplayObject3D(lightSource, true);
-			StageObjectsManager.getDefault.addLabXObject(lightSource);
+			var imgLoader:Loader = new Loader();
+			imgLoader.contentLoaderInfo.addEventListener(Event.COMPLETE,loadLightSourceTextureComplete);
+			imgLoader.load(new URLRequest("../assets/textures/metal.jpg"));
 			
 			/*Create Lens*/	
 			var shadeMaterialLens:PhongMaterial = new PhongMaterial(light,0xFFFFFF,0x6ccff8,100);
