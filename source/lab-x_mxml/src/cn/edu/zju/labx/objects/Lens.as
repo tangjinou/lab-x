@@ -178,7 +178,7 @@ package cn.edu.zju.labx.objects
 //			this.useOwnContainer = true;
 			var effectLayer:ViewportLayer = new ViewportLayer(StageObjectsManager.getDefault.mainView.viewport, null);
 			effectLayer.addDisplayObject3D(this, true);
-//			effectLayer.alpha = 1;
+			effectLayer.alpha = 0.7;
 			effectLayer.blendMode = BlendMode.HARDLIGHT;
 			StageObjectsManager.getDefault.layerManager.equipmentLayer.addLayer(effectLayer);
         } 
