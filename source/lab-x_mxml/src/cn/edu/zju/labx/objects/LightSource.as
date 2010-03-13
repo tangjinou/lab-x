@@ -18,6 +18,7 @@ package cn.edu.zju.labx.objects
 	import org.papervision3d.events.InteractiveScene3DEvent;
 	import org.papervision3d.materials.utils.MaterialsList;
 	import org.papervision3d.objects.parsers.DAE;
+	import org.papervision3d.view.layer.ViewportLayer;
 
 	public class LightSource extends LabXObject implements IUserInputListener, IRayMaker
 	{
@@ -121,7 +122,10 @@ package cn.edu.zju.labx.objects
 	    private function daeFileOnloaded(evt:FileLoadEvent):void{  
 	    	addChild(light);  
 //			trace(light.childrenList());
-			this.useOwnContainer = true;
+			var effectLayer:ViewportLayer = new ViewportLayer(StageObjectsManager.getDefault.mainView.viewport, null);
+			effectLayer.addDisplayObject3D(this, true);
+			StageObjectsManager.getDefault.layerManager.equipmentLayer.addLayer(effectLayer);
+
 			light.getChildByName("COLLADA_Scene").getChildByName("Cylinder01").addEventListener(InteractiveScene3DEvent.OBJECT_PRESS, objectPressHandler);
             light.getChildByName("COLLADA_Scene").getChildByName("Cylinder02").addEventListener(InteractiveScene3DEvent.OBJECT_PRESS, objectPressHandler);
         } 
