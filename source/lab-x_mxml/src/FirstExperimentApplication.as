@@ -132,7 +132,6 @@ package
 			StageObjectsManager.getDefault.addLabXObject(beam);
 			
 			
-			
 			/*Create Lens*/	
 			var shadeMaterialLens:PhongMaterial = new PhongMaterial(light,0xFFFFFF,0x6ccff8,100);
 			shadeMaterialLens.interactive = true;
