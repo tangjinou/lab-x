@@ -1,12 +1,14 @@
 package cn.edu.zju.labx.core{
 	
 	import cn.edu.zju.labx.events.IUserInputListener;
+	import cn.edu.zju.labx.objects.LabXObject;
 	
 	import flash.events.KeyboardEvent;
 	import flash.events.MouseEvent;
 	import flash.ui.Keyboard;
 	
 	import org.papervision3d.core.utils.virtualmouse.VirtualMouseMouseEvent;
+	import org.papervision3d.events.InteractiveScene3DEvent;
 
 	public class UserInputHandler 
 	{	
@@ -31,7 +33,20 @@ package cn.edu.zju.labx.core{
 			return instance;
 		}
 		
-		
+		/**
+		 *  This is hook for objectPress
+		 */ 
+	    public function objectPressHandlerHook(event:InteractiveScene3DEvent,labXObject:LabXObject):void{
+	    	StageObjectsManager.getDefault.objectPressHandlerHook(event,labXObject);
+	    }
+	    
+	    /**
+	    *   This is hook for not press no the labx objects
+	    */ 
+	    public function objectUnPressHandlerHook():void{
+	    	StageObjectsManager.getDefault.objectUnPressHandler();
+	    }
+	    
 		
 		/**
 		 * **********************************************************************
@@ -42,18 +57,22 @@ package cn.edu.zju.labx.core{
 		
 		public function set currentSelectedObject(currentObject:IUserInputListener):void {
 			this._currentSelectedObject = currentObject;
+			
 		}
 		
 		public function mouseDownHandler (e:MouseEvent):void
 		{
 			if (e is VirtualMouseMouseEvent)
-			{
+			{   
+				objectUnPressHandlerHook();
 				return;
 			}
-			if (this._currentSelectedObject != null)
+			if (this._currentSelectedObject != null && StageObjectsManager.getDefault.rotate_stage==false)
 			{
 				this._currentSelectedObject.hanleUserInputEvent(e);
+				return;
 			}
+			objectUnPressHandlerHook();
 		}
 		
 		public function mouseUpHandler (e:MouseEvent):void
@@ -67,7 +86,7 @@ package cn.edu.zju.labx.core{
 				this._currentSelectedObject.hanleUserInputEvent(e);
 				this._currentSelectedObject = null;
 			}else{
-				FirstExperimentApplication.isOrbiting=false;
+				StageObjectsManager.getDefault.isOrbiting=false;
 			}
 		}
 		

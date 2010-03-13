@@ -30,7 +30,6 @@ package
         private var camPitch:Number = 60;
         private var camYaw:Number = 270;
 
-        public static  var isOrbiting:Boolean;
         private var previousMouseX:Number;
         private var previousMouseY:Number;
         private var easePitch:Number = 90;
@@ -149,17 +148,15 @@ package
 		public function onMouseDown(e:MouseEvent):void
         {
         	if (e is VirtualMouseMouseEvent)return;
-            isOrbiting = true;
+            StageObjectsManager.getDefault.isOrbiting = true;
             previousMouseX = e.stageX;
             previousMouseY = e.stageY;
-            if(StageObjectsManager.getDefault.rotate_stage==false){
-                UserInputHandler.getDefault.mouseDownHandler(e);
-            }
+            UserInputHandler.getDefault.mouseDownHandler(e);
         }
         public function onMouseUp(e:MouseEvent):void
         {
         	if (e is VirtualMouseMouseEvent)return;
-             isOrbiting = false;
+             StageObjectsManager.getDefault.isOrbiting = false;
         }
         
 		public function onMouseMove(e:MouseEvent):void
@@ -167,7 +164,7 @@ package
         	if (e is VirtualMouseMouseEvent || (!e.buttonDown))return;
              var differenceX:Number = e.stageX - previousMouseX;
              var differenceY:Number = e.stageY - previousMouseY;
-             if(isOrbiting==true && StageObjectsManager.getDefault.rotate_stage==true){
+             if(StageObjectsManager.getDefault.isOrbiting==true && StageObjectsManager.getDefault.rotate_stage==true){
                 camPitch += differenceY;
                 camYaw += differenceX;
   				//clamp pitch

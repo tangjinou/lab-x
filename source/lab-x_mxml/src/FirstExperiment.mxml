@@ -14,6 +14,9 @@
 	 		   message_box.text="公告栏";
 //	 		   StageObjectsManager.getDefault.mainView=firstExperiment;	
 	 		   StageObjectsManager.getDefault.messageBox=message_box;
+	 		   StageObjectsManager.getDefault.rotate_left_button=rotate_left;
+	 		   StageObjectsManager.getDefault.rotate_right_button=rotate_right;
+	 		   
 	 		   Mouse3D.enabled = true;
 	 		   firstExperiment.viewport.interactive = true; 
 	 		   var uic:UIComponent = new UIComponent();
@@ -72,6 +75,8 @@
 	 <mx:Button  click="close_stage_rotate()" icon="@Embed('../assets/icon/stop.png')" toolTip="close_stage_rotate"/>
 	 <mx:Button  click="StageObjectsManager.getDefault.mainView.camera.zoom++" icon="@Embed('../assets/icon/zoom_add.png')" toolTip="zoom+"/>
 	 <mx:Button  click="StageObjectsManager.getDefault.mainView.camera.zoom--" icon="@Embed('../assets/icon/zoom_min.png')" toolTip="zoom-"/>
+     <mx:Button  id="rotate_left" enabled="false" icon="@Embed('../assets/icon/rotate_left.png')"  disabledIcon="@Embed('../assets/icon/rotate_left_disable.png')"  toolTip="rotate left"/>
+     <mx:Button  id="rotate_right" enabled="false" icon="@Embed('../assets/icon/rotate_right.png')" disabledIcon="@Embed('../assets/icon/rotate_right_disable.png')" toolTip="rotate right"/>
      </mx:VBox>
 	 
 	 <mx:VBox horizontalGap="10" verticalAlign="bottom" x="929" y="536">
@@ -99,7 +104,5 @@
                  fontSize="15" color="#FF0000" y="553">
      </mx:Text>
 	 
-	 
 	 <mx:Move id="move_up" target="{moveText}" />
-	 
 </mx:Application>

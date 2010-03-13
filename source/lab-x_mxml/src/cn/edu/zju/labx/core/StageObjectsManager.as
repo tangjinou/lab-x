@@ -7,8 +7,10 @@ package cn.edu.zju.labx.core
 	
 	import mx.collections.ArrayCollection;
 	import mx.collections.Sort;
+	import mx.controls.Button;
 	import mx.controls.TextArea;
 	
+	import org.papervision3d.events.InteractiveScene3DEvent;
 	import org.papervision3d.objects.DisplayObject3D;
 	import org.papervision3d.view.BasicView;
 	
@@ -44,6 +46,11 @@ package cn.edu.zju.labx.core
         */  
         public  var originPivot:DisplayObject3D;
         
+        
+        /**
+        *  This is for basicview rotate
+        **/
+        public  var isOrbiting:Boolean;
 		
 		/**
 		 * Get the current mouse X axis position, coordinate is start from left-bottom of the main view
@@ -257,6 +264,31 @@ package cn.edu.zju.labx.core
 		 public function clearMessage(msg:String):void{
 		    messageBox.text="公告栏";
 		 }
+		 
+		 
+		 
+		 /**
+		 *  This is rotate_right button in the view
+		 **/
+		 public var rotate_right_button:Button;
+		 
+		 /**
+		 *  This is rotate_left button in the view
+		 **/
+		 public var rotate_left_button:Button;
+		 
+		 
+		 public function objectPressHandlerHook(event:InteractiveScene3DEvent,labXObject:LabXObject):void{
+		       rotate_right_button.enabled=true;
+		       rotate_left_button.enabled=true;
+		 } 
+		 
+		 
+		 public function objectUnPressHandler():void{
+		    rotate_right_button.enabled=false;
+		    rotate_left_button.enabled=false;
+		 }
+		 
 		
 		/****
 		 *   we could get layerManager, layerManager is also a singleton

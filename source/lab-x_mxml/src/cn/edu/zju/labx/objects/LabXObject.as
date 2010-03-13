@@ -37,8 +37,11 @@ package cn.edu.zju.labx.objects
 			if (instanceOf(IUserInputListener)) {
 				UserInputHandler.getDefault.currentSelectedObject = this as IUserInputListener;
 //				this.x = StageObjectsManager.getDefault.getMouse_x()-LabXConstant.STAGE_WIDTH/2;
+                UserInputHandler.getDefault.objectPressHandlerHook(event,this);
 			}
 		}
+		
+		
 		
 		/**
 		 * Get the object X axis in screen coordiate
