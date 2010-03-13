@@ -1,7 +1,9 @@
 package cn.edu.zju.labx.core
 {
+	import org.papervision3d.view.Viewport3D;
 	import org.papervision3d.view.layer.ViewportLayer;
-	   
+	import org.papervision3d.view.layer.util.ViewportLayerSortMode;
+	
 	/***
     * 
     *  Definition for different viewport layers for z-sorting ,should be newed in main application;
@@ -12,11 +14,6 @@ package cn.edu.zju.labx.core
         public var deskLayer:ViewportLayer;
 		public var equipmentLayer:ViewportLayer;
 		
-		/** second level layers **/
-		public var lensLayer:ViewportLayer;
-		public var lightSourceLayer:ViewportLayer;
-		public var boardLayer:ViewportLayer;
-		public var rayLayer:ViewportLayer;
        
        	/*************************************************************************
 		 * Sigleton Method to make sure there are only one LayerManager 
@@ -46,6 +43,19 @@ package cn.edu.zju.labx.core
 				deskLayer.layerIndex = 1;
             }
 		
+		}
+		
+		public function initViewportLayers():void
+		{
+			var viewport:Viewport3D = StageObjectsManager.getDefault.mainView.viewport;
+			equipmentLayer = new ViewportLayer(viewport, null);
+			deskLayer = new ViewportLayer(viewport, null);
+			viewport.containerSprite.addLayer(equipmentLayer);
+			viewport.containerSprite.addLayer(deskLayer);
+			viewport.containerSprite.sortMode = ViewportLayerSortMode.INDEX_SORT;
+			equipmentLayer.layerIndex = 1;
+			deskLayer.layerIndex = 2;
+			equipmentLayer.sortMode = ViewportLayerSortMode.Z_SORT;
 		}
 	}
 }
