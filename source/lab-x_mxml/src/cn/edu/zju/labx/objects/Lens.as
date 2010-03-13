@@ -15,7 +15,7 @@ package cn.edu.zju.labx.objects
 	import flash.events.Event;
 	import flash.events.KeyboardEvent;
 	import flash.events.MouseEvent;
-	
+	import flash.display.BlendMode;
 	import mx.collections.ArrayCollection;
 	
 	import org.papervision3d.core.math.Number3D;
@@ -24,7 +24,8 @@ package cn.edu.zju.labx.objects
 	import org.papervision3d.events.InteractiveScene3DEvent;
 	import org.papervision3d.materials.utils.MaterialsList;
 	import org.papervision3d.objects.parsers.DAE;
-	
+	import org.papervision3d.view.layer.ViewportLayer;
+		
 	public class Lens extends LabXObject implements ILabXListener ,IUserInputListener, IRayMaker
 	{   
 		private var _ray:Ray  = null;
@@ -170,6 +171,16 @@ package cn.edu.zju.labx.objects
 		}
 		
 	    protected function daeFileOnloaded(evt:FileLoadEvent):void{  
+	    	this.addChild(lens);  
+//	        trace("beigin~~~~~~~~~~~~~");
+//			trace(lens.childrenList());
+//			trace("end~~~~~~~~~~~~~");
+//			this.useOwnContainer = true;
+			var effectLayer:ViewportLayer = new ViewportLayer(StageObjectsManager.getDefault.mainView.viewport, null);
+			effectLayer.addDisplayObject3D(this, true);
+//			effectLayer.alpha = 1;
+			effectLayer.blendMode = BlendMode.HARDLIGHT;
+			StageObjectsManager.getDefault.layerManager.equipmentLayer.addLayer(effectLayer);
         } 
 		
 	}

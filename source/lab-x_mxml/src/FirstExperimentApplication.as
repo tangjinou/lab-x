@@ -12,9 +12,6 @@ package
 	
 	import flash.events.Event;
 	import flash.events.MouseEvent;
-	import flash.filters.BlurFilter;
-	import flash.filters.DropShadowFilter;
-	import flash.filters.GlowFilter;
 	
 	import org.papervision3d.cameras.CameraType;
 	import org.papervision3d.core.utils.virtualmouse.VirtualMouseMouseEvent;
@@ -66,8 +63,6 @@ package
 			StageObjectsManager.getDefault.mainView = this;
 			
 			createTopLevelViewportLayers();
-			createSecondLevelViewportLayers();
-			createSpecialEffectsOnLayers();
 			
 			createDesk();
 			createObjects();
@@ -85,37 +80,9 @@ package
 			viewport.containerSprite.sortMode = ViewportLayerSortMode.INDEX_SORT;
 			equipmentLayer.layerIndex = 1;
 			deskLayer.layerIndex = 2;
-		}
-		
-		public function createSecondLevelViewportLayers():void
-		{
-			lensLayer = new ViewportLayer(viewport,null);
-			lightSourceLayer = new ViewportLayer(viewport,null);
-			boardLayer = new ViewportLayer(viewport,null);
-			rayLayer = new ViewportLayer(viewport, null);
-			StageObjectsManager.getDefault.layerManager.lensLayer = lensLayer;
-			StageObjectsManager.getDefault.layerManager.lightSourceLayer = lightSourceLayer;
-			StageObjectsManager.getDefault.layerManager.boardLayer = boardLayer;
-			StageObjectsManager.getDefault.layerManager.rayLayer = rayLayer;
-			equipmentLayer.addLayer(lensLayer);
-			equipmentLayer.addLayer(lightSourceLayer);
-			equipmentLayer.addLayer(boardLayer);
-			equipmentLayer.addLayer(rayLayer);
 			equipmentLayer.sortMode = ViewportLayerSortMode.Z_SORT;
 		}
-		
-		public function createSpecialEffectsOnLayers():void
-		{
-			lensLayer.alpha = 0.7;
-			//rayLayer.alpha = 0.5;
-			
-			var bf:BlurFilter = new BlurFilter(3,3,1);
-			var growFilter_2:GlowFilter = new GlowFilter(0x00ffff, 2, 20, 10, 2, 3, true, false);
-			var growFilter_b_2:GlowFilter = new GlowFilter(0x00ffff, 2, 16, 10, 3, 9, false, false);
-			var dropShadow_2:DropShadowFilter = new DropShadowFilter(0, 360, 0x000fff, 1, 70, 70, 5, 3, false, false, false);
-			rayLayer.filters = [growFilter_2,growFilter_b_2,dropShadow_2];
-			
-		}
+
 		
 		public function createDesk():void
 		{
@@ -155,7 +122,7 @@ package
 			lightSource.moveUp(lightSource.height/2);	
 			lightSource.moveRight(50);
 			originPivot.addChild(lightSource);
-			lightSourceLayer.addDisplayObject3D(lightSource, true);
+			equipmentLayer.addDisplayObject3D(lightSource, true);
 			
 			StageObjectsManager.getDefault.addLabXObject(lightSource);
 			
@@ -167,7 +134,7 @@ package
 			concaveLens.moveRight(LabXConstant.DESK_WIDTH/3);
 			concaveLens.moveUp(concaveLens.height/2);
 			originPivot.addChild(concaveLens);
-			lensLayer.addDisplayObject3D(concaveLens, true);
+			//equipmentLayer.addDisplayObject3D(concaveLens, true);
 			
 			
 			StageObjectsManager.getDefault.addLabXObject(concaveLens);
@@ -180,7 +147,7 @@ package
 			convexLens.moveRight(LabXConstant.DESK_WIDTH/3 + 200);
 			convexLens.moveUp(convexLens.height/2);
 			originPivot.addChild(convexLens);
-			lensLayer.addDisplayObject3D(convexLens, true);
+			//equipmentLayer.addDisplayObject3D(convexLens, true);
 
 			
 			StageObjectsManager.getDefault.addLabXObject(convexLens);
@@ -192,7 +159,7 @@ package
 			board.moveRight(LabXConstant.DESK_WIDTH);
 			board.moveUp(board.height/2);
             originPivot.addChild(board);
-            boardLayer.addDisplayObject3D(board, true);
+            equipmentLayer.addDisplayObject3D(board, true);
             StageObjectsManager.getDefault.addLabXObject(board);
             
 			

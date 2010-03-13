@@ -1,8 +1,7 @@
 package cn.edu.zju.labx.objects
 {
 	import cn.edu.zju.labx.core.LabXConstant;
-	
-    import cn.edu.zju.labx.utils.ResourceManager;
+	import cn.edu.zju.labx.utils.ResourceManager;
 	
 	import org.papervision3d.core.proto.MaterialObject3D;
 	import org.papervision3d.events.FileLoadEvent;
@@ -17,11 +16,7 @@ package cn.edu.zju.labx.objects
 		}
 		
 	    override protected function daeFileOnloaded(evt:FileLoadEvent):void{  
-	    	this.addChild(lens);  
-//	        trace("beigin~~~~~~~~~~~~~");
-//			trace(lens.childrenList());
-//			trace("end~~~~~~~~~~~~~");
-			this.useOwnContainer = true;
+	    	super.daeFileOnloaded(evt);
             lens.getChildByName("COLLADA_Scene").getChildByName("Sphere02").addEventListener(InteractiveScene3DEvent.OBJECT_PRESS, objectPressHandler);
             lens.getChildByName("COLLADA_Scene").getChildByName("Sphere01").addEventListener(InteractiveScene3DEvent.OBJECT_PRESS, objectPressHandler);
         } 
