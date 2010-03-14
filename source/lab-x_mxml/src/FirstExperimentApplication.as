@@ -122,9 +122,9 @@ package
 			imgLoader.load(new URLRequest("../assets/textures/metal.jpg"));
 			
 			/*Create SplitterBeam*/
-			var shadeMaterialLens:PhongMaterial = new PhongMaterial(light,0xFFFFFF,0x6ccff8,100);
-			shadeMaterialLens.interactive = true;
-			var beam:SplitterBeam =new SplitterBeam(shadeMaterialLens);
+			var shadeMaterialBeam:PhongMaterial = new PhongMaterial(light,0xFFFFFF,0x6ccff8,100);
+			shadeMaterialBeam.interactive = true;
+			var beam:SplitterBeam =new SplitterBeam(shadeMaterialBeam);
 			beam.moveRight(LabXConstant.DESK_WIDTH/5);
 			beam.moveUp(beam.height/2);
 			originPivot.addChild(beam);
