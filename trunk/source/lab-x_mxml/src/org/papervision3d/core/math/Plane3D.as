@@ -89,10 +89,13 @@ package org.papervision3d.core.math
 			return flipPlane;
 		}
 		
+		/**
+		 * NOTICE:  Modified by Rocky, it maybe not the same as In PV3D
+		 */
 		public function getIntersectionLineNumbers( v0: Number3D, v1: Number3D ): Number3D
 		{
-			var d0: Number = normal.x * v0.x + normal.y * v0.y + normal.z * v0.z - d;
-			var d1: Number = normal.x * v1.x + normal.y * v1.y + normal.z * v1.z - d;
+			var d0: Number = normal.x * v0.x + normal.y * v0.y + normal.z * v0.z + d;
+			var d1: Number = normal.x * v1.x + normal.y * v1.y + normal.z * v1.z + d;
 			var m: Number = d1 / ( d1 - d0 );
 			
 			return new Number3D(

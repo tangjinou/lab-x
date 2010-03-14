@@ -3,7 +3,7 @@ package cn.edu.zju.labx.objects
 	import cn.edu.zju.labx.core.StageObjectsManager;
 	import cn.edu.zju.labx.events.IUserInputListener;
 	import cn.edu.zju.labx.events.LabXEvent;
-	import cn.edu.zju.labx.logicObject.RayLogic;
+	import cn.edu.zju.labx.logicObject.LineRayLogic;
 	import cn.edu.zju.labx.utils.ResourceManager;
 	
 	import flash.events.Event;
@@ -11,7 +11,6 @@ package cn.edu.zju.labx.objects
 	
 	import mx.collections.ArrayCollection;
 	
-	import org.flintparticles.threeD.geom.Vector3D;
 	import org.papervision3d.core.math.Number3D;
 	import org.papervision3d.core.proto.MaterialObject3D;
 	import org.papervision3d.events.FileLoadEvent;
@@ -47,16 +46,16 @@ package cn.edu.zju.labx.objects
 		   	ray = new Ray();
 //			addChild(ray);
 			
-			var royLogic1:RayLogic = new RayLogic(new Number3D(this.x,this.y+20+5,this.z),new Vector3D(1,0,0));
+			var royLogic1:LineRayLogic = new LineRayLogic(new Number3D(this.x,this.y+20+5,this.z),new Number3D(1,0,0));
 			var lineRay1:LineRay = new LineRay(royLogic1);
 			
-			var royLogic2:RayLogic = new RayLogic(new Number3D(this.x,this.y+20-5,this.z),new Vector3D(1,0,0));
+			var royLogic2:LineRayLogic = new LineRayLogic(new Number3D(this.x,this.y+20-5,this.z),new Number3D(1,0,0));
 			var lineRay2:LineRay = new LineRay(royLogic2);
 //			
-			var royLogic3:RayLogic = new RayLogic(new Number3D(this.x,this.y+20,this.z+5),new Vector3D(1,0,0));
+			var royLogic3:LineRayLogic = new LineRayLogic(new Number3D(this.x,this.y+20,this.z+5),new Number3D(1,0,0));
 			var lineRay3:LineRay = new LineRay(royLogic3);
 			
-			var royLogic4:RayLogic = new RayLogic(new Number3D(this.x,this.y+20,this.z-5),new Vector3D(1,0,0));
+			var royLogic4:LineRayLogic = new LineRayLogic(new Number3D(this.x,this.y+20,this.z-5),new Number3D(1,0,0));
 			var lineRay4:LineRay = new LineRay(royLogic4);
 			
 			var lineRays:ArrayCollection =new ArrayCollection();
@@ -70,7 +69,7 @@ package cn.edu.zju.labx.objects
 		
 		public function getRay():Ray
 		{
-//       	 	var ray:RayLogic = new RayLogic(new Number3D(this.x, this.y, this.z), new Vector3D(1, 0, 0));
+//       	 	var ray:LineRayLogic = new LineRayLogic(new Number3D(this.x, this.y, this.z), new Vector3D(1, 0, 0));
 //       	 	var rayArray:ArrayCollection = new ArrayCollection();
 //       	 	rayArray.addItem(ray);
 //			return new Ray(null, rayArray, this.x);

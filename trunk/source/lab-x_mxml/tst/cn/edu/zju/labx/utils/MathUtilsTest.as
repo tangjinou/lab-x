@@ -1,12 +1,10 @@
 package cn.edu.zju.labx.utils
 {
 	import cn.edu.zju.labx.core.LabXConstant;
-	import cn.edu.zju.labx.logicObject.RayLogic;
 	
 	import flexunit.framework.Assert;
 	
 	import org.flexunit.asserts.assertTrue;
-	import org.flintparticles.threeD.geom.Vector3D;
 	import org.papervision3d.core.math.Number2D;
 	import org.papervision3d.core.math.Number3D;
 	
@@ -141,6 +139,93 @@ package cn.edu.zju.labx.utils
 //			
 //			var r2:RayLogic = new RayLogic(new Number3D(-20, -5, 0), new Vector3D(10, -15, 0));
 //			assertTrue(r2.isPointOnRay(new Number3D(result.x, result.y, 0)));
+		}
+		
+		[Test] 
+		public function testCalculate3DIntersaction():void
+		{
+			var a:Number3D;
+			var b:Number3D;
+			var m:Number3D;
+			var n:Number3D;
+			
+			var result:Number3D;
+			
+			a = new Number3D(0, 0, 0);
+			b = new Number3D(-1, -1, 0);
+			m = new Number3D(1, 2, 0);
+			n = new Number3D(1, 5, 0);
+			result = MathUtils.calculate3DIntersection(a, b, m, n);
+			assertTrue(Math.abs(1 - result.x) < LabXConstant.NUMBER_PRECISION);
+			assertTrue(Math.abs(1 - result.y) < LabXConstant.NUMBER_PRECISION);
+			assertTrue(Math.abs(0 - result.z) < LabXConstant.NUMBER_PRECISION);
+			
+			a = new Number3D(10, 15, 0);
+			b = new Number3D(20, 5, 0);
+			m = new Number3D(-10, -20, 0);
+			n = new Number3D(-20, -5, 0);
+			result = MathUtils.calculate3DIntersection(a, b, m, n);
+			assertTrue(Math.abs(result.x+120) < LabXConstant.NUMBER_PRECISION);
+			assertTrue(Math.abs(result.y-145) < LabXConstant.NUMBER_PRECISION);
+			
+			a = new Number3D(100, 155, 0);
+			b = new Number3D(256, 523, 0);
+			m = new Number3D(-10, -20, 0);
+			n = new Number3D(-20, -5, 0);
+			result = MathUtils.calculate3DIntersection(a, b, m, n);
+			assertTrue(Math.abs(result.x-11.893687707641192 ) < LabXConstant.NUMBER_PRECISION);
+			assertTrue(Math.abs(result.y+52.840531561461795) < LabXConstant.NUMBER_PRECISION);
+			
+			a = new Number3D(0, 100, 155);
+			b = new Number3D(0, 256, 523);
+			m = new Number3D(0, -10, -20);
+			n = new Number3D(0, -20, -5);
+			result = MathUtils.calculate3DIntersection(a, b, m, n);
+			assertTrue(Math.abs(result.y-11.893687707641192 ) < LabXConstant.NUMBER_PRECISION);
+			assertTrue(Math.abs(result.z+52.840531561461795) < LabXConstant.NUMBER_PRECISION);
+			
+		}
+		
+		[Test] 
+		public function testCalculate3DIntersaction2():void
+		{
+			var orig:Number3D = new  Number3D(34, 12, 100);
+			var v1:Number3D = new Number3D(3, 1, -4);
+			var v2:Number3D = new Number3D(-2, -15, 189);
+			
+			var a:Number3D = v1;
+			var b:Number3D = v1;
+			var m:Number3D = v2;
+			var n:Number3D = v2;
+			
+			a.multiplyEq(34);
+			a = Number3D.add(orig, a);
+			
+			b.multiplyEq(-23);
+			b = Number3D.add(orig, b);
+			
+			m.multiplyEq(6);
+			m = Number3D.add(orig, m);
+			
+			n.multiplyEq(98);
+			n = Number3D.add(orig, n);
+			
+			var result1:Number3D = MathUtils.calculate3DIntersection(a, b, m, n);
+			var result2:Number3D = MathUtils.calculate3DIntersection(b, a, n, m);
+			var result3:Number3D = MathUtils.calculate3DIntersection(n, m, a, b);
+			var result4:Number3D = MathUtils.calculate3DIntersection(m, n, b, a);
+			
+			assertTrue(Math.abs(result1.x-result2.x)<LabXConstant.NUMBER_PRECISION);
+			assertTrue(Math.abs(result2.x-result3.x)<LabXConstant.NUMBER_PRECISION);
+			assertTrue(Math.abs(result3.x-result4.x)<LabXConstant.NUMBER_PRECISION);
+			
+			assertTrue(Math.abs(result1.y-result2.y)<LabXConstant.NUMBER_PRECISION);
+			assertTrue(Math.abs(result2.y-result3.y)<LabXConstant.NUMBER_PRECISION);
+			assertTrue(Math.abs(result3.y-result4.y)<LabXConstant.NUMBER_PRECISION);
+			
+			assertTrue(Math.abs(result1.z-result2.z)<LabXConstant.NUMBER_PRECISION);
+			assertTrue(Math.abs(result2.z-result3.z)<LabXConstant.NUMBER_PRECISION);
+			assertTrue(Math.abs(result3.z-result4.z)<LabXConstant.NUMBER_PRECISION);
 		}
 		
 	}
