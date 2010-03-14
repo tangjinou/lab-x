@@ -3,111 +3,136 @@ package cn.edu.zju.labx.logicObject
 	import cn.edu.zju.labx.core.LabXConstant;
 	import cn.edu.zju.labx.utils.MathUtils;
 	
-	import org.flintparticles.threeD.geom.Vector3D;
-	import org.papervision3d.core.math.Number2D;
+	import mx.collections.ArrayCollection;
+	
 	import org.papervision3d.core.math.Number3D;
+	import org.papervision3d.core.math.Plane3D;
 	
 	/**
 	 * geom logic for lens class
-	 * We assume that the lens is parallel to Y and Z coordinary
 	 */
 	public class LensLogic
 	{
 		/**
-		 * Position of the Lens
+		 * normal of the lens
 		 */
-		private var _position:Number3D;
+		private var normal:Number3D;
+		
+		/**
+		 * position of the lens
+		 */
+		public var position:Number3D;
+		
 		/**
 		 * Focus of the lens.
 		 */
-		private var _f:Number;
+		public var f:Number;
 		
 		/**
 		 * Construct a Lens Logic object
 		 */
-		public function LensLogic(position:Number3D=null, f:Number=LabXConstant.LENS_DEFAULT_FOCAL_LENGTH)
+		public function LensLogic(position:Number3D=null, normal:Number3D=null, f:Number=LabXConstant.LENS_DEFAULT_FOCAL_LENGTH)
 		{
-			this._position = position||new Number3D();
-			this._f = f;
+			this.position = position || new Number3D();
+			this.normal = normal || new Number3D(1, 0, 0);
+			this.f = ((f == 0)?LabXConstant.LENS_DEFAULT_FOCAL_LENGTH : f);
 		}
 		
 		/**
-		 * Calculate the ray after the lens
+		 * Get the focus points of the lens.
 		 */
-		public function calculateRayAfterLens(ray:RayLogic):RayLogic {
-			var resultRay:RayLogic = new RayLogic();
-			var vector:Vector3D = ray.vector;
-			var point:Number3D = ray.point;
+		public function getFocusPoints():ArrayCollection
+		{
+			var focusPoints:ArrayCollection = new ArrayCollection();
 			
-			if (point.x == _position.x) { //if the point is on the lens
-				point.x = point.x - vector.x;
-				point.y = point.y - vector.y;
-				point.y = point.y - vector.y;
+			var d:Number3D = normal.clone();
+			d.multiplyEq(f);
+			
+			var focusPoint1:Number3D =  Number3D.add(position, d);
+			focusPoints.addItem(focusPoint1);
+			
+			d.multiplyEq(-1);
+			var focusPoint2:Number3D =  Number3D.add(position, d);
+			focusPoints.addItem(focusPoint2);
+			return focusPoints;
+		}
+		
+		/**
+		 * Calculate the ray after the lens, if the ray are not pass through the lens, return null.
+		 * otherwise, return the result ray.
+		 * 
+		 * @param   lineRay  ray to processed
+		 * 
+		 */
+		public function processRay(lineRay:LineRayLogic):LineRayLogic {
+			var rayPoint:Number3D = new Number3D(lineRay.x, lineRay.y, lineRay.z);
+			
+			var lensNormalRay:LineRayLogic = new LineRayLogic(position, normal);
+			var lensPlane:Plane3D = new Plane3D(normal, position);
+			
+			//if the ray through the center of the lens, pass through
+			if (lineRay.isPointOnRay(this.position))
+			{
+				return new LineRayLogic(position, new Number3D(lineRay.dx, lineRay.dy, lineRay.dz));
 			}
 			
-			var intersection:Number3D = new Number3D();
-			if (vector.x == 0)
+			//if the ray point on lens normal, choose another point for calculate 
+			if (lensNormalRay.isPointOnRay(rayPoint))
+			{
+				rayPoint.x -= lineRay.dx;
+				rayPoint.y -= lineRay.dy;
+				rayPoint.z -= lineRay.dz;
+			}
+			
+			//calculate the lens and ray intersection point
+			var anotherPointOnRay:Number3D = new Number3D(lineRay.x+lineRay.dx, lineRay.y+lineRay.dy, lineRay.z+lineRay.dz);
+			var intersaction:Number3D = lensPlane.getIntersectionLineNumbers(anotherPointOnRay, rayPoint);
+			
+			//if the intersaction of the ray is not on the direction of the ray, we assume that the ray is no need to processed.
+			if((intersaction.x-rayPoint.x)/lineRay.dx < 0)
 			{
 				return null;
-			}
-			intersection.x = _position.x;
-			intersection.y = ((vector.y/vector.x) * (_position.x - point.x)) + point.y;
-			intersection.z = ((vector.z/vector.x) * (_position.x - point.x)) + point.z;
-			resultRay.point = intersection;
-			
-			var xyIntersaction:Number2D = MathUtils.calculateIntersaction(new Number2D(this._position.x,point.y), new Number2D(this.position.x+this.f, this.position.y), new Number2D(point.x, point.y), new Number2D(this.position.x, this.position.y));
-			var xzIntersaction:Number2D = MathUtils.calculateIntersaction(new Number2D(this._position.x,point.z), new Number2D(this.position.x+this.f, this.position.z), new Number2D(point.x, point.z), new Number2D(this.position.x, this.position.z));
-			
-			if (xyIntersaction == null && xzIntersaction == null) {
-				resultRay.vector.x = 1;
-				resultRay.vector.y = 0;
-				resultRay.vector.z = 0;
-			}
-			else if (xyIntersaction == null) {
-				resultRay.vector.x = xzIntersaction.x-intersection.x;
-				resultRay.vector.y = 0;
-				resultRay.vector.z = xzIntersaction.y-intersection.z;
+//				rayPoint = Number3D.sub(intersaction, new Number3D(lineRay.dx, lineRay.dy, lineRay.dz));
 			} 
-			else if (xzIntersaction == null)
-			{
-				resultRay.vector.x = xyIntersaction.x-intersection.x;
-				resultRay.vector.y = xyIntersaction.y-intersection.y;
-				resultRay.vector.z = 0;
-			}
-			else
-			{
-				resultRay.vector.x = xyIntersaction.x-intersection.x;
-				resultRay.vector.y = xyIntersaction.y-intersection.y;
-				resultRay.vector.z = xzIntersaction.y-intersection.z;
-			}
 			
-			resultRay.vector  = resultRay.vector.normalize();
-			return resultRay;
+			//calculate the image point of ray point.
+			var focusPoint:Number3D = getImageFocus(rayPoint);
+			var paraPoint:Number3D = lensPlane.closestPointOnPlane(rayPoint, position);
+			
+			var resultPoint:Number3D = MathUtils.calculate3DIntersection(paraPoint, focusPoint, rayPoint, position);
+			
+
+			var vector:Number3D = Number3D.sub(resultPoint, intersaction);
+			vector.normalize();
+			if (f<0)vector.multiplyEq(-1);
+			return new LineRayLogic(intersaction, vector);
 		}
 		
 		
 		/**
-		 ****************************************************************************
-		 ******     Get and Set Part for private variables     *********************
-		 ****************************************************************************
+		 * Get the focus point in the image side
+		 * If the point is on lens plane, return null.
 		 */
-		public function get position():Number3D
+		public function getImageFocus(point:Number3D):Number3D
 		{
-			return this._position;
+			var focusPoints:ArrayCollection = getFocusPoints();
+			var p1:Number3D = focusPoints.getItemAt(0) as Number3D;
+			var p2:Number3D = focusPoints.getItemAt(1) as Number3D;
+			
+			var d1:Number = Number3D.sub(p1, point).moduloSquared;
+			var d2:Number = Number3D.sub(p2, point).moduloSquared;
+			//TODO:
+			if(f>0)
+			{
+				return (d1 > d2) ? p1 : p2;
+			}
+			else if (f < 0)
+			{
+				return (d1 > d2) ? p2 : p1;
+			}
+			
+			return null;
 		}
 		
-		public function set position(position:Number3D):void {
-			this._position = position;
-		}
-		
-		public function get f():Number
-		{
-			return this._f;
-		}
-		
-		public function set f(f:Number):void {
-			this._f = f;
-		}
-
 	}
 }

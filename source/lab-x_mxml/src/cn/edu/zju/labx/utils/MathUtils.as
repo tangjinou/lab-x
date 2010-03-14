@@ -241,5 +241,45 @@ package cn.edu.zju.labx.utils
 			
 			return result;
 		}
+		
+		
+		/**
+		  * Calculate the intersaction of two lines. we assume the 2 lines are the same plane
+		  * @usage: MathUtil.calculateIntersaction(a, b, c, d); 
+		  * 
+		  * @param a (Number3D) first point in first line
+		  * @param b (Number3D) second point in first line
+		  * @param m (Number3D) first point in first line
+		  * @param n (Number3D) second point in second line
+		  * 
+		  */
+		public static function calculate3DIntersection(a:Number3D, b:Number3D, c:Number3D, d:Number3D):Number3D
+		{
+			var v0:Number3D = Number3D.sub(b, a);
+			v0.normalize();
+			
+			var p0:Number = Number3D.dot(Number3D.sub(c, a), v0);
+			
+			//point is p = a + v*p0;
+			var tmp:Number3D = v0.clone();
+			tmp.multiplyEq(p0);
+			var conj:Number3D = Number3D.add(tmp, a);
+			
+			//normal is p - c
+			var normal:Number3D = Number3D.sub(conj, c);
+			normal.normalize();
+			
+			
+			var d0:Number = Number3D.dot(Number3D.sub(c, a), normal);
+			var d1:Number = Number3D.dot(Number3D.sub(d, a), normal);
+			
+			var m:Number = d1 / (d1 - d0);
+			
+			return new Number3D(
+					d.x + (c.x-d.x)*m,
+					d.y + (c.y-d.y)*m,
+					d.z + (c.z-d.z)*m
+			);
+		}
 	}
 }

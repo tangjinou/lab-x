@@ -7,7 +7,7 @@ package cn.edu.zju.labx.objects
 	import cn.edu.zju.labx.events.IUserInputListener;
 	import cn.edu.zju.labx.events.LabXEvent;
 	import cn.edu.zju.labx.logicObject.LensLogic;
-	import cn.edu.zju.labx.logicObject.RayLogic;
+	import cn.edu.zju.labx.logicObject.LineRayLogic;
 	import cn.edu.zju.labx.utils.ResourceManager;
 	
 	import com.greensock.*;
@@ -92,11 +92,11 @@ package cn.edu.zju.labx.objects
 			if(oldRay != null)
 			{
 				oldRay.EndX = this.x;
-				var lensLogic:LensLogic = new LensLogic(new Number3D(this.x, this.y, this.z), this._focus);
+				var lensLogic:LensLogic = new LensLogic(new Number3D(this.x, this.y, this.z), null, this._focus);
 				var newLineRays:ArrayCollection = new ArrayCollection();
 				for each (var oldLineRay:LineRay in oldRay.getLineRays())
 				{
-					var resultLogic:RayLogic = lensLogic.calculateRayAfterLens(oldLineRay.logic);
+					var resultLogic:LineRayLogic = lensLogic.processRay(oldLineRay.logic);
 					if (isRayOnLens(resultLogic))newLineRays.addItem(new LineRay(resultLogic));
 				}
 				return  new Ray(null, newLineRays, 0, 0);
@@ -104,19 +104,19 @@ package cn.edu.zju.labx.objects
 			return null;
 		}
 		
-		private function isRayOnLens(ray:RayLogic):Boolean
+		private function isRayOnLens(ray:LineRayLogic):Boolean
 		{
 			if (ray == null) return false;
-			if (Math.abs(ray.vector.x) < LabXConstant.NUMBER_PRECISION) return false;
+			if (Math.abs(ray.dx) < LabXConstant.NUMBER_PRECISION) return false;
        	 	var x:Number = this.x;
-        	var y:Number = (this.x-ray.point.x)*ray.vector.y/ray.vector.x + ray.point.y;
+        	var y:Number = (this.x-ray.x)*ray.dy/ray.dx + ray.y;
         	if (Math.abs(this.y - y) < this.height/2) return true;
         	return false;
 		}
 		
 		public function getRay():Ray
 		{
-//       	 	var ray:RayLogic = new RayLogic(new Number3D(this.x, this.y, this.z), new Vector3D(1, 0, 0)); 
+//       	 	var ray:LineRayLogic = new LineRayLogic(new Number3D(this.x, this.y, this.z), new Vector3D(1, 0, 0)); 
 			return this._ray;
 		}
 		

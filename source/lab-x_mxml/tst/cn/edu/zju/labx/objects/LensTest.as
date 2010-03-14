@@ -2,13 +2,12 @@ package cn.edu.zju.labx.objects
 {
 	import cn.edu.zju.labx.core.StageObjectsManager;
 	import cn.edu.zju.labx.events.LabXEvent;
-	import cn.edu.zju.labx.logicObject.RayLogic;
+	import cn.edu.zju.labx.logicObject.LineRayLogic;
 	
 	import flexunit.framework.TestCase;
 	
 	import mx.collections.ArrayCollection;
 	
-	import org.flintparticles.threeD.geom.Vector3D;
 	import org.papervision3d.core.math.Number3D;
 	import org.papervision3d.objects.DisplayObject3D;
 
@@ -47,8 +46,8 @@ package cn.edu.zju.labx.objects
 			var focusPoint:Number3D = new Number3D(lens.x + 20, 200, 150);
 			
 			var lineRays:ArrayCollection = new ArrayCollection();
-			lineRays.addItem(new LineRay(new RayLogic(new Number3D(0, 10, 250), new Vector3D(1, 0, 0))));
-			lineRays.addItem(new LineRay(new RayLogic(new Number3D(0, 50, 250), new Vector3D(1, 0, 0))));
+			lineRays.addItem(new LineRay(new LineRayLogic(new Number3D(0, 10, 250), new Number3D(1, 0, 0))));
+			lineRays.addItem(new LineRay(new LineRayLogic(new Number3D(0, 50, 250), new Number3D(1, 0, 0))));
 			var oldRay:Ray = new Ray(null, lineRays, 20);
 			
 			var rayMaker:MockRayMaker = new MockRayMaker()
