@@ -86,7 +86,7 @@ package cn.edu.zju.labx.objects
 		/********************************************************************/
 		/* This for find the ray if is on this object                       */
 		/*******************************************************************/
-		public var circle:Number = 30;
+		public var circle:Number = 50;
 		
 		
 		/**
