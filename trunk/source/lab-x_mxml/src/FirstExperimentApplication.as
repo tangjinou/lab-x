@@ -156,7 +156,7 @@ package
             originPivot.addChild(board);
             equipmentLayer.addDisplayObject3D(board, true);
             StageObjectsManager.getDefault.addObject(board);
-            
+            board.displayImage();
 			
 		}
 		
