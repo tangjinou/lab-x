@@ -69,13 +69,13 @@ package cn.edu.zju.labx.objects
 		
 		public function displayImage():void
 		{
-			var theta:Number = Math.PI/6;
+			var theta:Number = Math.PI/10;
 			var interf:InterferenceLogic = new InterferenceLogic(theta, LabXConstant.WAVE_LENGTH);
 			var distance:Number = interf.getDistance();
 			trace(distance);
 			
 			var bmp:BitmapData = new BitmapData(depth, height, false, 0x0);
-			distance /= 150;
+			distance /= 300;
 			var numOfColumns:Number = depth/distance/2;
 			for (var i:Number = 0; i < numOfColumns; i++)
 			{
