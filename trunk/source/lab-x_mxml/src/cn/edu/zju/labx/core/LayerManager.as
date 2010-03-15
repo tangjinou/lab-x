@@ -68,5 +68,13 @@ package cn.edu.zju.labx.core
 			var dropShadow_2:DropShadowFilter = new DropShadowFilter(0, 360, 0x000fff, 1, 70, 70, 5, 3, false, false, false);
 			rayEffect = [growFilter_2,growFilter_b_2,dropShadow_2];
 		}
+		
+		public function addRayLayer(rayLayer:ViewportLayer, eqLayer:ViewportLayer = null):void
+		{
+			rayLayer.filters = rayEffect;
+			if(eqLayer == null)
+				eqLayer = equipmentLayer;
+			eqLayer.addLayer(rayLayer);
+		}
 	}
 }

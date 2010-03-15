@@ -87,9 +87,7 @@ package cn.edu.zju.labx.objects
 		    }
 		    var effectLayer:ViewportLayer = new ViewportLayer(StageObjectsManager.getDefault.mainView.viewport, null);
 			effectLayer.addDisplayObject3D(lines, true);
-
-			effectLayer.filters = StageObjectsManager.getDefault.layerManager.rayEffect;
-			StageObjectsManager.getDefault.layerManager.equipmentLayer.addLayer(effectLayer);
+			StageObjectsManager.getDefault.layerManager.addRayLayer(effectLayer);
 		    addChild(lines);
 	    }
         
