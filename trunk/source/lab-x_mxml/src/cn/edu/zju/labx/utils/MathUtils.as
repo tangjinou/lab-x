@@ -1,5 +1,7 @@
 package cn.edu.zju.labx.utils
 {
+	import cn.edu.zju.labx.core.LabXError;
+	
 	import org.papervision3d.core.math.Matrix3D;
 	import org.papervision3d.core.math.Number2D;
 	import org.papervision3d.core.math.Number3D;
@@ -240,6 +242,55 @@ package cn.edu.zju.labx.utils
 			result.x = x1v*(result.y-y1)/y1v + x1;
 			
 			return result;
+		}
+		
+		
+		/***
+		 *  calculate the point'position in Flat based on the line
+		 * 
+		 *  @param  transform is the Flat's normals
+		 *  @param  vetor is line's vetor
+		 *  @Exception The two vectors are not in the same dirction
+		 *  @return the point's  position
+		 *   
+		 **/
+		public static function calculatePointInFlat(transform:Matrix3D,vetor:Number3D,startPoint:Number3D):Number3D{
+//		   var x0:Number = transform.n14;
+//		   var y0:Number = transform.n24;
+//		   var z0:Number = transform.n34;
+
+		   var D:Number = 0 - transform.n14*transform.n11 - transform.n24*transform.n12-transform.n34*transform.n13;
+		   var m:Number = transform.n11*vetor.x + transform.n12*vetor.y + transform.n13*vetor.z;
+		   if(!isZero(m)){
+		      var k:Number = (0 - D - startPoint.x*transform.n11 -startPoint.y*transform.n12 -startPoint.z*transform.n13)/m
+		      
+		      var resultPoint:Number3D = new Number3D(vetor.x*k+startPoint.x,vetor.y*k+startPoint.y,vetor.z*k+startPoint.z);
+		      
+		      if(isVetorTheSameDirection(vetor,Number3D.sub(resultPoint,startPoint))){
+		         return resultPoint;
+		      }
+		      throw new LabXError("The two vectors are not in the same dirction");
+		      
+		   }
+           throw new LabXError("");
+		}
+		
+		public static function isZero(number:Number):Boolean{
+		   if(Math.abs(number)<0.000001){
+		      return true;
+		   }
+		   return false;
+		}
+		
+		
+		/***
+		 *   @return  if the two vector is the same direction, return true
+		 */ 
+		public static function isVetorTheSameDirection(v1:Number3D,v2:Number3D):Boolean{
+           if(Number3D.dot(v1,v2)>0){
+              return true;
+           }
+           return false;		   
 		}
 		
 		

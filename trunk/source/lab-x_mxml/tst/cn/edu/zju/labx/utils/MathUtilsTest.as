@@ -5,6 +5,7 @@ package cn.edu.zju.labx.utils
 	import flexunit.framework.Assert;
 	
 	import org.flexunit.asserts.assertTrue;
+	import org.papervision3d.core.math.Matrix3D;
 	import org.papervision3d.core.math.Number2D;
 	import org.papervision3d.core.math.Number3D;
 	
@@ -141,6 +142,101 @@ package cn.edu.zju.labx.utils
 //			assertTrue(r2.isPointOnRay(new Number3D(result.x, result.y, 0)));
 		}
 		
+		[Test]
+		public function testCalculatePointInFlat():void {
+			var transform:Matrix3D = new Matrix3D();
+			transform.n14 = 1;
+			/*
+			* 1		0		0		1
+            * 0		1		0		0
+			* 0		0		1		0
+			* 0		0		0		1
+            */
+		    
+		    var line:Number3D;
+		    var startPoint:Number3D;
+		    var result:Number3D;
+		    
+		    line = new Number3D(-2,2,0);
+		    startPoint = new Number3D(2,0,0);
+		    result = MathUtils.calculatePointInFlat(transform,line,startPoint);
+		    Assert.assertNotNull(result);
+		    Assert.assertEquals(result.x,1);
+		    Assert.assertEquals(result.y,1);
+		    Assert.assertEquals(result.z,0);
+		    
+		    line = new Number3D(-3,3,0);
+		    startPoint = new Number3D(3,0,0);
+		    result = MathUtils.calculatePointInFlat(transform,line,startPoint);
+		    Assert.assertNotNull(result);
+		    Assert.assertEquals(result.x,1);
+		    Assert.assertEquals(result.y,2);
+		    Assert.assertEquals(result.z,0);
+		    
+		    try{
+		      line = new Number3D(1,0,0);
+		      startPoint = new Number3D(2,0,0);
+		      result = MathUtils.calculatePointInFlat(transform,line,startPoint);
+            } catch (err:Error){
+               Assert.assertTrue(err is Error);            
+            }
+		    
+		    
+		    line = new Number3D(2,2,0);
+		    startPoint = new Number3D(-1,0,0);
+		    result = MathUtils.calculatePointInFlat(transform,line,startPoint);
+		    Assert.assertNotNull(result);
+		    Assert.assertEquals(result.x,1);
+		    Assert.assertEquals(result.y,2);
+		    Assert.assertEquals(result.z,0);
+		    
+		    
+		    
+		    
+		    
+		    transform.n11 = 0;
+		    transform.n12 = 1;
+		    transform.n14 = 0;
+		    transform.n24 = 1;
+		    /*
+			* 0		1		0		0
+            * 0		1		0		1
+			* 0		0		1		0
+			* 0		0		0		1
+            */
+		    line = new Number3D(0,3,0);
+		    startPoint = new Number3D(1,0,0);
+		    result = MathUtils.calculatePointInFlat(transform,line,startPoint);
+		    Assert.assertNotNull(result);
+		    Assert.assertEquals(result.x,1);
+		    Assert.assertEquals(result.y,1);
+		    Assert.assertEquals(result.z,0);
+		    
+		    transform.n11 = 0.771;
+		    transform.n12 = 0.771;
+		    transform.n13 = 0;
+		    transform.n14 = 1;
+		    transform.n24 = 0;
+		    transform.n34 = 0;
+		    /*
+			* 0.771	0.771	0		1
+            * 0		1		0		0
+			* 0		0		1		0
+			* 0		0		0		1
+            */
+            line = new Number3D(2,2,0);
+		    startPoint = new Number3D(0,-1,0);
+		    result = MathUtils.calculatePointInFlat(transform,line,startPoint);
+		    Assert.assertNotNull(result);
+		    Assert.assertEquals(result.x,1);
+		    Assert.assertEquals(result.y,0);
+		    Assert.assertEquals(result.z,0);
+            
+		    
+		    
+		    
+		    
+		}
 		[Test] 
 		public function testCalculate3DIntersaction():void
 		{

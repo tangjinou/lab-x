@@ -1,5 +1,7 @@
-package cn.edu.zju.labx.objects
+package cn.edu.zju.labx.events
 {
+	import cn.edu.zju.labx.objects.Ray;
+	
 	public interface IRayMaker
 	{
 		function getRay():Ray;

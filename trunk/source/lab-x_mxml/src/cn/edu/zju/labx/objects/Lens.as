@@ -3,10 +3,11 @@ package cn.edu.zju.labx.objects
 	import cn.edu.zju.labx.core.LabXConstant;
 	import cn.edu.zju.labx.core.StageObjectsManager;
 	import cn.edu.zju.labx.core.UserInputHandler;
-	import cn.edu.zju.labx.events.ILabXListener;
+	import cn.edu.zju.labx.events.IRayHandle;
 	import cn.edu.zju.labx.events.IUserInputListener;
-	import cn.edu.zju.labx.events.LabXEvent;
 	import cn.edu.zju.labx.logicObject.LensLogic;
+	import cn.edu.zju.labx.logicObject.LineRayLogic
+	import cn.edu.zju.labx.utils.MathUtils;
 	import cn.edu.zju.labx.logicObject.LineRayLogic;
 	
 	import com.greensock.*;
@@ -26,9 +27,8 @@ package cn.edu.zju.labx.objects
 	import org.papervision3d.objects.parsers.DAE;
 	import org.papervision3d.view.layer.ViewportLayer;
 		
-	public class Lens extends LabXObject implements ILabXListener ,IUserInputListener, IRayMaker
+	public class Lens extends LabXObject implements IUserInputListener, IRayHandle
 	{   
-		private var _ray:Ray  = null;
 		private var _focus:Number = LabXConstant.LENS_DEFAULT_FOCAL_LENGTH;
 		
 		
@@ -69,30 +69,9 @@ package cn.edu.zju.labx.objects
 		     this.LENS_DAE_URL =url;
 		}
 
-		public function handleLabXEvent(event:LabXEvent):Boolean
-		{
-			if(this._ray != null)StageObjectsManager.getDefault.originPivot.removeChild(this._ray);
-			this._ray = null;
-			
-			if (event.type != LabXEvent.LIGHT_OFF)
-			{
-				var obj:LabXObject = StageObjectsManager.getDefault.getPreviousXObject(this);
-				if (obj != null && obj is IRayMaker)
-				{
-					this._ray = makeAnNewRay(obj as IRayMaker);
-					if(this._ray != null)
-					{
-						StageObjectsManager.getDefault.originPivot.addChild(this._ray);
-						this._ray.displayRays();
-					}
-				}
-			}
-			return true;
-		}
 		
-		private function makeAnNewRay(rayMaker:IRayMaker):Ray
+		private function makeAnNewRay(oldRay:Ray):Ray
 		{
-			var oldRay:Ray = rayMaker.getRay();
 			if(oldRay != null)
 			{
 				oldRay.EndX = this.x;
@@ -118,16 +97,6 @@ package cn.edu.zju.labx.objects
         	return false;
 		}
 		
-		public function getRay():Ray
-		{
-//       	 	var ray:LineRayLogic = new LineRayLogic(new Number3D(this.x, this.y, this.z), new Vector3D(1, 0, 0)); 
-			return this._ray;
-		}
-		
-		public function setRay(ray:Ray):void
-		{
-			this._ray = ray;
-		}
 		
 	    public function hanleUserInputEvent(event:Event):void{
 	   	    if(userInputHandle!=null){
@@ -143,6 +112,7 @@ package cn.edu.zju.labx.objects
 	   	    	 } else if (mouseEvent.type == MouseEvent.MOUSE_UP) {
 	   	    	 	oldMouseX = -1;
 	   	    	 	oldMouseY = -1;
+	   	    	 	StageObjectsManager.getDefault.rayManager.reProduceRays();
 	   	    	 } else if ((mouseEvent.type == MouseEvent.MOUSE_MOVE) &&(oldMouseY != -1) && (oldMouseY != -1) && mouseEvent.buttonDown) {
 	   	    	 	var xMove:Number = mouseEvent.stageX - oldMouseX;
 	   	    	 	var yMove:Number = mouseEvent.stageY - oldMouseY;
@@ -174,7 +144,6 @@ package cn.edu.zju.labx.objects
        	 	this.x += xMove;
        	 	this.z += yMove;
        	 	StageObjectsManager.getDefault.addMessage("lens move:"+xMove);
-       	 	StageObjectsManager.getDefault.notify(new LabXEvent(this, LabXEvent.XOBJECT_MOVE));
 	    }
 	    
 	    // should destribute the listener 
@@ -183,6 +152,48 @@ package cn.edu.zju.labx.objects
 			lens.addEventListener(type, listener, useCapture, priority, useWeakReference);
 		}
 		
+		
+		
+		 /**
+		 *  deal with when the ray on the object
+		 **/ 
+   		public function onRayHanle(oldRay:Ray):void{
+   		    this._ray = makeAnNewRay(oldRay);
+			if(this._ray != null)
+			{
+				StageObjectsManager.getDefault.originPivot.addChild(this._ray);
+				this._ray.displayRays();
+				StageObjectsManager.getDefault.rayManager.notify(_ray);
+			}
+   		     
+   		}
+   		
+    	/**
+    	 *   get the distance between  the object's centrol point and the ray's start point 
+    	 * 
+    	 *   if return -1 means that the distance is infinite
+    	 * 
+   		 **/
+    	public function getDistance(ray:Ray):Number{
+    		if(ray.getLineRays().length>0){
+			   var lineRay:LineRay = ray.getLineRays().getItemAt(0) as LineRay;
+    	       return MathUtils.distanceToNumber3D(new Number3D(this.x,this.y,this.z),lineRay.start_point);;
+    	    }
+    	    return -1;
+    	}
+    	
+   		 /**
+   		 *   judge the ray if is on the object
+   		 */ 
+    	public function isOnTheRay(ray:Ray):Boolean{
+    		
+    	    if(ray.getLineRays().length>0){
+			   var lineRay:LineRay = ray.getLineRays().getItemAt(0) as LineRay;
+	           return isTheRayOnThisObject(Number3D.sub(lineRay.end_point,lineRay.start_point),lineRay.start_point);
+			}
+    	   return false;
+    	}
+    	
 	    protected function daeFileOnloaded(evt:FileLoadEvent):void{  
 	    	this.addChild(lens);  
 //	        trace("beigin~~~~~~~~~~~~~");
