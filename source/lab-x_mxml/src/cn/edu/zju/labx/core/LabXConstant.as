@@ -1,5 +1,7 @@
 package cn.edu.zju.labx.core
 {
+	import org.hamcrest.mxml.object.Null;
+	
 	public class LabXConstant
 	{
 		/**
@@ -31,6 +33,7 @@ package cn.edu.zju.labx.core
 		
 		public static const NUMBER_PRECISION:Number = 0.000001;
 		
+		public static const WAVE_LENGTH:Number = 740; //unit:nm
 		
 
 	}
