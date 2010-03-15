@@ -18,7 +18,7 @@ package cn.edu.zju.labx.core
         public var deskLayer:ViewportLayer;
 		public var equipmentLayer:ViewportLayer;
 		
-		public var rayEffect:Array;
+		private var rayEffect:Array;
        
        	/*************************************************************************
 		 * Sigleton Method to make sure there are only one LayerManager 
