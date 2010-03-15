@@ -14,7 +14,7 @@ package cn.edu.zju.labx.objects
 		 */
 		private var endPoint:Number3D;
 		
-		public function LineRay(logic:LineRayLogic=null,length:Number=3200)
+		public function LineRay(logic:LineRayLogic=null,length:Number=1200)
 		{
 			_logic = logic;
 			_length= length;
