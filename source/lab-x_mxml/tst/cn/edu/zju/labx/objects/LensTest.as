@@ -20,8 +20,6 @@ package cn.edu.zju.labx.objects
 		
 		override public function setUp():void
 		{
-			StageObjectsManager.getDefault.getLabXListeners().removeAll();
-			StageObjectsManager.getDefault.getLabXObjects().removeAll();
 			StageObjectsManager.getDefault.originPivot = new DisplayObject3D();
 		}
 		
@@ -41,8 +39,7 @@ package cn.edu.zju.labx.objects
 			lens.x = 100;
 			lens.y = 200;
 			lens.z = 150;
-			StageObjectsManager.getDefault.addLabXObject(lens);
-			
+
 			var focusPoint:Number3D = new Number3D(lens.x + 20, 200, 150);
 			
 			var lineRays:ArrayCollection = new ArrayCollection();
@@ -54,9 +51,7 @@ package cn.edu.zju.labx.objects
 			rayMaker.x = 0;
 			rayMaker.setRay(oldRay);
 			
-			StageObjectsManager.getDefault.addLabXObject(rayMaker);
 			
-			lens.handleLabXEvent(new LabXEvent(rayMaker, LabXEvent.LIGHT_ON));
 			var resultRay:Ray = lens.getRay();
 			
 //			assertEquals(100, ray.startX);

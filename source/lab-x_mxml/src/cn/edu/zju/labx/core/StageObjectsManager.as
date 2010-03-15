@@ -1,12 +1,8 @@
 package cn.edu.zju.labx.core
 {
-	import cn.edu.zju.labx.events.ILabXListener;
-	import cn.edu.zju.labx.events.LabXEvent;
-	import cn.edu.zju.labx.objects.IRayMaker;
 	import cn.edu.zju.labx.objects.LabXObject;
 	
 	import mx.collections.ArrayCollection;
-	import mx.collections.Sort;
 	import mx.controls.Button;
 	import mx.controls.TextArea;
 	
@@ -96,6 +92,8 @@ package cn.edu.zju.labx.core
 		{
 			return stageY - originPivot.y - (LabXConstant.STAGE_HEIGHT/2);
 		}
+		
+		
 		        
 		/*************************************************************************
 		 * Sigleton Method to make sure there are only one StageObjectManager 
@@ -110,152 +108,25 @@ package cn.edu.zju.labx.core
 			return instance;
 		}
 		
-		/**
-		 * *************************************************************************
-		 * LabX Object Management
+		
+		 /*************************************************************************
+		 *  This is the RayManager 
 		 * ***********************************************************************
 		 */
-		 
-		private var objectList:ArrayCollection =new ArrayCollection();
-		 
-		/**
-		 * add an LabX Event listener
-		 */
-		public function addLabXObject(obj:LabXObject):void
-		{
-			objectList.addItem(obj);
-			if (objectList.sort == null) {
-				var sorter:Sort = new Sort();
-				sorter.compareFunction = compareValues;
-				objectList.sort = sorter;
-				objectList.refresh();
-			}
-			
-			if(obj is ILabXListener) {
-				addLabXEventListener(obj as ILabXListener);
-			}
-			
-			this.notify(new LabXEvent(null, LabXEvent.XOBJECT_ADD));
-//			if(originPivot != null)originPivot.addChild(obj);
-		}
+	    private var raymanager:RayManager;
+	    public function get rayManager():RayManager{
+	    	if(this.raymanager ==null){
+	    	   raymanager =new RayManager(); 
+	    	}
+	    	return this.raymanager;
+	    }
 		
-		/**
-		 * remove an LabX Event listener
-		 * 
-		 * @param obj listener to listen LabX Event
-		 * 
-		 */
-		public function removeLabXObject(obj:LabXObject):void
-		{
-			if (obj is IRayMaker)
-			{
-				var rayMaker:IRayMaker = obj as IRayMaker;
-				if(rayMaker.getRay() != null)this.originPivot.removeChild(rayMaker.getRay());
-			}
-			objectList.removeItemAt(objectList.getItemIndex(obj));
-			if(obj is ILabXListener) {
-				removeLabXEventListener(obj as ILabXListener);
-			}
-			this.notify(new LabXEvent(null, LabXEvent.XOBJECT_REMOVE));
-//			if(originPivot != null)originPivot.removeChild(obj);
-		}
 		
-		public function getPreviousXObject(obj:LabXObject):LabXObject
-		{
-			var index:int = objectList.getItemIndex(obj);
-			if ((index > 0) && (index < objectList.length))
-			{
-				return objectList.getItemAt(index-1) as LabXObject;
-			}
-			return null;
-		}
 
-		public function getLabXObjects():ArrayCollection
-		{
-			return objectList;
-		}
-		
-		/**
-		 * *************************************************************************
-		 * LabX Event Manager
+		 /*************************************************************************
+		 *  This is the MessageBox 
 		 * ***********************************************************************
 		 */
-		/**
-		 * LabX Event listener list
-		 */
-		private var listenerList:ArrayCollection = new ArrayCollection();
-		
-		
-		/**
-		 * add an LabX Event listener
-		 * 
-		 * 
-		 * This should be private,Because it only add when object added,what is your oppinion?
-		 */
-		private function addLabXEventListener(listener:ILabXListener):void
-		{
-			listenerList.addItem(listener);
-			if (listenerList.sort == null) {
-				var sorter:Sort = new Sort();
-				sorter.compareFunction = compareValues;
-				listenerList.sort = sorter;
-				listenerList.refresh();
-			}
-		}
-		
-		/**
-		 * remove an LabX Event listener
-		 * 
-		 * @param obj listener to listen LabX Event
-		 * 
-		 */
-		private function removeLabXEventListener(listener:ILabXListener):void
-		{   
-			listenerList.removeItemAt(listenerList.getItemIndex(listener));
-		}
-		
-		public function getLabXListeners():ArrayCollection
-		{
-			return listenerList;
-		}
-		
-		/**
-		 * Dispatch LabX Event 
-		 */
-		public  function notify(event:LabXEvent):void {
-			notify_count = 0;
-			if (event.type == LabXEvent.XOBJECT_MOVE)
-			{
-				listenerList.refresh();
-				objectList.refresh();
-			}
-			for(var index:int;index<listenerList.length;index++){
-				var obj:ILabXListener =listenerList.getItemAt(index) as ILabXListener;
-			    if(obj.handleLabXEvent(event)==false){
-			       break;
-			    }
-			    notify_count++;
-			}
-		}
-		
-		private function compareValues(a:Object, b:Object, fields:Array = null):int
-		{
-			if (a == null && b == null) return 0;
-			if (a == null) return 1;
-			if (b == null) return -1;
-			var objA:LabXObject = a as LabXObject;
-			var objB:LabXObject = b as LabXObject;
-			
-			if (objA.x > objB.x)return 1;
-			if (objA.x < objB.x)return -1;
-			
-			return 0;
-		};
-		
-		
-		/**
-		 *  This is the MessageBox
-		 **/
 		 public var messageBox:TextArea;
 		 public function addMessage(msg:String):void{
 		    messageBox.text+="\n"+msg;
@@ -265,8 +136,10 @@ package cn.edu.zju.labx.core
 		    messageBox.text="公告栏";
 		 }
 		 
-		 
-		 
+		 /******************************************************
+		 *  This is hook for objectPressHandler
+		 * *****************************************************/
+		
 		 /**
 		 *  This is rotate_right button in the view
 		 **/
@@ -277,7 +150,6 @@ package cn.edu.zju.labx.core
 		 **/
 		 public var rotate_left_button:Button;
 		 
-		 
 		 private var labXObjectSelected:LabXObject;
 		 
 		 public function objectPressHandlerHook(event:InteractiveScene3DEvent,labXObject:LabXObject):void{
@@ -285,7 +157,6 @@ package cn.edu.zju.labx.core
 		       rotate_left_button.enabled=true;
 		       labXObjectSelected = labXObject;
 		 } 
-		 
 		 
 		 public function objectUnPressHandler():void{
 		 	
@@ -296,6 +167,26 @@ package cn.edu.zju.labx.core
 		   }
 		 }
 		 
+		 
+		 /******************************************************
+		 *   object list 
+		 * ******************************************************/
+         private var objectList:ArrayCollection = new ArrayCollection();		 
+		 
+		 public function addObject(obj:LabXObject):void{
+		     objectList.addItem(obj);
+		 }
+		 public function removeObject(obj:LabXObject):void{
+		     objectList.removeItemAt(objectList.getItemIndex(obj));
+		 }
+		 public function getObjectList():ArrayCollection{
+		     return objectList
+		 }
+		
+		 /////////////////////////////////////////////////////////////////////////
+		 
+		 
+	    //////////////////////////////////////////////////////////////////////////////
 		
 		/****
 		 *   we could get layerManager, layerManager is also a singleton
@@ -309,14 +200,15 @@ package cn.edu.zju.labx.core
 		public function rotate_left():void{
 //		   if(labXObjectSelected!=null&&UserInputHandler.getDefault.currentSelectedObject!=null){
 		   if(labXObjectSelected!=null){
-		     labXObjectSelected.rotationY++;
-		     if(labXObjectSelected is ILabXListener)
-		     {
-		     	var obj:ILabXListener = labXObjectSelected as ILabXListener;
-		     	obj.handleLabXEvent(new LabXEvent(null, LabXEvent.XOBJECT_MOVE));
-		     }
-		   }
-		   else{
+		     labXObjectSelected.localRotationY++;
+//		     trace("transform:"+labXObjectSelected.transform.toString());
+//		     if(labXObjectSelected is ILabXListener)
+//		     {
+//		     	var obj:ILabXListen = labXObjectSelected as ILabXListener;
+//		     	obj.handleLabXEvent(new LabXEvent(null, LabXEvent.XOBJECT_MOVE));
+//		     }
+//		   }
+//		   else{
 //		     this.originPivot.rotationY++;
 		   }
 		}
@@ -324,13 +216,13 @@ package cn.edu.zju.labx.core
 		public function rotate_right():void{
 //		   if(labXObjectSelected!=null&&UserInputHandler.getDefault.currentSelectedObject!=null){
            if(labXObjectSelected!=null){
-		     labXObjectSelected.rotationY--;
-		     if(labXObjectSelected is ILabXListener)
-		     {
-		     	var obj:ILabXListener = labXObjectSelected as ILabXListener;
-		     	obj.handleLabXEvent(new LabXEvent(null, LabXEvent.XOBJECT_MOVE));
-		     }
-		   }else{
+		     labXObjectSelected.localRotationY--;
+//		     if(labXObjectSelected is ILabXListener)
+//		     {
+//		     	var obj:ILabXListener = labXObjectSelected as ILabXListener;
+//		     	obj.handleLabXEvent(new LabXEvent(null, LabXEvent.XOBJECT_MOVE));
+//		     }
+//		   }else{
 //		     this.originPivot.rotationY--;
 		   }
 		}

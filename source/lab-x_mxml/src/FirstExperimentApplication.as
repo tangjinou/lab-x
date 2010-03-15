@@ -8,7 +8,6 @@ package
 	import cn.edu.zju.labx.objects.ConvexLens;
 	import cn.edu.zju.labx.objects.Lens;
 	import cn.edu.zju.labx.objects.LightSource;
-	import cn.edu.zju.labx.objects.SplitterBeam;
 	import cn.edu.zju.labx.utils.ResourceManager;
 	
 	import flash.display.Bitmap;
@@ -21,10 +20,8 @@ package
 	import org.papervision3d.core.utils.virtualmouse.VirtualMouseMouseEvent;
 	import org.papervision3d.events.FileLoadEvent;
 	import org.papervision3d.lights.PointLight3D;
-	import org.papervision3d.materials.shadematerials.PhongMaterial;
 	import org.papervision3d.materials.BitmapMaterial;
-	import org.papervision3d.materials.shaders.ShadedMaterial;
-	import org.papervision3d.materials.shaders.PhongShader;
+	import org.papervision3d.materials.shadematerials.PhongMaterial;
 	import org.papervision3d.objects.DisplayObject3D;
 	import org.papervision3d.objects.parsers.DAE;
 	import org.papervision3d.view.BasicView;
@@ -96,11 +93,11 @@ package
 //			var shadedMaterial:ShadedMaterial = new ShadedMaterial(bitmapMaterial, shader);
 			bitmapMaterial.interactive = true;
 			var lightSource:LightSource = new LightSource(bitmapMaterial);
+			StageObjectsManager.getDefault.rayManager.setLightSource(lightSource);
 			lightSource.moveUp(lightSource.height/2);	
 			lightSource.moveRight(50);
 			originPivot.addChild(lightSource);
 			equipmentLayer.addDisplayObject3D(lightSource, true);
-			StageObjectsManager.getDefault.addLabXObject(lightSource);
         	
         }
 		public function createObjects():void
@@ -122,24 +119,24 @@ package
 			imgLoader.load(new URLRequest("../assets/textures/metal.jpg"));
 			
 			/*Create SplitterBeam*/
-			var shadeMaterialBeam:PhongMaterial = new PhongMaterial(light,0xFFFFFF,0x6ccff8,100);
-			shadeMaterialBeam.interactive = true;
-			var beam:SplitterBeam =new SplitterBeam(shadeMaterialBeam);
-			beam.moveRight(LabXConstant.DESK_WIDTH/5);
-			beam.moveUp(beam.height/2);
-			originPivot.addChild(beam);
-			equipmentLayer.addDisplayObject3D(beam, true);
-			StageObjectsManager.getDefault.addLabXObject(beam);
+//			var shadeMaterialLens:PhongMaterial = new PhongMaterial(light,0xFFFFFF,0x6ccff8,100);
+//			shadeMaterialLens.interactive = true;
+//			var beam:SplitterBeam =new SplitterBeam(shadeMaterialLens);
+//			beam.moveRight(LabXConstant.DESK_WIDTH/5);
+//			beam.moveUp(beam.height/2);
+//			originPivot.addChild(beam);
+//			equipmentLayer.addDisplayObject3D(beam, true);
+//			StageObjectsManager.getDefault.addObject(beam);
 			
 			
 			/*Create Lens*/	
 			var shadeMaterialLens:PhongMaterial = new PhongMaterial(light,0xFFFFFF,0x6ccff8,100);
 			shadeMaterialLens.interactive = true;
-			concaveLens = new ConcaveLens(shadeMaterialLens, -100);
+			concaveLens = new ConcaveLens(shadeMaterialLens, 100);
 			concaveLens.moveRight(LabXConstant.DESK_WIDTH/3);
 			concaveLens.moveUp(concaveLens.height/2);
 			originPivot.addChild(concaveLens);
-			StageObjectsManager.getDefault.addLabXObject(concaveLens);
+			StageObjectsManager.getDefault.addObject(concaveLens);
 			
 			/*Create second Lens*/	
 			var shadeMaterialLens2:PhongMaterial = new PhongMaterial(light,0xFFFFFF,0x6ccff8,100);
@@ -148,7 +145,7 @@ package
 			convexLens.moveRight(LabXConstant.DESK_WIDTH/3 + 200);
 			convexLens.moveUp(convexLens.height/2);
 			originPivot.addChild(convexLens);
-			StageObjectsManager.getDefault.addLabXObject(convexLens);
+			StageObjectsManager.getDefault.addObject(convexLens);
 			
 			/*create Board*/
 			var shadeMaterialBoard:PhongMaterial = new PhongMaterial(light,0xFFFFFF,0xe1e1e1,100);
@@ -158,7 +155,7 @@ package
 			board.moveUp(board.height/2);
             originPivot.addChild(board);
             equipmentLayer.addDisplayObject3D(board, true);
-            StageObjectsManager.getDefault.addLabXObject(board);
+            StageObjectsManager.getDefault.addObject(board);
             
 			
 		}

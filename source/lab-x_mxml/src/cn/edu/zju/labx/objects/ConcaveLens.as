@@ -12,6 +12,7 @@ package cn.edu.zju.labx.objects
 		public function ConcaveLens(material:MaterialObject3D=null, focus:Number=LabXConstant.LENS_DEFAULT_FOCAL_LENGTH)
 		{   
 			lens_dae_url = ResourceManager.CONCAVE_LENS_DAE_URL;
+			if(material!=null)
 			material.doubleSided = true;
 			super(material, focus);
 		}

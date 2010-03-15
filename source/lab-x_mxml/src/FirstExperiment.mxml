@@ -47,10 +47,8 @@
 	 		   firstExperiment.convexLens.visible=lens_checkBox.selected;
 	 		   if(lens_checkBox.selected==true){
                   StageObjectsManager.getDefault.addMessage("增加凸透镜.");
-                  StageObjectsManager.getDefault.addLabXObject(firstExperiment.convexLens);
                }else{
                   StageObjectsManager.getDefault.addMessage("移除凸透镜.");
-                  StageObjectsManager.getDefault.removeLabXObject(firstExperiment.convexLens);
                }
                //TODO: need remove the stage listerner
 	 		}
@@ -59,10 +57,8 @@
 	 		   firstExperiment.concaveLens.visible=lens_checkBox2.selected;
 	 		   if(lens_checkBox2.selected==true){
                   StageObjectsManager.getDefault.addMessage("增加凹透镜.");
-                  StageObjectsManager.getDefault.addLabXObject(firstExperiment.concaveLens);
                }else{
                   StageObjectsManager.getDefault.addMessage("移除凹透镜.");
-                  StageObjectsManager.getDefault.removeLabXObject(firstExperiment.concaveLens);
                }
                //TODO: need remove the stage listerner
 	 		}

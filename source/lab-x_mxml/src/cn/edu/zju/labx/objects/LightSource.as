@@ -2,7 +2,6 @@ package cn.edu.zju.labx.objects
 {
 	import cn.edu.zju.labx.core.StageObjectsManager;
 	import cn.edu.zju.labx.events.IUserInputListener;
-	import cn.edu.zju.labx.events.LabXEvent;
 	import cn.edu.zju.labx.logicObject.LineRayLogic;
 	import cn.edu.zju.labx.utils.ResourceManager;
 	
@@ -19,14 +18,13 @@ package cn.edu.zju.labx.objects
 	import org.papervision3d.objects.parsers.DAE;
 	import org.papervision3d.view.layer.ViewportLayer;
 
-	public class LightSource extends LabXObject implements IUserInputListener, IRayMaker
+	public class LightSource extends LabXObject implements IUserInputListener
 	{
 		
 		private var isOn:Boolean = false;
 		protected var light:DAE;
 	    public var height:Number =100;
 	    public var width:Number =60;
-		public var ray:Ray; 
 		
 		public function LightSource(material:MaterialObject3D=null)
 		{
@@ -43,7 +41,7 @@ package cn.edu.zju.labx.objects
 		}
 		
 		public function createRay():void{
-		   	ray = new Ray();
+		   	_ray = new Ray();
 //			addChild(ray);
 			
 			var royLogic1:LineRayLogic = new LineRayLogic(new Number3D(this.x,this.y+20+5,this.z),new Number3D(1,0,0));
@@ -63,23 +61,13 @@ package cn.edu.zju.labx.objects
 			lineRays.addItem(lineRay2);
 			lineRays.addItem(lineRay3);
 			lineRays.addItem(lineRay4);
-			ray.setLineRays(lineRays);
+			_ray.setLineRays(lineRays);
 
 		}
 		
-		public function getRay():Ray
-		{
-//       	 	var ray:LineRayLogic = new LineRayLogic(new Number3D(this.x, this.y, this.z), new Vector3D(1, 0, 0));
-//       	 	var rayArray:ArrayCollection = new ArrayCollection();
-//       	 	rayArray.addItem(ray);
-//			return new Ray(null, rayArray, this.x);
-			return ray;
-		}
-		
-		public function setRay(ray:Ray):void
-		{
-			
-		}
+		public function get isLightOn():Boolean{
+            return isOn;		
+        }
 		
 		public  function hanleUserInputEvent(event:Event):void
 		{
@@ -95,19 +83,24 @@ package cn.edu.zju.labx.objects
 	   	    	 if (mouseEvent.type == MouseEvent.MOUSE_UP)
 	   	    	 {
 	   	    	 	isOn = !isOn;
+	   	    	 	
 		   	    	 if (isOn)
 		   	    	 {  
-		   	    	 	createRay();
-		   	    	 	StageObjectsManager.getDefault.originPivot.addChild(getRay());
-		   	    	 	StageObjectsManager.getDefault.notify(new LabXEvent(this, LabXEvent.LIGHT_ON));
-		   	    	 	ray.EndX=1000;
+		   	    	   openRay();
 		   	    	 } else {
-		   	    	 	StageObjectsManager.getDefault.originPivot.removeChild(getRay());
-		   	    	 	this.ray = null;
-		   	    	 	StageObjectsManager.getDefault.notify(new LabXEvent(this, LabXEvent.LIGHT_OFF));
+		   	    	 	StageObjectsManager.getDefault.rayManager.clearRays();
+//		   	    	 	StageObjectsManager.getDefault.originPivot.removeChild(getRay());
+		   	    	 	this._ray = null;
 		   	    	 }
 	   	    	 }
 			}
+		}
+		
+		public function openRay():void{
+			createRay();
+		   	StageObjectsManager.getDefault.originPivot.addChild(getRay());
+		   	StageObjectsManager.getDefault.rayManager.notify(this._ray);
+		   	_ray.EndX=1000;
 		}
 		
 		// should destribute the listener 

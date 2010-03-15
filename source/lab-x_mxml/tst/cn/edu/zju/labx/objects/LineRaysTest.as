@@ -24,8 +24,8 @@ package cn.edu.zju.labx.objects
        }
        
        public function testLineRays2():void{
-       	   var startPonit:Vertex3D = new Vertex3D(0,0,0);
-       	   var endPoint:Vertex3D = new Vertex3D(1,2,2);
+       	   var startPonit:Number3D = new Number3D(0,0,0);
+       	   var endPoint:Number3D = new Number3D(1,2,2);
            var lineRays:LineRay = new LineRay();
            lineRays.newLineRay(startPonit,endPoint);
 //           assertEquals(3,lineRays._length);

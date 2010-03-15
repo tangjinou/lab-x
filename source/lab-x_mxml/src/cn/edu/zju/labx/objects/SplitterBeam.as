@@ -3,22 +3,22 @@ package cn.edu.zju.labx.objects
 	import cn.edu.zju.labx.core.LabXConstant;
 	import cn.edu.zju.labx.core.StageObjectsManager;
 	import cn.edu.zju.labx.core.UserInputHandler;
-	import cn.edu.zju.labx.events.ILabXListener;
+	import cn.edu.zju.labx.events.IRayMaker;
 	import cn.edu.zju.labx.events.IUserInputListener;
-	import cn.edu.zju.labx.events.LabXEvent;
 	
 	import flash.events.Event;
 	import flash.events.KeyboardEvent;
 	import flash.events.MouseEvent;
+	
+	import mx.collections.ArrayCollection;
 	
 	import org.papervision3d.core.proto.MaterialObject3D;
 	import org.papervision3d.events.InteractiveScene3DEvent;
 	import org.papervision3d.materials.utils.MaterialsList;
 	import org.papervision3d.objects.primitives.Cube;
 
-	public class SplitterBeam extends LabXObject implements ILabXListener ,IUserInputListener, IRayMaker
+	public class SplitterBeam extends LabXObject implements IUserInputListener
 	{   
-		private var _ray:Ray  = null;
 		
 	    public var height:int;
 	    public var width:int;
@@ -38,9 +38,24 @@ package cn.edu.zju.labx.objects
 			addEventListener(InteractiveScene3DEvent.OBJECT_PRESS, objectPressHandler);
 		}
 		
-		public function handleLabXEvent(event:LabXEvent):Boolean{
+
 		
-		  return true;
+		private function makeAnNewRay(rayMaker:IRayMaker):Ray
+		{
+			var oldRay:Ray = rayMaker.getRay();
+			if(oldRay != null)
+			{
+				oldRay.EndX = this.x;
+//				var lensLogic:LensLogic = new LensLogic(new Number3D(this.x, this.y, this.z), this._focus);
+				var newLineRays:ArrayCollection = new ArrayCollection();
+				for each (var oldLineRay:LineRay in oldRay.getLineRays())
+				{
+//					var resultLogic:RayLogic = lensLogic.calculateRayAfterLens(oldLineRay.logic);
+//					if (isRayOnLens(resultLogic))newLineRays.addItem(new LineRay(resultLogic));
+				}
+				return  new Ray(null, newLineRays, 0, 0);
+			}
+			return null;
 		}
 		
 		public function hanleUserInputEvent(event:Event):void{
@@ -77,20 +92,9 @@ package cn.edu.zju.labx.objects
 	    {
 	    	if (StageObjectsManager.getDefault.mainView.camera.z > 0)xMove = -xMove; //when camera is on the other side, x should reverse
        	 	this.x += xMove;
-       	 	StageObjectsManager.getDefault.addMessage("lens move:"+xMove);
-       	 	StageObjectsManager.getDefault.notify(new LabXEvent(this, LabXEvent.XOBJECT_MOVE));
+       	 	StageObjectsManager.getDefault.addMessage("SplitterBeam move:"+xMove);
 	    }
 		
-		public function getRay():Ray
-		{
-//       	var ray:RayLogic = new RayLogic(new Number3D(this.x, this.y, this.z), new Vector3D(1, 0, 0)); 
-			return this._ray;
-		}
-		
-		public function setRay(ray:Ray):void
-		{
-			this._ray = ray;
-		}
 		
 		public function createDisplayObject():void{
 		    var materialsList:MaterialsList = new MaterialsList();
@@ -100,7 +104,7 @@ package cn.edu.zju.labx.objects
 			materialsList.addMaterial(material,"right");
 			materialsList.addMaterial(material,"top");
 			materialsList.addMaterial(material,"bottom");
-            height=100;
+            height=120;
 	        width=3;
 	        depth=100;
 		   	splitterBeam = new Cube(materialsList,width,depth,height);
