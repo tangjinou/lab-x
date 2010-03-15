@@ -2,10 +2,6 @@ package cn.edu.zju.labx.objects
 {   
 	import cn.edu.zju.labx.core.StageObjectsManager;
 	
-	import flash.filters.BlurFilter;
-	import flash.filters.DropShadowFilter;
-	import flash.filters.GlowFilter;
-	
 	import mx.collections.ArrayCollection;
 	
 	import org.papervision3d.core.geom.Lines3D;
@@ -91,11 +87,8 @@ package cn.edu.zju.labx.objects
 		    }
 		    var effectLayer:ViewportLayer = new ViewportLayer(StageObjectsManager.getDefault.mainView.viewport, null);
 			effectLayer.addDisplayObject3D(lines, true);
-			var bf:BlurFilter = new BlurFilter(3,3,1);
-			var growFilter_2:GlowFilter = new GlowFilter(0x00ffff, 2, 20, 10, 2, 3, true, false);
-			var growFilter_b_2:GlowFilter = new GlowFilter(0x00ffff, 2, 16, 10, 3, 9, false, false);
-			var dropShadow_2:DropShadowFilter = new DropShadowFilter(0, 360, 0x000fff, 1, 70, 70, 5, 3, false, false, false);
-			effectLayer.filters = [growFilter_2,growFilter_b_2,dropShadow_2];
+
+			effectLayer.filters = StageObjectsManager.getDefault.layerManager.rayEffect;
 			StageObjectsManager.getDefault.layerManager.equipmentLayer.addLayer(effectLayer);
 		    addChild(lines);
 	    }
