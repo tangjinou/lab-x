@@ -8,14 +8,14 @@ package cn.edu.zju.labx.objects
 	import cn.edu.zju.labx.events.LabXEvent;
 	import cn.edu.zju.labx.logicObject.LensLogic;
 	import cn.edu.zju.labx.logicObject.LineRayLogic;
-	import cn.edu.zju.labx.utils.ResourceManager;
 	
 	import com.greensock.*;
 	
+	import flash.display.BlendMode;
 	import flash.events.Event;
 	import flash.events.KeyboardEvent;
 	import flash.events.MouseEvent;
-	import flash.display.BlendMode;
+	
 	import mx.collections.ArrayCollection;
 	
 	import org.papervision3d.core.math.Number3D;
@@ -44,6 +44,10 @@ package cn.edu.zju.labx.objects
 		 * To store the old Mouse X position;
 		 */
 	    public var oldMouseX:Number = -1;
+	    /**
+		 * To store the old Mouse y position;
+		 */
+	    public var oldMouseY:Number = -1;
 	    
 		public function Lens(material:MaterialObject3D=null, focus:Number=LabXConstant.LENS_DEFAULT_FOCAL_LENGTH)
 		{
@@ -92,7 +96,7 @@ package cn.edu.zju.labx.objects
 			if(oldRay != null)
 			{
 				oldRay.EndX = this.x;
-				var lensLogic:LensLogic = new LensLogic(new Number3D(this.x, this.y, this.z), null, this._focus);
+				var lensLogic:LensLogic = new LensLogic(new Number3D(this.x, this.y, this.z), new Number3D(this.transform.n11, this.transform.n12, this.transform.n13), this._focus);
 				var newLineRays:ArrayCollection = new ArrayCollection();
 				for each (var oldLineRay:LineRay in oldRay.getLineRays())
 				{
@@ -135,13 +139,17 @@ package cn.edu.zju.labx.objects
 	   	   	     var mouseEvent:MouseEvent = event as MouseEvent;
 	   	    	 if (mouseEvent.type == MouseEvent.MOUSE_DOWN) {
 	   	    	 	oldMouseX = mouseEvent.stageX;
+	   	    	 	oldMouseY = mouseEvent.stageY;
 	   	    	 } else if (mouseEvent.type == MouseEvent.MOUSE_UP) {
 	   	    	 	oldMouseX = -1;
-	   	    	 } else if ((mouseEvent.type == MouseEvent.MOUSE_MOVE) && (oldMouseX != -1) && mouseEvent.buttonDown) {
+	   	    	 	oldMouseY = -1;
+	   	    	 } else if ((mouseEvent.type == MouseEvent.MOUSE_MOVE) &&(oldMouseY != -1) && (oldMouseY != -1) && mouseEvent.buttonDown) {
 	   	    	 	var xMove:Number = mouseEvent.stageX - oldMouseX;
-	   	    	 	if (Math.abs(xMove) < 10)return;
-	   	    	 	internalMove(xMove);
+	   	    	 	var yMove:Number = mouseEvent.stageY - oldMouseY;
+	   	    	 	if ((Math.abs(xMove) < 10) && (Math.abs(yMove) < 3))return;
+	   	    	 	internalMove(xMove, yMove);
        	 			oldMouseX = mouseEvent.stageX;
+       	 			oldMouseY = mouseEvent.stageY;
 	   	    	 }
 	    	} else if (event is KeyboardEvent)
 	    	{
@@ -150,16 +158,21 @@ package cn.edu.zju.labx.objects
 	    		{
 	    			var xMoveKey:Number = LabXConstant.X_MOVE_MIN;
 	    			if(UserInputHandler.keyLeft)xMoveKey = -xMoveKey;
-	    			internalMove(xMoveKey);
+	    			internalMove(xMoveKey, 0);
 	    		} 
 	    	}
 	    	
 	    }
 	    
-	    private function internalMove(xMove:Number):void
+	    private function internalMove(xMove:Number, yMove:Number):void
 	    {
-	    	if (StageObjectsManager.getDefault.mainView.camera.z > 0)xMove = -xMove; //when camera is on the other side, x should reverse
+	    	if (StageObjectsManager.getDefault.mainView.camera.z > 0)
+	    	{
+	    		xMove = -xMove; //when camera is on the other side, x should reverse
+//	    		yMove = -yMove;
+	    	}
        	 	this.x += xMove;
+       	 	this.z += yMove;
        	 	StageObjectsManager.getDefault.addMessage("lens move:"+xMove);
        	 	StageObjectsManager.getDefault.notify(new LabXEvent(this, LabXEvent.XOBJECT_MOVE));
 	    }

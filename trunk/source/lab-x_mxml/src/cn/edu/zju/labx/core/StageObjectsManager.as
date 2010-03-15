@@ -289,10 +289,11 @@ package cn.edu.zju.labx.core
 		 
 		 public function objectUnPressHandler():void{
 		 	
-		 	   if(labXObjectSelected == null){
+	 	   if(labXObjectSelected == null)
+	 	   {
 		       rotate_right_button.enabled=false;
 		       rotate_left_button.enabled=false;
-		       }
+		   }
 		 }
 		 
 		
@@ -309,6 +310,11 @@ package cn.edu.zju.labx.core
 //		   if(labXObjectSelected!=null&&UserInputHandler.getDefault.currentSelectedObject!=null){
 		   if(labXObjectSelected!=null){
 		     labXObjectSelected.rotationY++;
+		     if(labXObjectSelected is ILabXListener)
+		     {
+		     	var obj:ILabXListener = labXObjectSelected as ILabXListener;
+		     	obj.handleLabXEvent(new LabXEvent(null, LabXEvent.XOBJECT_MOVE));
+		     }
 		   }
 		   else{
 //		     this.originPivot.rotationY++;
@@ -319,6 +325,11 @@ package cn.edu.zju.labx.core
 //		   if(labXObjectSelected!=null&&UserInputHandler.getDefault.currentSelectedObject!=null){
            if(labXObjectSelected!=null){
 		     labXObjectSelected.rotationY--;
+		     if(labXObjectSelected is ILabXListener)
+		     {
+		     	var obj:ILabXListener = labXObjectSelected as ILabXListener;
+		     	obj.handleLabXEvent(new LabXEvent(null, LabXEvent.XOBJECT_MOVE));
+		     }
 		   }else{
 //		     this.originPivot.rotationY--;
 		   }

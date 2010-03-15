@@ -64,7 +64,6 @@ package cn.edu.zju.labx.core{
 		{
 			if (e is VirtualMouseMouseEvent)
 			{   
-				objectUnPressHandlerHook();
 				return;
 			}
 			if (this._currentSelectedObject != null && StageObjectsManager.getDefault.rotate_stage==false)
@@ -72,7 +71,7 @@ package cn.edu.zju.labx.core{
 				this._currentSelectedObject.hanleUserInputEvent(e);
 				return;
 			}
-			objectUnPressHandlerHook();
+			if (this._currentSelectedObject == null)objectUnPressHandlerHook();
 		}
 		
 		public function mouseUpHandler (e:MouseEvent):void
