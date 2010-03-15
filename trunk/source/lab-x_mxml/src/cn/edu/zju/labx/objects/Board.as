@@ -1,13 +1,16 @@
 package cn.edu.zju.labx.objects
 {   
     import cn.edu.zju.labx.core.LabXConstant;
+    import cn.edu.zju.labx.events.IRayHandle;
     import cn.edu.zju.labx.events.IUserInputListener;
     import cn.edu.zju.labx.logicObject.InterferenceLogic;
+    import cn.edu.zju.labx.utils.MathUtils;
     
     import flash.display.BitmapData;
     import flash.events.Event;
     import flash.geom.Rectangle;
     
+    import org.papervision3d.core.math.Number3D;
     import org.papervision3d.core.proto.MaterialObject3D;
     import org.papervision3d.events.InteractiveScene3DEvent;
     import org.papervision3d.materials.BitmapMaterial;
@@ -18,7 +21,7 @@ package cn.edu.zju.labx.objects
      * Board is an LabX Object used to display the light result
      * 
      */
-	public class Board extends LabXObject implements IUserInputListener
+	public class Board extends LabXObject implements IUserInputListener ,IRayHandle
 	{   
 		protected var cube:Cube;
 		
@@ -87,6 +90,39 @@ package cn.edu.zju.labx.objects
 			
 		}
 		
+						 /**
+		 *  deal with when the ray on the object
+		 **/ 
+   		public function onRayHanle(oldRay:Ray):void{
+ 
+             oldRay.EndX=this.x;
+   		     
+   		}
+   		
+    	/**
+    	 *   get the distance between  the object's centrol point and the ray's start point 
+    	 * 
+    	 *   if return -1 means that the distance is infinite
+    	 * 
+   		 **/
+    	public function getDistance(ray:Ray):Number{
+    		if(ray.getLineRays().length>0){
+			   var lineRay:LineRay = ray.getLineRays().getItemAt(0) as LineRay;
+    	       return MathUtils.distanceToNumber3D(new Number3D(this.x,this.y,this.z),lineRay.start_point);;
+    	    }
+    	    return -1;
+    	}
+    	
+   		 /**
+   		 *   judge the ray if is on the object
+   		 */ 
+    	public function isOnTheRay(ray:Ray):Boolean{
+    	    if(ray.getLineRays().length>0){
+			   var lineRay:LineRay = ray.getLineRays().getItemAt(0) as LineRay;
+	           return isTheRayOnThisObject(Number3D.sub(lineRay.end_point,lineRay.start_point),lineRay.start_point);
+			}
+    	   return false;
+    	}
 		
 //	    override public  function eventTriger(event:String):void{
 //	    	if(event == MouseEvent.MOUSE_UP){

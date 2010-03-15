@@ -50,7 +50,7 @@ package cn.edu.zju.labx.core
 		 	rayList.addItem(ray);	
 		 	var nearestHandler:IRayHandle;
 		 	var minDistance:Number = Number.MAX_VALUE;
-		      for(var i:int=0;i<StageObjectsManager.getDefault.getObjectList().length-1;i++){
+		      for(var i:int=0;i<StageObjectsManager.getDefault.getObjectList().length;i++){
 		         var obj:LabXObject = StageObjectsManager.getDefault.getObjectList().getItemAt(i) as LabXObject;
 		         if(obj is IRayHandle){
 		              var handle:IRayHandle = obj as IRayHandle;

@@ -3,6 +3,7 @@ package cn.edu.zju.labx.objects
 	import cn.edu.zju.labx.core.LabXConstant;
 	import cn.edu.zju.labx.core.StageObjectsManager;
 	import cn.edu.zju.labx.core.UserInputHandler;
+	import cn.edu.zju.labx.events.IRayHandle;
 	import cn.edu.zju.labx.events.IRayMaker;
 	import cn.edu.zju.labx.events.IUserInputListener;
 	
@@ -17,7 +18,7 @@ package cn.edu.zju.labx.objects
 	import org.papervision3d.materials.utils.MaterialsList;
 	import org.papervision3d.objects.primitives.Cube;
 
-	public class SplitterBeam extends LabXObject implements IUserInputListener
+	public class SplitterBeam extends LabXObject implements IUserInputListener,IRayHandle
 	{   
 		
 	    public var height:int;
@@ -110,6 +111,46 @@ package cn.edu.zju.labx.objects
 		   	splitterBeam = new Cube(materialsList,width,depth,height);
 		   	this.addChild(splitterBeam);
 		}
+		
+				 /**
+		 *  deal with when the ray on the object
+		 **/ 
+   		public function onRayHanle(oldRay:Ray):void{
+   		    this._ray = makeAnNewRay(oldRay);
+			if(this._ray != null)
+			{
+//				StageObjectsManager.getDefault.originPivot.addChild(this._ray);
+//				this._ray.displayRays();
+//				StageObjectsManager.getDefault.rayManager.notify(_ray);
+			}
+   		     
+   		}
+   		
+    	/**
+    	 *   get the distance between  the object's centrol point and the ray's start point 
+    	 * 
+    	 *   if return -1 means that the distance is infinite
+    	 * 
+   		 **/
+    	public function getDistance(ray:Ray):Number{
+//    		if(ray.getLineRays().length>0){
+//			   var lineRay:LineRay = ray.getLineRays().getItemAt(0) as LineRay;
+//    	       return MathUtils.distanceToNumber3D(new Number3D(this.x,this.y,this.z),lineRay.start_point);;
+//    	    }
+    	    return -1;
+    	}
+    	
+   		 /**
+   		 *   judge the ray if is on the object
+   		 */ 
+    	public function isOnTheRay(ray:Ray):Boolean{
+    		
+//    	    if(ray.getLineRays().length>0){
+//			   var lineRay:LineRay = ray.getLineRays().getItemAt(0) as LineRay;
+//	           return isTheRayOnThisObject(Number3D.sub(lineRay.end_point,lineRay.start_point),lineRay.start_point);
+//			}
+    	   return false;
+    	}
 	    
 	    // should destribute the listener 
         override public function addEventListener(type:String, listener:Function,useCapture:Boolean = false, priority:int = 0, useWeakReference:Boolean = false):void
