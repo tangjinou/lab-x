@@ -1,5 +1,9 @@
 package cn.edu.zju.labx.core
 {
+	import flash.filters.BlurFilter;
+	import flash.filters.DropShadowFilter;
+	import flash.filters.GlowFilter;
+	
 	import org.papervision3d.view.Viewport3D;
 	import org.papervision3d.view.layer.ViewportLayer;
 	import org.papervision3d.view.layer.util.ViewportLayerSortMode;
@@ -14,6 +18,7 @@ package cn.edu.zju.labx.core
         public var deskLayer:ViewportLayer;
 		public var equipmentLayer:ViewportLayer;
 		
+		public var rayEffect:Array;
        
        	/*************************************************************************
 		 * Sigleton Method to make sure there are only one LayerManager 
@@ -56,6 +61,12 @@ package cn.edu.zju.labx.core
 			equipmentLayer.layerIndex = 1;
 			deskLayer.layerIndex = 2;
 			equipmentLayer.sortMode = ViewportLayerSortMode.Z_SORT;
+			
+			var bf:BlurFilter = new BlurFilter(3,3,1);
+			var growFilter_2:GlowFilter = new GlowFilter(0x00ffff, 2, 20, 10, 2, 3, true, false);
+			var growFilter_b_2:GlowFilter = new GlowFilter(0x00ffff, 2, 16, 10, 3, 9, false, false);
+			var dropShadow_2:DropShadowFilter = new DropShadowFilter(0, 360, 0x000fff, 1, 70, 70, 5, 3, false, false, false);
+			rayEffect = [growFilter_2,growFilter_b_2,dropShadow_2];
 		}
 	}
 }
