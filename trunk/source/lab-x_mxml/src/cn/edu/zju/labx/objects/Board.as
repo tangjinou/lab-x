@@ -1,9 +1,7 @@
 package cn.edu.zju.labx.objects
 {   
     import cn.edu.zju.labx.core.LabXConstant;
-    import cn.edu.zju.labx.core.StageObjectsManager;
     import cn.edu.zju.labx.events.IUserInputListener;
-    import cn.edu.zju.labx.events.LabXEvent;
     import cn.edu.zju.labx.logicObject.InterferenceLogic;
     
     import flash.display.BitmapData;
@@ -71,14 +69,16 @@ package cn.edu.zju.labx.objects
 		
 		public function displayImage():void
 		{
-			var theta:Number = Math.PI/4;
-			var interf:InterferenceLogic = new InterferenceLogic(theta, LabXConstant.WAVE_LENGTH);
-			var distance:Number = interf.getDistance();
+//			var theta:Number = Math.PI/4;
+//			var interf:InterferenceLogic = new InterferenceLogic(theta, LabXConstant.WAVE_LENGTH);
+//			var distance:Number = interf.getDistance();
 			
 			var bmp:BitmapData = new BitmapData(depth, height, false, 0x0);
-			for (var i:Number = 0; i < 10; i++)
+			var distance:Number = 10;
+			var numOfColumns:Number = depth/distance/2;
+			for (var i:Number = 0; i < numOfColumns; i++)
 			{
-				bmp.fillRect(new Rectangle(depth*i/5, 0, depth/10, height), 0x0000FF);
+				bmp.fillRect(new Rectangle(i*distance*2, 0, distance, height), 0x0000FF);
 			}
 			var material:BitmapMaterial = new BitmapMaterial(bmp);
 			material.smooth = true;
