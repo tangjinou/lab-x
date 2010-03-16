@@ -90,7 +90,13 @@ package cn.edu.zju.labx.objects
 			
 		}
 		
-						 /**
+         /************************************************************
+		 * 
+		 *  This is implement of IRayHandle
+		 * 
+		 ************************************************************/ 
+		
+		/**
 		 *  deal with when the ray on the object
 		 **/ 
    		public function onRayHanle(oldRay:Ray):void{
@@ -122,20 +128,7 @@ package cn.edu.zju.labx.objects
 	           return isTheRayOnThisObject(Number3D.sub(lineRay.end_point,lineRay.start_point),lineRay.start_point);
 			}
     	   return false;
-    	}
-		
-//	    override public  function eventTriger(event:String):void{
-//	    	if(event == MouseEvent.MOUSE_UP){
-//	    		 if(this.getMouse_x()>this.getScreen_x()){
-//                    this.moveRight(this.x_min_offset);
-//                 }
-//                 else{
-//                    this.moveLeft(this.x_min_offset);
-//                 }
-//      		}
-//	    }
-	    
-	    // should destribute the listener 
-		
+    	}		
+
 	}
 }

@@ -275,6 +275,31 @@ package cn.edu.zju.labx.utils
            throw new LabXError("");
 		}
 		
+	     /***
+		 *  calculate the point'position in Flat based on the line
+		 * 
+		 *  @param  flat_position
+		 *  @prame  flat_norma
+		 *  @param  vetor is line's vetor
+		 *  @Exception The two vectors are not in the same dirction
+		 *  @return the point's  position
+		 *   
+		 **/
+		public static function calculatePointInFlat2(flat_position:Number3D,flat_norma,line_vetor:Number3D,startPoint:Number3D):Number3D{
+		   var D:Number = 0 - flat_position.x*flat_norma.x - flat_position.y*flat_norma.y-flat_position.z*flat_norma.z;
+		   var m:Number = flat_norma.x*line_vetor.x + flat_norma.y*line_vetor.y + flat_norma.z*line_vetor.z;
+		   if(!isZero(m)){
+		      var k:Number = (0 - D - startPoint.x*flat_norma.x -startPoint.y*flat_norma.y -startPoint.z*flat_norma.z)/m
+		      var resultPoint:Number3D = new Number3D(line_vetor.x*k+startPoint.x,line_vetor.y*k+startPoint.y,line_vetor.z*k+startPoint.z);
+		      if(isVetorTheSameDirection(line_vetor,Number3D.sub(resultPoint,startPoint))){
+		         return resultPoint;
+		      }
+		      throw new LabXError("The two vectors are not in the same dirction");
+		      
+		   }
+           throw new LabXError("");
+		}
+		
 		public static function isZero(number:Number):Boolean{
 		   if(Math.abs(number)<0.000001){
 		      return true;
@@ -332,5 +357,22 @@ package cn.edu.zju.labx.utils
 					d.z + (c.z-d.z)*m
 			);
 		}
+		
+		
+		  /**
+		  * Calculate the Dreflection vector based on incidentRay vector and object normal
+		  * @param incidentRay (Number3D) first point in first line
+		  * @param normal (Number3D) second point in first line
+		  */
+		public static function calculate3DreflectionVector(incidentRay:Number3D,normal:Number3D):Number3D{
+		   //Vnew=V-2*N(V.N) 
+		    var nor:Number3D = normal.clone();
+		    nor.normalize();
+		    var  n:Number= Number3D.dot(incidentRay,nor);
+		    nor.multiplyEq(2);
+		    nor.multiplyEq(n);
+		    return Number3D.sub(incidentRay,nor);
+		}   
+		
 	}
 }

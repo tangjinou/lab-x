@@ -201,6 +201,7 @@ package cn.edu.zju.labx.core
 //		   if(labXObjectSelected!=null&&UserInputHandler.getDefault.currentSelectedObject!=null){
 		   if(labXObjectSelected!=null){
 		     labXObjectSelected.localRotationY++;
+		     rayManager.reProduceRays();
 //		     trace("transform:"+labXObjectSelected.transform.toString());
 //		     if(labXObjectSelected is ILabXListener)
 //		     {
@@ -217,6 +218,8 @@ package cn.edu.zju.labx.core
 //		   if(labXObjectSelected!=null&&UserInputHandler.getDefault.currentSelectedObject!=null){
            if(labXObjectSelected!=null){
 		     labXObjectSelected.localRotationY--;
+		     rayManager.reProduceRays();
+		     
 //		     if(labXObjectSelected is ILabXListener)
 //		     {
 //		     	var obj:ILabXListener = labXObjectSelected as ILabXListener;

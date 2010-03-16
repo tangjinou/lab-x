@@ -4,8 +4,9 @@ package cn.edu.zju.labx.objects
 	import cn.edu.zju.labx.core.StageObjectsManager;
 	import cn.edu.zju.labx.core.UserInputHandler;
 	import cn.edu.zju.labx.events.IRayHandle;
-	import cn.edu.zju.labx.events.IRayMaker;
 	import cn.edu.zju.labx.events.IUserInputListener;
+	import cn.edu.zju.labx.logicObject.SplitterBeamLogic;
+	import cn.edu.zju.labx.utils.MathUtils;
 	
 	import flash.events.Event;
 	import flash.events.KeyboardEvent;
@@ -13,6 +14,7 @@ package cn.edu.zju.labx.objects
 	
 	import mx.collections.ArrayCollection;
 	
+	import org.papervision3d.core.math.Number3D;
 	import org.papervision3d.core.proto.MaterialObject3D;
 	import org.papervision3d.events.InteractiveScene3DEvent;
 	import org.papervision3d.materials.utils.MaterialsList;
@@ -39,18 +41,17 @@ package cn.edu.zju.labx.objects
 			addEventListener(InteractiveScene3DEvent.OBJECT_PRESS, objectPressHandler);
 		}
 		
-
-		
-		private function makeAnNewRay(rayMaker:IRayMaker):Ray
+		private function makeAnNewRay(oldRay:Ray):Ray
 		{
-			var oldRay:Ray = rayMaker.getRay();
 			if(oldRay != null)
 			{
 				oldRay.EndX = this.x;
 //				var lensLogic:LensLogic = new LensLogic(new Number3D(this.x, this.y, this.z), this._focus);
 				var newLineRays:ArrayCollection = new ArrayCollection();
 				for each (var oldLineRay:LineRay in oldRay.getLineRays())
-				{
+				{   
+					var beamLogic:SplitterBeamLogic =new SplitterBeamLogic(new Number3D(this.x,this.y,this.z),new Number3D(this.transform.n11,this.transform.n12,this.transform.n13));
+                    newLineRays.addItem(beamLogic.calculateRayAfterSplit(oldLineRay));
 //					var resultLogic:RayLogic = lensLogic.calculateRayAfterLens(oldLineRay.logic);
 //					if (isRayOnLens(resultLogic))newLineRays.addItem(new LineRay(resultLogic));
 				}
@@ -111,17 +112,29 @@ package cn.edu.zju.labx.objects
 		   	splitterBeam = new Cube(materialsList,width,depth,height);
 		   	this.addChild(splitterBeam);
 		}
+	    
+	    // should destribute the listener 
+        override public function addEventListener(type:String, listener:Function,useCapture:Boolean = false, priority:int = 0, useWeakReference:Boolean = false):void
+		{   
+			splitterBeam.addEventListener(type, listener, useCapture, priority, useWeakReference);
+		}
 		
-				 /**
+	     /************************************************************
+		 * 
+		 *  This is implement of IRayHandle
+		 * 
+		 ************************************************************/ 
+		 
+		 /**
 		 *  deal with when the ray on the object
 		 **/ 
    		public function onRayHanle(oldRay:Ray):void{
    		    this._ray = makeAnNewRay(oldRay);
 			if(this._ray != null)
 			{
-//				StageObjectsManager.getDefault.originPivot.addChild(this._ray);
-//				this._ray.displayRays();
-//				StageObjectsManager.getDefault.rayManager.notify(_ray);
+				StageObjectsManager.getDefault.originPivot.addChild(this._ray);
+				this._ray.displayRays();
+				StageObjectsManager.getDefault.rayManager.notify(_ray);
 			}
    		     
    		}
@@ -133,10 +146,10 @@ package cn.edu.zju.labx.objects
     	 * 
    		 **/
     	public function getDistance(ray:Ray):Number{
-//    		if(ray.getLineRays().length>0){
-//			   var lineRay:LineRay = ray.getLineRays().getItemAt(0) as LineRay;
-//    	       return MathUtils.distanceToNumber3D(new Number3D(this.x,this.y,this.z),lineRay.start_point);;
-//    	    }
+    		if(ray.getLineRays().length>0){
+			   var lineRay:LineRay = ray.getLineRays().getItemAt(0) as LineRay;
+    	       return MathUtils.distanceToNumber3D(new Number3D(this.x,this.y,this.z),lineRay.start_point);;
+    	    }
     	    return -1;
     	}
     	
@@ -145,18 +158,12 @@ package cn.edu.zju.labx.objects
    		 */ 
     	public function isOnTheRay(ray:Ray):Boolean{
     		
-//    	    if(ray.getLineRays().length>0){
-//			   var lineRay:LineRay = ray.getLineRays().getItemAt(0) as LineRay;
-//	           return isTheRayOnThisObject(Number3D.sub(lineRay.end_point,lineRay.start_point),lineRay.start_point);
-//			}
+    	    if(ray.getLineRays().length>0){
+			   var lineRay:LineRay = ray.getLineRays().getItemAt(0) as LineRay;
+	           return isTheRayOnThisObject(Number3D.sub(lineRay.end_point,lineRay.start_point),lineRay.start_point);
+			}
     	   return false;
     	}
-	    
-	    // should destribute the listener 
-        override public function addEventListener(type:String, listener:Function,useCapture:Boolean = false, priority:int = 0, useWeakReference:Boolean = false):void
-		{   
-			splitterBeam.addEventListener(type, listener, useCapture, priority, useWeakReference);
-		}
-		
+
 	}
 }

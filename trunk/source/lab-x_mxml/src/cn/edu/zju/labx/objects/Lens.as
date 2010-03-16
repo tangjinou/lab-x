@@ -153,7 +153,26 @@ package cn.edu.zju.labx.objects
 		}
 		
 		
-		
+		   		
+    	
+	    protected function daeFileOnloaded(evt:FileLoadEvent):void{  
+	    	this.addChild(lens);  
+//	        trace("beigin~~~~~~~~~~~~~");
+//			trace(lens.childrenList());
+//			trace("end~~~~~~~~~~~~~");
+//			this.useOwnContainer = true;
+			var effectLayer:ViewportLayer = new ViewportLayer(StageObjectsManager.getDefault.mainView.viewport, null);
+			effectLayer.addDisplayObject3D(this, true);
+			effectLayer.alpha = 0.7;
+			effectLayer.blendMode = BlendMode.HARDLIGHT;
+			StageObjectsManager.getDefault.layerManager.equipmentLayer.addLayer(effectLayer);
+        } 
+        
+         /************************************************************
+		 * 
+		 *  This is implement of IRayHandle
+		 * 
+		 ************************************************************/ 
 		 /**
 		 *  deal with when the ray on the object
 		 **/ 
@@ -193,19 +212,7 @@ package cn.edu.zju.labx.objects
 			}
     	   return false;
     	}
-    	
-	    protected function daeFileOnloaded(evt:FileLoadEvent):void{  
-	    	this.addChild(lens);  
-//	        trace("beigin~~~~~~~~~~~~~");
-//			trace(lens.childrenList());
-//			trace("end~~~~~~~~~~~~~");
-//			this.useOwnContainer = true;
-			var effectLayer:ViewportLayer = new ViewportLayer(StageObjectsManager.getDefault.mainView.viewport, null);
-			effectLayer.addDisplayObject3D(this, true);
-			effectLayer.alpha = 0.7;
-			effectLayer.blendMode = BlendMode.HARDLIGHT;
-			StageObjectsManager.getDefault.layerManager.equipmentLayer.addLayer(effectLayer);
-        } 
+
 		
 	}
 }
