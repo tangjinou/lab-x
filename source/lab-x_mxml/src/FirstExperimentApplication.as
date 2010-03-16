@@ -77,6 +77,7 @@ package
             DAE(desk).load(ResourceManager.DESK_DAE_URL);
             desk.scale = 3;
             desk.scaleX = 6;
+            desk.scaleZ = 5;
 		}
 		
 		private function deskOnLoaded(evt:FileLoadEvent):void{
@@ -157,7 +158,7 @@ package
             originPivot.addChild(board);
             equipmentLayer.addDisplayObject3D(board, true);
             StageObjectsManager.getDefault.addObject(board);
-            board.displayImage();
+            board.displayInterferenceImage();
 			
 		}
 		
