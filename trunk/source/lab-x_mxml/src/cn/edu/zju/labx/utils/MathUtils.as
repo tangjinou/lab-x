@@ -255,24 +255,26 @@ package cn.edu.zju.labx.utils
 		 *   
 		 **/
 		public static function calculatePointInFlat(transform:Matrix3D,vetor:Number3D,startPoint:Number3D):Number3D{
-//		   var x0:Number = transform.n14;
-//		   var y0:Number = transform.n24;
-//		   var z0:Number = transform.n34;
 
+
+//           var plane3D:Plane3D = new Plane3D(new Number3D(transform.n11,transform.n12,transform.n13),new Number3D(transform.n14,transform.n24,transform.n34));
+//           return  plane3D.getIntersectionLineNumbers(startPoint,Number3D.add(startPoint,vetor));
+		   var x0:Number = transform.n14;
+		   var y0:Number = transform.n24;
+		   var z0:Number = transform.n34;           
 		   var D:Number = 0 - transform.n14*transform.n11 - transform.n24*transform.n12-transform.n34*transform.n13;
 		   var m:Number = transform.n11*vetor.x + transform.n12*vetor.y + transform.n13*vetor.z;
 		   if(!isZero(m)){
 		      var k:Number = (0 - D - startPoint.x*transform.n11 -startPoint.y*transform.n12 -startPoint.z*transform.n13)/m
-		      
 		      var resultPoint:Number3D = new Number3D(vetor.x*k+startPoint.x,vetor.y*k+startPoint.y,vetor.z*k+startPoint.z);
-		      
 		      if(isVetorTheSameDirection(vetor,Number3D.sub(resultPoint,startPoint))){
 		         return resultPoint;
 		      }
-		      throw new LabXError("The two vectors are not in the same dirction");
+//		      throw new LabXError("The two vectors are not in the same dirction");
 		      
 		   }
-           throw new LabXError("");
+		   return null;
+//           throw new LabXError("");
 		}
 		
 	     /***
@@ -285,19 +287,15 @@ package cn.edu.zju.labx.utils
 		 *  @return the point's  position
 		 *   
 		 **/
-		public static function calculatePointInFlat2(flat_position:Number3D,flat_norma,line_vetor:Number3D,startPoint:Number3D):Number3D{
-		   var D:Number = 0 - flat_position.x*flat_norma.x - flat_position.y*flat_norma.y-flat_position.z*flat_norma.z;
-		   var m:Number = flat_norma.x*line_vetor.x + flat_norma.y*line_vetor.y + flat_norma.z*line_vetor.z;
-		   if(!isZero(m)){
-		      var k:Number = (0 - D - startPoint.x*flat_norma.x -startPoint.y*flat_norma.y -startPoint.z*flat_norma.z)/m
-		      var resultPoint:Number3D = new Number3D(line_vetor.x*k+startPoint.x,line_vetor.y*k+startPoint.y,line_vetor.z*k+startPoint.z);
-		      if(isVetorTheSameDirection(line_vetor,Number3D.sub(resultPoint,startPoint))){
-		         return resultPoint;
-		      }
-		      throw new LabXError("The two vectors are not in the same dirction");
-		      
-		   }
-           throw new LabXError("");
+		public static function calculatePointInFlat2(flat_point:Number3D,flat_normal:Number3D,line_vetor:Number3D,startPoint:Number3D):Number3D{
+		   var transform:Matrix3D = new Matrix3D();
+		   transform.n11 = flat_normal.x;
+		   transform.n12 = flat_normal.y;
+		   transform.n13 = flat_normal.z;
+		   transform.n14 = flat_point.x;
+		   transform.n24 = flat_point.y;
+		   transform.n34 = flat_point.z;
+		   return calculatePointInFlat(transform,line_vetor,startPoint);
 		}
 		
 		public static function isZero(number:Number):Boolean{
@@ -325,7 +323,7 @@ package cn.edu.zju.labx.utils
 		  * 
 		  * @param a (Number3D) first point in first line
 		  * @param b (Number3D) second point in first line
-		  * @param m (Number3D) first point in first line
+		  * @param m (Number3D) first point in second line
 		  * @param n (Number3D) second point in second line
 		  * 
 		  */
