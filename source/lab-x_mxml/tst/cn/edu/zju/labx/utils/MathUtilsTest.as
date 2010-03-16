@@ -4,6 +4,7 @@ package cn.edu.zju.labx.utils
 	
 	import flexunit.framework.Assert;
 	
+	import org.flexunit.asserts.assertEquals;
 	import org.flexunit.asserts.assertTrue;
 	import org.papervision3d.core.math.Matrix3D;
 	import org.papervision3d.core.math.Number2D;
@@ -237,6 +238,36 @@ package cn.edu.zju.labx.utils
 		    
 		    
 		}
+		
+		[Test]
+		public function testCalculatePointInFlat2():void {
+		   
+		    var flat_position:Number3D =new Number3D(1,0,0);
+		    var flat_norma:Number3D =new Number3D(1,0,0);
+		    var line:Number3D;
+		    var startPoint:Number3D;
+		    var result:Number3D;
+		    line = new Number3D(-2,2,0);
+		    startPoint = new Number3D(2,0,0);
+		    result = MathUtils.calculatePointInFlat2(flat_position,flat_norma,line,startPoint);
+		    Assert.assertNotNull(result);
+		    Assert.assertEquals(result.x,1);
+		    Assert.assertEquals(result.y,1);
+		    Assert.assertEquals(result.z,0);
+		    
+		    
+		    flat_position = new Number3D(1,0,0);
+		    flat_norma = new Number3D(1.71,0.71,0);
+		    line = new Number3D(2,2,0);
+		    startPoint = new Number3D(0,-1,0);
+            result = MathUtils.calculatePointInFlat2(flat_position,flat_norma,line,startPoint);
+		    Assert.assertNotNull(result);
+		    Assert.assertEquals(result.x,1);
+		    Assert.assertEquals(result.y,0);
+		    Assert.assertEquals(result.z,0);
+		
+		}
+
 		[Test] 
 		public function testCalculate3DIntersaction():void
 		{
@@ -323,6 +354,17 @@ package cn.edu.zju.labx.utils
 			assertTrue(Math.abs(result2.z-result3.z)<LabXConstant.NUMBER_PRECISION);
 			assertTrue(Math.abs(result3.z-result4.z)<LabXConstant.NUMBER_PRECISION);
 		}
+		
+		[Test] 
+		public function calculate3DreflectionVector():void{
+		   var v:Number3D = new Number3D(1,1,0);
+		   var m:Number3D = new Number3D(-1,0,0);
+		   var v2:Number3D = MathUtils.calculate3DreflectionVector(v,m);
+		   assertEquals(-1,v2.x);
+		   assertEquals(1,v2.y);
+		   assertEquals(0,v2.z);
+		}
+		
 		
 	}
 }

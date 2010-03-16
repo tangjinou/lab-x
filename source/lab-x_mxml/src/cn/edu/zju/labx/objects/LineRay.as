@@ -56,5 +56,8 @@ package cn.edu.zju.labx.objects
 	    {
 	    	return this._logic;
 	    }
+	    public function get normal():Number3D{
+	        return new Number3D(this._logic.dx,this._logic.dy,this._logic.dz);
+	    }
 	}
 }
