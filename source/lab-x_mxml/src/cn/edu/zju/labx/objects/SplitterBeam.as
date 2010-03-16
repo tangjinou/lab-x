@@ -5,6 +5,7 @@ package cn.edu.zju.labx.objects
 	import cn.edu.zju.labx.core.UserInputHandler;
 	import cn.edu.zju.labx.events.IRayHandle;
 	import cn.edu.zju.labx.events.IUserInputListener;
+	import cn.edu.zju.labx.logicObject.LineRayLogic;
 	import cn.edu.zju.labx.logicObject.SplitterBeamLogic;
 	import cn.edu.zju.labx.utils.MathUtils;
 	
@@ -41,7 +42,7 @@ package cn.edu.zju.labx.objects
 			addEventListener(InteractiveScene3DEvent.OBJECT_PRESS, objectPressHandler);
 		}
 		
-		private function makeAnNewRay(oldRay:Ray):Ray
+		private function makeNewRay1(oldRay:Ray):Ray
 		{
 			if(oldRay != null)
 			{
@@ -52,12 +53,24 @@ package cn.edu.zju.labx.objects
 				{   
 					var beamLogic:SplitterBeamLogic =new SplitterBeamLogic(new Number3D(this.x,this.y,this.z),new Number3D(this.transform.n11,this.transform.n12,this.transform.n13));
                     newLineRays.addItem(beamLogic.calculateRayAfterSplit(oldLineRay));
-//					var resultLogic:RayLogic = lensLogic.calculateRayAfterLens(oldLineRay.logic);
-//					if (isRayOnLens(resultLogic))newLineRays.addItem(new LineRay(resultLogic));
 				}
 				return  new Ray(null, newLineRays, 0, 0);
 			}
 			return null;
+		}
+		
+		private function makeNewRay2(oldRay:Ray):Ray{
+		   	if(oldRay != null)
+			{
+		     	var newLineRays:ArrayCollection = new ArrayCollection();
+				for each (var oldLineRay:LineRay in oldRay.getLineRays())
+				{   
+					var lineRayLogic:LineRayLogic = new LineRayLogic(oldLineRay.end_point.clone(),oldLineRay.normal);
+                    newLineRays.addItem(new LineRay(lineRayLogic));
+				}
+				return  new Ray(null,newLineRays,0,0);
+		    }
+		    return  null
 		}
 		
 		public function hanleUserInputEvent(event:Event):void{
@@ -129,14 +142,19 @@ package cn.edu.zju.labx.objects
 		 *  deal with when the ray on the object
 		 **/ 
    		public function onRayHanle(oldRay:Ray):void{
-   		    this._ray = makeAnNewRay(oldRay);
+   		    this._ray = makeNewRay1(oldRay);
+   		    var ray2:Ray = makeNewRay2(oldRay);
 			if(this._ray != null)
 			{
 				StageObjectsManager.getDefault.originPivot.addChild(this._ray);
 				this._ray.displayRays();
 				StageObjectsManager.getDefault.rayManager.notify(_ray);
 			}
-   		     
+			if(ray2!=null){
+			    StageObjectsManager.getDefault.originPivot.addChild(ray2);
+				ray2.displayRays();
+				StageObjectsManager.getDefault.rayManager.notify(ray2);
+			}
    		}
    		
     	/**
@@ -158,7 +176,7 @@ package cn.edu.zju.labx.objects
    		 */ 
     	public function isOnTheRay(ray:Ray):Boolean{
     		
-    	    if(ray.getLineRays().length>0){
+    	    if(ray!=null && ray.getLineRays()!=null && ray.getLineRays().length>0){
 			   var lineRay:LineRay = ray.getLineRays().getItemAt(0) as LineRay;
 	           return isTheRayOnThisObject(Number3D.sub(lineRay.end_point,lineRay.start_point),lineRay.start_point);
 			}

@@ -9,6 +9,7 @@ package cn.edu.zju.labx.objects
 	import org.hamcrest.object.instanceOf;
 	import org.papervision3d.core.geom.TriangleMesh3D;
 	import org.papervision3d.core.math.Number3D;
+	import org.papervision3d.core.math.Plane3D;
 	import org.papervision3d.core.proto.MaterialObject3D;
 	import org.papervision3d.events.InteractiveScene3DEvent;
 	
@@ -23,8 +24,7 @@ package cn.edu.zju.labx.objects
 		 * This  Function is for add userInputHandle
 		 */ 
 		public var userInputHandle:Function;
-
-		
+        
 		/**
 		 * Create an LabX Object
 		 */

@@ -21,8 +21,8 @@ package cn.edu.zju.labx.objects
 		
 		public var lineBold:Number=2;
 		
-		public var startX:Number;
-		public var endX:Number;
+		private var startX:Number;
+		private var endX:Number;
 		
 		//This array is in for lineRay
 		private var lineRays:ArrayCollection =new ArrayCollection();
@@ -64,6 +64,16 @@ package cn.edu.zju.labx.objects
 		   }
 			
 			displayRays();
+		}
+		
+		public function set startPonit(p:Number3D):void{
+		      for(var i:int=0;i<lineRays.length;i++){
+			  	if(lineRays.getItemAt(i) is LineRay)
+			 	 {
+			  		var lineRay:LineRay = lineRays.getItemAt(i) as LineRay;
+			  		lineRay.start_point = p.clone();
+		    	}
+		      }
 		}
 		
 		public function displayRays():void

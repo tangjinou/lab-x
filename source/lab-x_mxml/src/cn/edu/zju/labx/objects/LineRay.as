@@ -34,6 +34,13 @@ package cn.edu.zju.labx.objects
 		   return new Number3D(_logic.x,_logic.y,_logic.z);
 		}
 		
+		public function set start_point(p:Number3D):void{
+           this._logic.x = p.x;
+           this._logic.y = p.y;		
+           this._logic.z = p.z;
+		}
+		
+		
 		public function get end_point():Number3D{
 		   if(endPoint ==null){
 		     var x:Number= _length * _logic.dx+_logic.x;
