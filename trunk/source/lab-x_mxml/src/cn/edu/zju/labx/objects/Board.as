@@ -70,7 +70,7 @@ package cn.edu.zju.labx.objects
 			cube.addEventListener(type, listener, useCapture, priority, useWeakReference);
 		}
 		
-		public function displayImage():void
+		public function displayInterferenceImage():void
 		{
 			var theta:Number = Math.PI/10;
 			var interf:InterferenceLogic = new InterferenceLogic(theta, LabXConstant.WAVE_LENGTH);
@@ -90,6 +90,7 @@ package cn.edu.zju.labx.objects
 			
 		}
 		
+
          /************************************************************
 		 * 
 		 *  This is implement of IRayHandle
