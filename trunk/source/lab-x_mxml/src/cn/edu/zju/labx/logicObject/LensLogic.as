@@ -101,10 +101,27 @@ package cn.edu.zju.labx.logicObject
 			
 			var resultPoint:Number3D = MathUtils.calculate3DIntersection(paraPoint, focusPoint, rayPoint, position);
 			
-
+			
+			/**
+			 * This block is for test the MathUtils.calculate3DIntersection is correct or not
+			 */
+			var checkLine1:LineRayLogic = new LineRayLogic(paraPoint, Number3D.sub(focusPoint, paraPoint))
+			if(!checkLine1.isPointOnRay(resultPoint))
+			{
+				trace("Errror---------------------------");
+			}
+			var checkLine2:LineRayLogic = new LineRayLogic(rayPoint, Number3D.sub(position, rayPoint))
+			if(!checkLine2.isPointOnRay(resultPoint))
+			{
+				trace("Errror---------------------------");
+			}
+			/***********************************************************************************/
+			
+			
+			
 			var vector:Number3D = Number3D.sub(resultPoint, intersaction);
 			vector.normalize();
-			if (f<0)vector.multiplyEq(-1);
+			if (f<0 || (Math.abs(lensPlane.distance(rayPoint)) < f))vector.multiplyEq(-1);
 			return new LineRayLogic(intersaction, vector);
 		}
 		
