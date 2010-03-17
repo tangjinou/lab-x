@@ -20,7 +20,7 @@
 	 		   Mouse3D.enabled = true;
 	 		   firstExperiment.viewport.interactive = true; 
 	 		   var uic:UIComponent = new UIComponent();
-			   stage.frameRate = 10;
+			   stage.frameRate = 40;
                stage.addEventListener(MouseEvent.MOUSE_DOWN, firstExperiment.onMouseDown);
                stage.addEventListener(MouseEvent.MOUSE_MOVE, firstExperiment.onMouseMove);
                stage.addEventListener(MouseEvent.MOUSE_UP, UserInputHandler.getDefault.mouseUpHandler);
