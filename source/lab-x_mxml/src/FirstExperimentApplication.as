@@ -8,6 +8,7 @@ package
 	import cn.edu.zju.labx.objects.ConvexLens;
 	import cn.edu.zju.labx.objects.Lens;
 	import cn.edu.zju.labx.objects.LightSource;
+	import cn.edu.zju.labx.objects.Mirror;
 	import cn.edu.zju.labx.objects.SplitterBeam;
 	import cn.edu.zju.labx.utils.ResourceManager;
 	
@@ -45,8 +46,10 @@ package
 		private var light:PointLight3D;
 		public  var originPivot:DisplayObject3D;
 		private var desk:DAE; 
-	    public var concaveLens:Lens;
-	    public var convexLens:Lens;
+		private var beam1:SplitterBeam;
+		private var beam2:SplitterBeam;
+	    public var convexLens1:Lens;
+	    public var convexLens2:Lens;
 	    private var board:Board;
 	
 		private var deskLayer:ViewportLayer;
@@ -124,34 +127,59 @@ package
 			imgLoader.contentLoaderInfo.addEventListener(Event.COMPLETE,loadLightSourceTextureComplete);
 			imgLoader.load(new URLRequest("../assets/textures/metal.jpg"));
 			
-			/*Create SplitterBeam*/
+			
+			/*Create SplitterBeam1*/
 			var shadeMaterialBeam:PhongMaterial = new PhongMaterial(light,0xFFFFFF,0x6ccff8,100);
 			shadeMaterialBeam.interactive = true;
-			var beam:SplitterBeam =new SplitterBeam(shadeMaterialBeam);
-			beam.moveRight(LabXConstant.DESK_WIDTH/5);
-			beam.moveUp(beam.height/2);
-			originPivot.addChild(beam);
-			equipmentLayer.addDisplayObject3D(beam, true);
-			StageObjectsManager.getDefault.addObject(beam);
+			beam1 =new SplitterBeam(shadeMaterialBeam);
+			beam1.moveRight(LabXConstant.DESK_WIDTH/5);
+			beam1.moveUp(beam1.height/2);
+			originPivot.addChild(beam1);
+			equipmentLayer.addDisplayObject3D(beam1, true);
+			StageObjectsManager.getDefault.addObject(beam1);
+			
+			
+			/*Create SplitterBeam2*/
+			var shadeMaterialBeam:PhongMaterial = new PhongMaterial(light,0xFFFFFF,0x6ccff8,100);
+			shadeMaterialBeam.interactive = true;
+			beam2 =new SplitterBeam(shadeMaterialBeam);
+			beam2.moveRight(LabXConstant.DESK_WIDTH/5*2);
+			beam2.moveUp(beam1.height/2);
+			beam2.rotationY -=135;
+			beam2.moveForward(-200);
+			originPivot.addChild(beam2);
+			equipmentLayer.addDisplayObject3D(beam2, true);
+			StageObjectsManager.getDefault.addObject(beam2);
 			
 			
 			/*Create Lens*/	
 			var shadeMaterialLens:PhongMaterial = new PhongMaterial(light,0xFFFFFF,0x6ccff8,100);
 			shadeMaterialLens.interactive = true;
-			concaveLens = new ConcaveLens(shadeMaterialLens, 100);
-			concaveLens.moveRight(LabXConstant.DESK_WIDTH/3);
-			concaveLens.moveUp(concaveLens.height/2);
-			originPivot.addChild(concaveLens);
-			StageObjectsManager.getDefault.addObject(concaveLens);
+			convexLens1 = new ConvexLens(shadeMaterialLens, 100);
+			convexLens1.moveRight(LabXConstant.DESK_WIDTH/3);
+			convexLens1.moveUp(convexLens1.height/2);
+			originPivot.addChild(convexLens1);
+			StageObjectsManager.getDefault.addObject(convexLens1);
 			
 			/*Create second Lens*/	
 			var shadeMaterialLens2:PhongMaterial = new PhongMaterial(light,0xFFFFFF,0x6ccff8,100);
 			shadeMaterialLens2.interactive = true;
-			convexLens = new ConvexLens(shadeMaterialLens2, 100);
-			convexLens.moveRight(LabXConstant.DESK_WIDTH/3 + 200);
-			convexLens.moveUp(convexLens.height/2);
-			originPivot.addChild(convexLens);
-			StageObjectsManager.getDefault.addObject(convexLens);
+			convexLens2 = new ConvexLens(shadeMaterialLens2, 100);
+			convexLens2.moveRight(LabXConstant.DESK_WIDTH/3 + 200);
+			convexLens2.moveUp(convexLens2.height/2);
+			originPivot.addChild(convexLens2);
+			StageObjectsManager.getDefault.addObject(convexLens2);
+			
+			
+			/*Create mirror*/
+			var shadeMaterialBeam:PhongMaterial = new PhongMaterial(light,0xFFFFFF,0xFF0000,100);
+			shadeMaterialBeam.interactive = true;
+			var mirror:Mirror =new Mirror(shadeMaterialBeam);
+			mirror.moveRight(LabXConstant.DESK_WIDTH -100);
+			mirror.moveUp(mirror.height/2);
+			originPivot.addChild(mirror);
+			equipmentLayer.addDisplayObject3D(mirror, true);
+			StageObjectsManager.getDefault.addObject(mirror);
 			
 			/*create Board*/
 			var shadeMaterialBoard:PhongMaterial = new PhongMaterial(light,0xFFFFFF,0xe1e1e1,100);

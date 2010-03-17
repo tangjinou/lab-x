@@ -59,7 +59,7 @@ package cn.edu.zju.labx.objects
 			return null;
 		}
 		
-		private function makeNewRay2(oldRay:Ray):Ray{
+		protected function makeNewRay2(oldRay:Ray):Ray{
 		   	if(oldRay != null)
 			{
 		     	var newLineRays:ArrayCollection = new ArrayCollection();

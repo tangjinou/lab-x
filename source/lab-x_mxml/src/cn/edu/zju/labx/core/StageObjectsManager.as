@@ -159,7 +159,6 @@ package cn.edu.zju.labx.core
 		 } 
 		 
 		 public function objectUnPressHandler():void{
-		 	
 	 	   if(labXObjectSelected == null)
 	 	   {
 		       rotate_right_button.enabled=false;
@@ -199,7 +198,7 @@ package cn.edu.zju.labx.core
 		
 		public function rotate_left():void{
 //		   if(labXObjectSelected!=null&&UserInputHandler.getDefault.currentSelectedObject!=null){
-		   if(labXObjectSelected!=null){
+		   if(labXObjectSelected!=null&&Math.abs(labXObjectSelected.localRotationY) <70){
 		     labXObjectSelected.localRotationY++;
 		     rayManager.reProduceRays();
 //		     trace("transform:"+labXObjectSelected.transform.toString());
@@ -216,10 +215,9 @@ package cn.edu.zju.labx.core
 		
 		public function rotate_right():void{
 //		   if(labXObjectSelected!=null&&UserInputHandler.getDefault.currentSelectedObject!=null){
-           if(labXObjectSelected!=null){
+           if(labXObjectSelected!=null&& Math.abs(labXObjectSelected.localRotationY) <70){
 		     labXObjectSelected.localRotationY--;
 		     rayManager.reProduceRays();
-		     
 //		     if(labXObjectSelected is ILabXListener)
 //		     {
 //		     	var obj:ILabXListener = labXObjectSelected as ILabXListener;
@@ -230,33 +228,6 @@ package cn.edu.zju.labx.core
 		   }
 		}
 		
-//	    private var labXObjectListener:LabXObject =null;
-//        public function setNextObjectListener(labXObjectListener:LabXObject):void{
-//            this.labXObjectListener= labXObjectListener; 
-//        }
-//        private function labXObjectListenerTriger(event:String):void{
-//           if(this.labXObjectListener!=null){
-//              this.labXObjectListener.eventTriger(event);
-//              this.labXObjectListener = null;
-//           }
-//        }
-//		public function dispatchEvent(event:Event):void{
-//		   this.labXObjectListenerTriger(event.type);
-//		}
-		
-		//////////////////////////////////////////////////////////////////////
-//		public var x_min_offset:int = 5;
-//		public var y_min_offset:int = 5;
-//        public var z_min_offset:int = 5;
-//        public function setX_min_offset(offset:int):void{
-//             this.x_min_offset = offset;
-//        }
-//        public function setY_min_offset(offset:int):void{
-//            this.y_min_offset = offset;
-//        }
-//        public function setZ_min_offset(offset:int):void{
-//            this.z_min_offset = offset;
-//        }
         
 	}   
 }
