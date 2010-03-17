@@ -18,21 +18,24 @@ package cn.edu.zju.labx.objects
 	
 	import mx.collections.ArrayCollection;
 	
+	import org.papervision3d.core.geom.TriangleMesh3D;
 	import org.papervision3d.core.math.Number3D;
+	import org.papervision3d.core.math.Plane3D;
 	import org.papervision3d.core.proto.MaterialObject3D;
+	import org.papervision3d.core.utils.MeshUtil;
 	import org.papervision3d.events.FileLoadEvent;
 	import org.papervision3d.events.InteractiveScene3DEvent;
-	import org.papervision3d.materials.utils.MaterialsList;
-	import org.papervision3d.objects.parsers.DAE;
+	import org.papervision3d.objects.primitives.Sphere;
 	import org.papervision3d.view.layer.ViewportLayer;
-		
+	
 	public class Lens extends LabXObject implements IUserInputListener, IRayHandle
 	{   
 		private var _focus:Number = LabXConstant.LENS_DEFAULT_FOCAL_LENGTH;
 		
 		
-//		protected var lens:Cylinder;
-	    protected var lens:DAE;
+		protected var lensPart1:TriangleMesh3D;
+	    protected var lensPart2:TriangleMesh3D;
+	    protected var lens:TriangleMesh3D;
 	    
 	    public var width:Number =120;
 	    public var height:Number=120;
@@ -56,11 +59,28 @@ package cn.edu.zju.labx.objects
 			this._focus = focus;
 		}
 		public function createChildren():void{
-//		   	lens = new Cylinder(this.material,100,100,30,10);
-//		   	this.addChild(lens);
-            lens=new DAE(true);  
-            lens.addEventListener(FileLoadEvent.LOAD_COMPLETE,daeFileOnloaded);
-            lens.load(LENS_DAE_URL,new MaterialsList( {all:this.material} ) );		
+		   	var sp:Sphere = new Sphere(this.material,200,30, 30);
+		   	var normal:Number3D = new Number3D(300,0,0); 
+			var point:Number3D = new Number3D(190,0,0); 
+		   	var cutPlane:Plane3D = Plane3D.fromNormalAndPoint(normal, point);
+		   	var meshes:Array = MeshUtil.cutTriangleMesh(sp, cutPlane);
+		   	lensPart1 = meshes[0];
+		 	lensPart1.moveLeft(190);
+		   	normal.x = -300;
+		   	point.x = -190;
+		   	var meshes2:Array = MeshUtil.cutTriangleMesh(meshes[1], cutPlane);
+		   	lensPart2 = meshes2[0];
+		   	lensPart2.moveRight(190);
+		   	lens = new TriangleMesh3D(null, null, null);
+		   	lens.addChild(lensPart1);
+		   	lens.addChild(lensPart2);
+		   	this.addChild(lens);
+		   	lens.useOwnContainer = true;
+		   	var effectLayer:ViewportLayer = new ViewportLayer(StageObjectsManager.getDefault.mainView.viewport, null);
+			effectLayer.addDisplayObject3D(lens, true);
+			effectLayer.alpha = 0.7;
+			effectLayer.blendMode = BlendMode.HARDLIGHT;
+			StageObjectsManager.getDefault.layerManager.equipmentLayer.addLayer(effectLayer);
               
 		}
 		
@@ -165,11 +185,6 @@ package cn.edu.zju.labx.objects
 //			trace(lens.childrenList());
 //			trace("end~~~~~~~~~~~~~");
 //			this.useOwnContainer = true;
-			var effectLayer:ViewportLayer = new ViewportLayer(StageObjectsManager.getDefault.mainView.viewport, null);
-			effectLayer.addDisplayObject3D(this, true);
-			effectLayer.alpha = 0.7;
-			effectLayer.blendMode = BlendMode.HARDLIGHT;
-			StageObjectsManager.getDefault.layerManager.equipmentLayer.addLayer(effectLayer);
         } 
         
          /************************************************************
