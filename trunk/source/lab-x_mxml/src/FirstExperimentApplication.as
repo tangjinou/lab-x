@@ -57,6 +57,7 @@ package
 			super(viewportWidth, viewportHeight, true, false, CameraType.FREE);
 			viewport.interactive = true;
 			camera.zoom = 90;
+			camera.useCulling = true;
 			/**
 			 *  set the mainView here ,if not it will make some problems
 			 */ 
