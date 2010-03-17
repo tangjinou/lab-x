@@ -82,6 +82,7 @@ package cn.edu.zju.labx.objects
 					var resultLogic:LineRayLogic = lensLogic.processRay(oldLineRay.logic);
 					if (isRayOnLens(resultLogic))newLineRays.addItem(new LineRay(resultLogic));
 				}
+				oldRay = null;
 				return  new Ray(null, newLineRays, 0, 0);
 			}
 			return null;

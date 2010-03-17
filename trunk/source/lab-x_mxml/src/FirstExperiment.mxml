@@ -44,7 +44,7 @@
 	 		}
 	 		
 	 		public function checkBoxChanged():void{
-	 		   firstExperiment.convexLens.visible=lens_checkBox.selected;
+	 		   firstExperiment.convexLens1.visible=lens_checkBox.selected;
 	 		   if(lens_checkBox.selected==true){
                   StageObjectsManager.getDefault.addMessage("增加凸透镜.");
                }else{
@@ -54,7 +54,7 @@
 	 		}
 	 		
 	 		public function checkBoxChanged2():void{
-	 		   firstExperiment.concaveLens.visible=lens_checkBox2.selected;
+	 		   firstExperiment.convexLens2.visible=lens_checkBox2.selected;
 	 		   if(lens_checkBox2.selected==true){
                   StageObjectsManager.getDefault.addMessage("增加凹透镜.");
                }else{
@@ -71,8 +71,8 @@
 	 <mx:Button  click="close_stage_rotate()" icon="@Embed('../assets/icon/stop.png')"  toolTip="close_stage_rotate"/>
 	 <mx:Button  buttonDown="StageObjectsManager.getDefault.mainView.camera.zoom++" autoRepeat="true" icon="@Embed('../assets/icon/zoom_add.png')" toolTip="zoom+"/>
 	 <mx:Button  buttonDown="StageObjectsManager.getDefault.mainView.camera.zoom--" autoRepeat="true" icon="@Embed('../assets/icon/zoom_min.png')" toolTip="zoom-"/>
-     <mx:Button  buttonDown="StageObjectsManager.getDefault.rotate_left()"  autoRepeat="true" id="rotate_left" enabled="false" icon="@Embed('../assets/icon/rotate_left.png')"  disabledIcon="@Embed('../assets/icon/rotate_left_disable.png')"  toolTip="rotate left"/>
-     <mx:Button  buttonDown="StageObjectsManager.getDefault.rotate_right()"  autoRepeat="true" id="rotate_right" enabled="false" icon="@Embed('../assets/icon/rotate_right.png')" disabledIcon="@Embed('../assets/icon/rotate_right_disable.png')" toolTip="rotate right"/>
+     <mx:Button  buttonDown="StageObjectsManager.getDefault.rotate_left()"   autoRepeat="false" id="rotate_left" enabled="false" icon="@Embed('../assets/icon/rotate_left.png')"  disabledIcon="@Embed('../assets/icon/rotate_left_disable.png')"  toolTip="rotate left"/>
+     <mx:Button  buttonDown="StageObjectsManager.getDefault.rotate_right()"  autoRepeat="false" id="rotate_right" enabled="false" icon="@Embed('../assets/icon/rotate_right.png')" disabledIcon="@Embed('../assets/icon/rotate_right_disable.png')" toolTip="rotate right"/>
      </mx:VBox>
 	 
 	 <mx:VBox horizontalGap="10" verticalAlign="bottom" x="929" y="536">
