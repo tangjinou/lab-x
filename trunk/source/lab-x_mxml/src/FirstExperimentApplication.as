@@ -27,6 +27,7 @@ package
 	import org.papervision3d.objects.parsers.DAE;
 	import org.papervision3d.view.BasicView;
 	import org.papervision3d.view.layer.ViewportLayer;
+	import org.papervision3d.view.stats.StatsView;
 	
 	public class FirstExperimentApplication extends BasicView
 	{
@@ -65,6 +66,8 @@ package
 			equipmentLayer = StageObjectsManager.getDefault.layerManager.equipmentLayer;
 			createDesk();
 			createObjects();
+			var stats:StatsView = new StatsView(renderer);
+			addChild(stats);
 			startRendering();
 		}
 
