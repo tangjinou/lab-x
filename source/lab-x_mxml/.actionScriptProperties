@@ -12,8 +12,6 @@
 </compiler>
 <applications>
 <application path="FirstExperiment.mxml"/>
-<application path="LabX.mxml"/>
-<application path="TestDesk.mxml"/>
 </applications>
 <modules/>
 <buildCSSFiles/>
