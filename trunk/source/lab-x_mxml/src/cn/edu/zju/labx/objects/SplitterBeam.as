@@ -34,6 +34,10 @@ package cn.edu.zju.labx.objects
 		 * To store the old Mouse X position;
 		 */
 	    public var oldMouseX:Number = -1;
+	    /**
+		 * To store the old Mouse y position;
+		 */
+	    public var oldMouseY:Number = -1;
 		
 		public function SplitterBeam(material:MaterialObject3D, vertices:Array=null, faces:Array=null, name:String=null)
 		{
@@ -75,41 +79,55 @@ package cn.edu.zju.labx.objects
 		
 		public function hanleUserInputEvent(event:Event):void{
 			if(userInputHandle!=null){
-	   	       userInputHandle.call(this,event);
-	   	       return;
-	   	    }
-	   	    if(event is MouseEvent)
-	   	    {
-	   	   	     var mouseEvent:MouseEvent = event as MouseEvent;
-	   	    	 if (mouseEvent.type == MouseEvent.MOUSE_DOWN) {
-	   	    	 	oldMouseX = mouseEvent.stageX;
-	   	    	 } else if (mouseEvent.type == MouseEvent.MOUSE_UP) {
-	   	    	 	oldMouseX = -1;
-	   	    	 } else if ((mouseEvent.type == MouseEvent.MOUSE_MOVE) && (oldMouseX != -1) && mouseEvent.buttonDown) {
-	   	    	 	var xMove:Number = mouseEvent.stageX - oldMouseX;
-	   	    	 	if (Math.abs(xMove) < 10)return;
-	   	    	 	internalMove(xMove);
-       	 			oldMouseX = mouseEvent.stageX;
-	   	    	 }
-	    	} else if (event is KeyboardEvent)
-	    	{
-	    		var keyBoradEvent:KeyboardEvent = event as KeyboardEvent;
-	    		if(UserInputHandler.keyLeft || UserInputHandler.keyRight)
-	    		{
-	    			var xMoveKey:Number = LabXConstant.X_MOVE_MIN;
-	    			if(UserInputHandler.keyLeft)xMoveKey = -xMoveKey;
-	    			internalMove(xMoveKey);
-	    		} 
-	    	}
-		  
-		}
-	    private function internalMove(xMove:Number):void
-	    {
-	    	if (StageObjectsManager.getDefault.mainView.camera.z > 0)xMove = -xMove; //when camera is on the other side, x should reverse
-       	 	this.x += xMove;
-       	 	StageObjectsManager.getDefault.addMessage("SplitterBeam move:"+xMove);
-	    }
+				userInputHandle.call(this,event);
+				return;
+			}
+			if(event is MouseEvent)
+			{
+				var mouseEvent:MouseEvent = event as MouseEvent;
+				if (mouseEvent.type == MouseEvent.MOUSE_DOWN) {
+					oldMouseX = mouseEvent.stageX;
+					oldMouseY = mouseEvent.stageY;
+				} else if (mouseEvent.type == MouseEvent.MOUSE_UP) {
+					oldMouseX = -1;
+					oldMouseY = -1;
+					StageObjectsManager.getDefault.rayManager.reProduceRays();
+				} else if ((mouseEvent.type == MouseEvent.MOUSE_MOVE) &&(oldMouseY != -1) && (oldMouseY != -1) && mouseEvent.buttonDown) {
+					var xMove:Number = mouseEvent.stageX - oldMouseX;
+					var yMove:Number = mouseEvent.stageY - oldMouseY;
+					if ((Math.abs(xMove) < 10) && (Math.abs(yMove) < 10))return;
+					internalMove(xMove, yMove);
+					oldMouseX = mouseEvent.stageX;
+					oldMouseY = mouseEvent.stageY;
+				}
+			} else if (event is KeyboardEvent)
+			{
+				var keyBoradEvent:KeyboardEvent = event as KeyboardEvent;
+				if(UserInputHandler.keyLeft || UserInputHandler.keyRight)
+				{
+					var xMoveKey:Number = LabXConstant.X_MOVE_MIN;
+					if(UserInputHandler.keyLeft)xMoveKey = -xMoveKey;
+					internalMove(xMoveKey, 0);
+				} 
+			}
 		
+		}
+	    
+		private function internalMove(xMove:Number, yMove:Number):void
+		{
+			if (StageObjectsManager.getDefault.mainView.camera.z > 0)
+			{
+				xMove = -xMove; //when camera is on the other side, x should reverse
+				yMove = -yMove;
+			}
+			if(Math.abs(xMove) > Math.abs(yMove))
+			{
+				this.x += xMove;
+			} else {
+				this.z -= yMove;
+			}
+			StageObjectsManager.getDefault.addMessage("lens move:"+xMove);
+		}
 		
 		public function createDisplayObject():void{
 		    var materialsList:MaterialsList = new MaterialsList();

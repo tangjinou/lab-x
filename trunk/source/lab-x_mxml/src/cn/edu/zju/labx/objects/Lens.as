@@ -6,9 +6,8 @@ package cn.edu.zju.labx.objects
 	import cn.edu.zju.labx.events.IRayHandle;
 	import cn.edu.zju.labx.events.IUserInputListener;
 	import cn.edu.zju.labx.logicObject.LensLogic;
-	import cn.edu.zju.labx.logicObject.LineRayLogic
-	import cn.edu.zju.labx.utils.MathUtils;
 	import cn.edu.zju.labx.logicObject.LineRayLogic;
+	import cn.edu.zju.labx.utils.MathUtils;
 	
 	import com.greensock.*;
 	
@@ -99,53 +98,57 @@ package cn.edu.zju.labx.objects
 		}
 		
 		
-	    public function hanleUserInputEvent(event:Event):void{
-	   	    if(userInputHandle!=null){
-	   	       userInputHandle.call(this,event);
-	   	       return;
-	   	    }
-	   	    if(event is MouseEvent)
-	   	    {
-	   	   	     var mouseEvent:MouseEvent = event as MouseEvent;
-	   	    	 if (mouseEvent.type == MouseEvent.MOUSE_DOWN) {
-	   	    	 	oldMouseX = mouseEvent.stageX;
-	   	    	 	oldMouseY = mouseEvent.stageY;
-	   	    	 } else if (mouseEvent.type == MouseEvent.MOUSE_UP) {
-	   	    	 	oldMouseX = -1;
-	   	    	 	oldMouseY = -1;
-	   	    	 	StageObjectsManager.getDefault.rayManager.reProduceRays();
-	   	    	 } else if ((mouseEvent.type == MouseEvent.MOUSE_MOVE) &&(oldMouseY != -1) && (oldMouseY != -1) && mouseEvent.buttonDown) {
-	   	    	 	var xMove:Number = mouseEvent.stageX - oldMouseX;
-	   	    	 	var yMove:Number = mouseEvent.stageY - oldMouseY;
-	   	    	 	if ((Math.abs(xMove) < 10) && (Math.abs(yMove) < 3))return;
-	   	    	 	internalMove(xMove, yMove);
-       	 			oldMouseX = mouseEvent.stageX;
-       	 			oldMouseY = mouseEvent.stageY;
-	   	    	 }
-	    	} else if (event is KeyboardEvent)
-	    	{
-	    		var keyBoradEvent:KeyboardEvent = event as KeyboardEvent;
-	    		if(UserInputHandler.keyLeft || UserInputHandler.keyRight)
-	    		{
-	    			var xMoveKey:Number = LabXConstant.X_MOVE_MIN;
-	    			if(UserInputHandler.keyLeft)xMoveKey = -xMoveKey;
-	    			internalMove(xMoveKey, 0);
-	    		} 
-	    	}
-	    	
-	    }
+		public function hanleUserInputEvent(event:Event):void{
+			if(userInputHandle!=null){
+				userInputHandle.call(this,event);
+				return;
+			}
+			if(event is MouseEvent)
+			{
+				var mouseEvent:MouseEvent = event as MouseEvent;
+				if (mouseEvent.type == MouseEvent.MOUSE_DOWN) {
+					oldMouseX = mouseEvent.stageX;
+					oldMouseY = mouseEvent.stageY;
+				} else if (mouseEvent.type == MouseEvent.MOUSE_UP) {
+					oldMouseX = -1;
+					oldMouseY = -1;
+					StageObjectsManager.getDefault.rayManager.reProduceRays();
+				} else if ((mouseEvent.type == MouseEvent.MOUSE_MOVE) &&(oldMouseY != -1) && (oldMouseY != -1) && mouseEvent.buttonDown) {
+					var xMove:Number = mouseEvent.stageX - oldMouseX;
+					var yMove:Number = mouseEvent.stageY - oldMouseY;
+					if ((Math.abs(xMove) < 10) && (Math.abs(yMove) < 10))return;
+					internalMove(xMove, yMove);
+					oldMouseX = mouseEvent.stageX;
+					oldMouseY = mouseEvent.stageY;
+				}
+			} else if (event is KeyboardEvent)
+			{
+				var keyBoradEvent:KeyboardEvent = event as KeyboardEvent;
+				if(UserInputHandler.keyLeft || UserInputHandler.keyRight)
+				{
+					var xMoveKey:Number = LabXConstant.X_MOVE_MIN;
+					if(UserInputHandler.keyLeft)xMoveKey = -xMoveKey;
+					internalMove(xMoveKey, 0);
+				} 
+			}
+		
+		}
 	    
-	    private function internalMove(xMove:Number, yMove:Number):void
-	    {
-	    	if (StageObjectsManager.getDefault.mainView.camera.z > 0)
-	    	{
-	    		xMove = -xMove; //when camera is on the other side, x should reverse
-//	    		yMove = -yMove;
-	    	}
-       	 	this.x += xMove;
-       	 	this.z += yMove;
-       	 	StageObjectsManager.getDefault.addMessage("lens move:"+xMove);
-	    }
+		private function internalMove(xMove:Number, yMove:Number):void
+		{
+			if (StageObjectsManager.getDefault.mainView.camera.z > 0)
+			{
+				xMove = -xMove; //when camera is on the other side, x should reverse
+				yMove = -yMove;
+			}
+			if(Math.abs(xMove) > Math.abs(yMove))
+			{
+				this.x += xMove;
+			} else {
+				this.z -= yMove;
+			}
+			StageObjectsManager.getDefault.addMessage("lens move:"+xMove);
+		}
 	    
 	    // should destribute the listener 
         override public function addEventListener(type:String, listener:Function,useCapture:Boolean = false, priority:int = 0, useWeakReference:Boolean = false):void

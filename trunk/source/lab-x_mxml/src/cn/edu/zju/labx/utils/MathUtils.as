@@ -1,6 +1,6 @@
 package cn.edu.zju.labx.utils
 {
-	import cn.edu.zju.labx.core.LabXError;
+	import cn.edu.zju.labx.core.LabXConstant;
 	
 	import org.papervision3d.core.math.Matrix3D;
 	import org.papervision3d.core.math.Number2D;
@@ -346,6 +346,8 @@ package cn.edu.zju.labx.utils
 			
 			var d0:Number = Number3D.dot(Number3D.sub(c, a), normal);
 			var d1:Number = Number3D.dot(Number3D.sub(d, a), normal);
+			
+			if (Math.abs(d0-d1) < LabXConstant.NUMBER_PRECISION)return null;
 			
 			var m:Number = d1 / (d1 - d0);
 			
