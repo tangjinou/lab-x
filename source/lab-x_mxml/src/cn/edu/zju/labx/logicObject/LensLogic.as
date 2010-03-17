@@ -101,6 +101,7 @@ package cn.edu.zju.labx.logicObject
 			
 			var resultPoint:Number3D = MathUtils.calculate3DIntersection(paraPoint, focusPoint, rayPoint, position);
 			
+			if (resultPoint == null)return null;
 			
 			/**
 			 * This block is for test the MathUtils.calculate3DIntersection is correct or not
