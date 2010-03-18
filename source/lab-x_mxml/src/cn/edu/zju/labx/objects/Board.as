@@ -5,6 +5,7 @@ package cn.edu.zju.labx.objects
     import cn.edu.zju.labx.events.IUserInputListener;
     import cn.edu.zju.labx.logicObject.InterferenceLogic;
     import cn.edu.zju.labx.utils.MathUtils;
+    import cn.edu.zju.labx.core.StageObjectsManager;
     
     import flash.display.BitmapData;
     import flash.events.Event;
@@ -16,6 +17,7 @@ package cn.edu.zju.labx.objects
     import org.papervision3d.materials.BitmapMaterial;
     import org.papervision3d.materials.utils.MaterialsList;
     import org.papervision3d.objects.primitives.Cube;
+    import org.papervision3d.view.layer.ViewportLayer;
     
     /**
      * Board is an LabX Object used to display the light result
@@ -56,6 +58,10 @@ package cn.edu.zju.labx.objects
 	        depth=LabXConstant.LABX_OBJECT_DEPTH;
 		   	cube = new Cube(materialsList,width,depth,height);
 		   	this.addChild(cube);
+		   	
+		   	var effectLayer:ViewportLayer = new ViewportLayer(StageObjectsManager.getDefault.mainView.viewport, null);
+			effectLayer.addDisplayObject3D(cube, true);
+			StageObjectsManager.getDefault.layerManager.equipmentLayer.addLayer(effectLayer);
 		}
 
 		
