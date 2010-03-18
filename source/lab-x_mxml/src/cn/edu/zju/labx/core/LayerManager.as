@@ -65,10 +65,10 @@ package cn.edu.zju.labx.core
 			equipmentLayer.sortMode = ViewportLayerSortMode.Z_SORT;
 			
 			var bf:BlurFilter = new BlurFilter(3,3,1);
-			var growFilter_2:GlowFilter = new GlowFilter(0x00ffff, 2, 20, 10, 2, 3, true, false);
-			var growFilter_b_2:GlowFilter = new GlowFilter(0x00ffff, 2, 16, 10, 3, 9, false, false);
-			var dropShadow_2:DropShadowFilter = new DropShadowFilter(0, 360, 0x000fff, 1, 70, 70, 5, 3, false, false, false);
-//			rayEffect = [growFilter_2,growFilter_b_2,dropShadow_2];
+//			var growFilter_in:GlowFilter = new GlowFilter(0x00ffff, 2, 20, 10, 2, 3, true, false);
+			var growFilter_out:GlowFilter = new GlowFilter(0x00ffff, 2, 16, 10, 3, 9, false, false);
+			var dropShadow:DropShadowFilter = new DropShadowFilter(0, 360, 0x000fff, 1, 70, 70, 5, 3, false, false, false);
+			rayEffect = [growFilter_out, dropShadow];
 		}
 		
 		public function addRayLayer(rayLayer:ViewportLayer, eqLayer:ViewportLayer = null):void
