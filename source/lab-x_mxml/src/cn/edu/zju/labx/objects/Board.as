@@ -1,11 +1,11 @@
 package cn.edu.zju.labx.objects
 {   
     import cn.edu.zju.labx.core.LabXConstant;
+    import cn.edu.zju.labx.core.StageObjectsManager;
     import cn.edu.zju.labx.events.IRayHandle;
     import cn.edu.zju.labx.events.IUserInputListener;
     import cn.edu.zju.labx.logicObject.InterferenceLogic;
     import cn.edu.zju.labx.utils.MathUtils;
-    import cn.edu.zju.labx.core.StageObjectsManager;
     
     import flash.display.BitmapData;
     import flash.events.Event;
@@ -47,9 +47,10 @@ package cn.edu.zju.labx.objects
 		
 		public function createDisplayObject():void{
 			var materialsList:MaterialsList = new MaterialsList();
+			var leftMaterial:MaterialObject3D = material.clone();
 			materialsList.addMaterial(material,"front");
 			materialsList.addMaterial(material,"back");
-			materialsList.addMaterial(material,"left");
+			materialsList.addMaterial(leftMaterial,"left");
 			materialsList.addMaterial(material,"right");
 			materialsList.addMaterial(material,"top");
 			materialsList.addMaterial(material,"bottom");
@@ -92,8 +93,8 @@ package cn.edu.zju.labx.objects
 			}
 			var material:BitmapMaterial = new BitmapMaterial(bmp);
 			material.smooth = true;
-			cube.replaceMaterialByName(material, "front");
-			
+			material.interactive = true;
+			cube.replaceMaterialByName(material, "left");
 		}
 		
 
