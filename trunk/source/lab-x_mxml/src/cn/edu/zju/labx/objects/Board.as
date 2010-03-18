@@ -124,8 +124,9 @@ package cn.edu.zju.labx.objects
    		 *   judge the ray if is on the object
    		 */ 
     	public function isOnTheRay(ray:Ray):Boolean{
-    	    if(ray.getLineRays().length>0){
+    	    if(ray!=null && ray.getLineRays()!=null && ray.getLineRays().length>0){
 			   var lineRay:LineRay = ray.getLineRays().getItemAt(0) as LineRay;
+			   if(lineRay !=null && lineRay.start_point!=null && lineRay.end_point !=null)
 	           return isTheRayOnThisObject(Number3D.sub(lineRay.end_point,lineRay.start_point),lineRay.start_point);
 			}
     	   return false;

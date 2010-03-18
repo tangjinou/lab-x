@@ -143,32 +143,34 @@ package
 			var shadeMaterialBeam:PhongMaterial = new PhongMaterial(light,0xFFFFFF,0x6ccff8,100);
 			shadeMaterialBeam.interactive = true;
 			beam2 =new SplitterBeam(shadeMaterialBeam);
-			beam2.moveRight(LabXConstant.DESK_WIDTH/5*2);
-			beam2.moveUp(beam1.height/2);
-			beam2.rotationY -=135;
-			beam2.moveForward(-200);
 			originPivot.addChild(beam2);
 			equipmentLayer.addDisplayObject3D(beam2, true);
 			StageObjectsManager.getDefault.addObject(beam2);
+			beam2.moveRight(LabXConstant.DESK_WIDTH/5*2);
+			beam2.moveUp(beam1.height/2);
+//			beam2.moveForward(200);
+			beam2.rotationY -=225;  // -135
+			trace(beam2.transform.toString());
 			
 			
-			/*Create Lens*/	
-			var shadeMaterialLens:PhongMaterial = new PhongMaterial(light,0xFFFFFF,0x6ccff8,100);
-			shadeMaterialLens.interactive = true;
-			convexLens1 = new ConvexLens(shadeMaterialLens, 100);
-			convexLens1.moveRight(LabXConstant.DESK_WIDTH/3);
-			convexLens1.moveUp(convexLens1.height/2);
-			originPivot.addChild(convexLens1);
-			StageObjectsManager.getDefault.addObject(convexLens1);
 			
-			/*Create second Lens*/	
-			var shadeMaterialLens2:PhongMaterial = new PhongMaterial(light,0xFFFFFF,0x6ccff8,100);
-			shadeMaterialLens2.interactive = true;
-			convexLens2 = new ConvexLens(shadeMaterialLens2, 100);
-			convexLens2.moveRight(LabXConstant.DESK_WIDTH/3 + 200);
-			convexLens2.moveUp(convexLens2.height/2);
-			originPivot.addChild(convexLens2);
-			StageObjectsManager.getDefault.addObject(convexLens2);
+//			/*Create Lens*/	
+//			var shadeMaterialLens:PhongMaterial = new PhongMaterial(light,0xFFFFFF,0x6ccff8,100);
+//			shadeMaterialLens.interactive = true;
+//			convexLens1 = new ConvexLens(shadeMaterialLens, 100);
+//			convexLens1.moveRight(LabXConstant.DESK_WIDTH/3);
+//			convexLens1.moveUp(convexLens1.height/2);
+//			originPivot.addChild(convexLens1);
+//			StageObjectsManager.getDefault.addObject(convexLens1);
+//			
+//			/*Create second Lens*/	
+//			var shadeMaterialLens2:PhongMaterial = new PhongMaterial(light,0xFFFFFF,0x6ccff8,100);
+//			shadeMaterialLens2.interactive = true;
+//			convexLens2 = new ConvexLens(shadeMaterialLens2, 100);
+//			convexLens2.moveRight(LabXConstant.DESK_WIDTH/3 + 200);
+//			convexLens2.moveUp(convexLens2.height/2);
+//			originPivot.addChild(convexLens2);
+//			StageObjectsManager.getDefault.addObject(convexLens2);
 			
 			
 			/*Create mirror*/
