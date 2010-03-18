@@ -18,7 +18,8 @@ package cn.edu.zju.labx.logicObject
 		public function LineRayLogic(point:Number3D=null, vector:Number3D=null)
 		{
 			point = point || new Number3D();
-			vector = vector || new Number3D();
+			vector = vector || new Number3D(1, 0, 0);
+			vector = vector.clone();
 			vector.normalize();
 			super(point.x, point.y, point.z, vector.x, vector.y, vector.z);
 		}

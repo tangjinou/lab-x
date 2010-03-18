@@ -76,54 +76,91 @@ package cn.edu.zju.labx.logicObject
 				return new LineRayLogic(position, new Number3D(lineRay.dx, lineRay.dy, lineRay.dz));
 			}
 			
-			//if the ray point on lens normal, choose another point for calculate 
-			if (lensNormalRay.isPointOnRay(rayPoint))
+			//if the ray point on lens normal, or the point distance if same as f, choose another point for calculate 
+			if (lensNormalRay.isPointOnRay(rayPoint) || (Math.abs(lensPlane.distance(rayPoint)) == f))
 			{
 				rayPoint.x -= lineRay.dx;
 				rayPoint.y -= lineRay.dy;
 				rayPoint.z -= lineRay.dz;
 			}
 			
+			var resultPoint:Number3D = getImagePosition(lensPlane, rayPoint);
+			
 			//calculate the lens and ray intersection point
 			var anotherPointOnRay:Number3D = new Number3D(lineRay.x+lineRay.dx, lineRay.y+lineRay.dy, lineRay.z+lineRay.dz);
 			var intersaction:Number3D = lensPlane.getIntersectionLineNumbers(anotherPointOnRay, rayPoint);
 			
 			//if the intersaction of the ray is not on the direction of the ray, we assume that the ray is no need to processed.
-			if((intersaction.x-rayPoint.x)/lineRay.dx < 0)
+			if(!MathUtils.isVetorTheSameDirection(Number3D.sub(intersaction, rayPoint), new Number3D(lineRay.dx, lineRay.dy, lineRay.dz)))
 			{
 				return null;
 //				rayPoint = Number3D.sub(intersaction, new Number3D(lineRay.dx, lineRay.dy, lineRay.dz));
 			} 
 			
 			//calculate the image point of ray point.
-			var focusPoint:Number3D = getImageFocus(rayPoint);
-			var paraPoint:Number3D = lensPlane.closestPointOnPlane(rayPoint, position);
+//			var focusPoint:Number3D = getImageFocus(rayPoint);
+//			var paraPoint:Number3D = lensPlane.closestPointOnPlane(rayPoint, position);
+//			
+//			var resultPoint:Number3D = MathUtils.calculate3DIntersection(paraPoint, focusPoint, rayPoint, position);
 			
-			var resultPoint:Number3D = MathUtils.calculate3DIntersection(paraPoint, focusPoint, rayPoint, position);
-			
-			if (resultPoint == null)return null;
-			
+//			if (resultPoint == null)
+//			{
+//				return null;
+//			}
+//			
 			/**
 			 * This block is for test the MathUtils.calculate3DIntersection is correct or not
 			 */
-			var checkLine1:LineRayLogic = new LineRayLogic(paraPoint, Number3D.sub(focusPoint, paraPoint))
-			if(!checkLine1.isPointOnRay(resultPoint))
-			{
-				trace("Errror---------------------------");
-			}
-			var checkLine2:LineRayLogic = new LineRayLogic(rayPoint, Number3D.sub(position, rayPoint))
-			if(!checkLine2.isPointOnRay(resultPoint))
-			{
-				trace("Errror---------------------------");
-			}
+//			var checkLine1:LineRayLogic = new LineRayLogic(paraPoint, Number3D.sub(focusPoint, paraPoint))
+//			if(!checkLine1.isPointOnRay(resultPoint))
+//			{
+//				trace("Errror---------------------------");
+//			}
+//			var checkLine2:LineRayLogic = new LineRayLogic(rayPoint, Number3D.sub(position, rayPoint))
+//			if(!checkLine2.isPointOnRay(resultPoint))
+//			{
+//				trace("Errror---------------------------");
+//			}
 			/***********************************************************************************/
 			
 			
 			
 			var vector:Number3D = Number3D.sub(resultPoint, intersaction);
 			vector.normalize();
-			if (f<0 || (Math.abs(lensPlane.distance(rayPoint)) < f))vector.multiplyEq(-1);
+			if (f<0 || (Math.abs(lensPlane.distance(rayPoint)) < f))
+			{
+				vector.multiplyEq(-1);
+			}
 			return new LineRayLogic(intersaction, vector);
+		}
+		
+		/**
+		 * We use the image formula to calculate the image position 
+		 * 1. convex lens:			1/u + 1/v = 1/f (u>f),    1/u - 1/v = 1/f (u < f)
+		 * 2. concave lens:			1/u - 1/v = -1/f
+		 * 
+		 * We assume that f' > 0 means convex lens, f' < 0 means concave lens.
+		 * We assume that v' > 0 means image is on the other side with object, v' < 0 means the image is the same side with object
+		 * If f' > 0, u > f', then v' > 0, we got the fomula:  1/v' = 1/f' - 1/u
+		 * If f' > 0, u < f', then v' < 0, we got the fomula:  1/v' = 1/f' - 1/u
+		 * If f' < 0, u < f', then v' < 0, we got the fomula:  1/v' = 1/f' - 1/u
+		 * 
+		 * So, we got the same formula.
+		 * 
+		 */
+		private function getImagePosition(lensPlane:Plane3D, objPoint:Number3D):Number3D
+		{
+			var u:Number = Math.abs(lensPlane.distance(objPoint));
+			var v:Number = 1/(1/f - 1/u);
+			
+			var pu:Number = Number3D.sub(position, objPoint).modulo;
+			var pv:Number = pu * v / u;
+			
+			var resultPoint:Number3D =  Number3D.sub(position, objPoint);
+			resultPoint.normalize();
+			resultPoint.multiplyEq(pv);
+			resultPoint = Number3D.add(resultPoint, position);
+			return resultPoint;
 		}
 		
 		
