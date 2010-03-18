@@ -94,12 +94,10 @@ package cn.edu.zju.labx.objects
 		 */
 		public function isTheRayOnThisObject(rayVector:Number3D,rayStartPoint:Number3D):Boolean{
 		   try{
-		    var pointInPlat:Number3D = MathUtils.calculatePointInFlat(this.transform,rayVector,rayStartPoint);
-		    
+		    var pointInPlat:Number3D = MathUtils.calculatePointInPlane(this.transform,rayVector,rayStartPoint);
 		    if(pointInPlat ==null){
 		       return false;
 		    }
-		    
 		     if(MathUtils.distanceToNumber3D(new Number3D(this.x,this.y,this.z),pointInPlat)<circle){
 		        return true;  
 		     }

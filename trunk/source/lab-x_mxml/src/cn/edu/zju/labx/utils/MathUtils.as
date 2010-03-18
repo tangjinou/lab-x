@@ -246,9 +246,9 @@ package cn.edu.zju.labx.utils
 		
 		
 		/***
-		 *  calculate the point'position in Flat based on the line
+		 *  calculate the point'position in Plane based on the line
 		 * 
-		 *  @param  transform is the Flat's normals
+		 *  @param  transform is the plane's transform (LabXObject's transform)
 		 *  @param  vetor is line's vetor
 		 *  @Exception The two vectors are not in the same dirction
 		 *  @return the point's  position
@@ -275,7 +275,7 @@ package cn.edu.zju.labx.utils
 		 *    5 k = (x1.x' + y1.y' + z1.z' + D) /(x'.x''+y'.y''+z'.z'')
 		 * 
 		 **/
-		public static function calculatePointInFlat(transform:Matrix3D,vetor:Number3D,startPoint:Number3D):Number3D{
+		public static function calculatePointInPlane(transform:Matrix3D,vetor:Number3D,startPoint:Number3D):Number3D{
 		   var x0:Number = transform.n14;
 		   var y0:Number = transform.n24;
 		   var z0:Number = transform.n34;           
@@ -288,31 +288,35 @@ package cn.edu.zju.labx.utils
 		         return resultPoint;
 		      }
 //		      throw new LabXError("The two vectors are not in the same dirction");
-		      
 		   }
 		   return null;
 //           throw new LabXError("");
 		}
 		
 	     /***
-		 *  calculate the point'position in Flat based on the line
+		 *  calculate the point'position in Plane based on the line
 		 * 
-		 *  @param  flat_position
-		 *  @prame  flat_norma
+		 *  @param  plane_position
+		 *  @prame  plane_norma
 		 *  @param  vetor is line's vetor
 		 *  @Exception The two vectors are not in the same dirction
 		 *  @return the point's  position
-		 *   
+		 * 
+		 * 
+		 *  Note: because the as3 don't support the same method name with different parameters
+		 *        so named it calculatePointInPlane2
+		 *        we could see this: http://www.javaeye.com/topic/75870  
+		 * 
 		 **/
-		public static function calculatePointInFlat2(flat_point:Number3D,flat_normal:Number3D,line_vetor:Number3D,startPoint:Number3D):Number3D{
+		public static function calculatePointInPlane2(plane_point:Number3D,plane_normal:Number3D,line_vetor:Number3D,startPoint:Number3D):Number3D{
 		   var transform:Matrix3D = new Matrix3D();
-		   transform.n11 = flat_normal.x;
-		   transform.n12 = flat_normal.y;
-		   transform.n13 = flat_normal.z;
-		   transform.n14 = flat_point.x;
-		   transform.n24 = flat_point.y;
-		   transform.n34 = flat_point.z;
-		   return calculatePointInFlat(transform,line_vetor,startPoint);
+		   transform.n11 = plane_normal.x;
+		   transform.n12 = plane_normal.y;
+		   transform.n13 = plane_normal.z;
+		   transform.n14 = plane_point.x;
+		   transform.n24 = plane_point.y;
+		   transform.n34 = plane_point.z;
+		   return calculatePointInPlane(transform,line_vetor,startPoint);
 		}
 		
 		public static function isZero(number:Number):Boolean{
