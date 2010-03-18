@@ -358,11 +358,31 @@ package cn.edu.zju.labx.utils
 		[Test] 
 		public function calculate3DreflectionVector():void{
 		   var v:Number3D = new Number3D(1,1,0);
-		   var m:Number3D = new Number3D(-1,0,0);
-		   var v2:Number3D = MathUtils.calculate3DreflectionVector(v,m);
-		   assertEquals(-1,v2.x);
-		   assertEquals(1,v2.y);
-		   assertEquals(0,v2.z);
+		   var m:Number3D = new Number3D(1,0,0);
+		   var v2:Number3D;
+		   v2= MathUtils.calculate3DreflectionVector(v,m);
+		   assertTrue(Math.abs(v2.x+0.70710678)<LabXConstant.NUMBER_PRECISION);
+		   assertTrue(Math.abs(v2.y-0.70710678)<LabXConstant.NUMBER_PRECISION);
+		   assertTrue(Math.abs(v2.z-0)<LabXConstant.NUMBER_PRECISION);
+
+
+	   
+		   v = new Number3D(-1,1,0);
+		   v2 = MathUtils.calculate3DreflectionVector(v,m);
+		   assertTrue(Math.abs(v2.x-0.70710678)<LabXConstant.NUMBER_PRECISION);
+		   assertTrue(Math.abs(v2.y-0.70710678)<LabXConstant.NUMBER_PRECISION);
+		   assertTrue(Math.abs(v2.z-0)<LabXConstant.NUMBER_PRECISION);
+
+		   
+		   
+		   v = new Number3D(0,1,0);
+		   m = new Number3D(1,-1,0);
+		   v2 = MathUtils.calculate3DreflectionVector(v,m);
+		   assertTrue(Math.abs(v2.x-1)<LabXConstant.NUMBER_PRECISION);
+		   assertTrue(Math.abs(v2.y-0)<LabXConstant.NUMBER_PRECISION);
+		   assertTrue(Math.abs(v2.z-0)<LabXConstant.NUMBER_PRECISION);
+
+		   
 		}
 		
 		

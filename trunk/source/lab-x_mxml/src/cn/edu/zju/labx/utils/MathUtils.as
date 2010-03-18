@@ -331,6 +331,7 @@ package cn.edu.zju.labx.utils
 		 *   @return  if the two vector is the same direction, return true
 		 */ 
 		public static function isVetorTheSameDirection(v1:Number3D,v2:Number3D):Boolean{
+
 			v1 = v1.clone();
 			v1.normalize();
 			v2 = v2.clone()
@@ -390,10 +391,14 @@ package cn.edu.zju.labx.utils
 		   //Vnew=V-2*N(V.N) 
 		    var nor:Number3D = normal.clone();
 		    nor.normalize();
-		    var  n:Number= Number3D.dot(incidentRay,nor);
+		    var v:Number3D = incidentRay.clone();
+		    v.normalize();
+		    var  n:Number= Number3D.dot(v,nor);
 		    nor.multiplyEq(2);
 		    nor.multiplyEq(n);
-		    return Number3D.sub(incidentRay,nor);
+		    var result :Number3D = Number3D.sub(v,nor);
+		    result.normalize();
+		    return result;
 		}   
 		
 	}
