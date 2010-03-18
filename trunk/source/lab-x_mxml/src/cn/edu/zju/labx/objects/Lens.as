@@ -80,7 +80,7 @@ package cn.edu.zju.labx.objects
 //			effectLayer.alpha = 0.7;
 			effectLayer.blendMode = BlendMode.HARDLIGHT;
 			StageObjectsManager.getDefault.layerManager.equipmentLayer.addLayer(effectLayer);
-              
+            sp.addEventListener(InteractiveScene3DEvent.OBJECT_PRESS, objectPressHandler);
 		}
 		
 		public function set lens_dae_url(url:String):void{
