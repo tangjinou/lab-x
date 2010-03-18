@@ -78,5 +78,12 @@ package cn.edu.zju.labx.core
 				eqLayer = equipmentLayer;
 			eqLayer.addLayer(rayLayer);
 		}
+		
+		public function removeRayLayer(rayLayer:ViewportLayer, eqLayer:ViewportLayer = null):void
+		{
+			if(eqLayer == null)
+				eqLayer = equipmentLayer;
+			eqLayer.removeLayer(rayLayer);
+		}
 	}
 }

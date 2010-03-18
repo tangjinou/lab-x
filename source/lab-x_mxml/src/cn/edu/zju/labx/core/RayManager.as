@@ -23,7 +23,10 @@ package cn.edu.zju.labx.core
 		
 		public function clearRays():void{
 		    for(var i:int=0;i<rayList.length;i++){
-		        StageObjectsManager.getDefault.originPivot.removeChild(rayList.getItemAt(i) as Ray);
+		    	var ray:Ray = rayList.getItemAt(i) as Ray;
+		        StageObjectsManager.getDefault.originPivot.removeChild(ray);
+		    	if(ray != null)ray.destroy();
+		    	ray = null;
 		    }
 		    rayList.removeAll();
 		}

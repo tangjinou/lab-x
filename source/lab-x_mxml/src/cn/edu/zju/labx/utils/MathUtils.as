@@ -396,7 +396,7 @@ package cn.edu.zju.labx.utils
 		    var  n:Number= Number3D.dot(v,nor);
 		    nor.multiplyEq(2);
 		    nor.multiplyEq(n);
-		    var result :Number3D = Number3D.sub(v,nor);
+		    var result:Number3D = Number3D.sub(v,nor);
 		    result.normalize();
 		    return result;
 		}   

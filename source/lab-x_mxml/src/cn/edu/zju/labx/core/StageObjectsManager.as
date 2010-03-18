@@ -197,34 +197,18 @@ package cn.edu.zju.labx.core
 		
 		
 		public function rotate_left():void{
-//		   if(labXObjectSelected!=null&&UserInputHandler.getDefault.currentSelectedObject!=null){
 		   if(labXObjectSelected!=null&&Math.abs(labXObjectSelected.localRotationY) <70){
 		     labXObjectSelected.localRotationY++;
+		     
 		     rayManager.reProduceRays();
-//		     trace("transform:"+labXObjectSelected.transform.toString());
-//		     if(labXObjectSelected is ILabXListener)
-//		     {
-//		     	var obj:ILabXListen = labXObjectSelected as ILabXListener;
-//		     	obj.handleLabXEvent(new LabXEvent(null, LabXEvent.XOBJECT_MOVE));
-//		     }
-//		   }
-//		   else{
-//		     this.originPivot.rotationY++;
 		   }
 		}
 		
 		public function rotate_right():void{
-//		   if(labXObjectSelected!=null&&UserInputHandler.getDefault.currentSelectedObject!=null){
            if(labXObjectSelected!=null&& Math.abs(labXObjectSelected.localRotationY) <70){
 		     labXObjectSelected.localRotationY--;
 		     rayManager.reProduceRays();
-//		     if(labXObjectSelected is ILabXListener)
-//		     {
-//		     	var obj:ILabXListener = labXObjectSelected as ILabXListener;
-//		     	obj.handleLabXEvent(new LabXEvent(null, LabXEvent.XOBJECT_MOVE));
-//		     }
-//		   }else{
-//		     this.originPivot.rotationY--;
+
 		   }
 		}
 		

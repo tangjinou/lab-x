@@ -95,7 +95,7 @@ package cn.edu.zju.labx.objects
 			if(oldRay != null)
 			{
 				oldRay.EndX = this.x;
-				var lensLogic:LensLogic = new LensLogic(new Number3D(this.x, this.y, this.z), new Number3D(this.transform.n11, this.transform.n12, this.transform.n13), this._focus);
+				var lensLogic:LensLogic = new LensLogic(getPosition(), getNormal(), this._focus);
 				var newLineRays:ArrayCollection = new ArrayCollection();
 				for each (var oldLineRay:LineRay in oldRay.getLineRays())
 				{
@@ -216,7 +216,7 @@ package cn.edu.zju.labx.objects
     	public function getDistance(ray:Ray):Number{
     		if(ray.getLineRays().length>0){
 			   var lineRay:LineRay = ray.getLineRays().getItemAt(0) as LineRay;
-    	       return MathUtils.distanceToNumber3D(new Number3D(this.x,this.y,this.z),lineRay.start_point);;
+    	       return MathUtils.distanceToNumber3D(getPosition(),lineRay.start_point);;
     	    }
     	    return -1;
     	}
@@ -228,7 +228,8 @@ package cn.edu.zju.labx.objects
     		
     	    if(ray!=null && ray.getLineRays()!=null && ray.getLineRays().length>0){
 			   var lineRay:LineRay = ray.getLineRays().getItemAt(0) as LineRay;
-	           return isLineRayOnObject(lineRay.logic);
+	           if(lineRay != null)return isLineRayOnObject(lineRay.logic);
+	           return false;
 			}
     	   return false;
     	}

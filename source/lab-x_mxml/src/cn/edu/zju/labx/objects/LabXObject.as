@@ -116,7 +116,23 @@ package cn.edu.zju.labx.objects
 		 */
 		public function getObjectPlane():Plane3D
 		{
-			return new Plane3D(new Number3D(this.transform.n11, this.transform.n12, this.transform.n13), new Number3D(this.x, this.y, this.z))
+			return new Plane3D(getNormal(), getPosition())
+		}
+		
+		/**
+		 * Get the Plane of this object
+		 */
+		public function getNormal():Number3D
+		{
+			return new Number3D(-this.transform.n11, -this.transform.n21, -this.transform.n31);
+		}
+		
+		/**
+		 * Get the Plane of this object
+		 */
+		public function getPosition():Number3D
+		{
+			return new Number3D(this.x, this.y, this.z);
 		}
 		
 			/**
