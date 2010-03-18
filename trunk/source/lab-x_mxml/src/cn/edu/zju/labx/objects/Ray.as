@@ -84,7 +84,7 @@ package cn.edu.zju.labx.objects
 			if(lines!=null){
 			  removeChild(lines);
 			}
-			var lineMaterial:LineMaterial = new LineMaterial(0xffffff,1);
+			var lineMaterial:LineMaterial = new LineMaterial(0x00ffff,1);
 			lines = new Lines3D(lineMaterial);
 			for(var i:int=0;i<lineRays.length;i++){
 			  if(lineRays.getItemAt(i) is LineRay)
