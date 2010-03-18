@@ -252,13 +252,30 @@ package cn.edu.zju.labx.utils
 		 *  @param  vetor is line's vetor
 		 *  @Exception The two vectors are not in the same dirction
 		 *  @return the point's  position
+		 * 
+		 *   The equation of Plane  is x'.x+y'.y+z'.z+D=0;
+		 *                          --(x',y',z') is the vector of the Plane
+		 *                          --D = 0 - x'.x0 -y'.y0 - z'.z0
+		 *                                  (x0,y0,z0) is the point in the Plane
+		 *                          
+		 *   The equation of Line   is (x-x1)/x''+(y-y1)/y''+(z-z1)/z''=k
+		 *                          --(x1,y1,z1) is the start point of the Line
+		 *                          --(x'',y'',z'') is the vector of the line
+		 * 
+		 *   so the two equation should found
+		 *     
+		 *    1 D = 0 - x'.x0 -y'.y0 - z'.z0
+		 *    
+		 *    2 x =(k*x''+x1)  y = (k*y''+y1)  z = (k*z''+z1)
 		 *   
+		 *    3 (k*x''+x1)x' + (k*y''+y1)y' + (k*z''+z1)z' + D =0
+		 * 
+		 *    4 k(x'.x''+y'.y''+z'.z'') + x1.x' + y1.y' + z1.z' + D =0
+		 * 
+		 *    5 k = (x1.x' + y1.y' + z1.z' + D) /(x'.x''+y'.y''+z'.z'')
+		 * 
 		 **/
 		public static function calculatePointInFlat(transform:Matrix3D,vetor:Number3D,startPoint:Number3D):Number3D{
-
-
-//           var plane3D:Plane3D = new Plane3D(new Number3D(transform.n11,transform.n12,transform.n13),new Number3D(transform.n14,transform.n24,transform.n34));
-//           return  plane3D.getIntersectionLineNumbers(startPoint,Number3D.add(startPoint,vetor));
 		   var x0:Number = transform.n14;
 		   var y0:Number = transform.n24;
 		   var z0:Number = transform.n34;           
