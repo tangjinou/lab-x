@@ -246,7 +246,6 @@ package
 			board.moveUp(board.height/2);
             originPivot.addChild(board);
             StageObjectsManager.getDefault.addObject(board);
-            board.displayInterferenceImage();
 			
 		}
 		
