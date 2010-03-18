@@ -4,11 +4,9 @@ package
 	import cn.edu.zju.labx.core.StageObjectsManager;
 	import cn.edu.zju.labx.core.UserInputHandler;
 	import cn.edu.zju.labx.objects.Board;
-	import cn.edu.zju.labx.objects.ConcaveLens;
 	import cn.edu.zju.labx.objects.ConvexLens;
 	import cn.edu.zju.labx.objects.Lens;
 	import cn.edu.zju.labx.objects.LightSource;
-	import cn.edu.zju.labx.objects.Mirror;
 	import cn.edu.zju.labx.objects.SplitterBeam;
 	import cn.edu.zju.labx.utils.ResourceManager;
 	
@@ -23,6 +21,7 @@ package
 	import org.papervision3d.events.FileLoadEvent;
 	import org.papervision3d.lights.PointLight3D;
 	import org.papervision3d.materials.BitmapMaterial;
+	import org.papervision3d.materials.ColorMaterial;
 	import org.papervision3d.materials.shadematerials.PhongMaterial;
 	import org.papervision3d.objects.DisplayObject3D;
 	import org.papervision3d.objects.parsers.DAE;
@@ -182,9 +181,8 @@ package
 //			StageObjectsManager.getDefault.addObject(mirror);
 			
 			/*create Board*/
-			var shadeMaterialBoard:PhongMaterial = new PhongMaterial(light,0xFFFFFF,0xe1e1e1,100);
-			shadeMaterialBoard.interactive = true;
-			board = new  Board(shadeMaterialBoard);
+			var ColorMaterialBoard:ColorMaterial = new ColorMaterial(0x262626, 1, true);
+			board = new  Board(ColorMaterialBoard);
 			board.moveRight(LabXConstant.DESK_WIDTH);
 			board.moveUp(board.height/2);
             originPivot.addChild(board);
