@@ -8,6 +8,5 @@ package
 		{
 			super(viewportWidth, viewportHeight, scaleToStage, interactive, cameraType);
 		}
-		
 	}
 }
