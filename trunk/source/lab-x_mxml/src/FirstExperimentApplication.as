@@ -135,7 +135,7 @@ package
 			beam1.moveRight(LabXConstant.DESK_WIDTH/5);
 			beam1.moveUp(beam1.height/2);
 			originPivot.addChild(beam1);
-			equipmentLayer.addDisplayObject3D(beam1, true);
+//			equipmentLayer.addDisplayObject3D(beam1, true);
 			StageObjectsManager.getDefault.addObject(beam1);
 			
 			
@@ -144,7 +144,7 @@ package
 			shadeMaterialBeam.interactive = true;
 			beam2 =new SplitterBeam(shadeMaterialBeam);
 			originPivot.addChild(beam2);
-			equipmentLayer.addDisplayObject3D(beam2, true);
+//			equipmentLayer.addDisplayObject3D(beam2, true);
 			StageObjectsManager.getDefault.addObject(beam2);
 			beam2.moveRight(LabXConstant.DESK_WIDTH/5*2);
 			beam2.moveUp(beam1.height/2);

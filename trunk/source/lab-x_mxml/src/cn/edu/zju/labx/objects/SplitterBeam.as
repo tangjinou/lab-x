@@ -12,6 +12,7 @@ package cn.edu.zju.labx.objects
 	import flash.events.Event;
 	import flash.events.KeyboardEvent;
 	import flash.events.MouseEvent;
+	import flash.display.BlendMode;
 	
 	import mx.collections.ArrayCollection;
 	
@@ -20,7 +21,8 @@ package cn.edu.zju.labx.objects
 	import org.papervision3d.events.InteractiveScene3DEvent;
 	import org.papervision3d.materials.utils.MaterialsList;
 	import org.papervision3d.objects.primitives.Cube;
-
+	import org.papervision3d.view.layer.ViewportLayer;
+	
 	public class SplitterBeam extends LabXObject implements IUserInputListener,IRayHandle
 	{   
 		
@@ -141,6 +143,13 @@ package cn.edu.zju.labx.objects
 	        width=3;
 	        depth=100;
 		   	splitterBeam = new Cube(materialsList,width,depth,height);
+		   	
+		   	var effectLayer:ViewportLayer = new ViewportLayer(StageObjectsManager.getDefault.mainView.viewport, null);
+			effectLayer.addDisplayObject3D(splitterBeam, true);
+			effectLayer.blendMode = BlendMode.HARDLIGHT;
+			StageObjectsManager.getDefault.layerManager.equipmentLayer.addLayer(effectLayer);
+
+		   	
 		   	this.addChild(splitterBeam);
 		}
 	    
