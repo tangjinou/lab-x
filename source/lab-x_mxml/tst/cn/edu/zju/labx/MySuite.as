@@ -24,7 +24,7 @@ package cn.edu.zju.labx
 //        
 //
 //       public var t3:LineRayLogicTest;
-//       public var t4:LensLogicTest;
+       public var t4:LensLogicTest;
 //       public var t5:LineRaysTest;
         
         

@@ -12,6 +12,7 @@
 </compiler>
 <applications>
 <application path="FirstExperiment.mxml"/>
+<application path="MyTest.mxml"/>
 </applications>
 <modules/>
 <buildCSSFiles/>

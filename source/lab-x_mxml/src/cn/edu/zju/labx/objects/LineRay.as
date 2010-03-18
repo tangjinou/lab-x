@@ -1,5 +1,6 @@
 package cn.edu.zju.labx.objects
 {
+	import cn.edu.zju.labx.core.LabXConstant;
 	import cn.edu.zju.labx.logicObject.LineRayLogic;
 	import cn.edu.zju.labx.utils.MathUtils;
 	
@@ -14,7 +15,7 @@ package cn.edu.zju.labx.objects
 		 */
 		private var endPoint:Number3D;
 		
-		public function LineRay(logic:LineRayLogic=null,length:Number=1200)
+		public function LineRay(logic:LineRayLogic=null,length:Number=LabXConstant.RAY_DEFAULT_LENGTH)
 		{
 			_logic = logic;
 			_length= length;

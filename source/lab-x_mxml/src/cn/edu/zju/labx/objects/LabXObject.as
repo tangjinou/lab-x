@@ -1,9 +1,11 @@
 package cn.edu.zju.labx.objects
 {
+	import cn.edu.zju.labx.core.LabXConstant;
 	import cn.edu.zju.labx.core.StageObjectsManager;
 	import cn.edu.zju.labx.core.UserInputHandler;
 	import cn.edu.zju.labx.events.IRayMaker;
 	import cn.edu.zju.labx.events.IUserInputListener;
+	import cn.edu.zju.labx.logicObject.LineRayLogic;
 	import cn.edu.zju.labx.utils.MathUtils;
 	
 	import org.hamcrest.object.instanceOf;
@@ -88,8 +90,36 @@ package cn.edu.zju.labx.objects
 		/*******************************************************************/
 		public var circle:Number = 50;
 		
-		
+		public function isLineRayOnObject(lineRayLogic:LineRayLogic):Boolean
+		{
+			var point:Number3D = new Number3D(lineRayLogic.x, lineRayLogic.y, lineRayLogic.z);
+			var vector:Number3D = new Number3D(lineRayLogic.dx, lineRayLogic.dy, lineRayLogic.dz);
+			var plane:Plane3D = getObjectPlane();
+			if(Math.abs(plane.distance(point)) < LabXConstant.NUMBER_PRECISION)
+			{
+				return false;
+			}
+			
+			var anPoint:Number3D = Number3D.sub(point, vector);
+			var intersection:Number3D = plane.getIntersectionLineNumbers(point, anPoint);
+			if (!MathUtils.isVetorTheSameDirection(Number3D.sub(intersection, point), vector))return false; //check if on the same direction on ray
+			
+			if(Number3D.sub(intersection, new Number3D(this.x,this.y,this.z)).modulo < circle)
+			{
+				return true;
+			}
+			return false;
+			
+		}
 		/**
+		 * Get the Plane of this object
+		 */
+		public function getObjectPlane():Plane3D
+		{
+			return new Plane3D(new Number3D(this.transform.n11, this.transform.n12, this.transform.n13), new Number3D(this.x, this.y, this.z))
+		}
+		
+			/**
 		 *  To find the ray if is on this object  
 		 */
 		public function isTheRayOnThisObject(rayVector:Number3D,rayStartPoint:Number3D):Boolean{
@@ -107,8 +137,5 @@ package cn.edu.zju.labx.objects
 		    return false;
 		}
 		
-		
-		
-	    
 	}
 }

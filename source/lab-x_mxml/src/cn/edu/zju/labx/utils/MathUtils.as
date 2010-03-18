@@ -331,10 +331,11 @@ package cn.edu.zju.labx.utils
 		 *   @return  if the two vector is the same direction, return true
 		 */ 
 		public static function isVetorTheSameDirection(v1:Number3D,v2:Number3D):Boolean{
-           if(Number3D.dot(v1,v2)>0){
-              return true;
-           }
-           return false;		   
+			v1 = v1.clone();
+			v1.normalize();
+			v2 = v2.clone()
+			v2.normalize();
+			return (Math.abs(Number3D.sub(v1, v2).modulo) < LabXConstant.NUMBER_PRECISION); 
 		}
 		
 		

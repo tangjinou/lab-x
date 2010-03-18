@@ -24,6 +24,8 @@ package cn.edu.zju.labx.core
 		public static const LABX_OBJECT_DEPTH:Number = 100;
 		public static const LENS_DEFAULT_FOCAL_LENGTH:Number = 10;
 		
+		
+		public static const RAY_DEFAULT_LENGTH:Number = STAGE_WIDTH;
 		/**
 		 * Constants for User Input Event
 		 */
