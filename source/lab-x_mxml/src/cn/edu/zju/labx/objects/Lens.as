@@ -75,10 +75,9 @@ package cn.edu.zju.labx.objects
 		   	lens.addChild(lensPart1);
 		   	lens.addChild(lensPart2);
 		   	this.addChild(lens);
-		   	lens.useOwnContainer = true;
 		   	var effectLayer:ViewportLayer = new ViewportLayer(StageObjectsManager.getDefault.mainView.viewport, null);
-			effectLayer.addDisplayObject3D(lens, true);
-			effectLayer.alpha = 0.7;
+			effectLayer.addDisplayObject3D(sp, true);
+//			effectLayer.alpha = 0.7;
 			effectLayer.blendMode = BlendMode.HARDLIGHT;
 			StageObjectsManager.getDefault.layerManager.equipmentLayer.addLayer(effectLayer);
               
