@@ -60,7 +60,7 @@ package cn.edu.zju.labx.objects
 		}
 		public function createChildren():void{
 			var radius:Number = 100;
-			var shift:Number = Math.sqrt(radius*radius - height*height/4);
+			var shift:Number = Math.sqrt(radius*radius - 130*130/4);
 		   	var sp:Sphere = new Sphere(this.material, radius, 24, 12);
 		   	var normal:Number3D = new Number3D(radius,0,0); 
 			var point:Number3D = new Number3D(shift,0,0); 
@@ -79,8 +79,8 @@ package cn.edu.zju.labx.objects
 		   	this.addChild(lens);
 		   	var effectLayer:ViewportLayer = new ViewportLayer(StageObjectsManager.getDefault.mainView.viewport, null);
 			effectLayer.addDisplayObject3D(sp, true);
-//			effectLayer.alpha = 0.7;
-			effectLayer.blendMode = BlendMode.HARDLIGHT;
+			effectLayer.alpha = 0.8;
+//			effectLayer.blendMode = BlendMode.HARDLIGHT;
 			StageObjectsManager.getDefault.layerManager.equipmentLayer.addLayer(effectLayer);
             sp.addEventListener(InteractiveScene3DEvent.OBJECT_PRESS, objectPressHandler);
 		}

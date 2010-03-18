@@ -124,8 +124,9 @@ package
 			StageObjectsManager.getDefault.originPivot = originPivot;
 			
 			light = new PointLight3D(true);
-			light.y = 100;
-			light.z = -100;
+			light.x = 200;
+			light.y = 50;
+			light.z = -50;
 			originPivot.addChild(light);
 			
 			var BASIC_X:Number = 100;
