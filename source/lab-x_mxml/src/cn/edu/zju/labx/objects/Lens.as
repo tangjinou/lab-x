@@ -59,7 +59,7 @@ package cn.edu.zju.labx.objects
 			this._focus = focus;
 		}
 		public function createChildren():void{
-		   	var sp:Sphere = new Sphere(this.material,150,30, 30);
+		   	var sp:Sphere = new Sphere(this.material,150, 30, 16);
 		   	var normal:Number3D = new Number3D(300,0,0); 
 			var point:Number3D = new Number3D(135,0,0); 
 		   	var cutPlane:Plane3D = Plane3D.fromNormalAndPoint(normal, point);
