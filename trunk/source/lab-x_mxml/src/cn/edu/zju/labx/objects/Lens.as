@@ -61,7 +61,7 @@ package cn.edu.zju.labx.objects
 		public function createChildren():void{
 			var radius:Number = 100;
 			var shift:Number = Math.sqrt(radius*radius - height*height/4);
-		   	var sp:Sphere = new Sphere(this.material,radius, 30, 16);
+		   	var sp:Sphere = new Sphere(this.material, radius, 24, 12);
 		   	var normal:Number3D = new Number3D(radius,0,0); 
 			var point:Number3D = new Number3D(shift,0,0); 
 		   	var cutPlane:Plane3D = Plane3D.fromNormalAndPoint(normal, point);
