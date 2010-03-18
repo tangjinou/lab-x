@@ -144,7 +144,7 @@ package cn.edu.zju.labx.utils
 		}
 		
 		[Test]
-		public function testCalculatePointInFlat():void {
+		public function testCalculatePointInPlane():void {
 			var transform:Matrix3D = new Matrix3D();
 			transform.n14 = 1;
 			/*
@@ -160,7 +160,7 @@ package cn.edu.zju.labx.utils
 		    
 		    line = new Number3D(-2,2,0);
 		    startPoint = new Number3D(2,0,0);
-		    result = MathUtils.calculatePointInFlat(transform,line,startPoint);
+		    result = MathUtils.calculatePointInPlane(transform,line,startPoint);
 		    Assert.assertNotNull(result);
 		    Assert.assertEquals(result.x,1);
 		    Assert.assertEquals(result.y,1);
@@ -168,7 +168,7 @@ package cn.edu.zju.labx.utils
 		    
 		    line = new Number3D(-3,3,0);
 		    startPoint = new Number3D(3,0,0);
-		    result = MathUtils.calculatePointInFlat(transform,line,startPoint);
+		    result = MathUtils.calculatePointInPlane(transform,line,startPoint);
 		    Assert.assertNotNull(result);
 		    Assert.assertEquals(result.x,1);
 		    Assert.assertEquals(result.y,2);
@@ -177,7 +177,7 @@ package cn.edu.zju.labx.utils
 		    try{
 		      line = new Number3D(1,0,0);
 		      startPoint = new Number3D(2,0,0);
-		      result = MathUtils.calculatePointInFlat(transform,line,startPoint);
+		      result = MathUtils.calculatePointInPlane(transform,line,startPoint);
             } catch (err:Error){
                Assert.assertTrue(err is Error);            
             }
@@ -185,7 +185,7 @@ package cn.edu.zju.labx.utils
 		    
 		    line = new Number3D(2,2,0);
 		    startPoint = new Number3D(-1,0,0);
-		    result = MathUtils.calculatePointInFlat(transform,line,startPoint);
+		    result = MathUtils.calculatePointInPlane(transform,line,startPoint);
 		    Assert.assertNotNull(result);
 		    Assert.assertEquals(result.x,1);
 		    Assert.assertEquals(result.y,2);
@@ -207,7 +207,7 @@ package cn.edu.zju.labx.utils
             */
 		    line = new Number3D(0,3,0);
 		    startPoint = new Number3D(1,0,0);
-		    result = MathUtils.calculatePointInFlat(transform,line,startPoint);
+		    result = MathUtils.calculatePointInPlane(transform,line,startPoint);
 		    Assert.assertNotNull(result);
 		    Assert.assertEquals(result.x,1);
 		    Assert.assertEquals(result.y,1);
@@ -227,7 +227,7 @@ package cn.edu.zju.labx.utils
             */
             line = new Number3D(2,2,0);
 		    startPoint = new Number3D(0,-1,0);
-		    result = MathUtils.calculatePointInFlat(transform,line,startPoint);
+		    result = MathUtils.calculatePointInPlane(transform,line,startPoint);
 		    Assert.assertNotNull(result);
 		    Assert.assertEquals(result.x,1);
 		    Assert.assertEquals(result.y,0);
@@ -240,7 +240,7 @@ package cn.edu.zju.labx.utils
 		}
 		
 		[Test]
-		public function testCalculatePointInFlat2():void {
+		public function testCalculatePointInPlane2():void {
 		   
 		    var flat_position:Number3D =new Number3D(1,0,0);
 		    var flat_norma:Number3D =new Number3D(1,0,0);
@@ -249,7 +249,7 @@ package cn.edu.zju.labx.utils
 		    var result:Number3D;
 		    line = new Number3D(-2,2,0);
 		    startPoint = new Number3D(2,0,0);
-		    result = MathUtils.calculatePointInFlat2(flat_position,flat_norma,line,startPoint);
+		    result = MathUtils.calculatePointInPlane2(flat_position,flat_norma,line,startPoint);
 		    Assert.assertNotNull(result);
 		    Assert.assertEquals(result.x,1);
 		    Assert.assertEquals(result.y,1);
@@ -260,7 +260,7 @@ package cn.edu.zju.labx.utils
 		    flat_norma = new Number3D(1.71,0.71,0);
 		    line = new Number3D(2,2,0);
 		    startPoint = new Number3D(0,-1,0);
-            result = MathUtils.calculatePointInFlat2(flat_position,flat_norma,line,startPoint);
+            result = MathUtils.calculatePointInPlane2(flat_position,flat_norma,line,startPoint);
 		    Assert.assertNotNull(result);
 		    Assert.assertEquals(result.x,1);
 		    Assert.assertEquals(result.y,0);

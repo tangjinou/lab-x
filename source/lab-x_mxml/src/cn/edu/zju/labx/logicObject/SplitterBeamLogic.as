@@ -16,8 +16,7 @@ package cn.edu.zju.labx.logicObject
 			_normal= normal;
 		}
         public function calculateRayAfterSplit(oldLineRay:LineRay):LineRay{
-            var pointInPlat:Number3D =MathUtils.calculatePointInFlat2(_position,_normal,oldLineRay.normal,oldLineRay.start_point);
-            
+            var pointInPlat:Number3D =MathUtils.calculatePointInPlane2(_position,_normal,oldLineRay.normal,oldLineRay.start_point);
             if(pointInPlat == null){
                return  null;
             }
