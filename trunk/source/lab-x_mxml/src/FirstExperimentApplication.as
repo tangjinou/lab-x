@@ -156,7 +156,6 @@ package
 
 			mirror1 =new Mirror(shadeMaterialBeam);
 			originPivot.addChild(mirror1);
-			equipmentLayer.addDisplayObject3D(mirror1, true);
 			StageObjectsManager.getDefault.addObject(mirror1);
 			mirror1.scale = BASIC_SCALE;
 			mirror1.moveRight(BASIC_X+100);
@@ -169,7 +168,6 @@ package
 			shadeMaterialBeam.interactive = true;
 			mirror2 =new Mirror(shadeMaterialBeam);
 			originPivot.addChild(mirror2);
-			equipmentLayer.addDisplayObject3D(mirror2, true);
 			StageObjectsManager.getDefault.addObject(mirror2);
 			mirror2.scale = BASIC_SCALE;
 			mirror2.moveRight(BASIC_X + 200);
@@ -181,7 +179,6 @@ package
 			shadeMaterialBeam.interactive = true;
 			mirror3 =new Mirror(shadeMaterialBeam);
 			originPivot.addChild(mirror3);
-			equipmentLayer.addDisplayObject3D(mirror3, true);
 			StageObjectsManager.getDefault.addObject(mirror3);
 			mirror3.scale = BASIC_SCALE;
 			mirror3.moveRight(BASIC_X + 200);
