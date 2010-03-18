@@ -65,7 +65,7 @@ package
 			 *  set the mainView here ,if not it will make some problems
 			 */ 
 			StageObjectsManager.getDefault.mainView = this;
-			StageObjectsManager.getDefault.layerManager.initViewportLayers();
+//			StageObjectsManager.getDefault.layerManager.initViewportLayers(); //init move to the getdefault in LayerManager
 			deskLayer = StageObjectsManager.getDefault.layerManager.deskLayer;
 			equipmentLayer = StageObjectsManager.getDefault.layerManager.equipmentLayer;
 			createDesk();
@@ -148,13 +148,13 @@ package
 			StageObjectsManager.getDefault.addObject(beam2);
 			beam2.moveRight(LabXConstant.DESK_WIDTH/5*2);
 			beam2.moveUp(beam1.height/2);
-//			beam2.moveForward(200);
+			beam2.moveForward(200);
 			beam2.rotationY -=225;  // -135
 			trace(beam2.transform.toString());
 			
 			
 			
-//			/*Create Lens*/	
+			/*Create Lens*/	
 			var shadeMaterialLens:PhongMaterial = new PhongMaterial(light,0xFFFFFF,0x6ccff8,100);
 			shadeMaterialLens.interactive = true;
 			convexLens1 = new ConvexLens(shadeMaterialLens, 100);
@@ -162,8 +162,8 @@ package
 			convexLens1.moveUp(convexLens1.height/2);
 			originPivot.addChild(convexLens1);
 			StageObjectsManager.getDefault.addObject(convexLens1);
-//			
-//			/*Create second Lens*/	
+			
+			/*Create second Lens*/	
 			var shadeMaterialLens2:PhongMaterial = new PhongMaterial(light,0xFFFFFF,0x6ccff8,100);
 			shadeMaterialLens2.interactive = true;
 			convexLens2 = new ConvexLens(shadeMaterialLens2, 100);
@@ -171,17 +171,17 @@ package
 			convexLens2.moveUp(convexLens2.height/2);
 			originPivot.addChild(convexLens2);
 			StageObjectsManager.getDefault.addObject(convexLens2);
-			
-			
-			/*Create mirror*/
-			var shadeMaterialBeam:PhongMaterial = new PhongMaterial(light,0xFFFFFF,0xFF0000,100);
-			shadeMaterialBeam.interactive = true;
-			var mirror:Mirror =new Mirror(shadeMaterialBeam);
-			mirror.moveRight(LabXConstant.DESK_WIDTH -100);
-			mirror.moveUp(mirror.height/2);
-			originPivot.addChild(mirror);
-			equipmentLayer.addDisplayObject3D(mirror, true);
-			StageObjectsManager.getDefault.addObject(mirror);
+//			
+//			
+//			/*Create mirror*/
+//			var shadeMaterialBeam:PhongMaterial = new PhongMaterial(light,0xFFFFFF,0xFF0000,100);
+//			shadeMaterialBeam.interactive = true;
+//			var mirror:Mirror =new Mirror(shadeMaterialBeam);
+//			mirror.moveRight(LabXConstant.DESK_WIDTH -100);
+//			mirror.moveUp(mirror.height/2);
+//			originPivot.addChild(mirror);
+//			equipmentLayer.addDisplayObject3D(mirror, true);
+//			StageObjectsManager.getDefault.addObject(mirror);
 			
 			/*create Board*/
 			var shadeMaterialBoard:PhongMaterial = new PhongMaterial(light,0xFFFFFF,0xe1e1e1,100);

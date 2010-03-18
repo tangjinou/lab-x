@@ -20,20 +20,19 @@ package cn.edu.zju.labx
     public class MySuite  
     {  
         public var t1:MathUtilsTest;
-//      public var t2:StageObjectsManagerTest;
-//        
-//
-//       public var t3:LineRayLogicTest;
-       public var t4:LensLogicTest;
-//       public var t5:LineRaysTest;
+		public var t2:StageObjectsManagerTest;
+ 		
+ 		public var t3:LineRayLogicTest;
+		public var t4:LensLogicTest;
+		public var t5:LineRaysTest;
+
+
+		public var t10:LensTest;
+		public var t11:Plane3DTest;
+
+		public var t12:InterferenceLogicTest;
         
-        
-//      public var t10:LensTest;
-//        public var t11:Plane3DTest;
-//        
-//        public var t12:InterferenceLogicTest;
-        
-        public function MySuite()  
+		public function MySuite()  
         {  
         }  
     }  

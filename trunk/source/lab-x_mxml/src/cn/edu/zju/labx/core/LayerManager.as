@@ -28,8 +28,10 @@ package cn.edu.zju.labx.core
 		protected static var instance:LayerManager = null;
 		public static function get getDefault():LayerManager
 		{
-			if (instance == null)
+			if (instance == null) {
 				instance = new LayerManager();
+				instance.initViewportLayers();
+			}
 			return instance;
 		}
 		
@@ -50,7 +52,7 @@ package cn.edu.zju.labx.core
 		
 		}
 		
-		public function initViewportLayers():void
+		private function initViewportLayers():void
 		{
 			var viewport:Viewport3D = StageObjectsManager.getDefault.mainView.viewport;
 			equipmentLayer = new ViewportLayer(viewport, null);
@@ -66,7 +68,7 @@ package cn.edu.zju.labx.core
 			var growFilter_2:GlowFilter = new GlowFilter(0x00ffff, 2, 20, 10, 2, 3, true, false);
 			var growFilter_b_2:GlowFilter = new GlowFilter(0x00ffff, 2, 16, 10, 3, 9, false, false);
 			var dropShadow_2:DropShadowFilter = new DropShadowFilter(0, 360, 0x000fff, 1, 70, 70, 5, 3, false, false, false);
-			rayEffect = [growFilter_2,growFilter_b_2,dropShadow_2];
+//			rayEffect = [growFilter_2,growFilter_b_2,dropShadow_2];
 		}
 		
 		public function addRayLayer(rayLayer:ViewportLayer, eqLayer:ViewportLayer = null):void
