@@ -110,6 +110,7 @@ package cn.edu.zju.labx.objects
    		public function onRayHanle(oldRay:Ray):void{
  
              oldRay.EndX=this.x;
+             displayInterferenceImage();
    		     
    		}
    		
