@@ -48,18 +48,23 @@ package cn.edu.zju.labx.objects
 			addEventListener(InteractiveScene3DEvent.OBJECT_PRESS, objectPressHandler);
 		}
 		
-		private function makeNewRay1(oldRay:Ray):Ray
+		protected function makeNewRay1(oldRay:Ray):Ray
 		{
 			if(oldRay != null)
 			{
-				oldRay.EndX = this.x;
+//				oldRay.EndX = this.x;
 //				var lensLogic:LensLogic = new LensLogic(new Number3D(this.x, this.y, this.z), this._focus);
 				var newLineRays:ArrayCollection = new ArrayCollection();
 				for each (var oldLineRay:LineRay in oldRay.getLineRays())
 				{   
-					var beamLogic:SplitterBeamLogic =new SplitterBeamLogic(new Number3D(this.x,this.y,this.z),new Number3D(this.transform.n11,this.transform.n12,this.transform.n13));
-                    newLineRays.addItem(beamLogic.calculateRayAfterSplit(oldLineRay));
+					var beamLogic:SplitterBeamLogic =new SplitterBeamLogic(getPosition(),getNormal());
+                    var lineRayLogic:LineRayLogic = beamLogic.calculateRayAfterSplit(oldLineRay.logic);
+                    if(lineRayLogic!=null){
+                    	newLineRays.addItem(new LineRay(lineRayLogic));
+                    	oldLineRay.end_point = new Number3D(lineRayLogic.x, lineRayLogic.y, lineRayLogic.z);
+                    }
 				}
+				oldRay.displayRays();
 				return  new Ray(null, newLineRays, 0, 0);
 			}
 			return null;
@@ -193,7 +198,7 @@ package cn.edu.zju.labx.objects
     	public function getDistance(ray:Ray):Number{
     		if(ray.getLineRays().length>0){
 			   var lineRay:LineRay = ray.getLineRays().getItemAt(0) as LineRay;
-    	       return MathUtils.distanceToNumber3D(new Number3D(this.x,this.y,this.z),lineRay.start_point);;
+    	       return MathUtils.distanceToNumber3D(getPosition(),lineRay.start_point);;
     	    }
     	    return -1;
     	}
@@ -205,7 +210,8 @@ package cn.edu.zju.labx.objects
     		
     	    if(ray!=null && ray.getLineRays()!=null && ray.getLineRays().length>0){
 			   var lineRay:LineRay = ray.getLineRays().getItemAt(0) as LineRay;
-	           return isLineRayOnObject(lineRay.logic);
+	           if(lineRay != null)return isLineRayOnObject(lineRay.logic);
+	           return false;
 			}
     	   return false;
     	}

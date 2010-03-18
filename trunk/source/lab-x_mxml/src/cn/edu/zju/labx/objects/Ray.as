@@ -25,9 +25,11 @@ package cn.edu.zju.labx.objects
 		private var endX:Number;
 		
 		//This array is in for lineRay
-		private var lineRays:ArrayCollection =new ArrayCollection();
+		public var lineRays:ArrayCollection =new ArrayCollection();//FOR TEST
 		
 		private var lines:Lines3D = null;
+		var lineMaterial:LineMaterial = new LineMaterial(0xffffff,1);
+		var effectLayer:ViewportLayer = new ViewportLayer(StageObjectsManager.getDefault.mainView.viewport, null);
 		
 		public function Ray(material:MaterialObject3D=null, lineRays:ArrayCollection =null, startX:Number=0, endX:Number=0)
 		{
@@ -77,14 +79,14 @@ package cn.edu.zju.labx.objects
 		}
 		
 		public function displayRays():void
-		{   
+		{
 			if(lineRays==null){
 			  return;
 			}
 			if(lines!=null){
 			  removeChild(lines);
 			}
-			var lineMaterial:LineMaterial = new LineMaterial(0x00ffff,1);
+
 			lines = new Lines3D(lineMaterial);
 			for(var i:int=0;i<lineRays.length;i++){
 			  if(lineRays.getItemAt(i) is LineRay)
@@ -95,10 +97,22 @@ package cn.edu.zju.labx.objects
 			  	lines.addLine(new Line3D(lines, lineMaterial, lineBold, start_point, end_point));
 			  }
 		    }
-		    var effectLayer:ViewportLayer = new ViewportLayer(StageObjectsManager.getDefault.mainView.viewport, null);
+		    
 			effectLayer.addDisplayObject3D(lines, true);
 			StageObjectsManager.getDefault.layerManager.addRayLayer(effectLayer);
 		    addChild(lines);
+	    }
+	    
+	    public function destroy():void
+	    {
+	    	removeChild(lines);
+	    	this.lines = null;
+	    	this.material.destroy();
+	    	this.material = null;
+	    	lineMaterial.destroy();
+	    	lineMaterial = null;
+	    	StageObjectsManager.getDefault.layerManager.removeRayLayer(this.effectLayer);
+	    	effectLayer = null;
 	    }
         
 	}
