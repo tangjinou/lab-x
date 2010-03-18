@@ -17,14 +17,14 @@ package cn.edu.zju.labx.logicObject
 		}
         public function calculateRayAfterSplit(oldLineRay:LineRay):LineRay{
             var pointInPlane:Number3D =MathUtils.calculatePointInPlane2(_position,_normal,oldLineRay.normal,oldLineRay.start_point);
-            if(pointInPlat == null){
+            if(pointInPlane == null){
                return  null;
             }
             _incidentRay = Number3D.sub(pointInPlane,oldLineRay.start_point);
             var dreflectionVector:Number3D = MathUtils.calculate3DreflectionVector(_incidentRay,_normal);
             //I don' know , but should do this here
 //            dreflectionVector.z = 0 - dreflectionVector.z;
-            return new LineRay(new LineRayLogic(pointInPlat,dreflectionVector));
+            return new LineRay(new LineRayLogic(pointInPlane,dreflectionVector));
         }
 	}
 }
