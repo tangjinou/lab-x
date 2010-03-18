@@ -59,18 +59,20 @@ package cn.edu.zju.labx.objects
 			this._focus = focus;
 		}
 		public function createChildren():void{
-		   	var sp:Sphere = new Sphere(this.material,150, 30, 16);
-		   	var normal:Number3D = new Number3D(300,0,0); 
-			var point:Number3D = new Number3D(135,0,0); 
+			var radius:Number = 100;
+			var shift:Number = Math.sqrt(radius*radius - height*height/4);
+		   	var sp:Sphere = new Sphere(this.material,radius, 30, 16);
+		   	var normal:Number3D = new Number3D(radius,0,0); 
+			var point:Number3D = new Number3D(shift,0,0); 
 		   	var cutPlane:Plane3D = Plane3D.fromNormalAndPoint(normal, point);
 		   	var meshes:Array = MeshUtil.cutTriangleMesh(sp, cutPlane);
 		   	lensPart1 = meshes[0];
-		 	lensPart1.moveLeft(135);
-		   	normal.x = -300;
-		   	point.x = -135;
+		 	lensPart1.moveLeft(shift);
+		   	normal.x = -radius;
+		   	point.x = -shift;
 		   	var meshes2:Array = MeshUtil.cutTriangleMesh(meshes[1], cutPlane);
 		   	lensPart2 = meshes2[0];
-		   	lensPart2.moveRight(135);
+		   	lensPart2.moveRight(shift);
 		   	lens = new TriangleMesh3D(null, null, null);
 		   	lens.addChild(lensPart1);
 		   	lens.addChild(lensPart2);
