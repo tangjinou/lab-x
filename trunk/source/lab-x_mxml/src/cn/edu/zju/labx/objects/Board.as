@@ -78,9 +78,8 @@ package cn.edu.zju.labx.objects
 			cube.addEventListener(type, listener, useCapture, priority, useWeakReference);
 		}
 		
-		public function displayInterferenceImage():void
+		public function displayInterferenceImage(theta:Number):void
 		{
-			var theta:Number = Math.PI/10;
 			var interf:InterferenceLogic = new InterferenceLogic(theta, LabXConstant.WAVE_LENGTH);
 			var distance:Number = interf.getDistance();
 			trace(distance);
@@ -122,7 +121,7 @@ package cn.edu.zju.labx.objects
 				}
 			}
 			oldRay.displayRays();
-            displayInterferenceImage();
+            displayInterferenceImage(Math.PI/10);
    		}
    		
     	/**
