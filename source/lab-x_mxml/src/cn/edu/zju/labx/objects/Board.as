@@ -107,9 +107,12 @@ package cn.edu.zju.labx.objects
 		 *  deal with when the ray on the object
 		 **/ 
    		public function onRayHanle(oldRay:Ray):void{
- 
+   			 
+   			 for each (var oldLineRay:LineRay in oldRay.getLineRays())
+		     {
+			 }
+			 oldRay.displayRays();
              displayInterferenceImage();
-   		     
    		}
    		
     	/**
