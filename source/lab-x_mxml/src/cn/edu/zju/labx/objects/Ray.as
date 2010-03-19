@@ -1,5 +1,6 @@
 package cn.edu.zju.labx.objects
 {   
+	import cn.edu.zju.labx.core.LabXConstant;
 	import cn.edu.zju.labx.core.StageObjectsManager;
 	
 	import mx.collections.ArrayCollection;
@@ -93,8 +94,10 @@ package cn.edu.zju.labx.objects
 			  if(lineRays.getItemAt(i) is LineRay)
 			  {
 			  	var lineRay:LineRay = lineRays.getItemAt(i) as LineRay;
+			  	
 			  	var start_point:Vertex3D = new Vertex3D(lineRay.start_point.x,lineRay.start_point.y,lineRay.start_point.z);
 			  	var end_point:Vertex3D = new Vertex3D(lineRay.end_point.x,lineRay.end_point.y,lineRay.end_point.z);
+			  	
 			  	lines.addLine(new Line3D(lines, lineMaterial, lineBold, start_point, end_point));
 			  }
 		    }

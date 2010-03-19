@@ -44,6 +44,9 @@ package cn.edu.zju.labx.objects
 		
 		public function get end_point():Number3D{
 		   if(endPoint ==null){
+		   	 if(_length>LabXConstant.RAY_DEFAULT_LENGTH){
+		   	   _length = LabXConstant.RAY_DEFAULT_LENGTH;
+		   	 }
 		     var x:Number= _length * _logic.dx+_logic.x;
 		     var y:Number= _length * _logic.dy+_logic.y;
 		     var z:Number= _length * _logic.dz+_logic.z;
@@ -59,6 +62,7 @@ package cn.edu.zju.labx.objects
 		    _logic.dy  = (endPoint.y - start_point.y)/_length;
 		    _logic.dz  = (endPoint.z - start_point.z)/_length;
 		}
+		
 		
 		public function get logic():LineRayLogic
 	    {
