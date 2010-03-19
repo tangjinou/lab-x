@@ -48,25 +48,25 @@ package cn.edu.zju.labx.objects
 		   this.lineRays= lineRays;
 		}
 		
-		public function set EndX(endx:Number):void
-		{
-			this.endX = endx;
-			if(endx<1000){
-				for(var i:int=0;i<lineRays.length;i++){
-			  	if(lineRays.getItemAt(i) is LineRay)
-			 	 {
-			  		var lineRay:LineRay = lineRays.getItemAt(i) as LineRay;
-			  		var k:Number = (endX - lineRay.start_point.x)/lineRay.logic.dx;
-               	 	var x:Number = endX;
-                	var y:Number = k*lineRay.logic.dy + lineRay.start_point.y;
-               		var z:Number = k*lineRay.logic.dz + lineRay.start_point.z;
-			  		lineRay.end_point = new Number3D(x,y,z);
-			  	 }
-		    	}
-		   }
-			
-			displayRays();
-		}
+//		public function set EndX(endx:Number):void
+//		{
+//			this.endX = endx;
+//			if(endx<1000){
+//				for(var i:int=0;i<lineRays.length;i++){
+//			  	if(lineRays.getItemAt(i) is LineRay)
+//			 	 {
+//			  		var lineRay:LineRay = lineRays.getItemAt(i) as LineRay;
+//			  		var k:Number = (endX - lineRay.start_point.x)/lineRay.logic.dx;
+//               	 	var x:Number = endX;
+//                	var y:Number = k*lineRay.logic.dy + lineRay.start_point.y;
+//               		var z:Number = k*lineRay.logic.dz + lineRay.start_point.z;
+//			  		lineRay.end_point = new Number3D(x,y,z);
+//			  	 }
+//		    	}
+//		   }
+//			
+//			displayRays();
+//		}
 		
 		public function set startPonit(p:Number3D):void{
 		      for(var i:int=0;i<lineRays.length;i++){

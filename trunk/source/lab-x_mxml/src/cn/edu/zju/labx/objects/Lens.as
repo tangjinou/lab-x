@@ -93,30 +93,26 @@ package cn.edu.zju.labx.objects
 		{
 			if(oldRay != null)
 			{
-				oldRay.EndX = this.x;
 				var lensLogic:LensLogic = new LensLogic(getPosition(), getNormal(), this._focus);
 				var newLineRays:ArrayCollection = new ArrayCollection();
 				for each (var oldLineRay:LineRay in oldRay.getLineRays())
 				{
-					var resultLogic:LineRayLogic = lensLogic.processRay(oldLineRay.logic);
-					if (isRayOnLens(resultLogic))newLineRays.addItem(new LineRay(resultLogic));
+					if (isLineRayOnObject(oldLineRay.logic)){
+						var resultLogic:LineRayLogic = lensLogic.processRay(oldLineRay.logic);
+						if (resultLogic != null)
+						{
+							newLineRays.addItem(new LineRay(resultLogic));
+							oldLineRay.end_point = new Number3D(resultLogic.x, resultLogic.y, resultLogic.z);
+						}
+							
+					}
 				}
-				oldRay = null;
+			    oldRay.displayRays();
 				return  new Ray(null, newLineRays, 0, 0);
 			}
 			return null;
 		}
-		
-		private function isRayOnLens(ray:LineRayLogic):Boolean
-		{
-			if (ray == null) return false;
-			if (Math.abs(ray.dx) < LabXConstant.NUMBER_PRECISION) return false;
-       	 	var x:Number = this.x;
-        	var y:Number = (this.x-ray.x)*ray.dy/ray.dx + ray.y;
-        	if (Math.abs(this.y - y) < this.height/2) return true;
-        	return false;
-		}
-		
+
 		
 		public function hanleUserInputEvent(event:Event):void{
 			if(userInputHandle!=null){
