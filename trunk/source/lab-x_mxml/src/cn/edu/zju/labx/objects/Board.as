@@ -152,7 +152,15 @@ package cn.edu.zju.labx.objects
 			}
 			oldRay.displayRays();
 			if(oldRay1!=null&&oldRay2!=null){
-               displayInterferenceImage(Math.PI/10);
+			   
+			   var lineRay1:LineRay = oldRay1.getLineRays().getItemAt(0) as LineRay;
+			   
+			   var lineRay2:LineRay = oldRay2.getLineRays().getItemAt(0) as LineRay;
+				
+			   if(lineRay1!=null&&lineRay2!=null){	
+               displayInterferenceImage(MathUtils.calculateAngleOfTwoVector(Number3D.sub(lineRay1.end_point,lineRay1.start_point),Number3D.sub(lineRay2.end_point,lineRay2.start_point)));
+               }
+            
             }
    		}
    		
