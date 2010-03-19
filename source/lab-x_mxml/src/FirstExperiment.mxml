@@ -39,7 +39,6 @@
 	 		}
 	 		
 	 		public function createCheckBoxes():void{
-	 		   vbox_checkBoxes
 	 		   
 	 		   for(var i:int=0;i<StageObjectsManager.getDefault.getObjectList().length;i++){
 	 		       var obj:LabXObject = StageObjectsManager.getDefault.getObjectList().getItemAt(i) as LabXObject;

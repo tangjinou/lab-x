@@ -100,7 +100,7 @@ package cn.edu.zju.labx.objects
 			createRay();
 		   	StageObjectsManager.getDefault.originPivot.addChild(getRay());
 		   	StageObjectsManager.getDefault.rayManager.notify(this._ray);
-		   	_ray.EndX=1000;
+		   	
 		}
 		
 		// should destribute the listener 
