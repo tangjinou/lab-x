@@ -83,7 +83,7 @@ package cn.edu.zju.labx.objects
 	    private var bmp:BitmapData;
 	    private var new_material:BitmapMaterial;
 		public function displayInterferenceImage(theta:Number):void
-		{
+		{   
 			var interf:InterferenceLogic = new InterferenceLogic(theta, LabXConstant.WAVE_LENGTH);
 			var distance:Number = interf.getDistance();
 //			trace(distance);
@@ -99,6 +99,7 @@ package cn.edu.zju.labx.objects
 			new_material.smooth = true;
 			new_material.interactive = true;
 			cube.replaceMaterialByName(new_material, "left");
+			
 		}
 		
 		//This is will be  automaticlly called when Ray chenged 
@@ -110,6 +111,8 @@ package cn.edu.zju.labx.objects
 				bmp = null;
 		    	cube.replaceMaterialByName(material, "left");
 		 	}
+		 	oldRay1 =null;
+		 	oldRay2 =null;
 		}
 		
 
@@ -122,8 +125,20 @@ package cn.edu.zju.labx.objects
 		/**
 		 *  deal with when the ray on the object
 		 **/ 
+		 
+		private var oldRay1:Ray =null;
+		private var oldRay2:Ray =null;
+		public function saveRays(oldRay:Ray):void{
+            if(oldRay1 == null){
+               oldRay1 = oldRay;
+            } else if(oldRay2 == null){
+               oldRay2 = oldRay;
+            }
+        }
    		public function onRayHanle(oldRay:Ray):void{
-
+   			
+            saveRays(oldRay);
+            
 			for each (var oldLineRay:LineRay in oldRay.getLineRays())
 			{
 				if (isLineRayOnObject(oldLineRay.logic)){
@@ -136,7 +151,9 @@ package cn.edu.zju.labx.objects
 				}
 			}
 			oldRay.displayRays();
-            displayInterferenceImage(Math.PI/10);
+			if(oldRay1!=null&&oldRay2!=null){
+               displayInterferenceImage(Math.PI/10);
+            }
    		}
    		
     	/**

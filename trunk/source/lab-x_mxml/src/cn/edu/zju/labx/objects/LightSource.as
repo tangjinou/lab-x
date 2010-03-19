@@ -99,6 +99,7 @@ package cn.edu.zju.labx.objects
 		public function openRay():void{
 			createRay();
 		   	StageObjectsManager.getDefault.originPivot.addChild(getRay());
+		   	_ray.displayRays();
 		   	StageObjectsManager.getDefault.rayManager.notify(this._ray);
 		   	
 		}

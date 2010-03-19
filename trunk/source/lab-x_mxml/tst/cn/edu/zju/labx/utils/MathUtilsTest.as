@@ -4,7 +4,6 @@ package cn.edu.zju.labx.utils
 	
 	import flexunit.framework.Assert;
 	
-	import org.flexunit.asserts.assertEquals;
 	import org.flexunit.asserts.assertTrue;
 	import org.papervision3d.core.math.Matrix3D;
 	import org.papervision3d.core.math.Number2D;
@@ -385,6 +384,27 @@ package cn.edu.zju.labx.utils
 		   
 		}
 		
+		[Test]
+		public function calculateAngleOfTwoVector():void{
+		   var v1:Number3D = new Number3D(3,0,0);
+		   var v2:Number3D = new Number3D(0,2,0);
+		   
+		   var r:Number = MathUtils.calculateAngleOfTwoVector(v1,v2);
+		   assertTrue(Math.abs(r - Math.PI/2)<LabXConstant.NUMBER_PRECISION);
+           
+           
+           v1 = new Number3D(1,0,0);
+           v2 = new Number3D(-1,0,0);
+           r = MathUtils.calculateAngleOfTwoVector(v1,v2);
+           assertTrue(Math.abs(r - Math.PI)<LabXConstant.NUMBER_PRECISION);		   
+		
+		   
+		   v1 = new Number3D(1,1,0);
+           v2 = new Number3D(1,0,0);
+           r = MathUtils.calculateAngleOfTwoVector(v1,v2);
+           assertTrue(Math.abs(r - Math.PI/4)<LabXConstant.NUMBER_PRECISION);	
+		 
+		}
 		
 	}
 }
