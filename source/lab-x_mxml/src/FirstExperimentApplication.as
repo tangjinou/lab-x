@@ -140,7 +140,7 @@ package
 			
 			
 			/*Create SplitterBeam1*/
-			var shadeMaterialBeam:PhongMaterial = new PhongMaterial(light,0xFF0000,0x6ccff8,100);
+			var shadeMaterialBeam:PhongMaterial = new PhongMaterial(light,0xFFFFFF,0xFF0000,100);
 			shadeMaterialBeam.interactive = true;
 			beam1 =new SplitterBeam("分光镜",shadeMaterialBeam);
 			StageObjectsManager.getDefault.addObject(beam1);
@@ -151,7 +151,7 @@ package
 			
 			
 //			/*Create Mirrcor1*/
-		    var shadeMaterialBeam:PhongMaterial = new PhongMaterial(light,0x00FF00,0x6ccff8,100);
+		    var shadeMaterialBeam:PhongMaterial = new PhongMaterial(light,0xFFFFFF,0x6ccff8,100);
 			shadeMaterialBeam.interactive = true;
 			mirror1 =new Mirror("镜子1",shadeMaterialBeam);
 			StageObjectsManager.getDefault.addObject(mirror1);
@@ -162,7 +162,7 @@ package
 			mirror1.rotationY+=55;
 
 			/*Create Mirrcor2*/
-			var shadeMaterialBeam:PhongMaterial = new PhongMaterial(light,0x00FF00,0x6ccff8,100);
+			var shadeMaterialBeam:PhongMaterial = new PhongMaterial(light,0xFFFFFF,0x6ccff8,100);
 			shadeMaterialBeam.interactive = true;
 			mirror2 =new Mirror("镜子2",shadeMaterialBeam);
 			StageObjectsManager.getDefault.addObject(mirror2);
@@ -172,7 +172,7 @@ package
 			mirror2.rotationY -=45;
 			
 			/*Create Mirrcor3*/
-			var shadeMaterialBeam:PhongMaterial = new PhongMaterial(light,0x00FF00,0x6ccff8,100);
+			var shadeMaterialBeam:PhongMaterial = new PhongMaterial(light,0xFFFFFF,0x6ccff8,100);
 			shadeMaterialBeam.interactive = true;
 			mirror3 =new Mirror("镜子3",shadeMaterialBeam);
 			StageObjectsManager.getDefault.addObject(mirror3);
@@ -241,9 +241,6 @@ package
 		
 		override protected function onRenderTick(e:Event=null):void
 		{
-//			easePitch += (camPitch - easePitch) * easeOut;
-//          easeYaw+= (camYaw - easeYaw) * easeOut;
-//          camera.orbit(easePitch, easeYaw);
 			camera.orbit(camPitch, camYaw);
             StageObjectsManager.getDefault.layerManager.viewLayerChange();
 			super.onRenderTick();
@@ -271,7 +268,6 @@ package
              if(StageObjectsManager.getDefault.isOrbiting==true && StageObjectsManager.getDefault.rotate_stage==true){
                 camPitch += differenceY;
                 camYaw += differenceX;
-  				//clamp pitch
   				if(camPitch < 5) camPitch = 5;
   				if(camPitch > 175) camPitch = 175;
              	//clamp yaw
