@@ -11,7 +11,6 @@ package cn.edu.zju.labx.objects
     import flash.events.Event;
     import flash.geom.Rectangle;
     
-    import org.papervision3d.core.math.Number3D;
     import org.papervision3d.core.proto.MaterialObject3D;
     import org.papervision3d.events.InteractiveScene3DEvent;
     import org.papervision3d.materials.BitmapMaterial;
@@ -38,9 +37,9 @@ package cn.edu.zju.labx.objects
 		 * @param material the material to create object in it
 		 * 
 		 */
-		public function Board(material:MaterialObject3D=null)
+		public function Board(name:String,material:MaterialObject3D=null)
 		{
-			super(material);
+			super(material,name);
 			createDisplayObject();
 		    addEventListener(InteractiveScene3DEvent.OBJECT_PRESS, objectPressHandler);
 		}

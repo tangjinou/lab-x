@@ -170,13 +170,37 @@ package cn.edu.zju.labx.core
 		 /******************************************************
 		 *   object list 
 		 * ******************************************************/
-         private var objectList:ArrayCollection = new ArrayCollection();		 
+		 //this list only for ray notify, if object is removed ,then i will be not notified
+         private var objectList:ArrayCollection = new ArrayCollection();
+         //this list for objects in the stage , it is globe list
+         private var objectAllSavedList:ArrayCollection = new ArrayCollection();		 
 		 
 		 public function addObject(obj:LabXObject):void{
+		 	 originPivot.addChild(obj);
 		     objectList.addItem(obj);
+		     objectAllSavedList.addItem(obj);
+		 }
+		 
+		 public function addObjectByName(name:String):void{
+		 	 for(var i:int=0;i<objectAllSavedList.length;i++){
+		        var obj:LabXObject = objectAllSavedList.getItemAt(i) as LabXObject;
+		        if(obj !=null && obj.name == name){
+		            originPivot.addChild(obj);
+		            objectList.addItem(obj);
+		        }
+		     }
 		 }
 		 public function removeObject(obj:LabXObject):void{
+		 	 originPivot.removeChild(obj);
 		     objectList.removeItemAt(objectList.getItemIndex(obj));
+		 }
+		 public function removeObjectByName(name:String):void{
+		     for(var i:int=0;i<objectList.length;i++){
+		        var obj:LabXObject = objectList.getItemAt(i) as LabXObject;
+		        if(obj !=null && obj.name == name){
+		           removeObject(obj);
+		        }
+		     }
 		 }
 		 public function getObjectList():ArrayCollection{
 		     return objectList

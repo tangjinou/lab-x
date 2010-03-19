@@ -1,18 +1,14 @@
 package cn.edu.zju.labx.objects
 {
 	import cn.edu.zju.labx.core.StageObjectsManager;
-	import cn.edu.zju.labx.logicObject.LineRayLogic;
-	import cn.edu.zju.labx.logicObject.SplitterBeamLogic;
-	
-	import mx.collections.ArrayCollection;
 	
 	import org.papervision3d.core.proto.MaterialObject3D;
 
 	public class Mirror extends SplitterBeam
 	{
-		public function Mirror(material:MaterialObject3D, vertices:Array=null, faces:Array=null, name:String=null)
+		public function Mirror(name:String,material:MaterialObject3D, vertices:Array=null, faces:Array=null)
 		{
-			super(material, vertices, faces, name);
+			super(name,material, vertices, faces);
 		}
 		
 		 /**

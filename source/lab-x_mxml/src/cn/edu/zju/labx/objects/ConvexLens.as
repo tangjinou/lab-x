@@ -9,10 +9,10 @@ package cn.edu.zju.labx.objects
 
 	public class ConvexLens extends Lens
 	{
-		public function ConvexLens(material:MaterialObject3D=null, focus:Number=LabXConstant.LENS_DEFAULT_FOCAL_LENGTH)
+		public function ConvexLens(name:String,material:MaterialObject3D=null, focus:Number=LabXConstant.LENS_DEFAULT_FOCAL_LENGTH)
 		{   
 			lens_dae_url = ResourceManager.CONVEX_LENS_DAE_URL;
-			super(material, focus);
+			super(name,material, focus);
 		}
 		
 	    override protected function daeFileOnloaded(evt:FileLoadEvent):void{  

@@ -2,6 +2,8 @@
 <mx:Application xmlns:mx="http://www.adobe.com/2006/mxml" backgroundColor="black" layout="absolute" creationComplete="callLater(init)" width="1000" height="600" xmlns:labx="cn.edu.zju.labx.*" xmlns:local="*" borderColor="#CD1A02" fontWeight="bold" fontSize="12">
 	 <mx:Script>
 	 	<![CDATA[
+	 		import mx.controls.CheckBox;
+	 		import cn.edu.zju.labx.objects.LabXObject;
 	 		import org.papervision3d.core.utils.Mouse3D;
 	 		import cn.edu.zju.labx.core.UserInputHandler;
 	 		import cn.edu.zju.labx.core.StageObjectsManager;
@@ -27,11 +29,30 @@
 			   uic.addChild(firstExperiment);
                addChild(uic);
                
+               createCheckBoxes();
+               
                 move_up.xTo = 0 - moveText.width + 6;
                 move_up.repeatCount = 10; //loop
                 move_up.repeatDelay = 1000; //loop time
                 move_up.duration = 10000; //the time of scroll onc
                 move_up.play();
+	 		}
+	 		
+	 		public function createCheckBoxes():void{
+	 		   vbox_checkBoxes
+	 		   
+	 		   for(var i:int=0;i<StageObjectsManager.getDefault.getObjectList().length;i++){
+	 		       var obj:LabXObject = StageObjectsManager.getDefault.getObjectList().getItemAt(i) as LabXObject;
+                   if(obj !=null){	 		       
+	 		         var checkbox:CheckBox = new CheckBox();
+	 		         checkbox.label = obj.name;
+	 		         checkbox.selected = true;
+	 		         checkbox.addEventListener(Event.CHANGE,checkBoxChanged);
+	 		         vbox_checkBoxes.addChild(checkbox);
+                   }
+	 		   }
+	 		       
+	 		   
 	 		}
 	 		public function open_stage_rotate():void{
 	 			StageObjectsManager.getDefault.rotate_stage=true;
@@ -41,28 +62,19 @@
 	 		    StageObjectsManager.getDefault.rotate_stage=false;
 	 		    StageObjectsManager.getDefault.addMessage("视角旋转关闭.");
 	 		    //TODO: need reset the view  
+	 		    
 	 		}
-	 		
-	 		public function checkBoxChanged():void{
-	 		   firstExperiment.convexLens1.visible=lens_checkBox.selected;
-	 		   if(lens_checkBox.selected==true){
-                  StageObjectsManager.getDefault.addMessage("增加凸透镜.");
-               }else{
-                  StageObjectsManager.getDefault.addMessage("移除凸透镜.");
-               }
-               //TODO: need remove the stage listerner
+	 		public function checkBoxChanged(event:Event):void{
+	 			var checkBox:CheckBox = event.target as CheckBox;
+                if(checkBox.selected ==true){
+                    StageObjectsManager.getDefault.addMessage("增加"+checkBox.label);                
+                    StageObjectsManager.getDefault.addObjectByName(checkBox.label);
+                }
+                else{
+                    StageObjectsManager.getDefault.addMessage("移除"+checkBox.label);
+                    StageObjectsManager.getDefault.removeObjectByName(checkBox.label);
+                }
 	 		}
-	 		
-	 		public function checkBoxChanged2():void{
-	 		   firstExperiment.convexLens2.visible=lens_checkBox2.selected;
-	 		   if(lens_checkBox2.selected==true){
-                  StageObjectsManager.getDefault.addMessage("增加凹透镜.");
-               }else{
-                  StageObjectsManager.getDefault.addMessage("移除凹透镜.");
-               }
-               //TODO: need remove the stage listerner
-	 		}
-	 		
 	 	]]> 
 	 </mx:Script>
 	 <local:FirstExperimentApplication id="firstExperiment" x="0" y="0" />
@@ -75,9 +87,7 @@
      <mx:Button  buttonDown="StageObjectsManager.getDefault.rotate_right()"  autoRepeat="false" id="rotate_right" enabled="false" icon="@Embed('../assets/icon/rotate_right.png')" disabledIcon="@Embed('../assets/icon/rotate_right_disable.png')" toolTip="rotate right"/>
      </mx:VBox>
 	 
-	 <mx:VBox horizontalGap="10" verticalAlign="bottom" x="929" y="536">
-	 <mx:CheckBox id="lens_checkBox"  selected="true"  label="凸透镜"  color="#B4ADA4" fontSize="12" change="checkBoxChanged()"/>
-	 <mx:CheckBox id="lens_checkBox2" selected="true" label="凹透镜" color="#B4ADA4" fontSize="12" change="checkBoxChanged2()"/>
+	 <mx:VBox id="vbox_checkBoxes" horizontalGap="10" verticalAlign="bottom" x="880" y="300">
 	 </mx:VBox>
 	 
 	 
@@ -86,6 +96,7 @@
 	     <mx:Label text="LabX" width="60" color="#DFF4F4" fontFamily="Arial" fontWeight="bold" fontSize="21" x="107" y="46"/>
 	 </mx:Panel>
 	 <mx:ApplicationControlBar width="20" height="44" x="104" y="0">
+	 
 	 </mx:ApplicationControlBar>
 	 <mx:Panel y="30" width="208" height="126" layout="absolute" color="#070707" horizontalCenter="-126" borderColor="#F90483" alpha="0.79">
 	     <mx:TextArea  x="0" y="0" width="188" height="86" editable="false"  fontSize="12" backgroundColor="#A69B9B" cornerRadius="1" borderStyle="solid" borderColor="#F31207" themeColor="#F0FF00" alpha="1.0" borderThickness="2"/>

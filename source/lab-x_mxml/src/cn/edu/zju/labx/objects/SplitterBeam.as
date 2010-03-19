@@ -41,9 +41,9 @@ package cn.edu.zju.labx.objects
 		 */
 	    public var oldMouseY:Number = -1;
 		
-		public function SplitterBeam(material:MaterialObject3D, vertices:Array=null, faces:Array=null, name:String=null)
+		public function SplitterBeam(name:String,material:MaterialObject3D,vertices:Array=null, faces:Array=null)
 		{
-			super(material, vertices, faces, name);
+			super(material,name, vertices, faces);
 			createDisplayObject();
 			addEventListener(InteractiveScene3DEvent.OBJECT_PRESS, objectPressHandler);
 		}
