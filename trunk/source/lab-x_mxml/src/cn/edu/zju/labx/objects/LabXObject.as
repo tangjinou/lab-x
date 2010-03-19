@@ -30,9 +30,9 @@ package cn.edu.zju.labx.objects
 		/**
 		 * Create an LabX Object
 		 */
-		public function LabXObject( material:MaterialObject3D, vertices:Array=null, faces:Array=null, name:String=null )
+		public function LabXObject( material:MaterialObject3D,name:String,vertices:Array=null, faces:Array=null)
 		{
-		   super(material, vertices, faces, null );
+		   super(material, vertices, faces, name);
 		}
 		
 		/**

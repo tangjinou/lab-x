@@ -11,7 +11,6 @@ package cn.edu.zju.labx.objects
 	
 	import com.greensock.*;
 	
-	import flash.display.BlendMode;
 	import flash.events.Event;
 	import flash.events.KeyboardEvent;
 	import flash.events.MouseEvent;
@@ -51,9 +50,9 @@ package cn.edu.zju.labx.objects
 		 */
 	    public var oldMouseY:Number = -1;
 	    
-		public function Lens(material:MaterialObject3D=null, focus:Number=LabXConstant.LENS_DEFAULT_FOCAL_LENGTH)
+		public function Lens(name:String,material:MaterialObject3D=null, focus:Number=LabXConstant.LENS_DEFAULT_FOCAL_LENGTH)
 		{
-			super(material);
+			super(material,name);
 			createChildren();
 			addEventListener(InteractiveScene3DEvent.OBJECT_PRESS, objectPressHandler);
 			this._focus = focus;

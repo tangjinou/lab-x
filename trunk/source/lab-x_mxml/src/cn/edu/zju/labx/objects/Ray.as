@@ -31,9 +31,9 @@ package cn.edu.zju.labx.objects
 		var lineMaterial:LineMaterial = new LineMaterial(0x00ffff,1);
 		var effectLayer:ViewportLayer = new ViewportLayer(StageObjectsManager.getDefault.mainView.viewport, null);
 		
-		public function Ray(material:MaterialObject3D=null, lineRays:ArrayCollection =null, startX:Number=0, endX:Number=0)
+		public function Ray(material:MaterialObject3D=null,lineRays:ArrayCollection =null, startX:Number=0, endX:Number=0)
 		{
-			super(material);
+			super(material,null);
 			this.lineBold = lineBold;
             this.lineRays= lineRays;
 //          displayRays();

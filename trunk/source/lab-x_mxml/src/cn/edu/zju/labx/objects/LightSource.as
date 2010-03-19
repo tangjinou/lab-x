@@ -26,9 +26,9 @@ package cn.edu.zju.labx.objects
 	    public var height:Number =100;
 	    public var width:Number =60;
 		
-		public function LightSource(material:MaterialObject3D=null)
+		public function LightSource(name:String,material:MaterialObject3D=null)
 		{
-			super(material);
+			super(material,name);
 			light=new DAE(true);  
 			light.addEventListener(FileLoadEvent.LOAD_COMPLETE,daeFileOnloaded);  
 			light.load(ResourceManager.RAY_DAE_URL,new MaterialsList( {all:this.material} ) );		
