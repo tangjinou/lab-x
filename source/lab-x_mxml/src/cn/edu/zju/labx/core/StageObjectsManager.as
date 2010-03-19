@@ -187,6 +187,7 @@ package cn.edu.zju.labx.core
 		        if(obj !=null && obj.name == name){
 		            originPivot.addChild(obj);
 		            objectList.addItem(obj);
+		            raymanager.reProduceRays();
 		        }
 		     }
 		 }
@@ -199,6 +200,7 @@ package cn.edu.zju.labx.core
 		        var obj:LabXObject = objectList.getItemAt(i) as LabXObject;
 		        if(obj !=null && obj.name == name){
 		           removeObject(obj);
+		           raymanager.reProduceRays();
 		        }
 		     }
 		 }
