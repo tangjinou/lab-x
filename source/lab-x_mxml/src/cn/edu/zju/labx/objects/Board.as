@@ -82,7 +82,7 @@ package cn.edu.zju.labx.objects
 	    //should keep the reference to free resource
 	    private var bmp:BitmapData;
 	    private var new_material:BitmapMaterial;
-		public function displayInterferenceImage():void
+		public function displayInterferenceImage(theta:Number):void
 		{
 			var interf:InterferenceLogic = new InterferenceLogic(theta, LabXConstant.WAVE_LENGTH);
 			var distance:Number = interf.getDistance();
