@@ -105,8 +105,6 @@ package
         {
         	var bitmap:Bitmap = evt.target.content as Bitmap;
 			var bitmapMaterial:BitmapMaterial = new BitmapMaterial(bitmap.bitmapData);
-//			var shader:PhongShader = new PhongShader(light,0xFFFFFF,0x464646,100);
-//			var shadedMaterial:ShadedMaterial = new ShadedMaterial(bitmapMaterial, shader);
 			bitmapMaterial.interactive = true;
 			lightSource = new LightSource("lightSource",bitmapMaterial);
 			StageObjectsManager.getDefault.rayManager.setLightSource(lightSource);
@@ -182,8 +180,6 @@ package
 			mirror3.moveBackward(200);
 			mirror3.rotationY -=55;
 			
-			
-			
 			/*Create Lens1*/	
 			var shadeMaterialLens:PhongMaterial = new PhongMaterial(light,0xFFFFFF,0x6ccff8,100);
 			shadeMaterialLens.interactive = true;
@@ -227,8 +223,6 @@ package
 			convexLens4.moveUp(convexLens4.height/2);
 			convexLens4.moveBackward(110);
 			convexLens4.rotationY -=35;
-          
-          
 			
 			/*create Board*/
 			var ColorMaterialBoard:ColorMaterial = new ColorMaterial(0x262626, 1, true);
