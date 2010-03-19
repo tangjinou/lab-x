@@ -149,20 +149,20 @@ package
 			
 			
 //			/*Create Mirrcor1*/
-		    var shadeMaterialBeam:PhongMaterial = new PhongMaterial(light,0xFFFFFF,0x6ccff8,100);
-			shadeMaterialBeam.interactive = true;
-			mirror1 =new Mirror("镜子1",shadeMaterialBeam);
+		    var shadeMaterialMiror:PhongMaterial = new PhongMaterial(light,0xFFFFFF,0x6ccff8,100);
+			shadeMaterialMiror.interactive = true;
+			mirror1 =new Mirror("镜子1",shadeMaterialMiror);
 			StageObjectsManager.getDefault.addObject(mirror1);
 			mirror1.scale = BASIC_SCALE;
 			mirror1.moveRight(BASIC_X+100);
 			mirror1.moveUp(mirror1.height/2);
 			mirror1.moveForward(200);
-			mirror1.rotationY+=55;
+			mirror1.rotationY+=54.217;
 
 			/*Create Mirrcor2*/
-			var shadeMaterialBeam:PhongMaterial = new PhongMaterial(light,0xFFFFFF,0x6ccff8,100);
-			shadeMaterialBeam.interactive = true;
-			mirror2 =new Mirror("镜子2",shadeMaterialBeam);
+			var shadeMaterialMiror2:PhongMaterial = new PhongMaterial(light,0xFFFFFF,0x6ccff8,100);
+			shadeMaterialMiror2.interactive = true;
+			mirror2 =new Mirror("镜子2",shadeMaterialMiror2);
 			StageObjectsManager.getDefault.addObject(mirror2);
 			mirror2.scale = BASIC_SCALE;
 			mirror2.moveRight(BASIC_X + 200);
@@ -170,59 +170,59 @@ package
 			mirror2.rotationY -=45;
 			
 			/*Create Mirrcor3*/
-			var shadeMaterialBeam:PhongMaterial = new PhongMaterial(light,0xFFFFFF,0x6ccff8,100);
-			shadeMaterialBeam.interactive = true;
-			mirror3 =new Mirror("镜子3",shadeMaterialBeam);
+			var shadeMaterialMiror3:PhongMaterial = new PhongMaterial(light,0xFFFFFF,0x6ccff8,100);
+			shadeMaterialMiror3.interactive = true;
+			mirror3 =new Mirror("镜子3",shadeMaterialMiror3);
 			StageObjectsManager.getDefault.addObject(mirror3);
 			mirror3.scale = BASIC_SCALE;
 			mirror3.moveRight(BASIC_X + 200);
 			mirror3.moveUp(mirror3.height/2);
-			mirror3.moveBackward(200);
-			mirror3.rotationY -=55;
+			mirror3.moveBackward(166.7);
+			mirror3.rotationY -=54.2;
 			
 			/*Create Lens1*/	
 			var shadeMaterialLens:PhongMaterial = new PhongMaterial(light,0xFFFFFF,0x6ccff8,100);
 			shadeMaterialLens.interactive = true;
-			convexLens1 = new ConvexLens("透镜1",shadeMaterialLens, 50);
+			convexLens1 = new ConvexLens("透镜1",shadeMaterialLens, 40);
 			StageObjectsManager.getDefault.addObject(convexLens1);
 			convexLens1.scale = BASIC_SCALE;
-			convexLens1.moveRight(BASIC_X + 200);
+			convexLens1.moveRight(BASIC_X + 280);
 			convexLens1.moveUp(convexLens1.height/2);
-			convexLens1.moveForward(170);
-			convexLens1.rotationY +=55;
+			convexLens1.moveForward(140);
+			convexLens1.rotationY +=18.5;
 			
 			/*Create Lens2*/	
 			var shadeMaterialLens2:PhongMaterial = new PhongMaterial(light,0xFFFFFF,0x6ccff8,100);
 			shadeMaterialLens2.interactive = true;
-			convexLens2 = new ConvexLens("透镜2",shadeMaterialLens2, 50);
+			convexLens2 = new ConvexLens("透镜2",shadeMaterialLens2, 60);
 			StageObjectsManager.getDefault.addObject(convexLens2);
 			convexLens2.scale = BASIC_SCALE;
 			convexLens2.moveRight(BASIC_X + 400);
 			convexLens2.moveUp(convexLens2.height/2);
 			convexLens2.moveForward(100);
-			convexLens2.rotationY +=55;
+			convexLens2.rotationY +=18.5;
 			
             /*Create Lens3*/	
 			var shadeMaterialLens3:PhongMaterial = new PhongMaterial(light,0xFFFFFF,0x6ccff8,100);
 			shadeMaterialLens3.interactive = true;
-			convexLens3 = new ConvexLens("透镜3",shadeMaterialLens3, 50);
+			convexLens3 = new ConvexLens("透镜3",shadeMaterialLens3, 40);
 			StageObjectsManager.getDefault.addObject(convexLens3);
 			convexLens3.scale = BASIC_SCALE;
 			convexLens3.moveRight(BASIC_X + 280);
 			convexLens3.moveUp(convexLens3.height/2);
-			convexLens3.moveBackward(160);
-			convexLens3.rotationY -=55;
+			convexLens3.moveBackward(140);
+			convexLens3.rotationY -=18.5;
 			
 			/*Create Lens4*/	
 			var shadeMaterialLens4:PhongMaterial = new PhongMaterial(light,0xFFFFFF,0x6ccff8,100);
 			shadeMaterialLens4.interactive = true;
-			convexLens4 = new ConvexLens("透镜4",shadeMaterialLens4, 50);
+			convexLens4 = new ConvexLens("透镜4",shadeMaterialLens4, 60);
 			StageObjectsManager.getDefault.addObject(convexLens4);
             convexLens4.scale = BASIC_SCALE;
 			convexLens4.moveRight(BASIC_X + 400);
 			convexLens4.moveUp(convexLens4.height/2);
-			convexLens4.moveBackward(110);
-			convexLens4.rotationY -=35;
+			convexLens4.moveBackward(100);
+			convexLens4.rotationY -=18.5;
 			
 			/*create Board*/
 			var ColorMaterialBoard:ColorMaterial = new ColorMaterial(0x262626, 1, true);
