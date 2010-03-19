@@ -11,6 +11,8 @@ package cn.edu.zju.labx.objects
     import flash.events.Event;
     import flash.geom.Rectangle;
     
+    import org.papervision3d.core.math.Number3D;
+    import org.papervision3d.core.math.Plane3D;
     import org.papervision3d.core.proto.MaterialObject3D;
     import org.papervision3d.events.InteractiveScene3DEvent;
     import org.papervision3d.materials.BitmapMaterial;
@@ -107,12 +109,19 @@ package cn.edu.zju.labx.objects
 		 *  deal with when the ray on the object
 		 **/ 
    		public function onRayHanle(oldRay:Ray):void{
-   			 
-   			 for each (var oldLineRay:LineRay in oldRay.getLineRays())
-		     {
-			 }
-			 oldRay.displayRays();
-             displayInterferenceImage();
+			for each (var oldLineRay:LineRay in oldRay.getLineRays())
+			{
+				if (isLineRayOnObject(oldLineRay.logic)){
+					var point:Number3D = new Number3D(oldLineRay.logic.x, oldLineRay.logic.y, oldLineRay.logic.z);
+					var vector:Number3D = new Number3D(oldLineRay.logic.dx, oldLineRay.logic.dy, oldLineRay.logic.dz);
+					var plane:Plane3D = getObjectPlane();
+					var anPoint:Number3D = Number3D.sub(point, vector);
+					var intersection:Number3D = plane.getIntersectionLineNumbers(point, anPoint);
+					oldLineRay.end_point = new Number3D(intersection.x, intersection.y, intersection.z);
+				}
+			}
+			oldRay.displayRays();
+            displayInterferenceImage();
    		}
    		
     	/**

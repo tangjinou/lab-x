@@ -81,10 +81,11 @@ package cn.edu.zju.labx.objects
 		public function displayRays():void
 		{
 			if(lineRays==null){
-			  return;
+				return;
 			}
 			if(lines!=null){
-			  removeChild(lines);
+				removeChild(lines);
+				StageObjectsManager.getDefault.layerManager.removeRayLayer(this.effectLayer);
 			}
 
 			lines = new Lines3D(lineMaterial);
