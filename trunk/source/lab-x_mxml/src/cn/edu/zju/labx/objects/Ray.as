@@ -29,8 +29,8 @@ package cn.edu.zju.labx.objects
 		public var lineRays:ArrayCollection =new ArrayCollection();//FOR TEST
 		
 		private var lines:Lines3D = null;
-		var lineMaterial:LineMaterial = new LineMaterial(0x00ffff,1);
-		var effectLayer:ViewportLayer = new ViewportLayer(StageObjectsManager.getDefault.mainView.viewport, null);
+		private var lineMaterial:LineMaterial = new LineMaterial(0x00ffff,1);
+		private var effectLayer:ViewportLayer = new ViewportLayer(StageObjectsManager.getDefault.mainView.viewport, null);
 		
 		public function Ray(material:MaterialObject3D=null,lineRays:ArrayCollection =null, startX:Number=0, endX:Number=0)
 		{
