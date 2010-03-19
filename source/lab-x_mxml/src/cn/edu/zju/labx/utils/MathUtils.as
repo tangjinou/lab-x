@@ -400,6 +400,17 @@ package cn.edu.zju.labx.utils
 		    result.normalize();
 		    return result;
 		}   
+
+		/**
+		 * Calculate the angle of the two vector
+		 **/ 
+		public static function calculateAngleOfTwoVector(v1:Number3D,v2:Number3D):Number{
+		   var _v1:Number3D = v1.clone();
+		   var _v2:Number3D = v2.clone();
+		   _v1.normalize();
+		   _v2.normalize();
+		   return Math.acos(Number3D.dot(_v1,_v2));
+		}
 		
 	}
 }

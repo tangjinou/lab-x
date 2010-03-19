@@ -5,6 +5,7 @@ package cn.edu.zju.labx.objects
 	import cn.edu.zju.labx.core.UserInputHandler;
 	import cn.edu.zju.labx.events.IRayMaker;
 	import cn.edu.zju.labx.events.IUserInputListener;
+	import cn.edu.zju.labx.font.Courier;
 	import cn.edu.zju.labx.logicObject.LineRayLogic;
 	import cn.edu.zju.labx.utils.MathUtils;
 	
@@ -14,6 +15,9 @@ package cn.edu.zju.labx.objects
 	import org.papervision3d.core.math.Plane3D;
 	import org.papervision3d.core.proto.MaterialObject3D;
 	import org.papervision3d.events.InteractiveScene3DEvent;
+	import org.papervision3d.materials.special.Letter3DMaterial;
+	import org.papervision3d.typography.Font3D;
+	import org.papervision3d.typography.Text3D;
 	
 	/**
 	 * LabX Object is the basic object in LabX model, any object that want 
@@ -43,6 +47,13 @@ package cn.edu.zju.labx.objects
 				UserInputHandler.getDefault.currentSelectedObject = this as IUserInputListener;
 //				this.x = StageObjectsManager.getDefault.getMouse_x()-LabXConstant.STAGE_WIDTH/2;
                 UserInputHandler.getDefault.objectPressHandlerHook(event,this);
+               
+//               var material:Letter3DMaterial = new Letter3DMaterial(0x0000FF);
+//               var text:String =  "Lens";
+//               var font3D:Font3D = new Courier();
+//               var text3D:Text3D = new Text3D(text,font3D,material,"myText");
+//     
+//               this.addChild(text3D);
 			}
 		}
 		
