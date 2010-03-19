@@ -29,8 +29,8 @@ package cn.edu.zju.labx.objects
 		protected var cube:Cube;
 		
 	    public var height:int;
-	    public var width:int;
-	    public var depth:int;
+	    public var width:int =10;
+	    public var depth:int =10;
 
 		
 		/**
@@ -78,23 +78,38 @@ package cn.edu.zju.labx.objects
 			cube.addEventListener(type, listener, useCapture, priority, useWeakReference);
 		}
 		
-		public function displayInterferenceImage(theta:Number):void
+
+	    //should keep the reference to free resource
+	    private var bmp:BitmapData;
+	    private var new_material:BitmapMaterial;
+		public function displayInterferenceImage():void
 		{
 			var interf:InterferenceLogic = new InterferenceLogic(theta, LabXConstant.WAVE_LENGTH);
 			var distance:Number = interf.getDistance();
-			trace(distance);
+//			trace(distance);
 			
-			var bmp:BitmapData = new BitmapData(depth, height, false, 0x0);
 			distance /= 300;
 			var numOfColumns:Number = depth/distance/2;
+			bmp = new BitmapData(depth, height, false, 0x0);
 			for (var i:Number = 0; i < numOfColumns; i++)
 			{
 				bmp.fillRect(new Rectangle(i*distance*2, 0, distance, height), 0x0000FF);
 			}
-			var material:BitmapMaterial = new BitmapMaterial(bmp);
-			material.smooth = true;
-			material.interactive = true;
-			cube.replaceMaterialByName(material, "left");
+			new_material = new BitmapMaterial(bmp);
+			new_material.smooth = true;
+			new_material.interactive = true;
+			cube.replaceMaterialByName(new_material, "left");
+		}
+		
+		//This is will be  automaticlly called when Ray chenged 
+		public function unDisplayInterferenceImage():void{
+			if(new_material!=null && bmp!=null){
+				new_material.destroy();
+				new_material = null;
+				bmp.dispose();
+				bmp = null;
+		    	cube.replaceMaterialByName(material, "left");
+		 	}
 		}
 		
 

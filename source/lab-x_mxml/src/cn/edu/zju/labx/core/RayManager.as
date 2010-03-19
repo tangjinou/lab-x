@@ -1,6 +1,7 @@
 package cn.edu.zju.labx.core
 {
 	import cn.edu.zju.labx.events.IRayHandle;
+	import cn.edu.zju.labx.objects.Board;
 	import cn.edu.zju.labx.objects.LabXObject;
 	import cn.edu.zju.labx.objects.LightSource;
 	import cn.edu.zju.labx.objects.Ray;
@@ -15,6 +16,12 @@ package cn.edu.zju.labx.core
 		
 		private var lightSource:LightSource;
 		
+		private var board:Board;
+		
+		public function setBorad(board:Board):void{
+		   this.board = board;
+		}
+		
 		public function setLightSource(l:LightSource):void{
 		   this.lightSource = l;
 		}
@@ -27,6 +34,10 @@ package cn.edu.zju.labx.core
 		        StageObjectsManager.getDefault.originPivot.removeChild(ray);
 		    	if(ray != null)ray.destroy();
 		    	ray = null;
+		    }
+		    // clean bmp in board
+		    if(board!=null){
+		          board.unDisplayInterferenceImage();
 		    }
 		    rayList.removeAll();
 		}

@@ -1,5 +1,6 @@
 package cn.edu.zju.labx.core
 {
+	import cn.edu.zju.labx.objects.Board;
 	import cn.edu.zju.labx.objects.LabXObject;
 	
 	import mx.collections.ArrayCollection;
@@ -179,6 +180,9 @@ package cn.edu.zju.labx.core
 		 	 originPivot.addChild(obj);
 		     objectList.addItem(obj);
 		     objectAllSavedList.addItem(obj);
+		     if(obj is Board){
+		       rayManager.setBorad(obj as Board);
+		     }
 		 }
 		 
 		 public function addObjectByName(name:String):void{
