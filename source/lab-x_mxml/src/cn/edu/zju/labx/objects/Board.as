@@ -128,6 +128,10 @@ package cn.edu.zju.labx.objects
 		 
 		private var oldRay1:Ray =null;
 		private var oldRay2:Ray =null;
+		
+		/**
+		 *  save the two rays
+		 */ 
 		public function saveRays(oldRay:Ray):void{
             if(oldRay1 == null){
                oldRay1 = oldRay;
@@ -152,16 +156,21 @@ package cn.edu.zju.labx.objects
 			}
 			oldRay.displayRays();
 			if(oldRay1!=null&&oldRay2!=null){
-			   
 			   var lineRay1:LineRay = oldRay1.getLineRays().getItemAt(0) as LineRay;
-			   
 			   var lineRay2:LineRay = oldRay2.getLineRays().getItemAt(0) as LineRay;
-				
-			   if(lineRay1!=null&&lineRay2!=null){	
-               displayInterferenceImage(MathUtils.calculateAngleOfTwoVector(Number3D.sub(lineRay1.end_point,lineRay1.start_point),Number3D.sub(lineRay2.end_point,lineRay2.start_point)));
+			   if(lineRay1!=null&&lineRay2!=null){		
+			   	var angle1:Number =  MathUtils.calculateAngleOfTwoVector(Number3D.sub(lineRay1.end_point,lineRay1.start_point),this.getNormal());
+			   	var angle2:Number =  MathUtils.calculateAngleOfTwoVector(Number3D.sub(lineRay2.end_point,lineRay2.start_point),this.getNormal());
+               	   if(Math.abs(angle1-angle2)<(Math.PI/180)){
+               	    displayInterferenceImage(MathUtils.calculateAngleOfTwoVector(Number3D.sub(lineRay1.end_point,lineRay1.start_point),Number3D.sub(lineRay2.end_point,lineRay2.start_point)));
+                   }else{
+                      StageObjectsManager.getDefault.addMessage("两条光线夹角之差大于一度");
+                   }
+               }else{
+               		  StageObjectsManager.getDefault.addMessage("光线没有经过挡板");
                }
             
-            }
+            } 
    		}
    		
     	/**

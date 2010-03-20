@@ -87,10 +87,12 @@ package cn.edu.zju.labx.objects
 		   	    	 if (isOn)
 		   	    	 {  
 		   	    	   openRay();
+                       StageObjectsManager.getDefault.addMessage("打开光源");
 		   	    	 } else {
 		   	    	 	StageObjectsManager.getDefault.rayManager.clearRays();
 //		   	    	 	StageObjectsManager.getDefault.originPivot.removeChild(getRay());
 		   	    	 	this._ray = null;
+		   	    	 	StageObjectsManager.getDefault.addMessage("关闭光源");
 		   	    	 }
 	   	    	 }
 			}
