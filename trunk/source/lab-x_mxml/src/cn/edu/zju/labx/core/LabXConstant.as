@@ -33,6 +33,10 @@ package cn.edu.zju.labx.core
 		public static const Y_MOVE_MIN:Number = 5;
 		public static const Z_MOVE_MIN:Number = 5;
 		
+		public static const X_KEY_MOVE_MIN:Number = 2;
+		public static const Y_KEY_MOVE_MIN:Number = 2;
+		public static const Z_KEY_MOVE_MIN:Number = 2;
+		
 		public static const NUMBER_PRECISION:Number = 0.000001;
 		
 		public static const WAVE_LENGTH:Number = 740; //unit:nm
