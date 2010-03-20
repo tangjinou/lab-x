@@ -77,8 +77,8 @@ package
 			equipmentLayer = StageObjectsManager.getDefault.layerManager.equipmentLayer;
 			createDesk();
 			createObjects();
-			var stats:StatsView = new StatsView(renderer);
-			addChild(stats);
+//			var stats:StatsView = new StatsView(renderer);
+//			addChild(stats);
 			startRendering();
 		}
 
