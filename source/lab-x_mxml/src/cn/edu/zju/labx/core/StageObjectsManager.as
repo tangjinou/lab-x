@@ -175,7 +175,7 @@ package cn.edu.zju.labx.core
 
 	 	   if(labXObjectSelected != null)
 	 	   {
-	 	   		var viewportLayer:ViewportLayer = mainView.viewport.getChildLayer(labXObjectSelected, true, true);
+	 	   		var viewportLayer:ViewportLayer = mainView.viewport.getChildLayer(labXObjectSelected.getObjectWithMaterial(), true, true);
 				viewportLayer.filters =null;
 	 	   		labXObjectSelected = null;
 		        rotate_right_button.enabled=false;
@@ -245,7 +245,7 @@ package cn.edu.zju.labx.core
 		
 		
 		public function rotate_left():void{
-		   if(labXObjectSelected!=null&&Math.abs(labXObjectSelected.localRotationY) <70){
+		   if(labXObjectSelected!=null){
 		     labXObjectSelected.localRotationY++;
 		     
 		     rayManager.reProduceRays();
@@ -253,7 +253,7 @@ package cn.edu.zju.labx.core
 		}
 		
 		public function rotate_right():void{
-           if(labXObjectSelected!=null&& Math.abs(labXObjectSelected.localRotationY) <70){
+           if(labXObjectSelected!=null){
 		     labXObjectSelected.localRotationY--;
 		     rayManager.reProduceRays();
 
