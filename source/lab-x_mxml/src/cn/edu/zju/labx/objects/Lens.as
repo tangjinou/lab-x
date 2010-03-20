@@ -40,6 +40,9 @@ package cn.edu.zju.labx.objects
 	    public var height:Number=120;
 	    
 	    private var LENS_DAE_URL:String;
+	    
+	    
+	    public var sp:Sphere;
    
 		/**
 		 * To store the old Mouse X position;
@@ -60,7 +63,7 @@ package cn.edu.zju.labx.objects
 		public function createChildren():void{
 			var radius:Number = 100;
 			var shift:Number = Math.sqrt(radius*radius - 130*130/4);
-		   	var sp:Sphere = new Sphere(this.material, radius, 24, 12);
+		   	sp = new Sphere(this.material, radius, 24, 12);
 		   	var normal:Number3D = new Number3D(radius,0,0); 
 			var point:Number3D = new Number3D(shift,0,0); 
 		   	var cutPlane:Plane3D = Plane3D.fromNormalAndPoint(normal, point);
@@ -182,6 +185,22 @@ package cn.edu.zju.labx.objects
 //			trace("end~~~~~~~~~~~~~");
 //			this.useOwnContainer = true;
         } 
+        
+        
+         /**
+		 *   This is for get object with the material on it, it should be overrite 
+		 * 
+		 *   when the this materials not on the basic object,
+		 * 
+		 *   for example: lens may not have the materials on 
+		 * 
+		 *   root,but on the sphere
+		 * 
+		 */ 
+		override public function getObjectWithMaterial():TriangleMesh3D{
+		    return sp;
+		}
+        
         
          /************************************************************
 		 * 

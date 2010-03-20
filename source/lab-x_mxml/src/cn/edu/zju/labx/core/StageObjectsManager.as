@@ -2,6 +2,7 @@ package cn.edu.zju.labx.core
 {
 	import cn.edu.zju.labx.objects.Board;
 	import cn.edu.zju.labx.objects.LabXObject;
+	import cn.edu.zju.labx.objects.Lens;
 	
 	import flash.filters.DropShadowFilter;
 	
@@ -161,12 +162,12 @@ package cn.edu.zju.labx.core
 		 public function objectPressHandlerHook(event:InteractiveScene3DEvent,labXObject:LabXObject):void{
 		 	if ((labXObjectSelected != null) && (labXObjectSelected != labXObject))
 		 	{
-		 		mainView.viewport.getChildLayer(labXObjectSelected, true, true).filters = null;
+		 		mainView.viewport.getChildLayer(labXObjectSelected.getObjectWithMaterial(), true, true).filters = null;
 		 	}
 		 	rotate_right_button.enabled=true;
 		 	rotate_left_button.enabled=true;
 		 	labXObjectSelected = labXObject;
-		 	var viewportLayer:ViewportLayer = mainView.viewport.getChildLayer(labXObject, true, true);
+		 	var viewportLayer:ViewportLayer = mainView.viewport.getChildLayer(labXObject.getObjectWithMaterial(), true, true);
 			viewportLayer.filters =[dropShadowFilter]; 
 		 } 
 		 
