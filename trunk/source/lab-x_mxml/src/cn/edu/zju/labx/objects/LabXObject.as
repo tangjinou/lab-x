@@ -160,5 +160,20 @@ package cn.edu.zju.labx.objects
 		    return false;
 		}
 		
+		/**
+		 *   This is for get object with the material on it, it should be overrite 
+		 * 
+		 *   when the this materials not on the basic object,
+		 * 
+		 *   for example: lens may not have the materials on 
+		 * 
+		 *   root,but on the sphere
+		 * 
+		 */ 
+		public function getObjectWithMaterial():TriangleMesh3D{
+		
+		    return this;
+		}
+		
 	}
 }
