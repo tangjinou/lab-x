@@ -10,6 +10,9 @@ package cn.edu.zju.labx.core
 	import org.papervision3d.events.InteractiveScene3DEvent;
 	import org.papervision3d.objects.DisplayObject3D;
 	import org.papervision3d.view.BasicView;
+	import org.papervision3d.view.layer.ViewportLayer;
+	
+	import flash.filters.DropShadowFilter;
 	
 	public  class StageObjectsManager
 	{   
@@ -153,15 +156,23 @@ package cn.edu.zju.labx.core
 		 
 		 private var labXObjectSelected:LabXObject;
 		 
+		 private var dropShadowFilter:DropShadowFilter = new DropShadowFilter(0, 360, 0x00FF00, 1, 16, 16, 3, 2, false, false, false);
+
 		 public function objectPressHandlerHook(event:InteractiveScene3DEvent,labXObject:LabXObject):void{
-		       rotate_right_button.enabled=true;
-		       rotate_left_button.enabled=true;
-		       labXObjectSelected = labXObject;
+		 	rotate_right_button.enabled=true;
+		 	rotate_left_button.enabled=true;
+		 	labXObjectSelected = labXObject;
+		 	var viewportLayer:ViewportLayer = mainView.viewport.getChildLayer(labXObject, true, true);
+			viewportLayer.filters =[dropShadowFilter]; 
 		 } 
 		 
 		 public function objectUnPressHandler():void{
-	 	   if(labXObjectSelected == null)
+
+	 	   if(labXObjectSelected != null)
 	 	   {
+	 	   		var viewportLayer:ViewportLayer = mainView.viewport.getChildLayer(labXObjectSelected, true, true);
+				viewportLayer.filters =null;
+	 	   		labXObjectSelected = null;
 		       rotate_right_button.enabled=false;
 		       rotate_left_button.enabled=false;
 		   }
