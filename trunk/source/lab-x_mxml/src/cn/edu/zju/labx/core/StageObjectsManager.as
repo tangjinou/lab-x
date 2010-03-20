@@ -3,6 +3,8 @@ package cn.edu.zju.labx.core
 	import cn.edu.zju.labx.objects.Board;
 	import cn.edu.zju.labx.objects.LabXObject;
 	
+	import flash.filters.DropShadowFilter;
+	
 	import mx.collections.ArrayCollection;
 	import mx.controls.Button;
 	import mx.controls.TextArea;
@@ -11,8 +13,6 @@ package cn.edu.zju.labx.core
 	import org.papervision3d.objects.DisplayObject3D;
 	import org.papervision3d.view.BasicView;
 	import org.papervision3d.view.layer.ViewportLayer;
-	
-	import flash.filters.DropShadowFilter;
 	
 	public  class StageObjectsManager
 	{   
@@ -173,8 +173,10 @@ package cn.edu.zju.labx.core
 	 	   		var viewportLayer:ViewportLayer = mainView.viewport.getChildLayer(labXObjectSelected, true, true);
 				viewportLayer.filters =null;
 	 	   		labXObjectSelected = null;
-		       rotate_right_button.enabled=false;
-		       rotate_left_button.enabled=false;
+		        rotate_right_button.enabled=false;
+		        rotate_left_button.enabled=false;
+		       
+		        labXObjectSelected =null
 		   }
 		 }
 		 

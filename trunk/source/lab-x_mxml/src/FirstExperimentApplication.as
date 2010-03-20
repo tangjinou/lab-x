@@ -72,13 +72,12 @@ package
 			 *  set the mainView here ,if not it will make some problems
 			 */ 
 			StageObjectsManager.getDefault.mainView = this;
-//			StageObjectsManager.getDefault.layerManager.initViewportLayers(); //init move to the getdefault in LayerManager
 			deskLayer = StageObjectsManager.getDefault.layerManager.deskLayer;
 			equipmentLayer = StageObjectsManager.getDefault.layerManager.equipmentLayer;
 			createDesk();
 			createObjects();
-//			var stats:StatsView = new StatsView(renderer);
-//			addChild(stats);
+			var stats:StatsView = new StatsView(renderer);
+			addChild(stats);
 			startRendering();
 		}
 
