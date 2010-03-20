@@ -159,6 +159,10 @@ package cn.edu.zju.labx.core
 		 private var dropShadowFilter:DropShadowFilter = new DropShadowFilter(0, 360, 0x00FF00, 1, 16, 16, 3, 2, false, false, false);
 
 		 public function objectPressHandlerHook(event:InteractiveScene3DEvent,labXObject:LabXObject):void{
+		 	if ((labXObjectSelected != null) && (labXObjectSelected != labXObject))
+		 	{
+		 		mainView.viewport.getChildLayer(labXObjectSelected, true, true).filters = null;
+		 	}
 		 	rotate_right_button.enabled=true;
 		 	rotate_left_button.enabled=true;
 		 	labXObjectSelected = labXObject;

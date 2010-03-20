@@ -7,6 +7,8 @@ package cn.edu.zju.labx.core{
 	import flash.events.MouseEvent;
 	import flash.ui.Keyboard;
 	
+	import mx.controls.Button;
+	
 	import org.papervision3d.core.utils.virtualmouse.VirtualMouseMouseEvent;
 	import org.papervision3d.events.InteractiveScene3DEvent;
 
@@ -71,7 +73,7 @@ package cn.edu.zju.labx.core{
 				this._currentSelectedObject.hanleUserInputEvent(e);
 				return;
 			}
-			if (this._currentSelectedObject == null)objectUnPressHandlerHook();
+			if ((this._currentSelectedObject == null) && !(e.target is Button) )objectUnPressHandlerHook();
 		}
 		
 		public function mouseUpHandler (e:MouseEvent):void
@@ -80,7 +82,7 @@ package cn.edu.zju.labx.core{
 			{
 				return;
 			}
-			if (this._currentSelectedObject != null)
+			if (this._currentSelectedObject != null  && !(e.target is Button))
 			{
 				this._currentSelectedObject.hanleUserInputEvent(e);
 				this._currentSelectedObject = null;
