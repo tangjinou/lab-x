@@ -105,7 +105,7 @@
 	 </mx:ApplicationControlBar>
 	 
 	 
-	 <mx:Text id="moveText" width="594" horizontalCenter="0" height="25"
+	 <mx:Text id="moveText" width="650" horizontalCenter="0" height="25"
                  text="welcome to the labx, you could press stop button,then move the objects" 
                  fontSize="15" color="#FF0000" y="553">
      </mx:Text>
