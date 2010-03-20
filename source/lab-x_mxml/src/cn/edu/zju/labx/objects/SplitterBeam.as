@@ -1,18 +1,15 @@
 package cn.edu.zju.labx.objects
 {
-	import cn.edu.zju.labx.core.LabXConstant;
 	import cn.edu.zju.labx.core.StageObjectsManager;
-	import cn.edu.zju.labx.core.UserInputHandler;
 	import cn.edu.zju.labx.events.IRayHandle;
 	import cn.edu.zju.labx.events.IUserInputListener;
+	import cn.edu.zju.labx.events.LabXObjectUserInputHandleTool;
 	import cn.edu.zju.labx.logicObject.LineRayLogic;
 	import cn.edu.zju.labx.logicObject.SplitterBeamLogic;
 	import cn.edu.zju.labx.utils.MathUtils;
 	
-	import flash.events.Event;
-	import flash.events.KeyboardEvent;
-	import flash.events.MouseEvent;
 	import flash.display.BlendMode;
+	import flash.events.Event;
 	
 	import mx.collections.ArrayCollection;
 	
@@ -32,20 +29,14 @@ package cn.edu.zju.labx.objects
 		
 		private var splitterBeam:Cube;
 		
-		/**
-		 * To store the old Mouse X position;
-		 */
-	    public var oldMouseX:Number = -1;
-	    /**
-		 * To store the old Mouse y position;
-		 */
-	    public var oldMouseY:Number = -1;
+		private var userInputhandleTool:LabXObjectUserInputHandleTool;
 		
 		public function SplitterBeam(name:String,material:MaterialObject3D,vertices:Array=null, faces:Array=null)
 		{
 			super(material,name, vertices, faces);
 			createDisplayObject();
 			addEventListener(InteractiveScene3DEvent.OBJECT_PRESS, objectPressHandler);
+			userInputhandleTool = new LabXObjectUserInputHandleTool(this);
 		}
 		
 		protected function makeNewRay1(oldRay:Ray):Ray
@@ -89,53 +80,9 @@ package cn.edu.zju.labx.objects
 				userInputHandle.call(this,event);
 				return;
 			}
-			if(event is MouseEvent)
-			{
-				var mouseEvent:MouseEvent = event as MouseEvent;
-				if (mouseEvent.type == MouseEvent.MOUSE_DOWN) {
-					oldMouseX = mouseEvent.stageX;
-					oldMouseY = mouseEvent.stageY;
-				} else if (mouseEvent.type == MouseEvent.MOUSE_UP) {
-					oldMouseX = -1;
-					oldMouseY = -1;
-					StageObjectsManager.getDefault.rayManager.reProduceRays();
-				} else if ((mouseEvent.type == MouseEvent.MOUSE_MOVE) &&(oldMouseY != -1) && (oldMouseY != -1) && mouseEvent.buttonDown) {
-					var xMove:Number = mouseEvent.stageX - oldMouseX;
-					var yMove:Number = mouseEvent.stageY - oldMouseY;
-					if ((Math.abs(xMove) < 10) && (Math.abs(yMove) < 10))return;
-					internalMove(xMove, yMove);
-					oldMouseX = mouseEvent.stageX;
-					oldMouseY = mouseEvent.stageY;
-				}
-			} else if (event is KeyboardEvent)
-			{
-				var keyBoradEvent:KeyboardEvent = event as KeyboardEvent;
-				if(UserInputHandler.keyLeft || UserInputHandler.keyRight)
-				{
-					var xMoveKey:Number = LabXConstant.X_MOVE_MIN;
-					if(UserInputHandler.keyLeft)xMoveKey = -xMoveKey;
-					internalMove(xMoveKey, 0);
-				} 
-			}
-		
+			userInputhandleTool.handleUserInputEvent(event);
 		}
 	    
-		private function internalMove(xMove:Number, yMove:Number):void
-		{
-			if (StageObjectsManager.getDefault.mainView.camera.z > 0)
-			{
-				xMove = -xMove; //when camera is on the other side, x should reverse
-				yMove = -yMove;
-			}
-			if(Math.abs(xMove) > Math.abs(yMove))
-			{
-				this.x += xMove;
-			} else {
-				this.z -= yMove;
-			}
-			StageObjectsManager.getDefault.addMessage("lens move:"+xMove);
-		}
-		
 		public function createDisplayObject():void{
 		    var materialsList:MaterialsList = new MaterialsList();
 			materialsList.addMaterial(material,"front");

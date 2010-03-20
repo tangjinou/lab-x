@@ -56,10 +56,11 @@ package cn.edu.zju.labx.core{
 		 * **********************************************************************
 		 */
 		private var _currentSelectedObject:IUserInputListener = null;
+		private var selectedLabxObject:IUserInputListener = null;
 		
 		public function set currentSelectedObject(currentObject:IUserInputListener):void {
 			this._currentSelectedObject = currentObject;
-			
+			selectedLabxObject = currentObject;
 		}
 		
 		public function mouseDownHandler (e:MouseEvent):void
@@ -73,7 +74,11 @@ package cn.edu.zju.labx.core{
 				this._currentSelectedObject.hanleUserInputEvent(e);
 				return;
 			}
-			if ((this._currentSelectedObject == null) && !(e.target is Button) )objectUnPressHandlerHook();
+			if ((this._currentSelectedObject == null) && !(e.target is Button) )
+			{
+				selectedLabxObject = null;
+				objectUnPressHandlerHook();
+			}
 		}
 		
 		public function mouseUpHandler (e:MouseEvent):void
@@ -113,28 +118,32 @@ package cn.edu.zju.labx.core{
 			{
 				case "W".charCodeAt():
 				case Keyboard.UP:
-					UserInputHandler.keyForward = true;
-					UserInputHandler.keyBackward = false;
+					keyForward = true;
+					keyBackward = false;
 					break;
  
 				case "S".charCodeAt():
 				case Keyboard.DOWN:
-					UserInputHandler.keyBackward = true;
-					UserInputHandler.keyForward = false;
+					keyBackward = true;
+					keyForward = false;
 					break;
  
 				case "A".charCodeAt():
 				case Keyboard.LEFT:
-					UserInputHandler.keyLeft = true;
-					UserInputHandler.keyRight = false;
+					keyLeft = true;
+					keyRight = false;
 					break;
  
 				case "D".charCodeAt():
 				case Keyboard.RIGHT:
-					UserInputHandler.keyRight = true;
-					UserInputHandler.keyLeft = false;
+					keyRight = true;
+					keyLeft = false;
 					break;
 					
+			}
+			if (selectedLabxObject != null)
+			{
+				selectedLabxObject.hanleUserInputEvent(e);
 			}
 		}
  
@@ -163,6 +172,10 @@ package cn.edu.zju.labx.core{
 					keyRight = false;
 					break;
 					
+			}
+			if (selectedLabxObject != null)
+			{
+				selectedLabxObject.hanleUserInputEvent(e);
 			}
 		}
 		
