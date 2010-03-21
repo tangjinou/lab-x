@@ -285,10 +285,11 @@ package cn.edu.zju.labx.core
 		   }
 		}
 		public function object_down():void{
+			
 		    if(labXObjectSelected!=null){
 		      labXObjectSelected.y--;
-		     rayManager.reProduceRays();
-             this.addMessage(labXObjectSelected.name+"往下移动"+labXObjectSelected.y.toFixed(2));
+		      rayManager.reProduceRays();
+              this.addMessage(labXObjectSelected.name+"往下移动"+labXObjectSelected.y.toFixed(2));
 		   }
 		}
         
