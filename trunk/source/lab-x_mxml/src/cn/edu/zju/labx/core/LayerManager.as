@@ -3,7 +3,7 @@ package cn.edu.zju.labx.core
 	import flash.filters.BlurFilter;
 	import flash.filters.DropShadowFilter;
 	import flash.filters.GlowFilter;
-	import flash.filters.BitmapFilterQuality;
+	
 	import org.papervision3d.view.Viewport3D;
 	import org.papervision3d.view.layer.ViewportLayer;
 	import org.papervision3d.view.layer.util.ViewportLayerSortMode;
@@ -17,6 +17,7 @@ package cn.edu.zju.labx.core
         /** first level layers **/
         public var deskLayer:ViewportLayer;
 		public var equipmentLayer:ViewportLayer;
+		public var deskLegLayer:ViewportLayer;
 		
 		private var rayEffect:Array;
        
@@ -44,10 +45,12 @@ package cn.edu.zju.labx.core
             {
             	equipmentLayer.layerIndex = 1;
 				deskLayer.layerIndex = 2;
+				deskLegLayer.layerIndex = 3;
             }else
             {
-            	equipmentLayer.layerIndex = 2;
-				deskLayer.layerIndex = 1;
+            	equipmentLayer.layerIndex = 3;
+				deskLayer.layerIndex = 2;
+				deskLegLayer.layerIndex = 1;
             }
 		
 		}
@@ -57,11 +60,14 @@ package cn.edu.zju.labx.core
 			var viewport:Viewport3D = StageObjectsManager.getDefault.mainView.viewport;
 			equipmentLayer = new ViewportLayer(viewport, null);
 			deskLayer = new ViewportLayer(viewport, null);
+			deskLegLayer = new ViewportLayer(viewport, null);
 			viewport.containerSprite.addLayer(equipmentLayer);
 			viewport.containerSprite.addLayer(deskLayer);
+			viewport.containerSprite.addLayer(deskLegLayer);
 			viewport.containerSprite.sortMode = ViewportLayerSortMode.INDEX_SORT;
 			equipmentLayer.layerIndex = 1;
 			deskLayer.layerIndex = 2;
+			deskLegLayer.layerIndex = 3;
 			equipmentLayer.sortMode = ViewportLayerSortMode.Z_SORT;
 			
 			var bf:BlurFilter = new BlurFilter(3,3,1);
