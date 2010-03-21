@@ -5,12 +5,11 @@ package
 	import cn.edu.zju.labx.core.UserInputHandler;
 	import cn.edu.zju.labx.objects.Board;
 	import cn.edu.zju.labx.objects.ConvexLens;
+	import cn.edu.zju.labx.objects.Desk;
 	import cn.edu.zju.labx.objects.Lens;
 	import cn.edu.zju.labx.objects.LightSource;
 	import cn.edu.zju.labx.objects.Mirror;
 	import cn.edu.zju.labx.objects.SplitterBeam;
-	import cn.edu.zju.labx.objects.Desk;
-	import cn.edu.zju.labx.utils.ResourceManager;
 	
 	import flash.display.Bitmap;
 	import flash.display.Loader;
@@ -20,7 +19,6 @@ package
 	
 	import org.papervision3d.cameras.CameraType;
 	import org.papervision3d.core.utils.virtualmouse.VirtualMouseMouseEvent;
-	import org.papervision3d.events.FileLoadEvent;
 	import org.papervision3d.lights.PointLight3D;
 	import org.papervision3d.materials.BitmapMaterial;
 	import org.papervision3d.materials.ColorMaterial;
@@ -34,8 +32,8 @@ package
 	{
 		private var rotX:Number= 0.1; //higher is more rotation over x axis in simple orbit example
         private var rotY:Number= 0.1; //higher is more rotation over y axis in simple orbit example
-        private var camPitch:Number = 60;
-        private var camYaw:Number = 270;
+        private var camPitch:Number = LabXConstant.DEFAULT_CAMERA_PITCH;
+        private var camYaw:Number = LabXConstant.DEFAULT_CAMERA_YAW;
 
         private var previousMouseX:Number;
         private var previousMouseY:Number;
@@ -66,7 +64,7 @@ package
 		{
 			super(viewportWidth, viewportHeight, true, false, CameraType.FREE);
 			viewport.interactive = true;
-			camera.zoom = 90;
+			camera.zoom = LabXConstant.DEFAULT_CAMERA_ZOOM;
 			camera.useCulling = true;
 			/**
 			 *  set the mainView here ,if not it will make some problems
@@ -254,6 +252,16 @@ package
                 UserInputHandler.getDefault.mouseMoveHandler(e);
             }
         }
+        
+        
+		public function reset_camera():void
+		{
+			this.camera.zoom = LabXConstant.DEFAULT_CAMERA_ZOOM;
+			this.camera.useCulling = true;
+			this.camPitch = LabXConstant.DEFAULT_CAMERA_PITCH;
+			this.camYaw = LabXConstant.DEFAULT_CAMERA_YAW;
+			StageObjectsManager.getDefault.addMessage("恢复默认视角");
+		}
 		
 	}
 }

@@ -11,6 +11,9 @@ package cn.edu.zju.labx.core
 		public static const STAGE_WIDTH:Number = 1000;
 		public static const STAGE_DEPTH:Number = 600;
 		
+		public static const DEFAULT_CAMERA_ZOOM:Number = 90;
+		public static const DEFAULT_CAMERA_PITCH:Number = 60;
+		public static const DEFAULT_CAMERA_YAW:Number = 270;
 		/**
 		 *  Constants for Desk
 		 */
