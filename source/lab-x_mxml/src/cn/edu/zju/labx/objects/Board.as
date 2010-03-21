@@ -29,11 +29,6 @@ package cn.edu.zju.labx.objects
 	{   
 		protected var cube:Cube;
 		
-	    public var height:int;
-	    public var width:int =10;
-	    public var depth:int =10;
-
-		
 		/**
 		 * Create a board
 		 * 
@@ -48,6 +43,9 @@ package cn.edu.zju.labx.objects
 		}
 		
 		public function createDisplayObject():void{
+	        
+	        width=LabXConstant.LABX_OBJECT_WIDTH/10;
+			
 			var materialsList:MaterialsList = new MaterialsList();
 			var leftMaterial:MaterialObject3D = material.clone();
 			leftMaterial.interactive = true;
@@ -57,9 +55,6 @@ package cn.edu.zju.labx.objects
 			materialsList.addMaterial(material,"right");
 			materialsList.addMaterial(material,"top");
 			materialsList.addMaterial(material,"bottom");
-            height=LabXConstant.LABX_OBJECT_HEIGHT;
-	        width=LabXConstant.LABX_OBJECT_WIDTH/10;
-	        depth=LabXConstant.LABX_OBJECT_DEPTH;
 		   	cube = new Cube(materialsList,width,depth,height);
 		   	this.addChild(cube);
 		   	

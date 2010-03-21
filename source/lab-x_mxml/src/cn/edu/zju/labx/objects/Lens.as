@@ -37,9 +37,6 @@ package cn.edu.zju.labx.objects
 	    private var LENS_DAE_URL:String;
 	    public var sp:Sphere;
 	    
-	    public var width:Number =120;
-	    public var height:Number=120;
-	    
 	    /**
 	     * Focus of the lens, concave lens should always negative, and convex lens
 	     * should always positive

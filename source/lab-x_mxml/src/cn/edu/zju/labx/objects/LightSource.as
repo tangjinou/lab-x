@@ -23,8 +23,6 @@ package cn.edu.zju.labx.objects
 		
 		private var isOn:Boolean = false;
 		protected var light:DAE;
-	    public var height:Number =100;
-	    public var width:Number =60;
 		
 		public function LightSource(name:String,material:MaterialObject3D=null)
 		{
@@ -43,19 +41,23 @@ package cn.edu.zju.labx.objects
 		public function createRay():void{
 		   	_ray = new Ray();
 			
-			var royLogic0:LineRayLogic = new LineRayLogic(new Number3D(this.x,this.y+10,this.z),new Number3D(1,0,0));
+			var normal:Number3D = getNormal();
+			var lineNormal:Number3D = new Number3D(-normal.x, -normal.y, -normal.z);
+			
+			
+			var royLogic0:LineRayLogic = new LineRayLogic(new Number3D(this.x,this.y+10,this.z), lineNormal);
 			var lineRay0:LineRay = new LineRay(royLogic0);
 			
-			var royLogic1:LineRayLogic = new LineRayLogic(new Number3D(this.x,this.y+10+5,this.z),new Number3D(1,0,0));
+			var royLogic1:LineRayLogic = new LineRayLogic(new Number3D(this.x,this.y+10+5,this.z), lineNormal);
 			var lineRay1:LineRay = new LineRay(royLogic1);
 			
-			var royLogic2:LineRayLogic = new LineRayLogic(new Number3D(this.x,this.y+10-5,this.z),new Number3D(1,0,0));
+			var royLogic2:LineRayLogic = new LineRayLogic(new Number3D(this.x,this.y+10-5,this.z), lineNormal);
 			var lineRay2:LineRay = new LineRay(royLogic2);
 			
-			var royLogic3:LineRayLogic = new LineRayLogic(new Number3D(this.x,this.y+10,this.z+5),new Number3D(1,0,0));
+			var royLogic3:LineRayLogic = new LineRayLogic(new Number3D(this.x,this.y+10,this.z+5), lineNormal);
 			var lineRay3:LineRay = new LineRay(royLogic3);
 			
-			var royLogic4:LineRayLogic = new LineRayLogic(new Number3D(this.x,this.y+10,this.z-5),new Number3D(1,0,0));
+			var royLogic4:LineRayLogic = new LineRayLogic(new Number3D(this.x,this.y+10,this.z-5), lineNormal);
 			var lineRay4:LineRay = new LineRay(royLogic4);
 			
 			var lineRays:ArrayCollection =new ArrayCollection();
