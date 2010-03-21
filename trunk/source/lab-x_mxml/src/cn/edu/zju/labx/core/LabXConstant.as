@@ -23,8 +23,9 @@ package cn.edu.zju.labx.core
 		 * Constant for LabXObject and its sub classes
 		 */
 		public static const LABX_OBJECT_WIDTH:Number = 30;
-		public static const LABX_OBJECT_HEIGHT:Number = 100;
+		public static const LABX_OBJECT_HEIGHT:Number = 120;
 		public static const LABX_OBJECT_DEPTH:Number = 100;
+		
 		public static const LENS_DEFAULT_FOCAL_LENGTH:Number = 10;
 		
 		

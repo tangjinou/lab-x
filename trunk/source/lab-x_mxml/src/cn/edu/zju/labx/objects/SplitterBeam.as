@@ -23,11 +23,6 @@ package cn.edu.zju.labx.objects
 	
 	public class SplitterBeam extends LabXObject implements IUserInputListener,IRayHandle
 	{   
-		
-	    public var height:int;
-	    public var width:int;
-	    public var depth:int;
-		
 		private var splitterBeam:Cube;
 		
 		private var userInputhandleTool:LabXObjectUserInputHandleTool;
@@ -85,6 +80,10 @@ package cn.edu.zju.labx.objects
 		}
 	    
 		public function createDisplayObject():void{
+			
+	        width=3;
+	        depth=100;
+	        
 		    var materialsList:MaterialsList = new MaterialsList();
 			materialsList.addMaterial(material,"front");
 			materialsList.addMaterial(material,"back");
@@ -92,9 +91,6 @@ package cn.edu.zju.labx.objects
 			materialsList.addMaterial(material,"right");
 			materialsList.addMaterial(material,"top");
 			materialsList.addMaterial(material,"bottom");
-            height=120;
-	        width=3;
-	        depth=100;
 		   	splitterBeam = new Cube(materialsList,width,depth,height);
 		   	
 		   	var effectLayer:ViewportLayer = new ViewportLayer(StageObjectsManager.getDefault.mainView.viewport, null);

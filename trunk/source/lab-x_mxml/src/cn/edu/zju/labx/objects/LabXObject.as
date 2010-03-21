@@ -48,31 +48,7 @@ package cn.edu.zju.labx.objects
 			}
 		}
 		
-		
-		
-		/**
-		 * Get the object X axis in screen coordiate
-		 */
-	    public function getScreen_x():int{
-	       return this.x + StageObjectsManager.getDefault.stage_width/2;
-	    }
-	    
-	    /**
-		 * Get the object Y axis in screen coordiate
-		 */
-	    public function getScreen_y():int{
-	       return this.y + StageObjectsManager.getDefault.stage_height/2;
-	    }
-	    
 	    /*********************************************************/
-	    
-	    public function setX_Platform(_x:Number):void{
-	       
-	    }
-	    
-	    public function get x_in_platform():Number{
-	       return 0;
-	    }
 	    
 	    protected var _ray:Ray  = null;
 
@@ -90,6 +66,10 @@ package cn.edu.zju.labx.objects
 		/********************************************************************/
 		/* This for find the ray if is on this object                       */
 		/*******************************************************************/
+		public var height:Number = LabXConstant.LABX_OBJECT_HEIGHT;
+		public var width:Number  = LabXConstant.LABX_OBJECT_WIDTH;
+		public var depth:Number  = LabXConstant.LABX_OBJECT_DEPTH;
+		
 		public var circle:Number = 50;
 		
 		public function isLineRayOnObject(lineRayLogic:LineRayLogic):Boolean
