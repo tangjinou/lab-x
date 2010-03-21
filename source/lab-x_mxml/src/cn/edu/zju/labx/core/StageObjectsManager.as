@@ -9,7 +9,6 @@ package cn.edu.zju.labx.core
 	import mx.controls.Button;
 	import mx.controls.TextArea;
 	
-	import org.papervision3d.core.proto.CameraObject3D;
 	import org.papervision3d.events.InteractiveScene3DEvent;
 	import org.papervision3d.objects.DisplayObject3D;
 	import org.papervision3d.view.BasicView;
@@ -125,6 +124,91 @@ package cn.edu.zju.labx.core
 	    	}
 	    	return this.raymanager;
 	    }
+	    
+		/*************************************************************************
+		 *  we could get layerManager, layerManager is also a singleton
+		 * ***********************************************************************
+		 */
+		public function get layerManager():LayerManager{
+		
+		   return LayerManager.getDefault;
+		}
+		
+		/*************************************************************************
+		 *  we could get layerManager, layerManager is also a singleton
+		 * ***********************************************************************
+		 */
+		public function get experimentManager():ExperimentManager{
+		   return ExperimentManager.getDefault;
+		}
+		
+	    
+	    
+	    /***************************************************************************
+	     ***************************************************************************
+		 *   Object list, we handle the objects here
+		 * **************************************************************************
+		 */
+		 //this list only for ray notify, if object is removed ,then i will be not notified
+         private var objectList:ArrayCollection = new ArrayCollection();
+         //this list for objects in the stage , it is globe list
+         private var objectAllSavedList:ArrayCollection = new ArrayCollection();		 
+		 
+		/**
+		 * add an object to the stage
+		 */
+		 public function addObject(obj:LabXObject):void{
+		     originPivot.addChild(obj);
+		     objectList.addItem(obj);
+		     objectAllSavedList.addItem(obj);
+		     if(obj is Board){
+		       rayManager.setBorad(obj as Board);
+		     }
+		 }
+		 
+		/**
+		 * add an object to the stage by name
+		 */
+		public function addObjectByName(name:String):void{
+		 	 for(var i:int=0;i<objectAllSavedList.length;i++){
+		        var obj:LabXObject = objectAllSavedList.getItemAt(i) as LabXObject;
+		        if(obj !=null && obj.name == name){
+		            originPivot.addChild(obj);
+		            objectList.addItem(obj);
+		            raymanager.reProduceRays();
+		        }
+		     }
+		}
+		
+		/**
+		 * remove an object from the stage
+		 */ 
+		public function removeObject(obj:LabXObject):void{
+		 	 originPivot.removeChild(obj);
+		     objectList.removeItemAt(objectList.getItemIndex(obj));
+		}
+		 
+		/**
+		 * remove an object from the stage by name
+		 */ 
+		public function removeObjectByName(name:String):void{
+		     for(var i:int=0;i<objectList.length;i++){
+		        var obj:LabXObject = objectList.getItemAt(i) as LabXObject;
+		        if(obj !=null && obj.name == name){
+		           removeObject(obj);
+		           raymanager.reProduceRays();
+		        }
+		     }
+		 }
+		 
+		/**
+		 * get the objects in the stage
+		 */
+		public function getObjectList():ArrayCollection
+		{
+			return objectList
+		}
+		
 		
 		
 
@@ -199,64 +283,7 @@ package cn.edu.zju.labx.core
 		   }
 		 }
 		 
-		 
-		 /******************************************************
-		 *   object list 
-		 * ******************************************************/
-		 //this list only for ray notify, if object is removed ,then i will be not notified
-         private var objectList:ArrayCollection = new ArrayCollection();
-         //this list for objects in the stage , it is globe list
-         private var objectAllSavedList:ArrayCollection = new ArrayCollection();		 
-		 
-		 public function addObject(obj:LabXObject):void{
-		 	 originPivot.addChild(obj);
-		     objectList.addItem(obj);
-		     objectAllSavedList.addItem(obj);
-		     if(obj is Board){
-		       rayManager.setBorad(obj as Board);
-		     }
-		 }
-		 
-		 public function addObjectByName(name:String):void{
-		 	 for(var i:int=0;i<objectAllSavedList.length;i++){
-		        var obj:LabXObject = objectAllSavedList.getItemAt(i) as LabXObject;
-		        if(obj !=null && obj.name == name){
-		            originPivot.addChild(obj);
-		            objectList.addItem(obj);
-		            raymanager.reProduceRays();
-		        }
-		     }
-		 }
-		 public function removeObject(obj:LabXObject):void{
-		 	 originPivot.removeChild(obj);
-		     objectList.removeItemAt(objectList.getItemIndex(obj));
-		 }
-		 public function removeObjectByName(name:String):void{
-		     for(var i:int=0;i<objectList.length;i++){
-		        var obj:LabXObject = objectList.getItemAt(i) as LabXObject;
-		        if(obj !=null && obj.name == name){
-		           removeObject(obj);
-		           raymanager.reProduceRays();
-		        }
-		     }
-		 }
-		 public function getObjectList():ArrayCollection{
-		     return objectList
-		 }
-		
-		 /////////////////////////////////////////////////////////////////////////
-		 
-		 
-	    //////////////////////////////////////////////////////////////////////////////
-		
-		/****
-		 *   we could get layerManager, layerManager is also a singleton
-		 */ 
-		public function get layerManager():LayerManager{
-		
-		   return LayerManager.getDefault;
-		}
-		
+	
 		
 		///////////////////////////////////////////////////////////////////////////////////////////////////
 		/***
