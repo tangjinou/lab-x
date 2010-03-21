@@ -4,7 +4,7 @@ package
 	import cn.edu.zju.labx.core.StageObjectsManager;
 	import cn.edu.zju.labx.core.UserInputHandler;
 	import cn.edu.zju.labx.objects.Desk;
-	import cn.edu.zju.labx.objects.LabXObject;
+	import cn.edu.zju.labx.objects.Grid;
 	
 	import flash.events.Event;
 	import flash.events.MouseEvent;
@@ -27,6 +27,7 @@ package
         private var previousMouseX:Number;
         private var previousMouseY:Number;
         
+        private var grid:Grid;
 		private var light:PointLight3D;
 		public  var originPivot:DisplayObject3D;
 		private var desk:Desk; 
@@ -50,6 +51,8 @@ package
 			originPivot.x = -LabXConstant.STAGE_WIDTH/2
 			scene.addChild(originPivot);
 			StageObjectsManager.getDefault.originPivot = originPivot;
+			
+			grid = new Grid();
 			
 			light = new PointLight3D(true);
 			light.x = 200;
