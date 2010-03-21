@@ -114,18 +114,12 @@
      </mx:HBox>
 	 
 	 
-	 <mx:Panel y="30" width="208" height="126" layout="absolute" color="#070707" horizontalCenter="-386" borderColor="#67F509" alpha="0.79">
+	 <mx:Panel y="30" width="208" height="126" layout="absolute" color="#070707" horizontalCenter="-9" borderColor="#67F509" alpha="0.79">
 	     <mx:TextArea  x="0" y="0" width="188" height="86" editable="false" id="message_box" fontSize="12" backgroundColor="#A69B9B" cornerRadius="1" borderStyle="solid" borderColor="#F31207" themeColor="#F0FF00" alpha="1.0" borderThickness="2"/>
 	     <mx:Label text="LabX" width="60" color="#DFF4F4" fontFamily="Arial" fontWeight="bold" fontSize="21" x="107" y="46"/>
 	 </mx:Panel>
-	 <mx:ApplicationControlBar width="20" height="44" x="104" y="0">
+	 <mx:ApplicationControlBar width="20" height="44" x="481" y="0">
 	 
-	 </mx:ApplicationControlBar>
-	 <mx:Panel y="30" width="208" height="126" layout="absolute" color="#070707" horizontalCenter="-126" borderColor="#F90483" alpha="0.79">
-	     <mx:TextArea  x="0" y="0" width="188" height="86" editable="false"  fontSize="12" backgroundColor="#A69B9B" cornerRadius="1" borderStyle="solid" borderColor="#F31207" themeColor="#F0FF00" alpha="1.0" borderThickness="2"/>
-	     <mx:Label text="LabX" width="60" color="#DFF4F4" fontFamily="Arial" fontWeight="bold" fontSize="21" x="107" y="46"/>
-	 </mx:Panel>
-	 <mx:ApplicationControlBar width="20" height="44" x="364" y="0">
 	 </mx:ApplicationControlBar>
 	 
 </mx:Application>
