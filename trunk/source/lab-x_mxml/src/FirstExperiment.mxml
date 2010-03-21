@@ -2,6 +2,7 @@
 <mx:Application xmlns:mx="http://www.adobe.com/2006/mxml" backgroundColor="black" layout="absolute" creationComplete="callLater(init)" width="1000" height="600" xmlns:labx="cn.edu.zju.labx.*" xmlns:local="*" borderColor="#CD1A02" fontWeight="bold" fontSize="12">
 	 <mx:Script>
 	 	<![CDATA[
+	 		import mx.managers.ToolTipManager;
 	 		import mx.collections.ArrayCollection;
 	 		import mx.containers.VBox;
 	 		import mx.managers.PopUpManager;
@@ -20,7 +21,12 @@
             public var checkBoxList:ArrayCollection =new ArrayCollection();
 	 		public function init():void{
 	 		   message_box.text="公告栏";
-//	 		   StageObjectsManager.getDefault.mainView=firstExperiment;	
+	 		   
+	 		   
+	 		   /************ Set tool tips**********************/
+	 		   StyleManager.getStyleDeclaration("ToolTip").setStyle("fontSize",16);  
+               StyleManager.getStyleDeclaration("ToolTip").setStyle("backgroundColor","#33CC99"); 
+	 		   
 	 		   StageObjectsManager.getDefault.messageBox=message_box;
 	 		   StageObjectsManager.getDefault.rotate_left_button=rotate_left_button;
 	 		   StageObjectsManager.getDefault.rotate_right_button=rotate_right_button;
@@ -101,14 +107,12 @@
 	 <mx:Button  click="close_stage_rotate()" icon="@Embed('../assets/icon/stop.png')"  toolTip="关闭屏幕旋转"/>
 	 <mx:Button  buttonDown="StageObjectsManager.getDefault.mainView.camera.zoom++" autoRepeat="true" icon="@Embed('../assets/icon/zoom_add.png')" toolTip="放大"/>
 	 <mx:Button  buttonDown="StageObjectsManager.getDefault.mainView.camera.zoom--" autoRepeat="true" icon="@Embed('../assets/icon/zoom_min.png')" toolTip="缩小"/>
-     <mx:Button  buttonDown="StageObjectsManager.getDefault.rotate_left()"   autoRepeat="false" id="rotate_left_button" enabled="false" icon="@Embed('../assets/icon/rotate_left.png')"  disabledIcon="@Embed('../assets/icon/rotate_left_disable.png')"  toolTip="左旋转"/>
-     <mx:Button  buttonDown="StageObjectsManager.getDefault.rotate_right()"  autoRepeat="false" id="rotate_right_button" enabled="false" icon="@Embed('../assets/icon/rotate_right.png')" disabledIcon="@Embed('../assets/icon/rotate_right_disable.png')" toolTip="右旋转"/>
+     <mx:Button  buttonDown="StageObjectsManager.getDefault.rotate_left()"   autoRepeat="false" id="rotate_left_button" enabled="false" icon="@Embed('../assets/icon/rotate_left.png')"  disabledIcon="@Embed('../assets/icon/rotate_left_disable.png')"  toolTip="物体向左旋转"/>
+     <mx:Button  buttonDown="StageObjectsManager.getDefault.rotate_right()"  autoRepeat="false" id="rotate_right_button" enabled="false" icon="@Embed('../assets/icon/rotate_right.png')" disabledIcon="@Embed('../assets/icon/rotate_right_disable.png')" toolTip="物体向右旋转"/>
      <mx:Button  buttonDown="StageObjectsManager.getDefault.object_up()"  autoRepeat="false" id="object_up_button" enabled="false" icon="@Embed('../assets/icon/up.png')" disabledIcon="@Embed('../assets/icon/up_disable.png')" toolTip="物体向上移动"/>
      <mx:Button  buttonDown="StageObjectsManager.getDefault.object_down()"  autoRepeat="false" id="object_down_button" enabled="false" icon="@Embed('../assets/icon/down.png')" disabledIcon="@Embed('../assets/icon/down_disable.png')" toolTip="物体向下移动"/>
      <mx:Button  click="choseComponentWindow()"  toolTip="选择器件" icon="@Embed('../assets/icon/objects.png')" />
      </mx:VBox>
-	 
-
 	 
 	 
 	 <mx:Panel y="30" width="208" height="126" layout="absolute" color="#070707" horizontalCenter="-386" borderColor="#67F509" alpha="0.79">
