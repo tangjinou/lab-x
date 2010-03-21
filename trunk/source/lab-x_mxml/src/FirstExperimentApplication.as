@@ -83,11 +83,12 @@ package
 			scene.addChild(originPivot);
 			StageObjectsManager.getDefault.originPivot = originPivot;
 			
+			startRendering();
 			
 			createObjects();
 			var stats:StatsView = new StatsView(renderer);
 			addChild(stats);
-			startRendering();
+			
 		}
 
 		public function createObjects():void
