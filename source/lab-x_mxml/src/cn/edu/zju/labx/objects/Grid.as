@@ -6,6 +6,7 @@ package cn.edu.zju.labx.objects
 	
 	import flash.display.BitmapData;
 	import flash.geom.Rectangle;
+	import flash.display.BlendMode;
 	
 	import org.papervision3d.materials.BitmapMaterial;
 	import org.papervision3d.objects.primitives.Plane;
@@ -22,11 +23,11 @@ package cn.edu.zju.labx.objects
 			var bmp:BitmapData = new BitmapData(_width, _height, false, 0x0);
 			for (var i:Number = 0; i < _width/30; i++)
 			{
-				bmp.fillRect(new Rectangle(i*interval, 0, 1, _height), 0xFF0000);
+				bmp.fillRect(new Rectangle(i*interval, 0, 2, _height), 0xd82626);
 			}
 			for (i = 0; i < _height/30; i++)
 			{
-				bmp.fillRect(new Rectangle(0, i*interval, _width, 1), 0xFF0000);
+				bmp.fillRect(new Rectangle(0, i*interval, _width, 2), 0xd82626);
 			}
 			var mat:BitmapMaterial = new BitmapMaterial(bmp);
 			mat.smooth = true;
@@ -36,7 +37,7 @@ package cn.edu.zju.labx.objects
 			_plane.pitch(90);
 			StageObjectsManager.getDefault.originPivot.addChild(_plane);
 			StageObjectsManager.getDefault.layerManager.gridLayer.addDisplayObject3D(_plane);
-			StageObjectsManager.getDefault.layerManager.gridLayer.alpha = 0.3;
+			StageObjectsManager.getDefault.layerManager.gridLayer.blendMode = BlendMode.LIGHTEN;
 		}
 		
 		public function get grids():Plane
