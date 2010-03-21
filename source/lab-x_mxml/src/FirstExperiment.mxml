@@ -103,16 +103,18 @@
 	 <local:FirstExperimentApplication id="firstExperiment" x="0" y="0" />
      <mx:VBox horizontalGap="10" verticalAlign="bottom" x="937" y="10">
      <!--button size 52*36 -->
-     <mx:Button  click="open_stage_rotate()"  icon="@Embed('../assets/icon/open_stage_rotate.png')"  toolTip="打开屏幕旋转" />
-	 <mx:Button  click="close_stage_rotate()" icon="@Embed('../assets/icon/stop.png')"  toolTip="关闭屏幕旋转"/>
-	 <mx:Button  buttonDown="StageObjectsManager.getDefault.mainView.camera.zoom++" autoRepeat="true" icon="@Embed('../assets/icon/zoom_add.png')" toolTip="放大"/>
-	 <mx:Button  buttonDown="StageObjectsManager.getDefault.mainView.camera.zoom--" autoRepeat="true" icon="@Embed('../assets/icon/zoom_min.png')" toolTip="缩小"/>
-     <mx:Button  buttonDown="StageObjectsManager.getDefault.rotate_left()"   autoRepeat="false" id="rotate_left_button" enabled="false" icon="@Embed('../assets/icon/rotate_left.png')"  disabledIcon="@Embed('../assets/icon/rotate_left_disable.png')"  toolTip="物体向左旋转"/>
-     <mx:Button  buttonDown="StageObjectsManager.getDefault.rotate_right()"  autoRepeat="false" id="rotate_right_button" enabled="false" icon="@Embed('../assets/icon/rotate_right.png')" disabledIcon="@Embed('../assets/icon/rotate_right_disable.png')" toolTip="物体向右旋转"/>
-     <mx:Button  buttonDown="StageObjectsManager.getDefault.object_up()"  autoRepeat="false" id="object_up_button" enabled="false" icon="@Embed('../assets/icon/up.png')" disabledIcon="@Embed('../assets/icon/up_disable.png')" toolTip="物体向上移动"/>
-     <mx:Button  buttonDown="StageObjectsManager.getDefault.object_down()"  autoRepeat="false" id="object_down_button" enabled="false" icon="@Embed('../assets/icon/down.png')" disabledIcon="@Embed('../assets/icon/down_disable.png')" toolTip="物体向下移动"/>
-     <mx:Button  click="choseComponentWindow()"  toolTip="选择器件" icon="@Embed('../assets/icon/objects.png')" />
+     		<mx:Button  click="open_stage_rotate()"  icon="@Embed('../assets/icon/open_stage_rotate.png')"  toolTip="打开屏幕旋转" />
+	 		<mx:Button  click="close_stage_rotate()" icon="@Embed('../assets/icon/stop.png')"  toolTip="关闭屏幕旋转"/>
+	 		<mx:Button  click="choseComponentWindow()"  toolTip="选择器件" icon="@Embed('../assets/icon/objects.png')" />
+	 		<mx:Button  buttonDown="StageObjectsManager.getDefault.mainView.camera.zoom++" autoRepeat="true" icon="@Embed('../assets/icon/zoom_add.png')" toolTip="放大"/>
+	 		<mx:Button  buttonDown="StageObjectsManager.getDefault.mainView.camera.zoom--" autoRepeat="true" icon="@Embed('../assets/icon/zoom_min.png')" toolTip="缩小"/>
      </mx:VBox>
+     <mx:HBox x="758" y="554">
+			<mx:Button  buttonDown="StageObjectsManager.getDefault.rotate_left()"   autoRepeat="false" id="rotate_left_button" enabled="false" icon="@Embed('../assets/icon/rotate_left.png')"  disabledIcon="@Embed('../assets/icon/rotate_left_disable.png')"  toolTip="物体向左旋转"/>
+     		<mx:Button  buttonDown="StageObjectsManager.getDefault.rotate_right()"  autoRepeat="false" id="rotate_right_button" enabled="false" icon="@Embed('../assets/icon/rotate_right.png')" disabledIcon="@Embed('../assets/icon/rotate_right_disable.png')" toolTip="物体向右旋转"/>
+     		<mx:Button  buttonDown="StageObjectsManager.getDefault.object_up()"  autoRepeat="false" id="object_up_button" enabled="false" icon="@Embed('../assets/icon/up.png')" disabledIcon="@Embed('../assets/icon/up_disable.png')" toolTip="物体向上移动"/>
+     		<mx:Button  buttonDown="StageObjectsManager.getDefault.object_down()"  autoRepeat="false" id="object_down_button" enabled="false" icon="@Embed('../assets/icon/down.png')" disabledIcon="@Embed('../assets/icon/down_disable.png')" toolTip="物体向下移动"/>
+     </mx:HBox>
 	 
 	 
 	 <mx:Panel y="30" width="208" height="126" layout="absolute" color="#070707" horizontalCenter="-386" borderColor="#67F509" alpha="0.79">
