@@ -264,7 +264,7 @@ package cn.edu.zju.labx.core
 		
 		public function rotate_left():void{
 		   if(labXObjectSelected!=null){
-		     labXObjectSelected.localRotationY++;
+		     labXObjectSelected.localRotationY--;
 		     rayManager.reProduceRays();
 		      this.addMessage(labXObjectSelected.name+"绕Y转动"+labXObjectSelected.localRotationY.toFixed(2));
 		   }
@@ -272,7 +272,7 @@ package cn.edu.zju.labx.core
 		
 		public function rotate_right():void{
            if(labXObjectSelected!=null){
-		     labXObjectSelected.localRotationY--;
+		     labXObjectSelected.localRotationY++;
 		     rayManager.reProduceRays();
              this.addMessage(labXObjectSelected.name+"绕Y转动"+labXObjectSelected.localRotationY.toFixed(2));
 		   }
