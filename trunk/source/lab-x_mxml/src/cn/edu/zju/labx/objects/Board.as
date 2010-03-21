@@ -11,15 +11,19 @@ package cn.edu.zju.labx.objects
     import flash.events.Event;
     import flash.geom.Rectangle;
     
+    import org.papervision3d.core.geom.Lines3D;
+    import org.papervision3d.core.geom.TriangleMesh3D;
+    import org.papervision3d.core.geom.renderables.Line3D;
+    import org.papervision3d.core.geom.renderables.Vertex3D;
     import org.papervision3d.core.math.Number3D;
     import org.papervision3d.core.math.Plane3D;
     import org.papervision3d.core.proto.MaterialObject3D;
     import org.papervision3d.events.InteractiveScene3DEvent;
     import org.papervision3d.materials.BitmapMaterial;
+    import org.papervision3d.materials.special.LineMaterial;
     import org.papervision3d.materials.utils.MaterialsList;
     import org.papervision3d.objects.primitives.Cube;
     import org.papervision3d.view.layer.ViewportLayer;
-    import org.papervision3d.core.geom.TriangleMesh3D;
     
     /**
      * Board is an LabX Object used to display the light result
@@ -61,6 +65,23 @@ package cn.edu.zju.labx.objects
 		   	var effectLayer:ViewportLayer = new ViewportLayer(StageObjectsManager.getDefault.mainView.viewport, null);
 			effectLayer.addDisplayObject3D(cube, true);
 			StageObjectsManager.getDefault.layerManager.equipmentLayer.addLayer(effectLayer);
+			
+			/* display a cursor */
+			var lines:Lines3D = new Lines3D;
+			var blueMaterial:LineMaterial = new LineMaterial(0x0000FF);
+			var start:Vertex3D;
+			var end:Vertex3D;
+			var line:Line3D;
+			start = new Vertex3D(-5, 0, -10);
+			end = new Vertex3D(-5, 0, 10);
+			line = new Line3D(lines, blueMaterial, 1, start, end);
+			lines.addLine(line);
+			start = new Vertex3D(-5, -10, 0);
+			end = new Vertex3D(-5, 10, 0);
+			line = new Line3D(lines, blueMaterial, 1, start, end);
+			lines.addLine(line);	
+			effectLayer.addDisplayObject3D(lines);
+			this.addChild(lines);
 		}
 
 		
