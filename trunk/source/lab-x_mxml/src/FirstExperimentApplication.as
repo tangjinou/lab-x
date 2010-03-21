@@ -64,16 +64,16 @@ package
 			addChild(stats);
 			startRendering();
 			
-			equipmentSelected(LabXConstant.EXPERIMENT_FIRST);
+			experimentSelected(LabXConstant.EXPERIMENT_FIRST);
 		}
 		
 		
 		/**
 		 * For select the experiment
 		 */
-		public function equipmentSelected(equipmentId:Number = LabXConstant.EXPERIMENT_FIRST):void
+		public function experimentSelected(experimentId:Number = LabXConstant.EXPERIMENT_FIRST):void
 		{
-			var equipmentList:ArrayCollection = StageObjectsManager.getDefault.experimentManager.createExperimentEquipments(equipmentId);
+			var equipmentList:ArrayCollection = StageObjectsManager.getDefault.experimentManager.createExperimentEquipments(experimentId);
 		}
 		 		
 		override protected function onRenderTick(e:Event=null):void
