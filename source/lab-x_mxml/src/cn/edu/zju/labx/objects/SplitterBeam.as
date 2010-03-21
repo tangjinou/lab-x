@@ -19,6 +19,7 @@ package cn.edu.zju.labx.objects
 	import org.papervision3d.materials.utils.MaterialsList;
 	import org.papervision3d.objects.primitives.Cube;
 	import org.papervision3d.view.layer.ViewportLayer;
+	import org.papervision3d.core.geom.TriangleMesh3D;
 	
 	public class SplitterBeam extends LabXObject implements IUserInputListener,IRayHandle
 	{   
@@ -162,6 +163,19 @@ package cn.edu.zju.labx.objects
 			}
     	   return false;
     	}
-
+    	
+    	 /**
+		 *   This is for get object with the material on it, it should be overrite 
+		 * 
+		 *   when the this materials not on the basic object,
+		 * 
+		 *   for example: lens may not have the materials on 
+		 * 
+		 *   root,but on the sphere
+		 * 
+		 */ 
+		override public function getObjectWithMaterial():TriangleMesh3D{
+		    return splitterBeam;
+		}
 	}
 }
