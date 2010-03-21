@@ -1,20 +1,40 @@
 package cn.edu.zju.labx.objects
 {
-	import org.papervision3d.objects.parsers.DAE;
-	import org.papervision3d.events.FileLoadEvent;
-	import cn.edu.zju.labx.utils.ResourceManager;
 	import cn.edu.zju.labx.core.LabXConstant;
 	import cn.edu.zju.labx.core.StageObjectsManager;
+	import cn.edu.zju.labx.utils.ResourceManager;
+	
+	import flash.display.Bitmap;
+	import flash.display.Loader;
+	import flash.events.Event;
+	import flash.net.URLRequest;
+	
+	import org.papervision3d.events.FileLoadEvent;
+	import org.papervision3d.materials.utils.MaterialsList;
+	import org.papervision3d.objects.parsers.DAE;
+	import org.papervision3d.materials.BitmapMaterial;
 	
 	public class Desk
 	{
 		private var desk:DAE; 
+		
 		public function Desk()
 		{
+			var imgLoader:Loader = new Loader();
+			imgLoader.contentLoaderInfo.addEventListener(Event.COMPLETE,textureLoaded);
+			imgLoader.load(new URLRequest("../assets/textures/metal_desk.jpg"));
+			
+		}
+		private function textureLoaded(evt:Event):void
+		{
+			var bitmap:Bitmap = evt.target.content as Bitmap;
+			var bitmapMaterial:BitmapMaterial = new BitmapMaterial(bitmap.bitmapData);
+			bitmapMaterial.interactive = true;
+			bitmapMaterial.smooth = true;
+			bitmapMaterial.tiled = true;
 			desk = new DAE();  
 			desk.addEventListener(FileLoadEvent.LOAD_COMPLETE, deskOnLoaded);
-			DAE(desk).addFileSearchPath(ResourceManager.DESK_TEXTURE_DIR);
-            DAE(desk).load(ResourceManager.DESK_DAE_URL);
+            DAE(desk).load(ResourceManager.DESK_DAE_URL, new MaterialsList({all:bitmapMaterial}));
             desk.scale = 3;
             desk.scaleX = 6;
             desk.scaleZ = 5;
