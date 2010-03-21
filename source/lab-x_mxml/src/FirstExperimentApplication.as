@@ -10,6 +10,7 @@ package
 	import cn.edu.zju.labx.objects.LightSource;
 	import cn.edu.zju.labx.objects.Mirror;
 	import cn.edu.zju.labx.objects.SplitterBeam;
+	import cn.edu.zju.labx.utils.ResourceManager;
 	
 	import flash.display.Bitmap;
 	import flash.display.Loader;
@@ -112,7 +113,7 @@ package
 			/*Create lightSource*/
 			var imgLoader:Loader = new Loader();
 			imgLoader.contentLoaderInfo.addEventListener(Event.COMPLETE,loadLightSourceTextureComplete);
-			imgLoader.load(new URLRequest("../assets/textures/metal.jpg"));
+			imgLoader.load(new URLRequest(ResourceManager.LIGHTSOURCE_TEXTURE));
 			
 			
 			/*Create SplitterBeam1*/

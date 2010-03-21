@@ -26,7 +26,9 @@ package cn.edu.zju.labx.utils
 		
 		public static const DESK_DAE_URL:String = "../assets/models/desk.DAE";
 
-		public static const DESK_TEXTURE_DIR:String = "../assets/textures/desk";
+		public static const DESK_TEXTURE:String = "../assets/textures/metal_desk.jpg";
+		
+		public static const LIGHTSOURCE_TEXTURE:String = "../assets/textures/metal.jpg";
 		
 		public function ResourceManager()
 		{

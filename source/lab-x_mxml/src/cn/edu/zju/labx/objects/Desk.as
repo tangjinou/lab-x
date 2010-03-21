@@ -22,7 +22,7 @@ package cn.edu.zju.labx.objects
 		{
 			var imgLoader:Loader = new Loader();
 			imgLoader.contentLoaderInfo.addEventListener(Event.COMPLETE,textureLoaded);
-			imgLoader.load(new URLRequest("../assets/textures/metal_desk.jpg"));
+			imgLoader.load(new URLRequest(ResourceManager.DESK_TEXTURE));
 			
 		}
 		private function textureLoaded(evt:Event):void
