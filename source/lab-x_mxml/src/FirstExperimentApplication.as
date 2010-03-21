@@ -9,6 +9,7 @@ package
 	import cn.edu.zju.labx.objects.LightSource;
 	import cn.edu.zju.labx.objects.Mirror;
 	import cn.edu.zju.labx.objects.SplitterBeam;
+	import cn.edu.zju.labx.objects.Desk;
 	import cn.edu.zju.labx.utils.ResourceManager;
 	
 	import flash.display.Bitmap;
@@ -25,7 +26,6 @@ package
 	import org.papervision3d.materials.ColorMaterial;
 	import org.papervision3d.materials.shadematerials.PhongMaterial;
 	import org.papervision3d.objects.DisplayObject3D;
-	import org.papervision3d.objects.parsers.DAE;
 	import org.papervision3d.view.BasicView;
 	import org.papervision3d.view.layer.ViewportLayer;
 	import org.papervision3d.view.stats.StatsView;
@@ -45,7 +45,7 @@ package
         
 		private var light:PointLight3D;
 		public  var originPivot:DisplayObject3D;
-		private var desk:DAE; 
+		private var desk:Desk; 
 		private var lightSource:LightSource;
 		private var beam1:SplitterBeam;
 	    public var convexLens1:Lens;
@@ -74,32 +74,13 @@ package
 			StageObjectsManager.getDefault.mainView = this;
 			deskLayer = StageObjectsManager.getDefault.layerManager.deskLayer;
 			equipmentLayer = StageObjectsManager.getDefault.layerManager.equipmentLayer;
-			createDesk();
+			desk = new Desk();
 			createObjects();
 			var stats:StatsView = new StatsView(renderer);
 			addChild(stats);
 			startRendering();
 		}
 
-		
-		public function createDesk():void
-		{
-			desk = new DAE();  
-			desk.addEventListener(FileLoadEvent.LOAD_COMPLETE, deskOnLoaded);
-			DAE(desk).addFileSearchPath(ResourceManager.DESK_TEXTURE_DIR);
-            DAE(desk).load(ResourceManager.DESK_DAE_URL);
-            desk.scale = 3;
-            desk.scaleX = 6;
-            desk.scaleZ = 5;
-		}
-		
-		private function deskOnLoaded(evt:FileLoadEvent):void{
-            desk.moveDown(LabXConstant.STAGE_HEIGHT/2-40);
-            desk.moveRight(LabXConstant.STAGE_WIDTH/2);
-            originPivot.addChild(desk);
-            deskLayer.addDisplayObject3D(desk, true);
-        } 
-          
         private function loadLightSourceTextureComplete(evt:Event):void
         {
         	var bitmap:Bitmap = evt.target.content as Bitmap;

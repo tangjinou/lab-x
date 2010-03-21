@@ -6,6 +6,7 @@ package
 	import cn.edu.zju.labx.objects.ConvexLens;
 	import cn.edu.zju.labx.objects.Lens;
 	import cn.edu.zju.labx.objects.LightSource;
+	import cn.edu.zju.labx.objects.Desk;
 	import cn.edu.zju.labx.utils.ResourceManager;
 	
 	import flash.display.Bitmap;
@@ -55,7 +56,7 @@ package
 		/**
 		 * Equipments
 		 */
-		private var desk:DAE;
+		private var desk:Desk;
 		private var lightSource:LightSource;
 		public var convexLens1:Lens;
 	    public var convexLens2:Lens;
@@ -73,7 +74,7 @@ package
 			StageObjectsManager.getDefault.mainView = this;
 			deskLayer = StageObjectsManager.getDefault.layerManager.deskLayer;
 			equipmentLayer = StageObjectsManager.getDefault.layerManager.equipmentLayer;
-			createDesk();
+			desk = new Desk();
 			createObjects();
 			var stats:StatsView = new StatsView(renderer);
 			addChild(stats);
@@ -85,23 +86,6 @@ package
 		 * Create Equipment and other object in the stage
 		 ****************************************************************************
 		 */
-		private function createDesk():void
-		{
-			desk = new DAE();  
-			desk.addEventListener(FileLoadEvent.LOAD_COMPLETE, deskOnLoaded);
-			DAE(desk).addFileSearchPath(ResourceManager.DESK_TEXTURE_DIR);
-            DAE(desk).load(ResourceManager.DESK_DAE_URL);
-            desk.scale = 3;
-            desk.scaleX = 6;
-            desk.scaleZ = 5;
-		}
-		
-		private function deskOnLoaded(evt:FileLoadEvent):void{
-            desk.moveDown(LabXConstant.STAGE_HEIGHT/2-40);
-            desk.moveRight(LabXConstant.STAGE_WIDTH/2);
-            originPivot.addChild(desk);
-            deskLayer.addDisplayObject3D(desk, true);
-        } 
 		
 		private function createObjects():void
 		{
