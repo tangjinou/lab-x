@@ -6,6 +6,7 @@ package
 	import cn.edu.zju.labx.objects.Board;
 	import cn.edu.zju.labx.objects.ConvexLens;
 	import cn.edu.zju.labx.objects.Desk;
+	import cn.edu.zju.labx.objects.Grid;
 	import cn.edu.zju.labx.objects.Lens;
 	import cn.edu.zju.labx.objects.LightSource;
 	import cn.edu.zju.labx.objects.Mirror;
@@ -45,6 +46,7 @@ package
 		private var light:PointLight3D;
 		public  var originPivot:DisplayObject3D;
 		private var desk:Desk; 
+		private var grid:Grid;
 		private var lightSource:LightSource;
 		private var beam1:SplitterBeam;
 	    public var convexLens1:Lens;
@@ -58,7 +60,6 @@ package
 	    
 	    private var board:Board;
 	
-		private var deskLayer:ViewportLayer;
 		private var equipmentLayer:ViewportLayer;
 		
 		public function FirstExperimentApplication(viewportWidth:Number=LabXConstant.STAGE_WIDTH, viewportHeight:Number=LabXConstant.STAGE_HEIGHT, scaleToStage:Boolean=true, interactive:Boolean=false, cameraType:String="Target")
@@ -71,9 +72,9 @@ package
 			 *  set the mainView here ,if not it will make some problems
 			 */ 
 			StageObjectsManager.getDefault.mainView = this;
-			deskLayer = StageObjectsManager.getDefault.layerManager.deskLayer;
 			equipmentLayer = StageObjectsManager.getDefault.layerManager.equipmentLayer;
 			desk = new Desk();
+			
 			createObjects();
 			var stats:StatsView = new StatsView(renderer);
 			addChild(stats);
@@ -100,6 +101,8 @@ package
 			scene.addChild(originPivot);
 			StageObjectsManager.getDefault.originPivot = originPivot;
 			
+			grid = new Grid();
+						
 			light = new PointLight3D(true);
 			light.x = 200;
 			light.y = 50;
