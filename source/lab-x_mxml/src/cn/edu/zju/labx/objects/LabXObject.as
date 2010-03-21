@@ -42,6 +42,9 @@ package cn.edu.zju.labx.objects
 			if (instanceOf(IUserInputListener)) {
 				UserInputHandler.getDefault.currentSelectedObject = this as IUserInputListener;
                 UserInputHandler.getDefault.objectPressHandlerHook(event,this);
+                StageObjectsManager.getDefault.addMessage("已经选中"+this.name);
+                StageObjectsManager.getDefault.addMessage("键盘 up:物体上移动,down:物体下移动");
+                StageObjectsManager.getDefault.addMessage("left:物体左移动,right:物体右移动");
 			}
 		}
 		
