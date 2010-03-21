@@ -23,6 +23,8 @@ package cn.edu.zju.labx.events
 		 */
 	    public var oldMouseY:Number = -1;
 	    
+	    private var needReproduceRay:Boolean = false;
+	    
 		public function LabXObjectUserInputHandleTool(object:LabXObject)
 		{
 			this.labXObject = object;
@@ -37,10 +39,11 @@ package cn.edu.zju.labx.events
 					oldMouseX = mouseEvent.stageX;
 					oldMouseY = mouseEvent.stageY;
 				} else if (mouseEvent.type == MouseEvent.MOUSE_UP) {
-					if((mouseEvent.stageX != oldMouseX || mouseEvent.stageY != oldMouseY) && (oldMouseX != -1))
+					if(needReproduceRay && (oldMouseX != -1))
 					{
 						StageObjectsManager.getDefault.rayManager.reProduceRays();
 					}
+					needReproduceRay = false;
 					oldMouseX = -1;
 					oldMouseY = -1;
 				} else if ((mouseEvent.type == MouseEvent.MOUSE_MOVE) &&(oldMouseY != -1) && (oldMouseY != -1) && mouseEvent.buttonDown) {
@@ -84,6 +87,7 @@ package cn.edu.zju.labx.events
 				labXObject.z -= yMove;
 				StageObjectsManager.getDefault.addMessage("lens Z move:"+yMove);
 			}
+			needReproduceRay = true;
 		}
 	    
 
