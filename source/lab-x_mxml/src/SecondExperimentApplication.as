@@ -22,7 +22,6 @@ package
 	import org.papervision3d.materials.BitmapMaterial;
 	import org.papervision3d.materials.shadematerials.PhongMaterial;
 	import org.papervision3d.objects.DisplayObject3D;
-	import org.papervision3d.objects.parsers.DAE;
 	import org.papervision3d.view.BasicView;
 	import org.papervision3d.view.layer.ViewportLayer;
 	import org.papervision3d.view.stats.StatsView;
