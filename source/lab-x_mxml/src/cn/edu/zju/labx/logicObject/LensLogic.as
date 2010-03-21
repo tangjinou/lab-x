@@ -35,6 +35,7 @@ package cn.edu.zju.labx.logicObject
 		{
 			this.position = position || new Number3D();
 			this.normal = normal || new Number3D(1, 0, 0);
+			this.normal.normalize();
 			this.f = ((f == 0)?LabXConstant.LENS_DEFAULT_FOCAL_LENGTH : f);
 		}
 		
