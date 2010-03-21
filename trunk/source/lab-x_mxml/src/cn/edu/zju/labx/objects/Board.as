@@ -50,6 +50,7 @@ package cn.edu.zju.labx.objects
 		public function createDisplayObject():void{
 			var materialsList:MaterialsList = new MaterialsList();
 			var leftMaterial:MaterialObject3D = material.clone();
+			leftMaterial.interactive = true;
 			materialsList.addMaterial(material,"front");
 			materialsList.addMaterial(material,"back");
 			materialsList.addMaterial(leftMaterial,"left");
