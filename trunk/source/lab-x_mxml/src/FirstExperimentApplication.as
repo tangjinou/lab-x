@@ -162,18 +162,19 @@ package
 			/*Create Lens1*/	
 			var shadeMaterialLens:PhongMaterial = new PhongMaterial(light,0xFFFFFF,0x6ccff8,100);
 			shadeMaterialLens.interactive = true;
-			convexLens1 = new ConvexLens("扩束镜1",shadeMaterialLens, 8);
+			convexLens1 = new ConvexLens("扩束镜1",shadeMaterialLens, 18);
 			StageObjectsManager.getDefault.addObject(convexLens1);
-			convexLens1.moveUp(convexLens1.height/2 + 5);
+			convexLens1.moveUp(convexLens1.height/2);
 			convexLens1.scale = BASIC_SCALE*0.5;
 			convexLens1.moveRight(BASIC_X + 280);
 			convexLens1.moveForward(140);
 			convexLens1.rotationY +=18.5;
 			
-			/*Create Lens2*/	
+			/*Create Lens2*/
+			//distance between len1 and lens2 is about 126	
 			var shadeMaterialLens2:PhongMaterial = new PhongMaterial(light,0xFFFFFF,0x6ccff8,100);
 			shadeMaterialLens2.interactive = true;
-			convexLens2 = new ConvexLens("准直物镜1",shadeMaterialLens2, 85);
+			convexLens2 = new ConvexLens("准直物镜1",shadeMaterialLens2, 108);
 			StageObjectsManager.getDefault.addObject(convexLens2);
 			convexLens2.moveUp(convexLens2.height/2);
 			convexLens2.scale = BASIC_SCALE;
@@ -184,18 +185,19 @@ package
             /*Create Lens3*/	
 			var shadeMaterialLens3:PhongMaterial = new PhongMaterial(light,0xFFFFFF,0x6ccff8,100);
 			shadeMaterialLens3.interactive = true;
-			convexLens3 = new ConvexLens("扩束镜2",shadeMaterialLens3, 8);
+			convexLens3 = new ConvexLens("扩束镜2",shadeMaterialLens3, 18);
 			StageObjectsManager.getDefault.addObject(convexLens3);
-			convexLens3.moveUp(convexLens3.height/2 + 5);
+			convexLens3.moveUp(convexLens3.height/2);
 			convexLens3.scale = BASIC_SCALE*0.5;
 			convexLens3.moveRight(BASIC_X + 280);
 			convexLens3.moveBackward(140);
 			convexLens3.rotationY -=18.5;
 			
 			/*Create Lens4*/	
+			//distance between len1 and lens2 is about 126	
 			var shadeMaterialLens4:PhongMaterial = new PhongMaterial(light,0xFFFFFF,0x6ccff8,100);
 			shadeMaterialLens4.interactive = true;
-			convexLens4 = new ConvexLens("准直物镜2",shadeMaterialLens4, 85);
+			convexLens4 = new ConvexLens("准直物镜2",shadeMaterialLens4, 108);
 			StageObjectsManager.getDefault.addObject(convexLens4);
 			convexLens4.moveUp(convexLens4.height/2);
             convexLens4.scale = BASIC_SCALE;

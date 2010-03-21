@@ -43,19 +43,23 @@ package cn.edu.zju.labx.objects
 		public function createRay():void{
 		   	_ray = new Ray();
 			
-			var royLogic1:LineRayLogic = new LineRayLogic(new Number3D(this.x,this.y+15+5,this.z),new Number3D(1,0,0));
+			var royLogic0:LineRayLogic = new LineRayLogic(new Number3D(this.x,this.y+10,this.z),new Number3D(1,0,0));
+			var lineRay0:LineRay = new LineRay(royLogic0);
+			
+			var royLogic1:LineRayLogic = new LineRayLogic(new Number3D(this.x,this.y+10+5,this.z),new Number3D(1,0,0));
 			var lineRay1:LineRay = new LineRay(royLogic1);
 			
-			var royLogic2:LineRayLogic = new LineRayLogic(new Number3D(this.x,this.y+15-5,this.z),new Number3D(1,0,0));
+			var royLogic2:LineRayLogic = new LineRayLogic(new Number3D(this.x,this.y+10-5,this.z),new Number3D(1,0,0));
 			var lineRay2:LineRay = new LineRay(royLogic2);
 			
-			var royLogic3:LineRayLogic = new LineRayLogic(new Number3D(this.x,this.y+15,this.z+5),new Number3D(1,0,0));
+			var royLogic3:LineRayLogic = new LineRayLogic(new Number3D(this.x,this.y+10,this.z+5),new Number3D(1,0,0));
 			var lineRay3:LineRay = new LineRay(royLogic3);
 			
-			var royLogic4:LineRayLogic = new LineRayLogic(new Number3D(this.x,this.y+15,this.z-5),new Number3D(1,0,0));
+			var royLogic4:LineRayLogic = new LineRayLogic(new Number3D(this.x,this.y+10,this.z-5),new Number3D(1,0,0));
 			var lineRay4:LineRay = new LineRay(royLogic4);
 			
 			var lineRays:ArrayCollection =new ArrayCollection();
+			lineRays.addItem(lineRay0);
 			lineRays.addItem(lineRay1);
 			lineRays.addItem(lineRay2);
 			lineRays.addItem(lineRay3);

@@ -5,6 +5,7 @@ package cn.edu.zju.labx.logicObject
 	import flexunit.framework.TestCase;
 	
 	import org.papervision3d.core.math.Number3D;
+	import org.papervision3d.core.math.Plane3D;
 	
 	public class LensLogicTest extends TestCase
 	{
@@ -151,6 +152,47 @@ package cn.edu.zju.labx.logicObject
 //			assertTrue(Math.abs(rayResult.dx-(0.95586051)) < LabXConstant.NUMBER_PRECISION);
 //			assertTrue(Math.abs(rayResult.dy+0.29382083) < LabXConstant.NUMBER_PRECISION);
 //			assertTrue(Math.abs(rayResult.dz-0) < LabXConstant.NUMBER_PRECISION);
+		}
+		
+		
+		
+		public function testFocusLengthBUG():void
+		{
+			var lineRayLogic:LineRayLogic = new LineRayLogic(new Number3D(300, 62, -166.7), new Number3D(0.9488760116444964, 0, 0.31564903694710283));
+			
+			var position1:Number3D = new Number3D(380, 60, -140);
+			var normal1:Number3D = new Number3D(-0.9483236552061993, 0, -0.31730465640509214);
+			var lensLogic1:LensLogic = new LensLogic(position1, normal1, 30);
+			var result1:LineRayLogic = lensLogic1.processRay(lineRayLogic);
+			
+			trace(result1.dx);
+			trace(result1.dy);
+			trace(result1.dz);
+			
+//0.9173178294405009
+//-0.2425271093324738
+//0.31576668764992094
+
+
+			
+			
+			var position2:Number3D = new Number3D(500, 60, -100);
+			var normal2:Number3D = new Number3D(-0.9483236552061993, 0, -0.31730465640509214);
+			var plane2:Plane3D = new Plane3D(normal2,position2);
+			
+			trace(plane2.distance(position1)); //126.49102488094758
+			trace(Number3D.sub(position1, position2).modulo);
+			
+			var lensLogic2:LensLogic = new LensLogic(position2, normal2, 96);
+			var result2:LineRayLogic = lensLogic2.processRay(result1);
+			
+			trace(result2.dx);
+			trace(result2.dy);
+			trace(result2.dz);
+//0.9472891563977228
+//0.06836346298527674
+//0.3130011039915857
+			
 		}
 		
 	}
