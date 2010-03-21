@@ -47,11 +47,6 @@
                addChild(uic);
                createCheckBoxes();
                
-                move_up.xTo = 0 - moveText.width + 6;
-                move_up.repeatCount = 10; //loop
-                move_up.repeatDelay = 1000; //loop time
-                move_up.duration = 10000; //the time of scroll onc
-                move_up.play();
 	 		}
 	 		
 	 		public function createCheckBoxes():void{
@@ -131,11 +126,4 @@
 	 <mx:ApplicationControlBar width="20" height="44" x="364" y="0">
 	 </mx:ApplicationControlBar>
 	 
-	 
-	 <mx:Text id="moveText" width="650" horizontalCenter="0" height="25"
-                 text="welcome to the labx, you could press stop button,then move the objects" 
-                 fontSize="15" color="#FF0000" y="553">
-     </mx:Text>
-	 
-	 <mx:Move id="move_up" target="{moveText}" />
 </mx:Application>
