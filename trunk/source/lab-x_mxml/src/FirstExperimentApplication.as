@@ -150,7 +150,7 @@ package
 //			/*Create Mirrcor1*/
 		    var shadeMaterialMiror:PhongMaterial = new PhongMaterial(light,0xFFFFFF,0x6ccff8,100);
 			shadeMaterialMiror.interactive = true;
-			mirror1 =new Mirror("镜子1",shadeMaterialMiror);
+			mirror1 =new Mirror("反射镜1",shadeMaterialMiror);
 			StageObjectsManager.getDefault.addObject(mirror1);
 			mirror1.scale = BASIC_SCALE;
 			mirror1.moveRight(BASIC_X+100);
@@ -161,7 +161,7 @@ package
 			/*Create Mirrcor2*/
 			var shadeMaterialMiror2:PhongMaterial = new PhongMaterial(light,0xFFFFFF,0x6ccff8,100);
 			shadeMaterialMiror2.interactive = true;
-			mirror2 =new Mirror("镜子2",shadeMaterialMiror2);
+			mirror2 =new Mirror("反射镜2",shadeMaterialMiror2);
 			StageObjectsManager.getDefault.addObject(mirror2);
 			mirror2.scale = BASIC_SCALE;
 			mirror2.moveRight(BASIC_X + 200);
@@ -171,7 +171,7 @@ package
 			/*Create Mirrcor3*/
 			var shadeMaterialMiror3:PhongMaterial = new PhongMaterial(light,0xFFFFFF,0x6ccff8,100);
 			shadeMaterialMiror3.interactive = true;
-			mirror3 =new Mirror("镜子3",shadeMaterialMiror3);
+			mirror3 =new Mirror("反射镜3",shadeMaterialMiror3);
 			StageObjectsManager.getDefault.addObject(mirror3);
 			mirror3.scale = BASIC_SCALE;
 			mirror3.moveRight(BASIC_X + 200);
@@ -180,20 +180,20 @@ package
 			mirror3.rotationY -=54.2;
 			
 			/*Create Lens1*/	
-			var shadeMaterialLens:PhongMaterial = new PhongMaterial(light,0xFFFFFF,0x6ccff8,100);
-			shadeMaterialLens.interactive = true;
-			convexLens1 = new ConvexLens("透镜1",shadeMaterialLens, 40);
-			StageObjectsManager.getDefault.addObject(convexLens1);
-			convexLens1.scale = BASIC_SCALE;
-			convexLens1.moveRight(BASIC_X + 280);
-			convexLens1.moveUp(convexLens1.height/2);
-			convexLens1.moveForward(140);
-			convexLens1.rotationY +=18.5;
+//			var shadeMaterialLens:PhongMaterial = new PhongMaterial(light,0xFFFFFF,0x6ccff8,100);
+//			shadeMaterialLens.interactive = true;
+//			convexLens1 = new ConvexLens("扩束镜1",shadeMaterialLens, 40);
+//			StageObjectsManager.getDefault.addObject(convexLens1);
+//			convexLens1.scale = BASIC_SCALE*0.5;
+//			convexLens1.moveRight(BASIC_X + 280);
+//			convexLens1.moveUp(convexLens1.height/2);
+//			convexLens1.moveForward(140);
+//			convexLens1.rotationY +=18.5;
 			
 			/*Create Lens2*/	
 			var shadeMaterialLens2:PhongMaterial = new PhongMaterial(light,0xFFFFFF,0x6ccff8,100);
 			shadeMaterialLens2.interactive = true;
-			convexLens2 = new ConvexLens("透镜2",shadeMaterialLens2, 60);
+			convexLens2 = new ConvexLens("准直物镜1",shadeMaterialLens2, 100);
 			StageObjectsManager.getDefault.addObject(convexLens2);
 			convexLens2.scale = BASIC_SCALE;
 			convexLens2.moveRight(BASIC_X + 400);
@@ -204,9 +204,9 @@ package
             /*Create Lens3*/	
 			var shadeMaterialLens3:PhongMaterial = new PhongMaterial(light,0xFFFFFF,0x6ccff8,100);
 			shadeMaterialLens3.interactive = true;
-			convexLens3 = new ConvexLens("透镜3",shadeMaterialLens3, 40);
+			convexLens3 = new ConvexLens("扩束镜2",shadeMaterialLens3, 40);
 			StageObjectsManager.getDefault.addObject(convexLens3);
-			convexLens3.scale = BASIC_SCALE;
+			convexLens3.scale = BASIC_SCALE*0.5;
 			convexLens3.moveRight(BASIC_X + 280);
 			convexLens3.moveUp(convexLens3.height/2);
 			convexLens3.moveBackward(140);
@@ -215,7 +215,7 @@ package
 			/*Create Lens4*/	
 			var shadeMaterialLens4:PhongMaterial = new PhongMaterial(light,0xFFFFFF,0x6ccff8,100);
 			shadeMaterialLens4.interactive = true;
-			convexLens4 = new ConvexLens("透镜4",shadeMaterialLens4, 60);
+			convexLens4 = new ConvexLens("准直物镜2",shadeMaterialLens4, 100);
 			StageObjectsManager.getDefault.addObject(convexLens4);
             convexLens4.scale = BASIC_SCALE;
 			convexLens4.moveRight(BASIC_X + 400);
@@ -225,7 +225,7 @@ package
 			
 			/*create Board*/
 			var ColorMaterialBoard:ColorMaterial = new ColorMaterial(0x262626, 1, true);
-			board = new  Board("挡板",ColorMaterialBoard);
+			board = new  Board("接收屏",ColorMaterialBoard);
 			board.moveRight(LabXConstant.DESK_WIDTH);
 			board.moveUp(board.height/2);
             StageObjectsManager.getDefault.addObject(board);
