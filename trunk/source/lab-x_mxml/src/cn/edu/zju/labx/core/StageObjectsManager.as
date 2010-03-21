@@ -2,7 +2,6 @@ package cn.edu.zju.labx.core
 {
 	import cn.edu.zju.labx.objects.Board;
 	import cn.edu.zju.labx.objects.LabXObject;
-	import cn.edu.zju.labx.objects.Lens;
 	
 	import flash.filters.DropShadowFilter;
 	
@@ -149,11 +148,20 @@ package cn.edu.zju.labx.core
 		 *  This is rotate_right button in the view
 		 **/
 		 public var rotate_right_button:Button;
-		 
 		 /**
 		 *  This is rotate_left button in the view
 		 **/
 		 public var rotate_left_button:Button;
+		 /***
+		 *  This is object_up button in the view
+		 */ 
+		 public var object_up_button:Button;
+		 /***
+		 *  This is object_down button in the view
+		 */ 
+		 public var object_down_button:Button;
+		 
+		 
 		 
 		 private var labXObjectSelected:LabXObject;
 		 
@@ -164,8 +172,11 @@ package cn.edu.zju.labx.core
 		 	{
 		 		mainView.viewport.getChildLayer(labXObjectSelected.getObjectWithMaterial(), true, true).filters = null;
 		 	}
+		 	// enable the button list
 		 	rotate_right_button.enabled=true;
 		 	rotate_left_button.enabled=true;
+		 	object_up_button.enabled=true;
+		 	object_down_button.enabled=true;
 		 	labXObjectSelected = labXObject;
 		 	var viewportLayer:ViewportLayer = mainView.viewport.getChildLayer(labXObject.getObjectWithMaterial(), true, true);
 			viewportLayer.filters =[dropShadowFilter]; 
@@ -178,9 +189,11 @@ package cn.edu.zju.labx.core
 	 	   		var viewportLayer:ViewportLayer = mainView.viewport.getChildLayer(labXObjectSelected.getObjectWithMaterial(), true, true);
 				viewportLayer.filters =null;
 	 	   		labXObjectSelected = null;
+	 	   		//disable the button list
 		        rotate_right_button.enabled=false;
 		        rotate_left_button.enabled=false;
-		       
+		        object_up_button.enabled=false;
+		 	    object_down_button.enabled=false;
 		        labXObjectSelected =null
 		   }
 		 }
@@ -244,6 +257,11 @@ package cn.edu.zju.labx.core
 		}
 		
 		
+		///////////////////////////////////////////////////////////////////////////////////////////////////
+		/***
+		 *  This for button listener 
+		 */
+		
 		public function rotate_left():void{
 		   if(labXObjectSelected!=null){
 		     labXObjectSelected.localRotationY++;
@@ -259,7 +277,20 @@ package cn.edu.zju.labx.core
              this.addMessage(labXObjectSelected.name+"绕Y转动"+labXObjectSelected.localRotationY.toFixed(2));
 		   }
 		}
-		
+		public function object_up():void{
+		    if(labXObjectSelected!=null){
+		     labXObjectSelected.y++;
+		     rayManager.reProduceRays();
+             this.addMessage(labXObjectSelected.name+"往上移动"+labXObjectSelected.y.toFixed(2));
+		   }
+		}
+		public function object_down():void{
+		    if(labXObjectSelected!=null){
+		      labXObjectSelected.y--;
+		     rayManager.reProduceRays();
+             this.addMessage(labXObjectSelected.name+"往下移动"+labXObjectSelected.y.toFixed(2));
+		   }
+		}
         
 	}   
 }

@@ -180,15 +180,15 @@ package
 			mirror3.rotationY -=54.2;
 			
 			/*Create Lens1*/	
-//			var shadeMaterialLens:PhongMaterial = new PhongMaterial(light,0xFFFFFF,0x6ccff8,100);
-//			shadeMaterialLens.interactive = true;
-//			convexLens1 = new ConvexLens("扩束镜1",shadeMaterialLens, 40);
-//			StageObjectsManager.getDefault.addObject(convexLens1);
-//			convexLens1.scale = BASIC_SCALE*0.5;
-//			convexLens1.moveRight(BASIC_X + 280);
-//			convexLens1.moveUp(convexLens1.height/2);
-//			convexLens1.moveForward(140);
-//			convexLens1.rotationY +=18.5;
+			var shadeMaterialLens:PhongMaterial = new PhongMaterial(light,0xFFFFFF,0x6ccff8,100);
+			shadeMaterialLens.interactive = true;
+			convexLens1 = new ConvexLens("扩束镜1",shadeMaterialLens, 40);
+			StageObjectsManager.getDefault.addObject(convexLens1);
+			convexLens1.scale = BASIC_SCALE*0.5;
+			convexLens1.moveRight(BASIC_X + 280);
+			convexLens1.moveUp(convexLens1.height/2);
+			convexLens1.moveForward(140);
+			convexLens1.rotationY +=18.5;
 			
 			/*Create Lens2*/	
 			var shadeMaterialLens2:PhongMaterial = new PhongMaterial(light,0xFFFFFF,0x6ccff8,100);

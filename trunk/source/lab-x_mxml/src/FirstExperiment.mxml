@@ -16,8 +16,11 @@
 	 		   message_box.text="公告栏";
 //	 		   StageObjectsManager.getDefault.mainView=firstExperiment;	
 	 		   StageObjectsManager.getDefault.messageBox=message_box;
-	 		   StageObjectsManager.getDefault.rotate_left_button=rotate_left;
-	 		   StageObjectsManager.getDefault.rotate_right_button=rotate_right;
+	 		   StageObjectsManager.getDefault.rotate_left_button=rotate_left_button;
+	 		   StageObjectsManager.getDefault.rotate_right_button=rotate_right_button;
+	 		   StageObjectsManager.getDefault.object_up_button=object_up_button;
+	 		   StageObjectsManager.getDefault.object_down_button=object_down_button;
+	 		   
 	 		   
 	 		   Mouse3D.enabled = true;
 	 		   firstExperiment.viewport.interactive = true; 
@@ -84,10 +87,11 @@
 	 <mx:Button  click="close_stage_rotate()" icon="@Embed('../assets/icon/stop.png')"  toolTip="close_stage_rotate"/>
 	 <mx:Button  buttonDown="StageObjectsManager.getDefault.mainView.camera.zoom++" autoRepeat="true" icon="@Embed('../assets/icon/zoom_add.png')" toolTip="zoom+"/>
 	 <mx:Button  buttonDown="StageObjectsManager.getDefault.mainView.camera.zoom--" autoRepeat="true" icon="@Embed('../assets/icon/zoom_min.png')" toolTip="zoom-"/>
-     <mx:Button  buttonDown="StageObjectsManager.getDefault.rotate_left()"   autoRepeat="false" id="rotate_left" enabled="false" icon="@Embed('../assets/icon/rotate_left.png')"  disabledIcon="@Embed('../assets/icon/rotate_left_disable.png')"  toolTip="rotate left"/>
-     <mx:Button  buttonDown="StageObjectsManager.getDefault.rotate_right()"  autoRepeat="false" id="rotate_right" enabled="false" icon="@Embed('../assets/icon/rotate_right.png')" disabledIcon="@Embed('../assets/icon/rotate_right_disable.png')" toolTip="rotate right"/>
-     <mx:Button  buttonDown="StageObjectsManager.getDefault.rotate_right()"  autoRepeat="false" id="object_up" enabled="false" icon="@Embed('../assets/icon/up.png')" disabledIcon="@Embed('../assets/icon/up_disable.png')" toolTip="object up"/>
-     <mx:Button  buttonDown="StageObjectsManager.getDefault.rotate_right()"  autoRepeat="false" id="object_down" enabled="false" icon="@Embed('../assets/icon/down.png')" disabledIcon="@Embed('../assets/icon/down_disable.png')" toolTip="object down"/>
+     <mx:Button  buttonDown="StageObjectsManager.getDefault.rotate_left()"   autoRepeat="false" id="rotate_left_button" enabled="false" icon="@Embed('../assets/icon/rotate_left.png')"  disabledIcon="@Embed('../assets/icon/rotate_left_disable.png')"  toolTip="rotate left"/>
+     <mx:Button  buttonDown="StageObjectsManager.getDefault.rotate_right()"  autoRepeat="false" id="rotate_right_button" enabled="false" icon="@Embed('../assets/icon/rotate_right.png')" disabledIcon="@Embed('../assets/icon/rotate_right_disable.png')" toolTip="rotate right"/>
+     <mx:Button  buttonDown="StageObjectsManager.getDefault.object_up()"  autoRepeat="false" id="object_up_button" enabled="false" icon="@Embed('../assets/icon/up.png')" disabledIcon="@Embed('../assets/icon/up_disable.png')" toolTip="object up"/>
+     <mx:Button  buttonDown="StageObjectsManager.getDefault.object_down()"  autoRepeat="false" id="object_down_button" enabled="false" icon="@Embed('../assets/icon/down.png')" disabledIcon="@Embed('../assets/icon/down_disable.png')" toolTip="object down"/>
+     
      </mx:VBox>
 	 
 	 <mx:VBox id="vbox_checkBoxes" horizontalGap="10" verticalAlign="bottom" x="849" y="10">
