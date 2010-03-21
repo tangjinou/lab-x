@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Application xmlns:mx="http://www.adobe.com/2006/mxml" backgroundColor="black" layout="absolute" creationComplete="callLater(init)" width="1000" height="600" xmlns:labx="cn.edu.zju.labx.*" xmlns:local="*" borderColor="#CD1A02" fontWeight="bold" fontSize="12">
+	<mx:Script>
+	 	<![CDATA[
+	 		import mx.controls.CheckBox;
+	 		import cn.edu.zju.labx.objects.LabXObject;
+	 		import org.papervision3d.core.utils.Mouse3D;
+	 		import cn.edu.zju.labx.core.UserInputHandler;
+	 		import cn.edu.zju.labx.core.StageObjectsManager;
+	 		import SecondExperimentApplication;
+	 	    import mx.core.UIComponent;
+	 	    import flash.events.Event;
+			import flash.events.MouseEvent;
+			public var camera_yaw:int=0;
+	 		public function init():void{
+	 		   message_box.text="公告栏";
+//	 		   StageObjectsManager.getDefault.mainView=firstExperiment;	
+	 		   StageObjectsManager.getDefault.messageBox=message_box;
+	 		   StageObjectsManager.getDefault.rotate_left_button=rotate_left;
+	 		   StageObjectsManager.getDefault.rotate_right_button=rotate_right;
+	 		   
+	 		   Mouse3D.enabled = true;
+	 		   secondExperiment.viewport.interactive = true; 
+	 		   var uic:UIComponent = new UIComponent();
+			   stage.frameRate = 40;
+               stage.addEventListener(MouseEvent.MOUSE_DOWN, secondExperiment.onMouseDown);
+               stage.addEventListener(MouseEvent.MOUSE_MOVE, secondExperiment.onMouseMove);
+               stage.addEventListener(MouseEvent.MOUSE_UP, UserInputHandler.getDefault.mouseUpHandler);
+			   uic.addChild(secondExperiment);
+               addChild(uic);
+               
+               createCheckBoxes();
+               
+                move_up.xTo = 0 - moveText.width + 6;
+                move_up.repeatCount = 10; //loop
+                move_up.repeatDelay = 1000; //loop time
+                move_up.duration = 10000; //the time of scroll onc
+                move_up.play();
+	 		}
+	 		
+	 		public function createCheckBoxes():void{
+	 		   
+	 		   for(var i:int=0;i<StageObjectsManager.getDefault.getObjectList().length;i++){
+	 		       var obj:LabXObject = StageObjectsManager.getDefault.getObjectList().getItemAt(i) as LabXObject;
+                   if(obj !=null){	 		       
+	 		         var checkbox:CheckBox = new CheckBox();
+	 		         checkbox.label = obj.name;
+	 		         checkbox.selected = true;
+	 		         checkbox.addEventListener(Event.CHANGE,checkBoxChanged);
+	 		         vbox_checkBoxes.addChild(checkbox);
+                   }
+	 		   }
+	 		       
+	 		   
+	 		}
+	 		public function open_stage_rotate():void{
+	 			StageObjectsManager.getDefault.rotate_stage=true;
+	 			StageObjectsManager.getDefault.addMessage("视角旋转打开.");
+	 		}
+	 		public function close_stage_rotate():void{
+	 		    StageObjectsManager.getDefault.rotate_stage=false;
+	 		    StageObjectsManager.getDefault.addMessage("视角旋转关闭.");
+	 		    //TODO: need reset the view  
+	 		    
+	 		}
+	 		public function checkBoxChanged(event:Event):void{
+	 			var checkBox:CheckBox = event.target as CheckBox;
+                if(checkBox.selected ==true){
+                    StageObjectsManager.getDefault.addMessage("增加"+checkBox.label);                
+                    StageObjectsManager.getDefault.addObjectByName(checkBox.label);
+                }
+                else{
+                    StageObjectsManager.getDefault.addMessage("移除"+checkBox.label);
+                    StageObjectsManager.getDefault.removeObjectByName(checkBox.label);
+                }
+	 		}
+	 	]]> 
+	 </mx:Script>
+	 <local:SecondExperimentApplication id="secondExperiment" x="0" y="0" />
+     <mx:VBox horizontalGap="10" verticalAlign="bottom" x="937" y="10">
+     <mx:Button  click="open_stage_rotate()"  icon="@Embed('../assets/icon/open_stage_rotate.png')"  toolTip="open_stage_rotate" />
+	 <mx:Button  click="close_stage_rotate()" icon="@Embed('../assets/icon/stop.png')"  toolTip="close_stage_rotate"/>
+	 <mx:Button  buttonDown="StageObjectsManager.getDefault.mainView.camera.zoom++" autoRepeat="true" icon="@Embed('../assets/icon/zoom_add.png')" toolTip="zoom+"/>
+	 <mx:Button  buttonDown="StageObjectsManager.getDefault.mainView.camera.zoom--" autoRepeat="true" icon="@Embed('../assets/icon/zoom_min.png')" toolTip="zoom-"/>
+     <mx:Button  buttonDown="StageObjectsManager.getDefault.rotate_left()"   autoRepeat="false" id="rotate_left" enabled="false" icon="@Embed('../assets/icon/rotate_left.png')"  disabledIcon="@Embed('../assets/icon/rotate_left_disable.png')"  toolTip="rotate left"/>
+     <mx:Button  buttonDown="StageObjectsManager.getDefault.rotate_right()"  autoRepeat="false" id="rotate_right" enabled="false" icon="@Embed('../assets/icon/rotate_right.png')" disabledIcon="@Embed('../assets/icon/rotate_right_disable.png')" toolTip="rotate right"/>
+     </mx:VBox>
+	 
+	 <mx:VBox id="vbox_checkBoxes" horizontalGap="10" verticalAlign="bottom" x="880" y="300">
+	 </mx:VBox>
+	 
+	 
+	 <mx:Panel y="30" width="208" height="126" layout="absolute" color="#070707" horizontalCenter="-386" borderColor="#67F509" alpha="0.79">
+	     <mx:TextArea  x="0" y="0" width="188" height="86" editable="false" id="message_box" fontSize="12" backgroundColor="#A69B9B" cornerRadius="1" borderStyle="solid" borderColor="#F31207" themeColor="#F0FF00" alpha="1.0" borderThickness="2"/>
+	     <mx:Label text="LabX" width="60" color="#DFF4F4" fontFamily="Arial" fontWeight="bold" fontSize="21" x="107" y="46"/>
+	 </mx:Panel>
+	 <mx:ApplicationControlBar width="20" height="44" x="104" y="0">
+	 
+	 </mx:ApplicationControlBar>
+	 <mx:Panel y="30" width="208" height="126" layout="absolute" color="#070707" horizontalCenter="-126" borderColor="#F90483" alpha="0.79">
+	     <mx:TextArea  x="0" y="0" width="188" height="86" editable="false"  fontSize="12" backgroundColor="#A69B9B" cornerRadius="1" borderStyle="solid" borderColor="#F31207" themeColor="#F0FF00" alpha="1.0" borderThickness="2"/>
+	     <mx:Label text="LabX" width="60" color="#DFF4F4" fontFamily="Arial" fontWeight="bold" fontSize="21" x="107" y="46"/>
+	 </mx:Panel>
+	 <mx:ApplicationControlBar width="20" height="44" x="364" y="0">
+	 </mx:ApplicationControlBar>
+	 
+	 
+	 <mx:Text id="moveText" width="650" horizontalCenter="0" height="25"
+                 text="welcome to the labx, you could press stop button,then move the objects" 
+                 fontSize="15" color="#FF0000" y="553">
+     </mx:Text>
+	 
+	 <mx:Move id="move_up" target="{moveText}" />
+</mx:Application>
