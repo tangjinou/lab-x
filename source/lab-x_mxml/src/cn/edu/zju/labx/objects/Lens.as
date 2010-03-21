@@ -27,22 +27,29 @@ package cn.edu.zju.labx.objects
 	
 	public class Lens extends LabXObject implements IUserInputListener, IRayHandle
 	{   
-		private var _focus:Number = LabXConstant.LENS_DEFAULT_FOCAL_LENGTH;
 		
-		
+		/**
+		 * For display Lens Object
+		 */
 		protected var lensPart1:TriangleMesh3D;
 	    protected var lensPart2:TriangleMesh3D;
 	    protected var lens:TriangleMesh3D;
+	    private var LENS_DAE_URL:String;
+	    public var sp:Sphere;
 	    
 	    public var width:Number =120;
 	    public var height:Number=120;
 	    
-	    private var LENS_DAE_URL:String;
+	    /**
+	     * Focus of the lens, concave lens should always negative, and convex lens
+	     * should always positive
+	     */
+		private var _focus:Number = LabXConstant.LENS_DEFAULT_FOCAL_LENGTH;
+	    private var userInputTool:LabXObjectUserInputHandleTool;
 	    
-	    
-	    public var sp:Sphere;
-	    
-	    var userInputTool:LabXObjectUserInputHandleTool;
+		/**
+		 *Create a lens
+		 */
 		public function Lens(name:String,material:MaterialObject3D=null, focus:Number=LabXConstant.LENS_DEFAULT_FOCAL_LENGTH)
 		{
 			super(material,name);
@@ -52,6 +59,7 @@ package cn.edu.zju.labx.objects
 			
 			userInputTool = new LabXObjectUserInputHandleTool(this);
 		}
+		
 		public function createChildren():void{
 			var radius:Number = 100;
 			var shift:Number = Math.sqrt(radius*radius - 130*130/4);
@@ -83,7 +91,6 @@ package cn.edu.zju.labx.objects
 		     this.LENS_DAE_URL =url;
 		}
 
-		
 		private function makeAnNewRay(oldRay:Ray):Ray
 		{
 			if(oldRay != null)
@@ -189,10 +196,15 @@ package cn.edu.zju.labx.objects
    		 */ 
     	public function isOnTheRay(ray:Ray):Boolean{
     		
-    	    if(ray!=null && ray.getLineRays()!=null && ray.getLineRays().length>0){
-			   var lineRay:LineRay = ray.getLineRays().getItemAt(0) as LineRay;
-	           if(lineRay != null)return isLineRayOnObject(lineRay.logic);
-	           return false;
+			if(ray!=null && ray.getLineRays()!=null && ray.getLineRays().length>0)
+			{
+				for each (var lineRay:LineRay in ray.getLineRays())
+    	    	{
+					if(lineRay != null && isLineRayOnObject(lineRay.logic))
+					{
+						return true;
+					}
+    	    	}
 			}
     	   return false;
     	}
