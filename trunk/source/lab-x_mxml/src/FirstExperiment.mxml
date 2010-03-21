@@ -18,7 +18,8 @@
 			public var camera_yaw:int=0;
 			
 
-            public var checkBoxList:ArrayCollection =new ArrayCollection();
+            private var checkBoxList:ArrayCollection =new ArrayCollection();
+            private var all_checkBox:CheckBox = new CheckBox();
 	 		public function init():void{
 	 		   message_box.text="公告栏";
 	 		   
@@ -50,6 +51,9 @@
 	 		}
 	 		
 	 		public function createCheckBoxes():void{
+	 		   
+	 		   all_checkBox.label ="所有器件";
+	 		   all_checkBox.addEventListener(Event.CHANGE,allCheckBoxChanged);
 	 		   
 	 		   for(var i:int=0;i<StageObjectsManager.getDefault.getObjectList().length;i++){
 	 		       var obj:LabXObject = StageObjectsManager.getDefault.getObjectList().getItemAt(i) as LabXObject;
@@ -85,12 +89,33 @@
                     StageObjectsManager.getDefault.removeObjectByName(checkBox.label);
                 }
 	 		}
+	 		public function allCheckBoxChanged(event:Event):void{
+	 		    
+	 		    for(var i:int=0;i<checkBoxList.length;i++){
+	 		      var checkBox:CheckBox = checkBoxList.getItemAt(i) as CheckBox;
+	 		      checkBox.selected = all_checkBox.selected;
+	 		      if(checkBox.selected == true){
+	 		      	 StageObjectsManager.getDefault.addMessage("增加"+checkBox.label);  
+	 		         StageObjectsManager.getDefault.addObjectByName(checkBox.label);
+	 		      }else{
+	 		         StageObjectsManager.getDefault.addMessage("移除"+checkBox.label);
+                     StageObjectsManager.getDefault.removeObjectByName(checkBox.label);
+	 		      }
+	 		      
+	 		    }
+	 		    
+	 		};
+	 		
 	 		public function choseComponentWindow():void{
 	 		    var window:ChoseComponentWindow=ChoseComponentWindow(PopUpManager.createPopUp( this, ChoseComponentWindow , true));
+	 		    
+	 		    window.vbox_checkBoxes.addChild(all_checkBox);
+	 		    
 	 		    for(var i:int=0;i<checkBoxList.length;i++){
 	 		      var checkBox:CheckBox = checkBoxList.getItemAt(i) as CheckBox;
 	 		      window.vbox_checkBoxes.addChild(checkBox);
 	 		    }
+	 		    
 	 		   
 	 		}
 	 	]]> 

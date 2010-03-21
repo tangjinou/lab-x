@@ -11,13 +11,12 @@ package
 	import cn.edu.zju.labx.objects.LightSource;
 	import cn.edu.zju.labx.objects.Mirror;
 	import cn.edu.zju.labx.objects.SplitterBeam;
-	import cn.edu.zju.labx.utils.ResourceManager;
 	
 	import flash.display.Bitmap;
-	import flash.display.Loader;
 	import flash.events.Event;
 	import flash.events.MouseEvent;
-	import flash.net.URLRequest;
+	
+	import mx.controls.Alert;
 	
 	import org.papervision3d.cameras.CameraType;
 	import org.papervision3d.core.utils.virtualmouse.VirtualMouseMouseEvent;
@@ -79,6 +78,12 @@ package
 			equipmentLayer = StageObjectsManager.getDefault.layerManager.equipmentLayer;
 			desk = new Desk();
 			
+			originPivot = new DisplayObject3D();
+			originPivot.x = -LabXConstant.STAGE_WIDTH/2
+			scene.addChild(originPivot);
+			StageObjectsManager.getDefault.originPivot = originPivot;
+			
+			
 			createObjects();
 			var stats:StatsView = new StatsView(renderer);
 			addChild(stats);
@@ -87,12 +92,8 @@ package
 
 		public function createObjects():void
 		{
-			originPivot = new DisplayObject3D();
-			originPivot.x = -LabXConstant.STAGE_WIDTH/2
-			scene.addChild(originPivot);
-			StageObjectsManager.getDefault.originPivot = originPivot;
 			
-			grid = new Grid();
+//			grid = new Grid();
 						
 			light = new PointLight3D(true);
 			light.x = 200;
