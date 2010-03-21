@@ -62,6 +62,10 @@ package
 	
 		private var equipmentLayer:ViewportLayer;
 		
+		
+	    [Embed (source="../assets/textures/metal.jpg")]
+		public var LIGHTSOURCE_TEXTURE:Class;
+		
 		public function FirstExperimentApplication(viewportWidth:Number=LabXConstant.STAGE_WIDTH, viewportHeight:Number=LabXConstant.STAGE_HEIGHT, scaleToStage:Boolean=true, interactive:Boolean=false, cameraType:String="Target")
 		{
 			super(viewportWidth, viewportHeight, true, false, CameraType.FREE);
@@ -112,11 +116,17 @@ package
 			var BASIC_X:Number = 100;
 			var BASIC_SCALE:Number = 0.8;
 
-			
-			/*Create lightSource*/
-			var imgLoader:Loader = new Loader();
-			imgLoader.contentLoaderInfo.addEventListener(Event.COMPLETE,loadLightSourceTextureComplete);
-			imgLoader.load(new URLRequest(ResourceManager.LIGHTSOURCE_TEXTURE));
+
+            /**********create lightSource***************/
+            var bitmap:Bitmap =new LIGHTSOURCE_TEXTURE() as Bitmap;
+			var bitmapMaterial:BitmapMaterial = new BitmapMaterial(bitmap.bitmapData);
+			bitmapMaterial.interactive = true;
+			lightSource = new LightSource("激光光源",bitmapMaterial);
+			StageObjectsManager.getDefault.rayManager.setLightSource(lightSource);
+			lightSource.moveUp(lightSource.height/2);	
+			lightSource.moveRight(50);
+			originPivot.addChild(lightSource);
+			equipmentLayer.addDisplayObject3D(lightSource, true);
 			
 			
 			/*Create SplitterBeam1*/

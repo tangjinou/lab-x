@@ -1,6 +1,6 @@
 package cn.edu.zju.labx.utils
 {
-	import mx.controls.Image;
+	import flash.display.Bitmap;
 	
 	public class ResourceManager
 	{   
@@ -18,21 +18,15 @@ package cn.edu.zju.labx.utils
 		[Embed (source="../assets/icon/zoom_min.png")]
 		public static const zoom_min_png:Class;
 		
-		public static const CONVEX_LENS_DAE_URL:String = "../assets/models/lens_convex.DAE";
-		
-		public static const CONCAVE_LENS_DAE_URL:String = "../assets/models/lens_concave.DAE";
-		
-		public static const RAY_DAE_URL:String = "../assets/models/ray.DAE";
-		
-		public static const DESK_DAE_URL:String = "../assets/models/desk.DAE";
-
-		public static const DESK_TEXTURE:String = "../assets/textures/metal_desk.jpg";
-		
-		public static const LIGHTSOURCE_TEXTURE:String = "../assets/textures/metal.jpg";
-		
-		public function ResourceManager()
-		{
-		}
+//		public static const CONVEX_LENS_DAE_URL:String = "../assets/models/lens_convex.DAE";
+//		
+//		public static const CONCAVE_LENS_DAE_URL:String = "../assets/models/lens_concave.DAE";
+//		
+//		public static const RAY_DAE_URL:String = "../assets/models/ray.DAE";
+//		
+//		public static const DESK_DAE_URL:String = "../assets/models/desk.DAE";
+//
+//		public static const DESK_TEXTURE:String = "../assets/textures/metal_desk.jpg";
 		
 		
 
