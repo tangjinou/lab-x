@@ -3,10 +3,10 @@ package cn.edu.zju.labx.objects
 	import cn.edu.zju.labx.core.StageObjectsManager;
 	import cn.edu.zju.labx.events.IUserInputListener;
 	import cn.edu.zju.labx.logicObject.LineRayLogic;
-	import cn.edu.zju.labx.utils.ResourceManager;
 	
 	import flash.events.Event;
 	import flash.events.MouseEvent;
+	import flash.utils.ByteArray;
 	
 	import mx.collections.ArrayCollection;
 	
@@ -23,13 +23,18 @@ package cn.edu.zju.labx.objects
 		
 		private var isOn:Boolean = false;
 		protected var light:DAE;
+	    
+	    
+		
+		[Embed (source="../assets/models/lightSource.DAE",mimeType="application/octet-stream")]
+		public var LightSource_DAE:Class;
 		
 		public function LightSource(name:String,material:MaterialObject3D=null)
 		{
 			super(material,name);
 			light=new DAE(true);  
 			light.addEventListener(FileLoadEvent.LOAD_COMPLETE,daeFileOnloaded);  
-			light.load(ResourceManager.RAY_DAE_URL,new MaterialsList( {all:this.material} ) );		
+			light.load(new LightSource_DAE() as ByteArray,new MaterialsList( {all:this.material} ) );		
 			addEventListener(InteractiveScene3DEvent.OBJECT_PRESS, objectPressHandler);
 			createDisplayObject();
 		}
@@ -125,7 +130,6 @@ package cn.edu.zju.labx.objects
 			var effectLayer:ViewportLayer = new ViewportLayer(StageObjectsManager.getDefault.mainView.viewport, null);
 			effectLayer.addDisplayObject3D(this, true);
 			StageObjectsManager.getDefault.layerManager.equipmentLayer.addLayer(effectLayer);
-
 			light.getChildByName("COLLADA_Scene").getChildByName("Cylinder01").addEventListener(InteractiveScene3DEvent.OBJECT_PRESS, objectPressHandler);
             light.getChildByName("COLLADA_Scene").getChildByName("Cylinder02").addEventListener(InteractiveScene3DEvent.OBJECT_PRESS, objectPressHandler);
         } 

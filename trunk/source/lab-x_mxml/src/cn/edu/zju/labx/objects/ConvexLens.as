@@ -11,7 +11,7 @@ package cn.edu.zju.labx.objects
 	{
 		public function ConvexLens(name:String,material:MaterialObject3D=null, focus:Number=LabXConstant.LENS_DEFAULT_FOCAL_LENGTH)
 		{   
-			lens_dae_url = ResourceManager.CONVEX_LENS_DAE_URL;
+//			lens_dae_url = ResourceManager.CONVEX_LENS_DAE_URL;
 			super(name,material, focus);
 		}
 		
