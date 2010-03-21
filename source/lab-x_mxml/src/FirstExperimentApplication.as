@@ -85,19 +85,6 @@ package
 			startRendering();
 		}
 
-        private function loadLightSourceTextureComplete(evt:Event):void
-        {
-        	var bitmap:Bitmap = evt.target.content as Bitmap;
-			var bitmapMaterial:BitmapMaterial = new BitmapMaterial(bitmap.bitmapData);
-			bitmapMaterial.interactive = true;
-			lightSource = new LightSource("激光光源",bitmapMaterial);
-			StageObjectsManager.getDefault.rayManager.setLightSource(lightSource);
-			lightSource.moveUp(lightSource.height/2-10);	
-			lightSource.moveRight(50);
-			originPivot.addChild(lightSource);
-			equipmentLayer.addDisplayObject3D(lightSource, true);
-        	
-        }
 		public function createObjects():void
 		{
 			originPivot = new DisplayObject3D();
@@ -123,7 +110,7 @@ package
 			bitmapMaterial.interactive = true;
 			lightSource = new LightSource("激光光源",bitmapMaterial);
 			StageObjectsManager.getDefault.rayManager.setLightSource(lightSource);
-			lightSource.moveUp(lightSource.height/2);	
+			lightSource.moveUp(lightSource.height/2-10);	
 			lightSource.moveRight(50);
 			originPivot.addChild(lightSource);
 			equipmentLayer.addDisplayObject3D(lightSource, true);
