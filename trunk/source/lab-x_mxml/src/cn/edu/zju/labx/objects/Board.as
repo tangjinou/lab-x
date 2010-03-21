@@ -194,9 +194,13 @@ package cn.edu.zju.labx.objects
    		 */ 
     	public function isOnTheRay(ray:Ray):Boolean{
     	    if(ray!=null && ray.getLineRays()!=null && ray.getLineRays().length>0){
-			   var lineRay:LineRay = ray.getLineRays().getItemAt(0) as LineRay;
-	           if(lineRay != null)return isLineRayOnObject(lineRay.logic);
-	           return false;
+				for each (var lineRay:LineRay in ray.getLineRays())
+    	    	{
+					if(lineRay != null && isLineRayOnObject(lineRay.logic))
+					{
+						return true;
+					}
+    	    	}
 			}
     	   return false;
     	}		

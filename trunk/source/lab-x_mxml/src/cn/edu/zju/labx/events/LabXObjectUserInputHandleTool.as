@@ -37,9 +37,12 @@ package cn.edu.zju.labx.events
 					oldMouseX = mouseEvent.stageX;
 					oldMouseY = mouseEvent.stageY;
 				} else if (mouseEvent.type == MouseEvent.MOUSE_UP) {
+					if((mouseEvent.stageX != oldMouseX || mouseEvent.stageY != oldMouseY) && (oldMouseX != -1))
+					{
+						StageObjectsManager.getDefault.rayManager.reProduceRays();
+					}
 					oldMouseX = -1;
 					oldMouseY = -1;
-					StageObjectsManager.getDefault.rayManager.reProduceRays();
 				} else if ((mouseEvent.type == MouseEvent.MOUSE_MOVE) &&(oldMouseY != -1) && (oldMouseY != -1) && mouseEvent.buttonDown) {
 					var xMove:Number = mouseEvent.stageX - oldMouseX;
 					var yMove:Number = mouseEvent.stageY - oldMouseY;
