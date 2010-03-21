@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:TitleWindow xmlns:mx="http://www.adobe.com/2006/mxml"  
+    title="实验选择"  showCloseButton="true" close="PopUpManager.removePopUp(this);" creationComplete="init()" borderAlpha="0.75">
+	<mx:Script>
+		<![CDATA[
+			import mx.collections.ArrayCollection;
+			import cn.edu.zju.labx.core.StageObjectsManager;
+			import mx.managers.PopUpManager;
+			private var rotate_stage_status:Boolean;
+			
+			[Bindable]
+		    public static var exps:ArrayCollection = new ArrayCollection(
+                [ {label:"实验一", data:1}, 
+                  {label:"实验二", data:2}]);
+			public function init():void{
+			}
+			public var experiment_id:int=1;
+			public function selectHandler(event):void{
+			   experiment_id=ComboBox(event.target).selectedItem.data;
+			}
+			
+		]]>
+	</mx:Script>
+    <mx:VBox id="example" horizontalGap="10" verticalAlign="bottom" x="849" y="10">
+          <mx:ComboBox dataProvider="{exps}" height="4%" width="100%"  color="0x000000" close="selectHandler(event);" fontSize="12"/>
+	</mx:VBox>
+	
+</mx:TitleWindow>
+

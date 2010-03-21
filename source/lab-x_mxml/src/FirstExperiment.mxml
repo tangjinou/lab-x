@@ -2,6 +2,8 @@
 <mx:Application xmlns:mx="http://www.adobe.com/2006/mxml" backgroundColor="black" layout="absolute" preloader="cn.edu.zju.labx.core.LoadingBar" creationComplete="callLater(init)" width="1000" height="600" xmlns:labx="cn.edu.zju.labx.*" xmlns:local="*" borderColor="#CD1A02" fontWeight="bold" fontSize="12">
 	 <mx:Script>
 	 	<![CDATA[
+	 		import mx.events.CloseEvent;
+	 		import mx.controls.Alert;
 	 		import mx.managers.ToolTipManager;
 	 		import mx.collections.ArrayCollection;
 	 		import mx.containers.VBox;
@@ -20,6 +22,12 @@
 
             private var checkBoxList:ArrayCollection =new ArrayCollection();
             private var all_checkBox:CheckBox = new CheckBox();
+            
+            
+            
+            private var chooseExperimentwindow:ChooseExperimentWindow
+            
+            private var firstExperiment:FirstExperimentApplication;
 	 		public function init():void{
 	 		   message_box.text="公告栏";
 	 		   
@@ -33,21 +41,34 @@
 	 		   StageObjectsManager.getDefault.rotate_right_button=rotate_right_button;
 	 		   StageObjectsManager.getDefault.object_up_button=object_up_button;
 	 		   StageObjectsManager.getDefault.object_down_button=object_down_button;
-	 		   
-	 		   
-	 		   Mouse3D.enabled = true;
-	 		   firstExperiment.viewport.interactive = true; 
-	 		   var uic:UIComponent = new UIComponent();
-			   stage.frameRate = 40;
-               stage.addEventListener(MouseEvent.MOUSE_DOWN, firstExperiment.onMouseDown);
-               stage.addEventListener(MouseEvent.MOUSE_MOVE, firstExperiment.onMouseMove);
-               stage.addEventListener(MouseEvent.MOUSE_UP, UserInputHandler.getDefault.mouseUpHandler);
-               stage.addEventListener(KeyboardEvent.KEY_DOWN, UserInputHandler.getDefault.keyDownHandler);
-               stage.addEventListener(KeyboardEvent.KEY_UP, UserInputHandler.getDefault.keyUpHandler);
-			   uic.addChild(firstExperiment);
-               addChild(uic);
-               createCheckBoxes();
+	 		   chooseExperimentwindow = ChooseExperimentWindow(PopUpManager.createPopUp( this, ChooseExperimentWindow , true));
+               chooseExperimentwindow.x =this.width/3;
+               chooseExperimentwindow.y= this.height/3;
+               chooseExperimentwindow.addEventListener(CloseEvent.CLOSE,start);
                
+	 		}
+	 		public function start(event:CloseEvent):void{
+	 			
+	 		   if(chooseExperimentwindow.experiment_id == 1){
+	 		   		firstExperiment = new FirstExperimentApplication();
+	 		   		Mouse3D.enabled = true;
+	 		   		firstExperiment.viewport.interactive = true; 
+	 		   		var uic:UIComponent = new UIComponent();
+			   		stage.frameRate = 40;
+               		stage.addEventListener(MouseEvent.MOUSE_DOWN, firstExperiment.onMouseDown);
+               		stage.addEventListener(MouseEvent.MOUSE_MOVE, firstExperiment.onMouseMove);
+               		stage.addEventListener(MouseEvent.MOUSE_UP, UserInputHandler.getDefault.mouseUpHandler);
+               		stage.addEventListener(KeyboardEvent.KEY_DOWN, UserInputHandler.getDefault.keyDownHandler);
+               		stage.addEventListener(KeyboardEvent.KEY_UP, UserInputHandler.getDefault.keyUpHandler);
+			  		uic.addChild(firstExperiment);
+               		addChild(uic);
+               		
+	 		   }
+	 		   
+	 		   
+	 		   
+	 		   
+	 		   createCheckBoxes();
 	 		}
 	 		
 	 		public function createCheckBoxes():void{
@@ -107,20 +128,18 @@
 	 		};
 	 		
 	 		public function choseComponentWindow():void{
-	 		    var window:ChoseComponentWindow=ChoseComponentWindow(PopUpManager.createPopUp( this, ChoseComponentWindow , true));
-	 		    
+	 		    var window:ChooseComponentWindow=ChooseComponentWindow(PopUpManager.createPopUp( this, ChooseComponentWindow , true));
 	 		    window.vbox_checkBoxes.addChild(all_checkBox);
-	 		    
 	 		    for(var i:int=0;i<checkBoxList.length;i++){
 	 		      var checkBox:CheckBox = checkBoxList.getItemAt(i) as CheckBox;
 	 		      window.vbox_checkBoxes.addChild(checkBox);
 	 		    }
-	 		    
+	 		     window.x=this.width/3;
+	 		     window.y=this.height/3;
 	 		   
 	 		}
 	 	]]> 
 	 </mx:Script>
-	 <local:FirstExperimentApplication id="firstExperiment" x="0" y="0" />
      <mx:VBox horizontalGap="10" verticalAlign="bottom" x="937" y="10">
      <!--button size 52*36 -->
      		<mx:Button  click="open_stage_rotate()"  icon="@Embed('../assets/icon/open_stage_rotate.png')"  toolTip="打开屏幕旋转" />
