@@ -85,7 +85,7 @@ package
         	var bitmap:Bitmap = evt.target.content as Bitmap;
 			var bitmapMaterial:BitmapMaterial = new BitmapMaterial(bitmap.bitmapData);
 			bitmapMaterial.interactive = true;
-			lightSource = new LightSource("lightSource",bitmapMaterial);
+			lightSource = new LightSource("激光光源",bitmapMaterial);
 			StageObjectsManager.getDefault.rayManager.setLightSource(lightSource);
 			lightSource.moveUp(lightSource.height/2);	
 			lightSource.moveRight(50);

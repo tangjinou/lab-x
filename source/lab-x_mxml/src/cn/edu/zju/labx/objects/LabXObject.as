@@ -41,15 +41,7 @@ package cn.edu.zju.labx.objects
 		protected function objectPressHandler(event:InteractiveScene3DEvent):void {
 			if (instanceOf(IUserInputListener)) {
 				UserInputHandler.getDefault.currentSelectedObject = this as IUserInputListener;
-//				this.x = StageObjectsManager.getDefault.getMouse_x()-LabXConstant.STAGE_WIDTH/2;
                 UserInputHandler.getDefault.objectPressHandlerHook(event,this);
-                StageObjectsManager.getDefault.addMessage("已经选中"+this.name);
-//               var material:Letter3DMaterial = new Letter3DMaterial(0x0000FF);
-//               var text:String =  "Lens";
-//               var font3D:Font3D = new Courier();
-//               var text3D:Text3D = new Text3D(text,font3D,material,"myText");
-//     
-//               this.addChild(text3D);
 			}
 		}
 		

@@ -60,6 +60,14 @@ package cn.edu.zju.labx.core{
 		
 		public function set currentSelectedObject(currentObject:IUserInputListener):void {
 			this._currentSelectedObject = currentObject;
+			if(selectedLabxObject != currentObject)
+			{
+				if(currentObject is LabXObject)
+				{
+					var selected:LabXObject = currentObject as LabXObject;
+					StageObjectsManager.getDefault.addMessage("已经选中" + selected.name);
+				}
+			}
 			selectedLabxObject = currentObject;
 		}
 		
@@ -76,6 +84,11 @@ package cn.edu.zju.labx.core{
 			}
 			if ((this._currentSelectedObject == null) && !(e.target is Button) )
 			{
+				if(selectedLabxObject is LabXObject)
+				{
+					var selected:LabXObject = selectedLabxObject as LabXObject;
+					StageObjectsManager.getDefault.addMessage("取消选中" + selected.name);
+				}
 				selectedLabxObject = null;
 				objectUnPressHandlerHook();
 			}
