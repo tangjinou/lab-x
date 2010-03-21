@@ -92,8 +92,7 @@ package
 
 		public function createObjects():void
 		{
-			
-//			grid = new Grid();
+			grid = new Grid();
 						
 			light = new PointLight3D(true);
 			light.x = 200;

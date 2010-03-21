@@ -1,49 +1,50 @@
 package cn.edu.zju.labx.objects
 {
 
-	import cn.edu.zju.labx.core.LabXConstant;
 	import cn.edu.zju.labx.core.StageObjectsManager;
 	
-	import flash.display.BitmapData;
-	import flash.geom.Rectangle;
-	import flash.display.BlendMode;
+	import flash.filters.DropShadowFilter;
 	
-	import org.papervision3d.materials.BitmapMaterial;
-	import org.papervision3d.objects.primitives.Plane;
+	import org.papervision3d.core.geom.Lines3D;
+	import org.papervision3d.core.geom.renderables.Line3D;
+	import org.papervision3d.core.geom.renderables.Vertex3D;
+	import org.papervision3d.materials.special.LineMaterial;
 	
 	public class Grid
 	{
-		private var _plane:Plane;
-		private var _width:Number = 800;
-		private var _height:Number = 481;
+		private var _lines:Lines3D;
+		private var _width:Number = 900;
+		private var _depth:Number = 480;
+		private var _interval:Number = 50;
 		
 		public function Grid()
 		{
-			var interval:Number = 30;
-			var bmp:BitmapData = new BitmapData(_width, _height, false, 0x0);
-			for (var i:Number = 0; i < _width/30; i++)
+			_lines = new Lines3D;
+			var blueMaterial:LineMaterial = new LineMaterial(0x0000FF);
+			var start:Vertex3D;
+			var end:Vertex3D;
+			var line:Line3D;
+			for (var i:Number = 0; i < _depth/_interval; i++)
 			{
-				bmp.fillRect(new Rectangle(i*interval, 0, 2, _height), 0xd82626);
+				start = new Vertex3D(50, 0, i*_interval - _depth/2);
+				end = new Vertex3D(_width, 0, i*_interval - _depth/2);
+				line = new Line3D(_lines, blueMaterial, 1, start, end);
+				_lines.addLine(line);
 			}
-			for (i = 0; i < _height/30; i++)
+			for (i = 0; i < _width/_interval; i++)
 			{
-				bmp.fillRect(new Rectangle(0, i*interval, _width, 2), 0xd82626);
+				start = new Vertex3D(i*_interval + 50, 0, -_depth/2-15);
+				end = new Vertex3D(i*_interval + 50, 0, _depth/2-15);
+				line = new Line3D(_lines, blueMaterial, 1, start, end);
+				_lines.addLine(line);
 			}
-			var mat:BitmapMaterial = new BitmapMaterial(bmp);
-			mat.smooth = true;
-			_plane = new Plane(mat, _width, _height, 8, 8);
-			_plane.moveRight(_width/2+50);
-			_plane.moveBackward(10);
-			_plane.pitch(90);
-			StageObjectsManager.getDefault.originPivot.addChild(_plane);
-			StageObjectsManager.getDefault.layerManager.gridLayer.addDisplayObject3D(_plane);
-			StageObjectsManager.getDefault.layerManager.gridLayer.blendMode = BlendMode.LIGHTEN;
-		}
-		
-		public function get grids():Plane
-		{
-			return _plane;
-		}
+			StageObjectsManager.getDefault.originPivot.addChild(_lines);
+			StageObjectsManager.getDefault.layerManager.gridLayer.addDisplayObject3D(_lines);
+//			StageObjectsManager.getDefault.layerManager.gridLayer.alpha = 0.5;
+			var dropShadowFilter:DropShadowFilter = new DropShadowFilter(0, 45, 0x0000FF, 1, 8, 8, 3, 2, false, false, false);
 
+			StageObjectsManager.getDefault.layerManager.gridLayer.filters = [dropShadowFilter];
+			
+		}
 	}
 }
