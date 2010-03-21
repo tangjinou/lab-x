@@ -41,10 +41,23 @@ package cn.edu.zju.labx.core
 		public static const Y_KEY_MOVE_MIN:Number = 2;
 		public static const Z_KEY_MOVE_MIN:Number = 2;
 		
+		/**
+		 * Precision for number calculation
+		 */
 		public static const NUMBER_PRECISION:Number = 0.000001;
 		
+		/**
+		 * Wave length of red light
+		 */
 		public static const WAVE_LENGTH:Number = 740; //unit:nm
 		
-
+		
+		/**
+		 * Experiment Definition
+		 */
+		public static const EXPERIMENT_FIRST:int = 1;
+		public static const EXPERIMENT_SECOND:int = 2;
+		public static const EXPERIMENT_THIRD:int = 3;
+		public static const EXPERIMENT_FORTH:int = 4;
 	}
 }
