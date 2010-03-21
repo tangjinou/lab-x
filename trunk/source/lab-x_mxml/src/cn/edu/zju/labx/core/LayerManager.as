@@ -18,6 +18,7 @@ package cn.edu.zju.labx.core
         public var deskLayer:ViewportLayer;
 		public var equipmentLayer:ViewportLayer;
 		public var deskLegLayer:ViewportLayer;
+		public var gridLayer:ViewportLayer;
 		
 		private var rayEffect:Array;
        
@@ -44,11 +45,13 @@ package cn.edu.zju.labx.core
 		  if (StageObjectsManager.getDefault.mainView.camera.y < StageObjectsManager.getDefault.originPivot.y)
             {
             	equipmentLayer.layerIndex = 1;
-				deskLayer.layerIndex = 2;
-				deskLegLayer.layerIndex = 3;
+            	gridLayer.layerIndex = 2;
+				deskLayer.layerIndex = 3;
+				deskLegLayer.layerIndex = 4;
             }else
             {
-            	equipmentLayer.layerIndex = 3;
+            	equipmentLayer.layerIndex = 4;
+            	gridLayer.layerIndex = 3;
 				deskLayer.layerIndex = 2;
 				deskLegLayer.layerIndex = 1;
             }
@@ -61,13 +64,16 @@ package cn.edu.zju.labx.core
 			equipmentLayer = new ViewportLayer(viewport, null);
 			deskLayer = new ViewportLayer(viewport, null);
 			deskLegLayer = new ViewportLayer(viewport, null);
+			gridLayer = new ViewportLayer(viewport, null);
 			viewport.containerSprite.addLayer(equipmentLayer);
 			viewport.containerSprite.addLayer(deskLayer);
 			viewport.containerSprite.addLayer(deskLegLayer);
+			viewport.containerSprite.addLayer(gridLayer);
 			viewport.containerSprite.sortMode = ViewportLayerSortMode.INDEX_SORT;
 			equipmentLayer.layerIndex = 1;
-			deskLayer.layerIndex = 2;
-			deskLegLayer.layerIndex = 3;
+			gridLayer.layerIndex = 2;
+			deskLayer.layerIndex = 3;
+			deskLegLayer.layerIndex = 4;
 			equipmentLayer.sortMode = ViewportLayerSortMode.Z_SORT;
 			
 			var bf:BlurFilter = new BlurFilter(3,3,1);
