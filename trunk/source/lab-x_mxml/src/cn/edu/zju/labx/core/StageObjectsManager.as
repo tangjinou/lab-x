@@ -9,6 +9,7 @@ package cn.edu.zju.labx.core
 	import mx.controls.Button;
 	import mx.controls.TextArea;
 	
+	import org.papervision3d.core.proto.CameraObject3D;
 	import org.papervision3d.events.InteractiveScene3DEvent;
 	import org.papervision3d.objects.DisplayObject3D;
 	import org.papervision3d.view.BasicView;

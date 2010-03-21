@@ -100,6 +100,7 @@
      <!--button size 52*36 -->
      		<mx:Button  click="open_stage_rotate()"  icon="@Embed('../assets/icon/open_stage_rotate.png')"  toolTip="打开屏幕旋转" />
 	 		<mx:Button  click="close_stage_rotate()" icon="@Embed('../assets/icon/stop.png')"  toolTip="关闭屏幕旋转"/>
+     		<mx:Button  click="firstExperiment.reset_camera()"  icon="@Embed('../assets/icon/reset_camera.png')"  toolTip="默认视角" />
 	 		<mx:Button  click="choseComponentWindow()"  toolTip="选择器件" icon="@Embed('../assets/icon/objects.png')" />
 	 		<mx:Button  buttonDown="StageObjectsManager.getDefault.mainView.camera.zoom++" autoRepeat="true" icon="@Embed('../assets/icon/zoom_add.png')" toolTip="放大"/>
 	 		<mx:Button  buttonDown="StageObjectsManager.getDefault.mainView.camera.zoom--" autoRepeat="true" icon="@Embed('../assets/icon/zoom_min.png')" toolTip="缩小"/>
