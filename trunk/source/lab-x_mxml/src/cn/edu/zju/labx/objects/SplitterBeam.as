@@ -40,6 +40,7 @@ package cn.edu.zju.labx.objects
 		{
 			if(oldRay != null)
 			{
+				var resultRay:Ray =  new Ray(null, null, 0, 0)
 //				oldRay.EndX = this.x;
 //				var lensLogic:LensLogic = new LensLogic(new Number3D(this.x, this.y, this.z), this._focus);
 				var newLineRays:ArrayCollection = new ArrayCollection();
@@ -48,14 +49,15 @@ package cn.edu.zju.labx.objects
 					var beamLogic:SplitterBeamLogic =new SplitterBeamLogic(getPosition(),getNormal());
                     var lineRayLogic:LineRayLogic = beamLogic.calculateRayAfterSplit(oldLineRay.logic);
                     if(lineRayLogic!=null){
-                    	if(isReverseNormal(lineRayLogic, oldLineRay.logic)) return null;
                     	
                     	newLineRays.addItem(new LineRay(lineRayLogic));
                     	oldLineRay.end_point = new Number3D(lineRayLogic.x, lineRayLogic.y, lineRayLogic.z);
                     }
+                	if(isReverseNormal(lineRayLogic, oldLineRay.logic)) resultRay = null;
 				}
 				oldRay.displayRays();
-				return  new Ray(null, newLineRays, 0, 0);
+				if (resultRay != null)resultRay.setLineRays(newLineRays);
+				return resultRay;
 			}
 			return null;
 		}

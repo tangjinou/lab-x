@@ -132,7 +132,7 @@ package cn.edu.zju.labx.core
 		{
 			material = material || new PhongMaterial(light,0xFFFFFF,0x6ccff8,100);
 			material.interactive = true;
-			var convexLens:ConvexLens = new ConvexLens(name,material, 18);
+			var convexLens:ConvexLens = new ConvexLens(name,material, f);
 			return convexLens;
 		}
 		
