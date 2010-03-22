@@ -52,17 +52,17 @@ package cn.edu.zju.labx.core
 		}
 		
 		
-		private var experimentIndex:int;
+		private var _experimentIndex:int;
 		
-		public function get experimentId():int
+		public function get experimentIndex():int
 		{
-			return experimentIndex;
+			return _experimentIndex;
 		}
 		
 		public function createExperimentEquipments(experimentIndex:Number):ArrayCollection
 		{
 			var equipmentList:ArrayCollection = new ArrayCollection();
-			this.experimentIndex = experimentIndex;
+			this._experimentIndex = experimentIndex;
 			switch (experimentIndex)
 			{
 				case LabXConstant.EXPERIMENT_FIRST:
@@ -226,7 +226,7 @@ package cn.edu.zju.labx.core
 		
 		public function movingObjects():void{
 		     
-		    switch (experimentIndex)
+		    switch (_experimentIndex)
 			{
 				case LabXConstant.EXPERIMENT_FIRST:
 					 moveFirstExperimentEquipments();

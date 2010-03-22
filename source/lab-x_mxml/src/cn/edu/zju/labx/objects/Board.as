@@ -200,7 +200,7 @@ package cn.edu.zju.labx.objects
 			   var lineRay1:LineRay = oldRay1.getLineRays().getItemAt(0) as LineRay;
 			   var lineRay2:LineRay = oldRay2.getLineRays().getItemAt(0) as LineRay;
 			   if(lineRay1!=null&&lineRay2!=null){
-			   		switch (ExperimentManager.getDefault.experimentId)
+			   		switch (ExperimentManager.getDefault.experimentIndex)
 					{
 						case LabXConstant.EXPERIMENT_FIRST:	
 							handleDoubleSlitInterference(lineRay1, lineRay2);
