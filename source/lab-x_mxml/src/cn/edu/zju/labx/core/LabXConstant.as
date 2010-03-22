@@ -20,6 +20,15 @@ package cn.edu.zju.labx.core
 		public static const DESK_WIDTH:Number = 930;
 		public static const DESK_DEPTH:Number = 440;
 		
+		
+		public static const DESK_X_MIN:Number = 30;
+		public static const DESK_X_MAX:Number = 930;
+		public static const DESK_Z_MIN:Number = -LabXConstant.DESK_DEPTH/2;
+		public static const DESK_Z_MAX:Number = LabXConstant.DESK_DEPTH/2;
+		
+		
+		
+		
 		/**
 		 * Constant for LabXObject and its sub classes
 		 */
@@ -34,13 +43,13 @@ package cn.edu.zju.labx.core
 		/**
 		 * Constants for User Input Event
 		 */
-		public static const X_MOVE_MIN:Number = 5;
-		public static const Y_MOVE_MIN:Number = 5;
-		public static const Z_MOVE_MIN:Number = 5;
+		public static const X_MOVE_MIN:Number = 3;
+		public static const Y_MOVE_MIN:Number = 3;
+		public static const Z_MOVE_MIN:Number = 3;
 		
-		public static const X_KEY_MOVE_MIN:Number = 2;
-		public static const Y_KEY_MOVE_MIN:Number = 2;
-		public static const Z_KEY_MOVE_MIN:Number = 2;
+		public static const X_KEY_MOVE_MIN:Number = 1;
+		public static const Y_KEY_MOVE_MIN:Number = 1;
+		public static const Z_KEY_MOVE_MIN:Number = 1;
 		
 		public static const X_KEY_ROTATE_MIN:Number = 1;
 		public static const Y_KEY_ROTATE_MIN:Number = 1;

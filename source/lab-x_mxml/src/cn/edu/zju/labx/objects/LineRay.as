@@ -55,6 +55,35 @@ package cn.edu.zju.labx.objects
            return endPoint;		
 		}
 		
+//		private function optimizeEndPoint(logic:LineRayLogic):Number3D
+//		{
+//			var x:Number = logic.x;
+//			var y:Number = logic.y;
+//			var z:Number = logic.z;
+//			
+//			var dx:Number = logic.dx;
+//			var dy:Number = logic.dy;
+//			var dz:Number = logic.dz;
+//			
+//			var tx:Number = (dx==0) ? Number.MAX_VALUE : ((dx>0) ? (LabXConstant.DESK_X_MAX-x)/dx : (LabXConstant.DESK_X_MIN-x)/dx);
+//			var ty:Number = (dy==0) ? Number.MAX_VALUE : ((dy>0) ? (500-y)/dy : (0-y)/dy);
+//			var tz:Number = (dz==0) ? Number.MAX_VALUE : ((dz>0) ? (LabXConstant.DESK_Z_MAX-z)/dz : (LabXConstant.DESK_Z_MIN-z)/dz);
+//			
+//			if(tx < 0 || ty < 0 || tz < 0)
+//			{
+//				trace("calculate end point error");
+//			}
+//			
+//			var t:Number = ((tx <= ty) && (tx <= tz)) ? tx : ((ty <= tz) ? ty : tz);
+//			t += 50;
+//			
+//			x = t * dx + x;
+//			y = t * dy + y;
+//			z = t * dz + z;
+//			
+//			return new Number3D(x, y, z);
+//		}
+		
 		public function set end_point(endPoint:Number3D):void{
 		   	this.endPoint = endPoint;
 		    this._length  = MathUtils.distanceToNumber3D(start_point,endPoint);
