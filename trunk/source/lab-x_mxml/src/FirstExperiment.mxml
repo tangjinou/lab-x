@@ -62,7 +62,7 @@
                		stage.addEventListener(KeyboardEvent.KEY_UP, UserInputHandler.getDefault.keyUpHandler);
 			  		uic.addChild(firstExperiment);
                		addChild(uic);
-               		
+               		firstExperiment.experimentSelected(chooseExperimentwindow.experiment_id);
 	 		   }
 	 		   
 	 		   createCheckBoxes();
