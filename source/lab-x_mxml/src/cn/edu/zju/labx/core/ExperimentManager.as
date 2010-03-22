@@ -53,6 +53,12 @@ package cn.edu.zju.labx.core
 		
 		
 		private var experimentIndex:int;
+		
+		public function get experimentId():int
+		{
+			return experimentIndex;
+		}
+		
 		public function createExperimentEquipments(experimentIndex:Number):ArrayCollection
 		{
 			var equipmentList:ArrayCollection = new ArrayCollection();

@@ -2,6 +2,7 @@ package cn.edu.zju.labx.objects
 {   
     import cn.edu.zju.labx.core.LabXConstant;
     import cn.edu.zju.labx.core.StageObjectsManager;
+    import cn.edu.zju.labx.core.ExperimentManager;
     import cn.edu.zju.labx.events.IRayHandle;
     import cn.edu.zju.labx.events.IUserInputListener;
     import cn.edu.zju.labx.events.LabXObjectUserInputHandleTool;
@@ -123,6 +124,25 @@ package cn.edu.zju.labx.objects
 			
 		}
 		
+		public function displayMachZehnderInterferenceImage(theta:Number):void
+		{   
+			var distance:Number = InterferenceLogic.doubleSlitInterferenceLogic(theta, LabXConstant.WAVE_LENGTH);
+//			trace(distance);
+			
+			distance /= 300;
+			var numOfColumns:Number = depth/distance/2;
+			bmp = new BitmapData(depth, height, false, 0x0);
+			for (var i:Number = 0; i < numOfColumns; i++)
+			{
+				bmp.fillRect(new Rectangle(i*distance*2, 0, distance, height), 0x0000FF);
+			}
+			new_material = new BitmapMaterial(bmp);
+			new_material.smooth = true;
+			new_material.interactive = true;
+			cube.replaceMaterialByName(new_material, "left");
+			
+		}
+		
 		//This is will be  automaticlly called when Ray chenged 
 		public function unDisplayInterferenceImage():void{
 			if(new_material!=null && bmp!=null){
@@ -179,19 +199,41 @@ package cn.edu.zju.labx.objects
 			if(oldRay1!=null&&oldRay2!=null){
 			   var lineRay1:LineRay = oldRay1.getLineRays().getItemAt(0) as LineRay;
 			   var lineRay2:LineRay = oldRay2.getLineRays().getItemAt(0) as LineRay;
-			   if(lineRay1!=null&&lineRay2!=null){		
-			   	var angle1:Number =  MathUtils.calculateAngleOfTwoVector(Number3D.sub(lineRay1.end_point,lineRay1.start_point),this.getNormal());
-			   	var angle2:Number =  MathUtils.calculateAngleOfTwoVector(Number3D.sub(lineRay2.end_point,lineRay2.start_point),this.getNormal());
-               	   if(Math.abs(angle1-angle2)<(Math.PI/180)){
-               	    displayDoubleSlitInterferenceImage(MathUtils.calculateAngleOfTwoVector(Number3D.sub(lineRay1.end_point,lineRay1.start_point),Number3D.sub(lineRay2.end_point,lineRay2.start_point)));
-                   }else{
-                      StageObjectsManager.getDefault.addMessage("两条光线夹角之差大于一度");
-                   }
+			   if(lineRay1!=null&&lineRay2!=null){
+			   		switch (ExperimentManager.getDefault.experimentId)
+					{
+						case LabXConstant.EXPERIMENT_FIRST:	
+							handleDoubleSlitInterference(lineRay1, lineRay2);
+						case LabXConstant.EXPERIMENT_SECOND:
+							handleMachZehnderInterference(lineRay1, lineRay2);
+					}
                }else{
                		  StageObjectsManager.getDefault.addMessage("光线没有经过挡板");
                }
             
             } 
+   		}
+   		
+   		private function handleDoubleSlitInterference(lineRay1:LineRay, lineRay2:LineRay):void
+   		{
+   			var angle1:Number =  MathUtils.calculateAngleOfTwoVector(Number3D.sub(lineRay1.end_point,lineRay1.start_point),this.getNormal());
+			var angle2:Number =  MathUtils.calculateAngleOfTwoVector(Number3D.sub(lineRay2.end_point,lineRay2.start_point),this.getNormal());
+            if(Math.abs(angle1-angle2)<(Math.PI/180)){
+            	displayDoubleSlitInterferenceImage(MathUtils.calculateAngleOfTwoVector(Number3D.sub(lineRay1.end_point,lineRay1.start_point),Number3D.sub(lineRay2.end_point,lineRay2.start_point)));
+            }else{
+            	StageObjectsManager.getDefault.addMessage("两条光线夹角之差大于一度");
+            }
+   		}
+   		
+   		private function handleMachZehnderInterference(lineRay1:LineRay, lineRay2:LineRay):void
+   		{
+   			var angle1:Number =  MathUtils.calculateAngleOfTwoVector(Number3D.sub(lineRay1.end_point,lineRay1.start_point),this.getNormal());
+			var angle2:Number =  MathUtils.calculateAngleOfTwoVector(Number3D.sub(lineRay2.end_point,lineRay2.start_point),this.getNormal());
+            if(Math.abs(angle1-angle2)<(Math.PI/180)){
+            	displayMachZehnderInterferenceImage(MathUtils.calculateAngleOfTwoVector(Number3D.sub(lineRay1.end_point,lineRay1.start_point),Number3D.sub(lineRay2.end_point,lineRay2.start_point)));
+            }else{
+            	StageObjectsManager.getDefault.addMessage("两条光线夹角之差大于一度");
+            }
    		}
    		
     	/**
