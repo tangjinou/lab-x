@@ -240,9 +240,9 @@ package cn.edu.zju.labx.core
 			}
 		}
 		
-		private function isObjectInStage(object:LabXObject):Boolean
+		public function isObjectInStage(object:LabXObject):Boolean
 		{
-			return (object.x > 0) && (object.x < LabXConstant.DESK_WIDTH) && (object.z > -LabXConstant.DESK_DEPTH/2) && (object.z < LabXConstant.DESK_DEPTH/2);
+			return (object.x > 30) && (object.x < LabXConstant.DESK_WIDTH) && (object.z > -LabXConstant.DESK_DEPTH/2) && (object.z < LabXConstant.DESK_DEPTH/2);
 		}
 		 
 		/**

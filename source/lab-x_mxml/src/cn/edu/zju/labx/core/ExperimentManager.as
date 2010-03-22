@@ -75,15 +75,35 @@ package cn.edu.zju.labx.core
 		{
 			var equipmentList:ArrayCollection = new ArrayCollection();
 			
-            equipmentList.addItem(createLightSource("激光光源"));
-            equipmentList.addItem(createSplitterBeam("分光镜"));
-			equipmentList.addItem(createMirror("反射镜1"));
-			equipmentList.addItem(createMirror("反射镜2"));
-			equipmentList.addItem(createMirror("反射镜3"));
-			equipmentList.addItem(createLens("扩束镜1", 18));
-			equipmentList.addItem(createLens("扩束镜2", 18));
-			equipmentList.addItem(createLens("准直物镜1", 108));
-			equipmentList.addItem(createLens("准直物镜2", 108));
+			var lightSource:LightSource = createLightSource("激光光源");
+            lightSource.moveDown(10);
+            equipmentList.addItem(lightSource);
+            
+            var splitterBeam:SplitterBeam = createSplitterBeam("分光镜");
+            equipmentList.addItem(splitterBeam);
+            
+            var mirror1:Mirror = createMirror("反射镜1")
+			equipmentList.addItem(mirror1);
+			
+            var mirror2:Mirror = createMirror("反射镜2")
+			equipmentList.addItem(mirror2);
+			
+            var mirror3:Mirror = createMirror("反射镜3")
+			equipmentList.addItem(mirror3);
+			
+			var lens1:Lens = createLens("扩束镜1", 18);
+			lens1.scale = 0.4;
+			equipmentList.addItem(lens1);
+			var lens2:Lens = createLens("扩束镜2", 18);
+			lens2.scale = 0.4;
+			equipmentList.addItem(lens2);
+			var lens3:Lens = createLens("准直物镜1", 108);
+			lens3.scale = 0.8;
+			equipmentList.addItem(lens3);
+			var lens4:Lens = createLens("准直物镜2", 108);
+			lens4.scale = 0.8;
+			equipmentList.addItem(lens4);
+			
 			equipmentList.addItem(createBoard("接收屏"));
 			
 			return equipmentList;

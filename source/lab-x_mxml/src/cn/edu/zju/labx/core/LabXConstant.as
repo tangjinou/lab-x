@@ -17,8 +17,8 @@ package cn.edu.zju.labx.core
 		/**
 		 *  Constants for Desk
 		 */
-		public static const DESK_WIDTH:Number = STAGE_WIDTH * 0.8;
-		public static const DESK_DEPTH:Number = STAGE_DEPTH * 0.8;
+		public static const DESK_WIDTH:Number = 930;
+		public static const DESK_DEPTH:Number = 440;
 		
 		/**
 		 * Constant for LabXObject and its sub classes
