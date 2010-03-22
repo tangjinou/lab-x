@@ -15,7 +15,7 @@
 			public function init():void{
 			}
 			public var experiment_id:int=1;
-			public function selectHandler(event):void{
+			public function selectHandler(event:Event):void{
 			   experiment_id=ComboBox(event.target).selectedItem.data;
 			}
 			
