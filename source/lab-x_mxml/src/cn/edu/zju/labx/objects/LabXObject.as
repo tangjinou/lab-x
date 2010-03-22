@@ -156,5 +156,50 @@ package cn.edu.zju.labx.objects
 		    return this;
 		}
 		
+		/**
+		 * Move method to handle user move action
+		 */
+		public function objectMove(xMove:Number, yMove:Number, zMove:Number):void
+		{
+			if (StageObjectsManager.getDefault.mainView.camera.z > 0)
+			{
+				xMove = -xMove; //when camera is on the other side, x should reverse
+				zMove = -zMove;
+			}
+			
+			if (xMove != 0) {
+				this.x += xMove;
+				StageObjectsManager.getDefault.addMessage(this.name + " X move:"+xMove);
+			}
+			if (yMove != 0) {
+				this.y += yMove;
+				StageObjectsManager.getDefault.addMessage(this.name + " Y move:"+yMove);
+			}
+			if (zMove != 0) {
+				this.z += zMove;
+				StageObjectsManager.getDefault.addMessage(this.name + " Z move:"+zMove);
+			}
+		}
+		
+		/**
+		 * Rotate method to handle user rotate action
+		 */
+		public function objectRotate(xRotate:Number, yRotate:Number, zRotate:Number = 0):void
+	    {
+	    	if (xRotate != 0) {
+		    	this.rotationX += xRotate;
+				StageObjectsManager.getDefault.addMessage(this.name + " X rotate:"+xRotate);
+			}
+			if (yRotate != 0) {
+		    	this.rotationY += yRotate;
+				StageObjectsManager.getDefault.addMessage(this.name + " Y rotate:"+yRotate);
+			}
+			if (zRotate != 0) {
+		    	this.rotationZ += zRotate;
+				StageObjectsManager.getDefault.addMessage(this.name + " Z rotate:"+zRotate);
+			}
+	    }
+
+		
 	}
 }

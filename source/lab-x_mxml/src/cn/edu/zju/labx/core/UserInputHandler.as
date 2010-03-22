@@ -127,33 +127,6 @@ package cn.edu.zju.labx.core{
 		 */
 		public function keyDownHandler(e:KeyboardEvent):void
 		{	
-			switch(e.keyCode)
-			{
-				case "W".charCodeAt():
-				case Keyboard.UP:
-					keyForward = true;
-					keyBackward = false;
-					break;
- 
-				case "S".charCodeAt():
-				case Keyboard.DOWN:
-					keyBackward = true;
-					keyForward = false;
-					break;
- 
-				case "A".charCodeAt():
-				case Keyboard.LEFT:
-					keyLeft = true;
-					keyRight = false;
-					break;
- 
-				case "D".charCodeAt():
-				case Keyboard.RIGHT:
-					keyRight = true;
-					keyLeft = false;
-					break;
-					
-			}
 			if (selectedLabxObject != null)
 			{
 				selectedLabxObject.hanleUserInputEvent(e);
@@ -162,30 +135,6 @@ package cn.edu.zju.labx.core{
  
 		public function keyUpHandler(e:KeyboardEvent):void
 		{
-			switch(e.keyCode)
-			{
-				case "W".charCodeAt():
-				case Keyboard.UP:
-					keyForward = false;
-					break;
- 
-				case "S".charCodeAt():
-				case Keyboard.DOWN:
-					keyBackward = false;
-					break;
- 
-				case "A".charCodeAt():
-				case Keyboard.LEFT:
-					keyLeft = false;
-					break;
- 
-				case "D".charCodeAt():
-				case Keyboard.RIGHT:
- 
-					keyRight = false;
-					break;
-					
-			}
 			if (selectedLabxObject != null)
 			{
 				selectedLabxObject.hanleUserInputEvent(e);
