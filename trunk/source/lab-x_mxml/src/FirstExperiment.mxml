@@ -39,8 +39,6 @@
 	 		   StageObjectsManager.getDefault.messageBox=message_box;
 	 		   StageObjectsManager.getDefault.rotate_left_button=rotate_left_button;
 	 		   StageObjectsManager.getDefault.rotate_right_button=rotate_right_button;
-	 		   StageObjectsManager.getDefault.rotate_up_button=rotate_up_button;
-	 		   StageObjectsManager.getDefault.rotate_down_button=rotate_down_button;
 	 		   StageObjectsManager.getDefault.object_up_button=object_up_button;
 	 		   StageObjectsManager.getDefault.object_down_button=object_down_button;
 	 		   chooseExperimentwindow = ChooseExperimentWindow(PopUpManager.createPopUp( this, ChooseExperimentWindow , true));
@@ -157,8 +155,6 @@
             <mx:Label   text="物体移动" fontSize="12"/>
 			<mx:Button  buttonDown="StageObjectsManager.getDefault.rotate_left()"   autoRepeat="false" id="rotate_left_button" enabled="false" icon="@Embed('../assets/icon/rotate_left.png')"  disabledIcon="@Embed('../assets/icon/rotate_left_disable.png')"  toolTip="物体向左旋转"/>
      		<mx:Button  buttonDown="StageObjectsManager.getDefault.rotate_right()"  autoRepeat="false" id="rotate_right_button" enabled="false" icon="@Embed('../assets/icon/rotate_right.png')" disabledIcon="@Embed('../assets/icon/rotate_right_disable.png')" toolTip="物体向右旋转"/>
-     		<mx:Button  buttonDown="StageObjectsManager.getDefault.rotate_up()"  autoRepeat="false" id="rotate_up_button" enabled="false" icon="@Embed('../assets/icon/up.png')" disabledIcon="@Embed('../assets/icon/up_disable.png')" toolTip="物体向上移动"/>
-     		<mx:Button  buttonDown="StageObjectsManager.getDefault.rotate_down()"  autoRepeat="false" id="rotate_down_button" enabled="false" icon="@Embed('../assets/icon/down.png')" disabledIcon="@Embed('../assets/icon/down_disable.png')" toolTip="物体向下移动"/>
      		<mx:Button  buttonDown="StageObjectsManager.getDefault.object_up()"  autoRepeat="false" id="object_up_button" enabled="false" icon="@Embed('../assets/icon/up.png')" disabledIcon="@Embed('../assets/icon/up_disable.png')" toolTip="物体向上移动"/>
      		<mx:Button  buttonDown="StageObjectsManager.getDefault.object_down()"  autoRepeat="false" id="object_down_button" enabled="false" icon="@Embed('../assets/icon/down.png')" disabledIcon="@Embed('../assets/icon/down_disable.png')" toolTip="物体向下移动"/>
      </mx:HBox>
