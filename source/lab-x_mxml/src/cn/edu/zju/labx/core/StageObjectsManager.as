@@ -290,14 +290,6 @@ package cn.edu.zju.labx.core
 		 **/
 		 public var rotate_left_button:Button;
 		 /***
-		 *  This is rotate_up button in the view
-		 */ 
-		 public var rotate_up_button:Button;
-		 /***
-		 *  This is rotate_down button in the view
-		 */ 
-		 public var rotate_down_button:Button;
-		 /***
 		 *  This is object_up button in the view
 		 */ 
 		 public var object_up_button:Button;
@@ -320,8 +312,6 @@ package cn.edu.zju.labx.core
 		 	// enable the button list
 		 	rotate_right_button.enabled=true;
 		 	rotate_left_button.enabled=true;
-		 	rotate_up_button.enabled=true;
-		 	rotate_down_button.enabled=true;
 		 	object_up_button.enabled=true;
 		 	object_down_button.enabled=true;
 		 	labXObjectSelected = labXObject;
@@ -339,8 +329,6 @@ package cn.edu.zju.labx.core
 	 	   		//disable the button list
 		        rotate_right_button.enabled=false;
 		        rotate_left_button.enabled=false;
-		        rotate_up_button.enabled=false;
-		 	    rotate_down_button.enabled=false;
 		        object_up_button.enabled=false;
 		 	    object_down_button.enabled=false;
 		        labXObjectSelected =null
@@ -369,34 +357,34 @@ package cn.edu.zju.labx.core
              this.addMessage(labXObjectSelected.name+"绕Y转动"+labXObjectSelected.localRotationY.toFixed(2));
 		   }
 		}
-		public function rotate_up():void{
-		   if(labXObjectSelected!=null){
-		     labXObjectSelected.localRotationZ++;
-		     objectStateChanged(labXObjectSelected);
-		     this.addMessage(labXObjectSelected.name+"绕Z转动"+labXObjectSelected.localRotationZ.toFixed(2));
-		   }
-		}
 		
-		public function rotate_down():void{
-           if(labXObjectSelected!=null){
-		     labXObjectSelected.localRotationZ--;
-		     objectStateChanged(labXObjectSelected);
-             this.addMessage(labXObjectSelected.name+"绕Z转动"+labXObjectSelected.localRotationZ.toFixed(2));
-		   }
-		}
 		public function object_up():void{
 		    if(labXObjectSelected!=null){
-		     labXObjectSelected.y++;
-		     objectStateChanged(labXObjectSelected);
-             this.addMessage(labXObjectSelected.name+"往上移动"+labXObjectSelected.y.toFixed(2));
+		    	if (labXObjectSelected is LightSource)
+		    	{
+		    		labXObjectSelected.rotationZ++;
+		    		addMessage(labXObjectSelected.name+"往上转动"+labXObjectSelected.localRotationZ.toFixed(2))
+		    	} else 
+		    	{
+				    labXObjectSelected.y++;
+		            this.addMessage(labXObjectSelected.name+"往上移动"+labXObjectSelected.y.toFixed(2));
+		    	}
+		    	
+			    objectStateChanged(labXObjectSelected);
 		   }
 		}
 		public function object_down():void{
 			
 		    if(labXObjectSelected!=null){
-		      labXObjectSelected.y--;
-		      objectStateChanged(labXObjectSelected);
-              this.addMessage(labXObjectSelected.name+"往下移动"+labXObjectSelected.y.toFixed(2));
+		    	if (labXObjectSelected is LightSource)
+		    	{
+		    		labXObjectSelected.rotationZ--;
+		    		addMessage(labXObjectSelected.name+"往下转动"+labXObjectSelected.localRotationZ.toFixed(2))
+		    	} else {
+					labXObjectSelected.y--;
+					this.addMessage(labXObjectSelected.name+"往下移动"+labXObjectSelected.z.toFixed(2));
+		    	}
+				objectStateChanged(labXObjectSelected);
 		   }
 		}
         
