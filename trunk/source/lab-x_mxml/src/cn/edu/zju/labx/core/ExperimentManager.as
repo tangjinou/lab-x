@@ -68,6 +68,9 @@ package cn.edu.zju.labx.core
 				case LabXConstant.EXPERIMENT_FIRST:
 					equipmentList = createFirstExperimentEquipments();
 					break;
+				case LabXConstant.EXPERIMENT_SECOND:
+					equipmentList = createSecondExperimentEquipments();
+					break;
 			}
 			
 			for (var i:int=0; i<equipmentList.length; i++)
@@ -117,6 +120,45 @@ package cn.edu.zju.labx.core
 			lens3.scale = 0.8;
 			equipmentList.addItem(lens3);
 			var lens4:Lens = createLens("准直物镜2", 108);
+			lens4.scale = 0.8;
+			equipmentList.addItem(lens4);
+			
+			equipmentList.addItem(createBoard("接收屏"));
+			
+			return equipmentList;
+		}
+		
+		/**
+		 * Create equipment for second experiment
+		 */
+		private function createSecondExperimentEquipments():ArrayCollection
+		{
+			var equipmentList:ArrayCollection = new ArrayCollection();
+			
+			var lightSource:LightSource = createLightSource("激光光源");
+            lightSource.moveDown(10);
+            equipmentList.addItem(lightSource);
+            
+            var splitterBeam:SplitterBeam = createSplitterBeam("分光镜");
+            equipmentList.addItem(splitterBeam);
+            
+             var splitterBeam2:SplitterBeam = createSplitterBeam("分光镜2");
+            equipmentList.addItem(splitterBeam2);
+            
+            var mirror1:Mirror = createMirror("反射镜1")
+			equipmentList.addItem(mirror1);
+			
+            var mirror2:Mirror = createMirror("反射镜2")
+			equipmentList.addItem(mirror2);
+			
+			var lens1:Lens = createLens("扩束镜1", 18);
+			lens1.scale = 0.4;
+			equipmentList.addItem(lens1);
+			var lens2:Lens = createLens("准直物镜1", 108);
+			lens2.scale = 0.8;
+			equipmentList.addItem(lens2);
+			
+			var lens4:Lens = createLens("透镜", 108);
 			lens4.scale = 0.8;
 			equipmentList.addItem(lens4);
 			
