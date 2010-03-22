@@ -64,5 +64,10 @@ package cn.edu.zju.labx.core
 		public static const EXPERIMENT_SECOND:int = 2;
 		public static const EXPERIMENT_THIRD:int = 3;
 		public static const EXPERIMENT_FORTH:int = 4;
+		
+		/**
+		 *  Reset Moving objects Delay time
+		 */ 
+		public static const MOVE_DELAY:int =3;
 	}
 }

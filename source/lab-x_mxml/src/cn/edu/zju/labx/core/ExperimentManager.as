@@ -62,9 +62,6 @@ package cn.edu.zju.labx.core
 				case LabXConstant.EXPERIMENT_FIRST:
 					equipmentList = createFirstExperimentEquipments();
 					break;
-				case LabXConstant.EXPERIMENT_SECOND:
-					equipmentList = createSecondExperimentEquipments();
-					break;
 			}
 			
 			for (var i:int=0; i<equipmentList.length; i++)
@@ -114,45 +111,6 @@ package cn.edu.zju.labx.core
 			lens3.scale = 0.8;
 			equipmentList.addItem(lens3);
 			var lens4:Lens = createLens("准直物镜2", 108);
-			lens4.scale = 0.8;
-			equipmentList.addItem(lens4);
-			
-			equipmentList.addItem(createBoard("接收屏"));
-			
-			return equipmentList;
-		}
-		
-		/**
-		 * Create equipment for second experiment
-		 */
-		private function createSecondExperimentEquipments():ArrayCollection
-		{
-			var equipmentList:ArrayCollection = new ArrayCollection();
-			
-			var lightSource:LightSource = createLightSource("激光光源");
-            lightSource.moveDown(10);
-            equipmentList.addItem(lightSource);
-            
-            var splitterBeam:SplitterBeam = createSplitterBeam("分光镜");
-            equipmentList.addItem(splitterBeam);
-            
-             var splitterBeam2:SplitterBeam = createSplitterBeam("分光镜2");
-            equipmentList.addItem(splitterBeam2);
-            
-            var mirror1:Mirror = createMirror("反射镜1")
-			equipmentList.addItem(mirror1);
-			
-            var mirror2:Mirror = createMirror("反射镜2")
-			equipmentList.addItem(mirror2);
-			
-			var lens1:Lens = createLens("扩束镜1", 18);
-			lens1.scale = 0.4;
-			equipmentList.addItem(lens1);
-			var lens2:Lens = createLens("准直物镜1", 108);
-			lens2.scale = 0.8;
-			equipmentList.addItem(lens2);
-			
-			var lens4:Lens = createLens("透镜", 108);
 			lens4.scale = 0.8;
 			equipmentList.addItem(lens4);
 			
@@ -227,8 +185,8 @@ package cn.edu.zju.labx.core
 					 break;
 			}
 		
-		}
-		
+		}	
+
 		public function moveFirstExperimentEquipments():void{
 		
 		      for(var i:int=0;i<equipmentList.length;i++){
@@ -236,37 +194,46 @@ package cn.edu.zju.labx.core
 		          var labXObject:LabXObject = equipmentList.getItemAt(i) as LabXObject;
 		          
 		          if(labXObject.name =="激光光源"){
-		             TweenLite.to(labXObject,3,{x:50,z:0});
+		             TweenLite.to(labXObject,LabXConstant.MOVE_DELAY,{x:50,z:0});
 		          }
 		          else if(labXObject.name =="分光镜"){
-		             TweenLite.to(labXObject,3,{x:200,z:0,rotationY:45});
+		             TweenLite.to(labXObject,LabXConstant.MOVE_DELAY,{x:200,z:0,rotationY:45});
 		          }
 		          else if(labXObject.name =="反射镜1"){
-                     TweenLite.to(labXObject,3,{x:200,z:200,rotationY:54.217});		            
+                     TweenLite.to(labXObject,LabXConstant.MOVE_DELAY,{x:200,z:200,rotationY:54.217});		            
 		          }
 		          else if(labXObject.name =="反射镜2"){ 
-		          	 TweenLite.to(labXObject,3,{x:300,z:0,rotationY:-45});	
+		          	 TweenLite.to(labXObject,LabXConstant.MOVE_DELAY,{x:300,z:0,rotationY:-45});	
 		          }
 		          else if(labXObject.name =="反射镜3"){ 
-		          	 TweenLite.to(labXObject,3,{x:300,z:-166.7,rotationY:54.2});	
+		          	 TweenLite.to(labXObject,LabXConstant.MOVE_DELAY,{x:300,z:-166.7,rotationY:-54.2});	
 		          }
 		          else if(labXObject.name =="扩束镜1"){ 
-		          	 TweenLite.to(labXObject,3,{x:380,z:140,rotationY:18.5});	
+		          	 TweenLite.to(labXObject,LabXConstant.MOVE_DELAY,{x:380,z:140,rotationY:18.5});	
 		          }
 		          else if(labXObject.name =="扩束镜2"){ 
-		          	 TweenLite.to(labXObject,3,{x:380,z:-140,rotationY:-18.5});	
+		          	 TweenLite.to(labXObject,LabXConstant.MOVE_DELAY,{x:380,z:-140,rotationY:-18.5});	
 		          }
 		          else if(labXObject.name =="准直物镜1"){ 
-		          	 TweenLite.to(labXObject,3,{x:500,z:100,rotationY:18.5});	
+		          	 TweenLite.to(labXObject,LabXConstant.MOVE_DELAY,{x:500,z:100,rotationY:18.5});	
 		          }
 		          else if(labXObject.name =="准直物镜2"){ 
-		          	 TweenLite.to(labXObject,3,{x:500,z:-100,rotationY:-18.5});	
+		          	 TweenLite.to(labXObject,LabXConstant.MOVE_DELAY,{x:500,z:-100,rotationY:-18.5});	
 		          }
 		          else if(labXObject.name =="接收屏"){ 
-		          	 TweenLite.to(labXObject,3,{x:LabXConstant.DESK_WIDTH,z:0});	
+		          	 TweenLite.to(labXObject,LabXConstant.MOVE_DELAY,{x:LabXConstant.DESK_WIDTH*0.9,z:0});	
 		          }
-		          
+                     
 		      }
+		      var timer:Timer= new Timer((LabXConstant.MOVE_DELAY+1)*1000);
+		      timer.addEventListener(TimerEvent.TIMER, onTimer);
+    				function onTimer(event:TimerEvent):void{
+         			   for(var i:int=0;i<equipmentList.length;i++){
+         			       StageObjectsManager.getDefault.objectStateChanged(equipmentList.getItemAt(i) as LabXObject);
+         			   }
+         			   timer.stop();
+                    }
+              timer.start();
 		}
 	}
 }
