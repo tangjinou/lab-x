@@ -2,12 +2,12 @@ package cn.edu.zju.labx.events
 {
 	import cn.edu.zju.labx.core.LabXConstant;
 	import cn.edu.zju.labx.core.StageObjectsManager;
-	import cn.edu.zju.labx.core.UserInputHandler;
 	import cn.edu.zju.labx.objects.LabXObject;
 	
 	import flash.events.Event;
 	import flash.events.KeyboardEvent;
 	import flash.events.MouseEvent;
+	import flash.ui.Keyboard;
 	
 	public class LabXObjectUserInputHandleTool
 	{
@@ -48,53 +48,57 @@ package cn.edu.zju.labx.events
 					oldMouseY = -1;
 				} else if ((mouseEvent.type == MouseEvent.MOUSE_MOVE) &&(oldMouseY != -1) && (oldMouseY != -1) && mouseEvent.buttonDown) {
 					var xMove:Number = mouseEvent.stageX - oldMouseX;
-					var yMove:Number = mouseEvent.stageY - oldMouseY;
-					if ((Math.abs(xMove) < LabXConstant.X_MOVE_MIN) && (Math.abs(yMove) < LabXConstant.Z_MOVE_MIN))return;
-					internalMove(xMove, yMove);
+					var zMove:Number = mouseEvent.stageY - oldMouseY;
+					if ((Math.abs(xMove) < LabXConstant.X_MOVE_MIN) && (Math.abs(zMove) < LabXConstant.Z_MOVE_MIN))return;
+					labXObject.objectMove(xMove, 0, -zMove);
+					needReproduceRay = true;
 					oldMouseX = mouseEvent.stageX;
 					oldMouseY = mouseEvent.stageY;
 				}
 			} else if (event is KeyboardEvent)
 			{
+				if(event.type == KeyboardEvent.KEY_UP)
+				{
+					StageObjectsManager.getDefault.objectStateChanged(this.labXObject);
+					return;
+				}
+				
 				var keyBoradEvent:KeyboardEvent = event as KeyboardEvent;
-				if(UserInputHandler.keyLeft || UserInputHandler.keyRight)
+				switch(keyBoradEvent.keyCode)
 				{
-					var xMoveKey:Number = LabXConstant.X_KEY_MOVE_MIN;
-					if(UserInputHandler.keyLeft)xMoveKey = -xMoveKey;
-					internalMove(xMoveKey, 0);
-				} else if(UserInputHandler.keyForward || UserInputHandler.keyBackward)
-				{
-					var zMoveKey:Number = LabXConstant.Z_KEY_MOVE_MIN;
-					if(UserInputHandler.keyForward)zMoveKey = -zMoveKey;
-					internalMove(0, zMoveKey);
-				} 
-				if(event.type == KeyboardEvent.KEY_UP)StageObjectsManager.getDefault.objectStateChanged(this.labXObject);
+					case "W".charCodeAt():
+					case Keyboard.UP:
+						labXObject.objectMove(0, 0, LabXConstant.Z_KEY_MOVE_MIN);
+						break;
+	 
+					case "S".charCodeAt():
+					case Keyboard.DOWN:
+						labXObject.objectMove(0, 0, -LabXConstant.Z_KEY_MOVE_MIN);
+						break;
+	 
+					case "A".charCodeAt():
+					case Keyboard.LEFT:
+						labXObject.objectMove(-LabXConstant.X_KEY_MOVE_MIN, 0, 0);
+						break;
+	 
+					case "D".charCodeAt():
+					case Keyboard.RIGHT:
+						labXObject.objectMove(LabXConstant.X_KEY_MOVE_MIN,0,  0);
+						break;
+					case Keyboard.PAGE_UP:
+						labXObject.objectMove(0, LabXConstant.Y_KEY_MOVE_MIN, 0);
+						break;
+					case Keyboard.PAGE_DOWN:
+						labXObject.objectMove(0, -LabXConstant.Y_KEY_MOVE_MIN, 0);
+						break;
+					case "Q".charCodeAt():
+						labXObject.objectRotate(0, -LabXConstant.Y_KEY_ROTATE_MIN);
+						break;
+					case "E".charCodeAt():
+						labXObject.objectRotate(0, LabXConstant.Y_KEY_ROTATE_MIN);
+						break;
+				}
 			}
 		}
-		
-		private function internalMove(xMove:Number, yMove:Number):void
-		{
-			if (StageObjectsManager.getDefault.mainView.camera.z > 0)
-			{
-				xMove = -xMove; //when camera is on the other side, x should reverse
-				yMove = -yMove;
-			}
-//			if(Math.abs(xMove) > Math.abs(yMove))
-//			{
-//				labXObject.x += xMove;
-//				StageObjectsManager.getDefault.addMessage("lens X move:"+xMove);
-//			} else {
-//				labXObject.z -= yMove;
-//				StageObjectsManager.getDefault.addMessage("lens Z move:"+yMove);
-//			}
-			
-			labXObject.x += xMove;
-			StageObjectsManager.getDefault.addMessage("lens X move:"+xMove);
-			labXObject.z -= yMove;
-			StageObjectsManager.getDefault.addMessage("lens Z move:"+yMove);
-			needReproduceRay = true;
-		}
-	    
-
 	}
 }

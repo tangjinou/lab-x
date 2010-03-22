@@ -73,7 +73,7 @@ package
 		 */
 		public function experimentSelected(experimentId:Number = LabXConstant.EXPERIMENT_FIRST):void
 		{
-			var equipmentList:ArrayCollection = StageObjectsManager.getDefault.experimentManager.createExperimentEquipments(experimentId);
+			StageObjectsManager.getDefault.experimentManager.createExperimentEquipments(experimentId);
 		}
 		 		
 		override protected function onRenderTick(e:Event=null):void

@@ -42,6 +42,10 @@ package cn.edu.zju.labx.core
 		public static const Y_KEY_MOVE_MIN:Number = 2;
 		public static const Z_KEY_MOVE_MIN:Number = 2;
 		
+		public static const X_KEY_ROTATE_MIN:Number = 2;
+		public static const Y_KEY_ROTATE_MIN:Number = 2;
+		public static const Z_KEY_ROTATE_MIN:Number = 2;
+		
 		/**
 		 * Precision for number calculation
 		 */
