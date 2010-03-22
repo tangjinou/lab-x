@@ -49,23 +49,21 @@
 	 		}
 	 		public function start(event:CloseEvent):void{
 	 			
-	 		   if(chooseExperimentwindow.experiment_id == 1){
-	 		   		firstExperiment = new FirstExperimentApplication();
-	 		   		Mouse3D.enabled = true;
-	 		   		firstExperiment.viewport.interactive = true; 
-	 		   		var uic:UIComponent = new UIComponent();
-			   		stage.frameRate = 40;
-               		stage.addEventListener(MouseEvent.MOUSE_DOWN, firstExperiment.onMouseDown);
-               		stage.addEventListener(MouseEvent.MOUSE_MOVE, firstExperiment.onMouseMove);
-               		stage.addEventListener(MouseEvent.MOUSE_UP, UserInputHandler.getDefault.mouseUpHandler);
-               		stage.addEventListener(KeyboardEvent.KEY_DOWN, UserInputHandler.getDefault.keyDownHandler);
-               		stage.addEventListener(KeyboardEvent.KEY_UP, UserInputHandler.getDefault.keyUpHandler);
-			  		uic.addChild(firstExperiment);
-               		addChild(uic);
-               		firstExperiment.experimentSelected(chooseExperimentwindow.experiment_id);
-	 		   }
+ 		   		firstExperiment = new FirstExperimentApplication();
+ 		   		Mouse3D.enabled = true;
+ 		   		firstExperiment.viewport.interactive = true; 
+ 		   		var uic:UIComponent = new UIComponent();
+		   		stage.frameRate = 40;
+           		stage.addEventListener(MouseEvent.MOUSE_DOWN, firstExperiment.onMouseDown);
+           		stage.addEventListener(MouseEvent.MOUSE_MOVE, firstExperiment.onMouseMove);
+           		stage.addEventListener(MouseEvent.MOUSE_UP, UserInputHandler.getDefault.mouseUpHandler);
+           		stage.addEventListener(KeyboardEvent.KEY_DOWN, UserInputHandler.getDefault.keyDownHandler);
+           		stage.addEventListener(KeyboardEvent.KEY_UP, UserInputHandler.getDefault.keyUpHandler);
+		  		uic.addChild(firstExperiment);
+           		addChild(uic);
+           		firstExperiment.experimentSelected(chooseExperimentwindow.experiment_id);
 	 		   
-	 		   createCheckBoxes();
+				createCheckBoxes();
 	 		}
 	 		
 	 		public function createCheckBoxes():void{
