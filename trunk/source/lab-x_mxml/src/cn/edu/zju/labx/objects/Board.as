@@ -104,10 +104,9 @@ package cn.edu.zju.labx.objects
 	    //should keep the reference to free resource
 	    private var bmp:BitmapData;
 	    private var new_material:BitmapMaterial;
-		public function displayInterferenceImage(theta:Number):void
+		public function displayDoubleSlitInterferenceImage(theta:Number):void
 		{   
-			var interf:InterferenceLogic = new InterferenceLogic(theta, LabXConstant.WAVE_LENGTH);
-			var distance:Number = interf.getDistance();
+			var distance:Number = InterferenceLogic.doubleSlitInterferenceLogic(theta, LabXConstant.WAVE_LENGTH);
 //			trace(distance);
 			
 			distance /= 300;
@@ -184,7 +183,7 @@ package cn.edu.zju.labx.objects
 			   	var angle1:Number =  MathUtils.calculateAngleOfTwoVector(Number3D.sub(lineRay1.end_point,lineRay1.start_point),this.getNormal());
 			   	var angle2:Number =  MathUtils.calculateAngleOfTwoVector(Number3D.sub(lineRay2.end_point,lineRay2.start_point),this.getNormal());
                	   if(Math.abs(angle1-angle2)<(Math.PI/180)){
-               	    displayInterferenceImage(MathUtils.calculateAngleOfTwoVector(Number3D.sub(lineRay1.end_point,lineRay1.start_point),Number3D.sub(lineRay2.end_point,lineRay2.start_point)));
+               	    displayDoubleSlitInterferenceImage(MathUtils.calculateAngleOfTwoVector(Number3D.sub(lineRay1.end_point,lineRay1.start_point),Number3D.sub(lineRay2.end_point,lineRay2.start_point)));
                    }else{
                       StageObjectsManager.getDefault.addMessage("两条光线夹角之差大于一度");
                    }
