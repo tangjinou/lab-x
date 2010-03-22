@@ -45,11 +45,10 @@
 	 		   chooseExperimentwindow = ChooseExperimentWindow(PopUpManager.createPopUp( this, ChooseExperimentWindow , true));
                chooseExperimentwindow.x =this.width/3;
                chooseExperimentwindow.y= this.height/3;
-               chooseExperimentwindow.addEventListener(CloseEvent.CLOSE,start);
-               
+               chooseExperimentwindow.confirm.addEventListener(MouseEvent.CLICK,start);
 	 		}
-	 		public function start(event:CloseEvent):void{
-	 			
+	 		public function start(event:MouseEvent):void{
+	 			PopUpManager.removePopUp(chooseExperimentwindow);
  		   		firstExperiment = new FirstExperimentApplication();
  		   		Mouse3D.enabled = true;
  		   		firstExperiment.viewport.interactive = true; 

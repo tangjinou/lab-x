@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <mx:TitleWindow xmlns:mx="http://www.adobe.com/2006/mxml"  
-    title="实验选择"  showCloseButton="true" close="PopUpManager.removePopUp(this);" creationComplete="init()" borderAlpha="0.75">
+    title="实验选择"  showCloseButton="true" close="PopUpManager.removePopUp(this);" creationComplete="init()" borderAlpha="0.75" width="304" height="146">
 	<mx:Script>
 		<![CDATA[
 			import mx.collections.ArrayCollection;
@@ -21,9 +21,9 @@
 			
 		]]>
 	</mx:Script>
-    <mx:VBox id="example" horizontalGap="10" verticalAlign="bottom" x="849" y="10">
-          <mx:ComboBox dataProvider="{exps}" height="4%" width="100%"  color="0x000000" close="selectHandler(event);" fontSize="12"/>
-	</mx:VBox>
-	
+          <mx:Label text="请选择实验" width="270" textAlign="center" fontWeight="bold" fontSize="12"/> 
+          <mx:ComboBox dataProvider="{exps}"   color="0x000000" close="selectHandler(event);" fontSize="12" textAlign="center"/>
+	      <mx:Button label="确定" id="confirm" textAlign="center"/>
+    
 </mx:TitleWindow>
 
