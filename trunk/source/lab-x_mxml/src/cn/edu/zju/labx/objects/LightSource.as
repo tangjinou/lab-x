@@ -1,6 +1,5 @@
 package cn.edu.zju.labx.objects
 {
-	import cn.edu.zju.labx.core.LabXConstant;
 	import cn.edu.zju.labx.core.StageObjectsManager;
 	import cn.edu.zju.labx.events.IUserInputListener;
 	import cn.edu.zju.labx.events.LabXObjectUserInputHandleTool;
@@ -96,7 +95,7 @@ package cn.edu.zju.labx.objects
 			if (event is MouseEvent)
 			{
 				 var mouseEvent:MouseEvent = event as MouseEvent;
-	   	    	 if ((mouseEvent.type == MouseEvent.MOUSE_DOWN) && ((Math.abs(this.z) - LabXConstant.DESK_DEPTH/2) < 0))
+	   	    	 if ((mouseEvent.type == MouseEvent.MOUSE_DOWN) && StageObjectsManager.getDefault.isObjectInStage(this))
 	   	    	 {
 	   	    	 	isOn = !isOn;
 	   	    	 	

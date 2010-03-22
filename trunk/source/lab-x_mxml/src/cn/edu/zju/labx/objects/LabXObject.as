@@ -70,7 +70,13 @@ package cn.edu.zju.labx.objects
 		public var width:Number  = LabXConstant.LABX_OBJECT_WIDTH;
 		public var depth:Number  = LabXConstant.LABX_OBJECT_DEPTH;
 		
-		public var circle:Number = 50;
+		public var circle:Number = height/2;
+		
+		override public function set scale( scale:Number ):void
+		{
+			this.circle = circle * scale;
+			super.scale = scale;
+		}
 		
 		public function isLineRayOnObject(lineRayLogic:LineRayLogic):Boolean
 		{
