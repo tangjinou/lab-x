@@ -137,7 +137,10 @@
 	 		    }
 	 		     window.x=this.width/3;
 	 		     window.y=this.height/3;
-	 		   
+	 		}
+	 		public function movingObjects():void{
+	 		   ExperimentManager.getDefault.movingObjects();
+	 		
 	 		}
 	 	]]> 
 	 </mx:Script>
@@ -148,7 +151,7 @@
      		<mx:Button  click="firstExperiment.reset_camera()"  icon="@Embed('../assets/icon/reset_camera.png')"  toolTip="默认视角" />
 	 		<mx:Button  buttonDown="StageObjectsManager.getDefault.mainView.camera.zoom++" autoRepeat="true" icon="@Embed('../assets/icon/zoom_add.png')" toolTip="放大"/>
 	 		<mx:Button  buttonDown="StageObjectsManager.getDefault.mainView.camera.zoom--" autoRepeat="true" icon="@Embed('../assets/icon/zoom_min.png')" toolTip="缩小"/>
-            <mx:Button  click="ExperimentManager.getDefault.movingObjects()"  toolTip="最佳位置" icon="@Embed('../assets/icon/happy.png')" />
+            <mx:Button  click="movingObjects()"  toolTip="最佳位置" icon="@Embed('../assets/icon/happy.png')" />
             <mx:Button  click="choseComponentWindow()"  toolTip="选择器件" icon="@Embed('../assets/icon/objects.png')" />
      </mx:VBox>
      <mx:HBox x="700" y="554">
