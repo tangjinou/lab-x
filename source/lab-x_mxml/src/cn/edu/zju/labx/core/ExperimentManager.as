@@ -8,7 +8,11 @@ package cn.edu.zju.labx.core
 	import cn.edu.zju.labx.objects.Mirror;
 	import cn.edu.zju.labx.objects.SplitterBeam;
 	
+	import com.greensock.TweenLite;
+	
 	import flash.display.Bitmap;
+	import flash.events.TimerEvent;
+	import flash.utils.Timer;
 	
 	import mx.collections.ArrayCollection;
 	
@@ -28,6 +32,7 @@ package cn.edu.zju.labx.core
 		 * ***********************************************************************
 		 */
 		private static var instance:ExperimentManager = null;
+		
 		public function ExperimentManager()
 		{
 		}
@@ -46,9 +51,12 @@ package cn.edu.zju.labx.core
 			light = defaultLight;
 		}
 		
+		
+		private var experimentIndex:int;
 		public function createExperimentEquipments(experimentIndex:Number):ArrayCollection
 		{
 			var equipmentList:ArrayCollection = new ArrayCollection();
+			this.experimentIndex = experimentIndex;
 			switch (experimentIndex)
 			{
 				case LabXConstant.EXPERIMENT_FIRST:
@@ -71,12 +79,14 @@ package cn.edu.zju.labx.core
 		}
 		
 		
+		private var equipmentList:ArrayCollection;
+		
 		/**
 		 * Create equipment for first experiment
 		 */
 		private function createFirstExperimentEquipments():ArrayCollection
 		{
-			var equipmentList:ArrayCollection = new ArrayCollection();
+			equipmentList = new ArrayCollection();
 			
 			var lightSource:LightSource = createLightSource("激光光源");
             lightSource.moveDown(10);
@@ -206,6 +216,57 @@ package cn.edu.zju.labx.core
 			material = material || new ColorMaterial(0x262626, 1, true);
 			var board:Board = new  Board(name, material);
 			return board;
+		}
+		
+		public function movingObjects():void{
+		     
+		    switch (experimentIndex)
+			{
+				case LabXConstant.EXPERIMENT_FIRST:
+					 moveFirstExperimentEquipments();
+					 break;
+			}
+		
+		}
+		
+		public function moveFirstExperimentEquipments():void{
+		
+		      for(var i:int=0;i<equipmentList.length;i++){
+		      
+		          var labXObject:LabXObject = equipmentList.getItemAt(i) as LabXObject;
+		          
+		          if(labXObject.name =="激光光源"){
+		             TweenLite.to(labXObject,3,{x:50,z:0});
+		          }
+		          else if(labXObject.name =="分光镜"){
+		             TweenLite.to(labXObject,3,{x:200,z:0,rotationY:45});
+		          }
+		          else if(labXObject.name =="反射镜1"){
+                     TweenLite.to(labXObject,3,{x:200,z:200,rotationY:54.217});		            
+		          }
+		          else if(labXObject.name =="反射镜2"){ 
+		          	 TweenLite.to(labXObject,3,{x:300,z:0,rotationY:-45});	
+		          }
+		          else if(labXObject.name =="反射镜3"){ 
+		          	 TweenLite.to(labXObject,3,{x:300,z:-166.7,rotationY:54.2});	
+		          }
+		          else if(labXObject.name =="扩束镜1"){ 
+		          	 TweenLite.to(labXObject,3,{x:380,z:140,rotationY:18.5});	
+		          }
+		          else if(labXObject.name =="扩束镜2"){ 
+		          	 TweenLite.to(labXObject,3,{x:380,z:-140,rotationY:-18.5});	
+		          }
+		          else if(labXObject.name =="准直物镜1"){ 
+		          	 TweenLite.to(labXObject,3,{x:500,z:100,rotationY:18.5});	
+		          }
+		          else if(labXObject.name =="准直物镜2"){ 
+		          	 TweenLite.to(labXObject,3,{x:500,z:-100,rotationY:-18.5});	
+		          }
+		          else if(labXObject.name =="接收屏"){ 
+		          	 TweenLite.to(labXObject,3,{x:LabXConstant.DESK_WIDTH,z:0});	
+		          }
+		          
+		      }
 		}
 	}
 }
