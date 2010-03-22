@@ -17,7 +17,7 @@
 	 	    import mx.core.UIComponent;
 	 	    import flash.events.Event;
 			import flash.events.MouseEvent;
-			public var camera_yaw:int=0;
+//			public var camera_yaw:int=0;
 			
 
             private var checkBoxList:ArrayCollection =new ArrayCollection();
@@ -65,9 +65,6 @@
                		
 	 		   }
 	 		   
-	 		   
-	 		   
-	 		   
 	 		   createCheckBoxes();
 	 		}
 	 		
@@ -104,10 +101,12 @@
                 if(checkBox.selected ==true){
                     StageObjectsManager.getDefault.addMessage("增加"+checkBox.label);                
                     StageObjectsManager.getDefault.addObjectByName(checkBox.label);
+                    
                 }
                 else{
                     StageObjectsManager.getDefault.addMessage("移除"+checkBox.label);
                     StageObjectsManager.getDefault.removeObjectByName(checkBox.label);
+                    all_checkBox.selected=false;
                 }
 	 		}
 	 		public function allCheckBoxChanged(event:Event):void{
@@ -122,7 +121,6 @@
 	 		         StageObjectsManager.getDefault.addMessage("移除"+checkBox.label);
                      StageObjectsManager.getDefault.removeObjectByName(checkBox.label);
 	 		      }
-	 		      
 	 		    }
 	 		    
 	 		};
@@ -130,9 +128,13 @@
 	 		public function choseComponentWindow():void{
 	 		    var window:ChooseComponentWindow=ChooseComponentWindow(PopUpManager.createPopUp( this, ChooseComponentWindow , true));
 	 		    window.vbox_checkBoxes.addChild(all_checkBox);
+	 		    all_checkBox.selected = true;
 	 		    for(var i:int=0;i<checkBoxList.length;i++){
 	 		      var checkBox:CheckBox = checkBoxList.getItemAt(i) as CheckBox;
 	 		      window.vbox_checkBoxes.addChild(checkBox);
+	 		      if(checkBox.selected == false){
+	 		         all_checkBox.selected = false;
+	 		      }
 	 		    }
 	 		     window.x=this.width/3;
 	 		     window.y=this.height/3;
