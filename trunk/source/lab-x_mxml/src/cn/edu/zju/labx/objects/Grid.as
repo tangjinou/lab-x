@@ -20,7 +20,7 @@ package cn.edu.zju.labx.objects
 		public function Grid()
 		{
 			_lines = new Lines3D;
-			var blueMaterial:LineMaterial = new LineMaterial(0x0000FF);
+			var blueMaterial:LineMaterial = new LineMaterial(0x00FF00);
 			var start:Vertex3D;
 			var end:Vertex3D;
 			var line:Line3D;
@@ -40,8 +40,7 @@ package cn.edu.zju.labx.objects
 			}
 			StageObjectsManager.getDefault.originPivot.addChild(_lines);
 			StageObjectsManager.getDefault.layerManager.gridLayer.addDisplayObject3D(_lines);
-//			StageObjectsManager.getDefault.layerManager.gridLayer.alpha = 0.5;
-			var dropShadowFilter:DropShadowFilter = new DropShadowFilter(0, 45, 0x0000FF, 1, 8, 8, 3, 2, false, false, false);
+			var dropShadowFilter:DropShadowFilter = new DropShadowFilter(0, 45, 0x00FF00, 1, 8, 8, 3, 2, false, false, false);
 
 			StageObjectsManager.getDefault.layerManager.gridLayer.filters = [dropShadowFilter];
 			
