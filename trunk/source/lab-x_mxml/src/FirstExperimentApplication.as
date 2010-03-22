@@ -52,6 +52,7 @@ package
 			scene.addChild(originPivot);
 			StageObjectsManager.getDefault.originPivot = originPivot;
 			
+			
 			grid = new Grid();
 			
 			light = new PointLight3D(true);

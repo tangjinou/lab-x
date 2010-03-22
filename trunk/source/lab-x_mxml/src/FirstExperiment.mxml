@@ -2,6 +2,7 @@
 <mx:Application xmlns:mx="http://www.adobe.com/2006/mxml" backgroundColor="black" layout="absolute" preloader="cn.edu.zju.labx.core.LoadingBar" creationComplete="callLater(init)" width="1000" height="600" xmlns:labx="cn.edu.zju.labx.*" xmlns:local="*" borderColor="#CD1A02" fontWeight="bold" fontSize="12">
 	 <mx:Script>
 	 	<![CDATA[
+	 		import cn.edu.zju.labx.core.ExperimentManager;
 	 		import mx.events.CloseEvent;
 	 		import mx.controls.Alert;
 	 		import mx.managers.ToolTipManager;
@@ -147,6 +148,7 @@
      		<mx:Button  click="firstExperiment.reset_camera()"  icon="@Embed('../assets/icon/reset_camera.png')"  toolTip="默认视角" />
 	 		<mx:Button  buttonDown="StageObjectsManager.getDefault.mainView.camera.zoom++" autoRepeat="true" icon="@Embed('../assets/icon/zoom_add.png')" toolTip="放大"/>
 	 		<mx:Button  buttonDown="StageObjectsManager.getDefault.mainView.camera.zoom--" autoRepeat="true" icon="@Embed('../assets/icon/zoom_min.png')" toolTip="缩小"/>
+            <mx:Button  click="ExperimentManager.getDefault.movingObjects()"  toolTip="最佳位置" icon="@Embed('../assets/icon/happy.png')" />
             <mx:Button  click="choseComponentWindow()"  toolTip="选择器件" icon="@Embed('../assets/icon/objects.png')" />
      </mx:VBox>
      <mx:HBox x="700" y="554">
@@ -156,7 +158,6 @@
      		<mx:Button  buttonDown="StageObjectsManager.getDefault.object_up()"  autoRepeat="false" id="object_up_button" enabled="false" icon="@Embed('../assets/icon/up.png')" disabledIcon="@Embed('../assets/icon/up_disable.png')" toolTip="物体向上移动"/>
      		<mx:Button  buttonDown="StageObjectsManager.getDefault.object_down()"  autoRepeat="false" id="object_down_button" enabled="false" icon="@Embed('../assets/icon/down.png')" disabledIcon="@Embed('../assets/icon/down_disable.png')" toolTip="物体向下移动"/>
      </mx:HBox>
-	 
 	 
 	 <mx:Panel y="0" width="326" height="148" layout="absolute" color="#070707" horizontalCenter="-9" borderColor="#A4A8A1" alpha="0.79">
 	     <mx:TextArea  x="0" y="0" width="306" height="108" editable="false" id="message_box" fontSize="12" backgroundColor="#A69B9B" cornerRadius="1" borderStyle="solid" borderColor="#F31207" themeColor="#F0FF00" alpha="1.0" borderThickness="2"/>
