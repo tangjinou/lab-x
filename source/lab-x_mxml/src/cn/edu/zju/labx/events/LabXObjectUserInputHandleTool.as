@@ -79,14 +79,19 @@ package cn.edu.zju.labx.events
 				xMove = -xMove; //when camera is on the other side, x should reverse
 				yMove = -yMove;
 			}
-			if(Math.abs(xMove) > Math.abs(yMove))
-			{
-				labXObject.x += xMove;
-				StageObjectsManager.getDefault.addMessage("lens X move:"+xMove);
-			} else {
-				labXObject.z -= yMove;
-				StageObjectsManager.getDefault.addMessage("lens Z move:"+yMove);
-			}
+//			if(Math.abs(xMove) > Math.abs(yMove))
+//			{
+//				labXObject.x += xMove;
+//				StageObjectsManager.getDefault.addMessage("lens X move:"+xMove);
+//			} else {
+//				labXObject.z -= yMove;
+//				StageObjectsManager.getDefault.addMessage("lens Z move:"+yMove);
+//			}
+			
+			labXObject.x += xMove;
+			StageObjectsManager.getDefault.addMessage("lens X move:"+xMove);
+			labXObject.z -= yMove;
+			StageObjectsManager.getDefault.addMessage("lens Z move:"+yMove);
 			needReproduceRay = true;
 		}
 	    
