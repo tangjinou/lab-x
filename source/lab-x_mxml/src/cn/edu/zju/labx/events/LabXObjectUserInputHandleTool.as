@@ -23,6 +23,8 @@ package cn.edu.zju.labx.events
 		 */
 	    public var oldMouseY:Number = -1;
 	    
+	    private var keyDownAccelerate:Number = 1;
+	    
 	    private var needReproduceRay:Boolean = false;
 	    
 		public function LabXObjectUserInputHandleTool(object:LabXObject)
@@ -60,42 +62,45 @@ package cn.edu.zju.labx.events
 				if(event.type == KeyboardEvent.KEY_UP)
 				{
 					StageObjectsManager.getDefault.objectStateChanged(this.labXObject);
+					keyDownAccelerate = 1;
 					return;
 				}
 				
 				var keyBoradEvent:KeyboardEvent = event as KeyboardEvent;
+				if(keyDownAccelerate < 10)keyDownAccelerate += 0.5;
 				switch(keyBoradEvent.keyCode)
 				{
+					
 					case "W".charCodeAt():
 					case Keyboard.UP:
-						labXObject.objectMove(0, 0, LabXConstant.Z_KEY_MOVE_MIN);
+						labXObject.objectMove(0, 0, LabXConstant.Z_KEY_MOVE_MIN*keyDownAccelerate);
 						break;
 	 
 					case "S".charCodeAt():
 					case Keyboard.DOWN:
-						labXObject.objectMove(0, 0, -LabXConstant.Z_KEY_MOVE_MIN);
+						labXObject.objectMove(0, 0, -LabXConstant.Z_KEY_MOVE_MIN*keyDownAccelerate);
 						break;
 	 
 					case "A".charCodeAt():
 					case Keyboard.LEFT:
-						labXObject.objectMove(-LabXConstant.X_KEY_MOVE_MIN, 0, 0);
+						labXObject.objectMove(-LabXConstant.X_KEY_MOVE_MIN*keyDownAccelerate, 0, 0);
 						break;
 	 
 					case "D".charCodeAt():
 					case Keyboard.RIGHT:
-						labXObject.objectMove(LabXConstant.X_KEY_MOVE_MIN,0,  0);
+						labXObject.objectMove(LabXConstant.X_KEY_MOVE_MIN*keyDownAccelerate,0,  0);
 						break;
 					case Keyboard.PAGE_UP:
-						labXObject.objectMove(0, LabXConstant.Y_KEY_MOVE_MIN, 0);
+						labXObject.objectMove(0, LabXConstant.Y_KEY_MOVE_MIN*keyDownAccelerate, 0);
 						break;
 					case Keyboard.PAGE_DOWN:
-						labXObject.objectMove(0, -LabXConstant.Y_KEY_MOVE_MIN, 0);
+						labXObject.objectMove(0, -LabXConstant.Y_KEY_MOVE_MIN*keyDownAccelerate, 0);
 						break;
 					case "Q".charCodeAt():
-						labXObject.objectRotate(0, -LabXConstant.Y_KEY_ROTATE_MIN);
+						labXObject.objectRotate(0, -LabXConstant.Y_KEY_ROTATE_MIN*keyDownAccelerate);
 						break;
 					case "E".charCodeAt():
-						labXObject.objectRotate(0, LabXConstant.Y_KEY_ROTATE_MIN);
+						labXObject.objectRotate(0, LabXConstant.Y_KEY_ROTATE_MIN*keyDownAccelerate);
 						break;
 				}
 			}
