@@ -41,7 +41,7 @@ package cn.edu.zju.labx.events
 				} else if (mouseEvent.type == MouseEvent.MOUSE_UP) {
 					if(needReproduceRay && (oldMouseX != -1))
 					{
-						StageObjectsManager.getDefault.rayManager.reProduceRays();
+						StageObjectsManager.getDefault.objectStateChanged(labXObject);
 					}
 					needReproduceRay = false;
 					oldMouseX = -1;
@@ -68,7 +68,7 @@ package cn.edu.zju.labx.events
 					if(UserInputHandler.keyForward)zMoveKey = -zMoveKey;
 					internalMove(0, zMoveKey);
 				} 
-				if(event.type == KeyboardEvent.KEY_UP)StageObjectsManager.getDefault.rayManager.reProduceRays();
+				if(event.type == KeyboardEvent.KEY_UP)StageObjectsManager.getDefault.objectStateChanged(this.labXObject);
 			}
 		}
 		

@@ -60,7 +60,7 @@ package cn.edu.zju.labx.core
 			{
 				var equipment:LabXObject = equipmentList.getItemAt(i) as LabXObject;
 				equipment.moveUp(LabXConstant.LABX_OBJECT_HEIGHT/2);
-				equipment.moveForward(LabXConstant.LABX_OBJECT_DEPTH + 100);
+				equipment.moveForward(LabXConstant.STAGE_DEPTH/2);
 				equipment.moveRight(i*LabXConstant.STAGE_WIDTH/equipmentList.length);
 				StageObjectsManager.getDefault.addObject(equipment);
 			}

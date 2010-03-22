@@ -1,7 +1,9 @@
 package cn.edu.zju.labx.objects
 {
+	import cn.edu.zju.labx.core.LabXConstant;
 	import cn.edu.zju.labx.core.StageObjectsManager;
 	import cn.edu.zju.labx.events.IUserInputListener;
+	import cn.edu.zju.labx.events.LabXObjectUserInputHandleTool;
 	import cn.edu.zju.labx.logicObject.LineRayLogic;
 	
 	import flash.events.Event;
@@ -21,6 +23,7 @@ package cn.edu.zju.labx.objects
 	public class LightSource extends LabXObject implements IUserInputListener
 	{
 		
+		private var userInputTool:LabXObjectUserInputHandleTool;
 		private var isOn:Boolean = false;
 		protected var light:DAE;
 	    
@@ -37,6 +40,7 @@ package cn.edu.zju.labx.objects
 			light.load(new LightSource_DAE() as ByteArray,new MaterialsList( {all:this.material} ) );		
 			addEventListener(InteractiveScene3DEvent.OBJECT_PRESS, objectPressHandler);
 			createDisplayObject();
+			userInputTool = new LabXObjectUserInputHandleTool(this);
 		}
 		private function createDisplayObject():void
 		{   
@@ -87,10 +91,12 @@ package cn.edu.zju.labx.objects
 				return;
 			}
 			
+			userInputTool.handleUserInputEvent(event);
+			
 			if (event is MouseEvent)
 			{
 				 var mouseEvent:MouseEvent = event as MouseEvent;
-	   	    	 if (mouseEvent.type == MouseEvent.MOUSE_UP)
+	   	    	 if ((mouseEvent.type == MouseEvent.MOUSE_DOWN) && ((Math.abs(this.z) - LabXConstant.DESK_DEPTH/2) < 0))
 	   	    	 {
 	   	    	 	isOn = !isOn;
 	   	    	 	

@@ -1,5 +1,6 @@
 package cn.edu.zju.labx.objects
 {
+	import cn.edu.zju.labx.core.LabXConstant;
 	import cn.edu.zju.labx.core.StageObjectsManager;
 	import cn.edu.zju.labx.events.IRayHandle;
 	import cn.edu.zju.labx.events.IUserInputListener;
@@ -13,13 +14,13 @@ package cn.edu.zju.labx.objects
 	
 	import mx.collections.ArrayCollection;
 	
+	import org.papervision3d.core.geom.TriangleMesh3D;
 	import org.papervision3d.core.math.Number3D;
 	import org.papervision3d.core.proto.MaterialObject3D;
 	import org.papervision3d.events.InteractiveScene3DEvent;
 	import org.papervision3d.materials.utils.MaterialsList;
 	import org.papervision3d.objects.primitives.Cube;
 	import org.papervision3d.view.layer.ViewportLayer;
-	import org.papervision3d.core.geom.TriangleMesh3D;
 	
 	public class SplitterBeam extends LabXObject implements IUserInputListener,IRayHandle
 	{   
@@ -47,6 +48,8 @@ package cn.edu.zju.labx.objects
 					var beamLogic:SplitterBeamLogic =new SplitterBeamLogic(getPosition(),getNormal());
                     var lineRayLogic:LineRayLogic = beamLogic.calculateRayAfterSplit(oldLineRay.logic);
                     if(lineRayLogic!=null){
+                    	if(isReverseNormal(lineRayLogic, oldLineRay.logic)) return null;
+                    	
                     	newLineRays.addItem(new LineRay(lineRayLogic));
                     	oldLineRay.end_point = new Number3D(lineRayLogic.x, lineRayLogic.y, lineRayLogic.z);
                     }
@@ -56,6 +59,13 @@ package cn.edu.zju.labx.objects
 			}
 			return null;
 		}
+		
+		private function isReverseNormal(a:LineRayLogic, b:LineRayLogic):Boolean
+		{
+			var n1:Number3D = new Number3D(a.dx, a.dy, a.dz);
+			var n2:Number3D = new Number3D(b.dx, b.dy, b.dz);
+			return Number3D.add(n1, n2).modulo < LabXConstant.NUMBER_PRECISION;
+		}		
 		
 		protected function makeNewRay2(oldRay:Ray):Ray{
 		   	if(oldRay != null)
