@@ -10,9 +10,13 @@ package cn.edu.zju.labx.core
 	
 	public class RayManager
 	{
-		public function RayManager()
-		{
-		}
+		private static var instance:RayManager;
+	    public static function get getDefault():RayManager{
+	    	if(instance ==null){
+	    	   instance =new RayManager(); 
+	    	}
+	    	return instance;
+	    }
 		
 		private var lightSource:LightSource;
 		
@@ -51,9 +55,9 @@ package cn.edu.zju.labx.core
 		}
 		
 		public function reProduceRays():void{
-			if(this.lightSource!=null&&this.lightSource.isLightOn){
-		       this.clearRays();
-		       lightSource.openRay();
+			this.clearRays();
+			if(this.lightSource!=null && this.lightSource.isLightOn){
+				lightSource.openRay();
 		    }
 		}
 		 
@@ -64,8 +68,8 @@ package cn.edu.zju.labx.core
 		 	rayList.addItem(ray);	
 		 	var nearestHandler:IRayHandle;
 		 	var minDistance:Number = Number.MAX_VALUE;
-		      for(var i:int=0;i<StageObjectsManager.getDefault.getObjectList().length;i++){
-		         var obj:LabXObject = StageObjectsManager.getDefault.getObjectList().getItemAt(i) as LabXObject;
+		      for(var i:int=0;i<StageObjectsManager.getDefault.getStageObjectList().length;i++){
+		         var obj:LabXObject = StageObjectsManager.getDefault.getStageObjectList().getItemAt(i) as LabXObject;
 		         if(obj is IRayHandle){
 		              var handle:IRayHandle = obj as IRayHandle;
 		              if(handle.isOnTheRay(ray))

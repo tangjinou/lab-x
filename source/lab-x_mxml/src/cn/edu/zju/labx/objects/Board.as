@@ -4,6 +4,7 @@ package cn.edu.zju.labx.objects
     import cn.edu.zju.labx.core.StageObjectsManager;
     import cn.edu.zju.labx.events.IRayHandle;
     import cn.edu.zju.labx.events.IUserInputListener;
+    import cn.edu.zju.labx.events.LabXObjectUserInputHandleTool;
     import cn.edu.zju.labx.logicObject.InterferenceLogic;
     import cn.edu.zju.labx.utils.MathUtils;
     
@@ -33,6 +34,8 @@ package cn.edu.zju.labx.objects
 	{   
 		protected var cube:Cube;
 		
+		private var userInputTool:LabXObjectUserInputHandleTool;
+		
 		/**
 		 * Create a board
 		 * 
@@ -44,6 +47,7 @@ package cn.edu.zju.labx.objects
 			super(material,name);
 			createDisplayObject();
 		    addEventListener(InteractiveScene3DEvent.OBJECT_PRESS, objectPressHandler);
+		    userInputTool = new LabXObjectUserInputHandleTool(this);
 		}
 		
 		public function createDisplayObject():void{
@@ -88,7 +92,7 @@ package cn.edu.zju.labx.objects
 		
 		public function hanleUserInputEvent(event:Event):void
 		{
-			//TODO:
+			userInputTool.handleUserInputEvent(event);
 		}
 		
         override public function addEventListener(type:String, listener:Function,useCapture:Boolean = false, priority:int = 0, useWeakReference:Boolean = false):void

@@ -2,6 +2,7 @@ package cn.edu.zju.labx.core
 {
 	import cn.edu.zju.labx.objects.Board;
 	import cn.edu.zju.labx.objects.LabXObject;
+	import cn.edu.zju.labx.objects.LightSource;
 	
 	import flash.filters.DropShadowFilter;
 	
@@ -117,12 +118,8 @@ package cn.edu.zju.labx.core
 		 *  This is the RayManager 
 		 * ***********************************************************************
 		 */
-	    private var raymanager:RayManager;
 	    public function get rayManager():RayManager{
-	    	if(this.raymanager ==null){
-	    	   raymanager =new RayManager(); 
-	    	}
-	    	return this.raymanager;
+	    	return RayManager.getDefault;
 	    }
 	    
 		/*************************************************************************
@@ -149,21 +146,26 @@ package cn.edu.zju.labx.core
 		 *   Object list, we handle the objects here
 		 * **************************************************************************
 		 */
-		 //this list only for ray notify, if object is removed ,then i will be not notified
-         private var objectList:ArrayCollection = new ArrayCollection();
          //this list for objects in the stage , it is globe list
          private var objectAllSavedList:ArrayCollection = new ArrayCollection();		 
+		 //this list only for ray notify, if object is removed ,then i will be not notified
+         private var objectList:ArrayCollection = new ArrayCollection();
+         
+         private var stageObjectList:ArrayCollection = new ArrayCollection();
 		 
 		/**
 		 * add an object to the stage
 		 */
-		 public function addObject(obj:LabXObject):void{
-		     originPivot.addChild(obj);
-		     objectList.addItem(obj);
-		     objectAllSavedList.addItem(obj);
-		     if(obj is Board){
-		       rayManager.setBorad(obj as Board);
-		     }
+		public function addObject(obj:LabXObject):void
+		{
+		    if (!objectAllSavedList.contains(obj))objectAllSavedList.addItem(obj);
+			if (!objectList.contains(obj))
+			{
+				objectList.addItem(obj);
+				originPivot.addChild(obj);
+			}
+			
+			objectStateChanged(obj);
 		 }
 		 
 		/**
@@ -173,9 +175,7 @@ package cn.edu.zju.labx.core
 		 	 for(var i:int=0;i<objectAllSavedList.length;i++){
 		        var obj:LabXObject = objectAllSavedList.getItemAt(i) as LabXObject;
 		        if(obj !=null && obj.name == name){
-		            originPivot.addChild(obj);
-		            objectList.addItem(obj);
-		            raymanager.reProduceRays();
+		            addObject(obj);
 		        }
 		     }
 		}
@@ -184,29 +184,81 @@ package cn.edu.zju.labx.core
 		 * remove an object from the stage
 		 */ 
 		public function removeObject(obj:LabXObject):void{
-		 	 originPivot.removeChild(obj);
-		     objectList.removeItemAt(objectList.getItemIndex(obj));
+			originPivot.removeChild(obj);
+			objectList.removeItemAt(objectList.getItemIndex(obj));
+			
+			if(stageObjectList.contains(obj))
+			{
+				stageObjectList.removeItemAt(stageObjectList.getItemIndex(obj));
+				rayManager.reProduceRays();
+			}
 		}
 		 
 		/**
 		 * remove an object from the stage by name
 		 */ 
 		public function removeObjectByName(name:String):void{
-		     for(var i:int=0;i<objectList.length;i++){
-		        var obj:LabXObject = objectList.getItemAt(i) as LabXObject;
-		        if(obj !=null && obj.name == name){
-		           removeObject(obj);
-		           raymanager.reProduceRays();
-		        }
-		     }
-		 }
+			for(var i:int=0;i<objectList.length;i++)
+			{
+				var obj:LabXObject = objectList.getItemAt(i) as LabXObject;
+				if(obj !=null && obj.name == name){
+					removeObject(obj);
+				}
+			}
+		}
+		 
+		public function objectStateChanged(object:LabXObject):void
+		{
+			if (stageObjectList.contains(object))
+			{
+				if(!isObjectInStage(object))
+				{
+					stageObjectList.removeItemAt(stageObjectList.getItemIndex(object));
+					if (object is LightSource)
+					{
+						rayManager.setLightSource(null);
+					} else if (object is Board)
+					{
+						rayManager.setBorad(null);
+					}
+				}
+				rayManager.reProduceRays();
+			} else 
+			{
+				if(isObjectInStage(object))
+				{
+					stageObjectList.addItem(object);
+					if (object is LightSource)
+					{
+						rayManager.setLightSource(object as LightSource);
+					} else if (object is Board)
+					{
+						rayManager.setBorad(object as Board);
+					}
+					rayManager.reProduceRays();
+				}
+			}
+		}
+		
+		private function isObjectInStage(object:LabXObject):Boolean
+		{
+			return (object.x > 0) && (object.x < LabXConstant.DESK_WIDTH) && (object.z > -LabXConstant.DESK_DEPTH/2) && (object.z < LabXConstant.DESK_DEPTH/2);
+		}
 		 
 		/**
 		 * get the objects in the stage
 		 */
 		public function getObjectList():ArrayCollection
 		{
-			return objectList
+			return objectList;
+		}
+		
+		/**
+		 * get the objects in the stage
+		 */
+		public function getStageObjectList():ArrayCollection
+		{
+			return stageObjectList;
 		}
 		
 		
@@ -293,22 +345,22 @@ package cn.edu.zju.labx.core
 		public function rotate_left():void{
 		   if(labXObjectSelected!=null){
 		     labXObjectSelected.localRotationY--;
-		     rayManager.reProduceRays();
-		      this.addMessage(labXObjectSelected.name+"绕Y转动"+labXObjectSelected.localRotationY.toFixed(2));
+		     objectStateChanged(labXObjectSelected);
+		     this.addMessage(labXObjectSelected.name+"绕Y转动"+labXObjectSelected.localRotationY.toFixed(2));
 		   }
 		}
 		
 		public function rotate_right():void{
            if(labXObjectSelected!=null){
 		     labXObjectSelected.localRotationY++;
-		     rayManager.reProduceRays();
+		     objectStateChanged(labXObjectSelected);
              this.addMessage(labXObjectSelected.name+"绕Y转动"+labXObjectSelected.localRotationY.toFixed(2));
 		   }
 		}
 		public function object_up():void{
 		    if(labXObjectSelected!=null){
 		     labXObjectSelected.y++;
-		     rayManager.reProduceRays();
+		     objectStateChanged(labXObjectSelected);
              this.addMessage(labXObjectSelected.name+"往上移动"+labXObjectSelected.y.toFixed(2));
 		   }
 		}
@@ -316,7 +368,7 @@ package cn.edu.zju.labx.core
 			
 		    if(labXObjectSelected!=null){
 		      labXObjectSelected.y--;
-		      rayManager.reProduceRays();
+		      objectStateChanged(labXObjectSelected);
               this.addMessage(labXObjectSelected.name+"往下移动"+labXObjectSelected.y.toFixed(2));
 		   }
 		}
