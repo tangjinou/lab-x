@@ -66,7 +66,7 @@ package cn.edu.zju.labx.objects
 			var t:Number;
 			if(tx < 0 || ty < 0 || tz < 0)
 			{
-				t = LabXConstant.RAY_DEFAULT_LENGTH;
+				t = LabXConstant.RAY_DEFAULT_LENGTH-200;
 			} else {
 				t = ((tx <= ty) && (tx <= tz)) ? tx : ((ty <= tz) ? ty : tz)
 			}
