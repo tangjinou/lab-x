@@ -224,15 +224,38 @@ package cn.edu.zju.labx.core
 			return board;
 		}
 		
+		private var opitimize:Boolean = false;
 		public function movingObjects():void{
-		     
-		    switch (_experimentIndex)
-			{
-				case LabXConstant.EXPERIMENT_FIRST:
-					 moveFirstExperimentEquipments();
-					 break;
-			}
+		   if(opitimize == false){  
+		    		switch (_experimentIndex)
+					{
+						case LabXConstant.EXPERIMENT_FIRST:
+					 		moveFirstExperimentEquipments();
+					 		break;
+					}
+			  opitimize = true;
+		   }
+	       else{
+	          moveExperimentEquipmentsDefault();
+	          opitimize = false;
+	       }	
+		}
 		
+		
+		public function  moveExperimentEquipmentsDefault():void{
+			for(var i:int=0;i<equipmentList.length;i++){
+		          var labXObject:LabXObject = equipmentList.getItemAt(i) as LabXObject;
+		          TweenLite.to(labXObject,LabXConstant.MOVE_DELAY,{x:100*i,y:0,z:300,rotationY:0,rotationX:0,rotationZ:0});
+		    }
+		   	var timer:Timer= new Timer((LabXConstant.MOVE_DELAY+1)*1000);
+		      timer.addEventListener(TimerEvent.TIMER, onTimer);
+    				function onTimer(event:TimerEvent):void{
+         			   for(var i:int=0;i<equipmentList.length;i++){
+         			       StageObjectsManager.getDefault.objectStateChanged(equipmentList.getItemAt(i) as LabXObject);
+         			   }
+         			   timer.stop();
+                    }
+              timer.start();
 		}	
 
 		public function moveFirstExperimentEquipments():void{
