@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <mx:TitleWindow xmlns:mx="http://www.adobe.com/2006/mxml" 
-    title="器件选择" width="400" height="200" status="active" showCloseButton="true" close="PopUpManager.removePopUp(this);" creationComplete="init()" borderAlpha="0.75">
+    title="器件选择" width="600" height="500" status="active" showCloseButton="true" close="PopUpManager.removePopUp(this);" creationComplete="init()" borderAlpha="0.75">
 	<mx:Script>
 		<![CDATA[
 			import cn.edu.zju.labx.core.StageObjectsManager;
