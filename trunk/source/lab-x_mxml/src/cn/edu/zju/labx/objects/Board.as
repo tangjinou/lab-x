@@ -6,13 +6,10 @@ package cn.edu.zju.labx.objects
     import cn.edu.zju.labx.events.IRayHandle;
     import cn.edu.zju.labx.events.IUserInputListener;
     import cn.edu.zju.labx.events.LabXObjectUserInputHandleTool;
-    import cn.edu.zju.labx.logicObject.InterferenceLogic;
     import cn.edu.zju.labx.utils.MathUtils;
     
     import flash.display.BitmapData;
-    import flash.display.Shape;
     import flash.events.Event;
-    import flash.geom.Rectangle;
     
     import org.papervision3d.core.geom.Lines3D;
     import org.papervision3d.core.geom.TriangleMesh3D;
@@ -102,53 +99,10 @@ package cn.edu.zju.labx.objects
 			cube.addEventListener(type, listener, useCapture, priority, useWeakReference);
 		}
 		
-
-	    //should keep the reference to free resource
-	    private var bmp:BitmapData;
-	    private var new_material:BitmapMaterial;
-		public function displayDoubleSlitInterferenceImage(theta:Number):void
-		{   
-			var distance:Number = InterferenceLogic.doubleSlitInterferenceLogic(theta, LabXConstant.WAVE_LENGTH);
-//			trace(distance);
-			
-			distance /= 300;
-			var numOfColumns:Number = depth/distance/2;
-			bmp = new BitmapData(depth, height, false, 0x0);
-			for (var i:Number = 0; i < numOfColumns; i++)
-			{
-				bmp.fillRect(new Rectangle(i*distance*2, 0, distance, height), 0x0000FF);
-			}
-			new_material = new BitmapMaterial(bmp);
-			new_material.smooth = true;
-			new_material.interactive = true;
-			cube.replaceMaterialByName(new_material, "left");
-			
-		}
-		
-		public function displayMachZehnderInterferenceImage(theta:Number):void
-		{   
-			//TODO: add relationship with input parameter
-			var interval:Number = 5;
-			var numOfCircles:Number = height/interval;
-			bmp = new BitmapData(depth, height, false, 0x0);
-			var circle:Shape = new Shape();
-			var baseColor:Number = 0x0000FF;
-			var color:Number = baseColor;
-			circle.graphics.beginFill(color);
-			for (var i:Number = numOfCircles; i > 0; i--)
-			{
-				circle.graphics.drawCircle(depth/2, height/2 ,i*interval);
-				color = baseColor - color;
-				circle.graphics.beginFill(color);
-				bmp.draw(circle);
-			}
-			new_material = new BitmapMaterial(bmp);
-			new_material.smooth = true;
-			new_material.interactive = true;
-			cube.replaceMaterialByName(new_material, "left");
-			
-		}
-		
+		    //should keep the reference to free resource
+	    protected var bmp:BitmapData;
+	    protected var new_material:BitmapMaterial;
+	    	
 		//This is will be  automaticlly called when Ray chenged 
 		public function unDisplayInterferenceImage():void{
 			if(new_material!=null && bmp!=null){
@@ -173,8 +127,8 @@ package cn.edu.zju.labx.objects
 		 *  deal with when the ray on the object
 		 **/ 
 		 
-		private var oldRay1:Ray =null;
-		private var oldRay2:Ray =null;
+		protected var oldRay1:Ray =null;
+		protected var oldRay2:Ray =null;
 		
 		/**
 		 *  save the two rays
@@ -202,31 +156,8 @@ package cn.edu.zju.labx.objects
 				}
 			}
 			oldRay.displayRays();
-			if(oldRay1!=null&&oldRay2!=null){
-		       if(isParellel(oldRay1)==false || isParellel(oldRay2)==false){
-		       	  StageObjectsManager.getDefault.addMessage("射入挡板入射光线不平行");
-		          return;
-		       }
-			   var lineRay1:LineRay = oldRay1.getLineRays().getItemAt(0) as LineRay;
-			   var lineRay2:LineRay = oldRay2.getLineRays().getItemAt(0) as LineRay;
-			   if(lineRay1!=null&&lineRay2!=null){
-			   		switch (ExperimentManager.getDefault.experimentIndex)
-					{
-						case LabXConstant.EXPERIMENT_FIRST:	
-							handleDoubleSlitInterference(lineRay1, lineRay2);
-							break;
-						case LabXConstant.EXPERIMENT_SECOND:
-							handleMachZehnderInterference(lineRay1, lineRay2);
-							break;
-					}
-               }else{
-               		  StageObjectsManager.getDefault.addMessage("光线没有经过挡板");
-               }
-            
-            } 
    		}
-   		
-   		private function isParellel(ray:Ray):Boolean{
+   		protected function isParellel(ray:Ray):Boolean{
    		       for(var i:int=0;i<ray.getLineRays().length;i++){
 			       for(var j:int=0;j<ray.getLineRays().length;j++){
 			       	var lineRay1:LineRay = ray.getLineRays().getItemAt(i) as LineRay;
@@ -239,27 +170,7 @@ package cn.edu.zju.labx.objects
 			   return true;
    		}
    		
-   		private function handleDoubleSlitInterference(lineRay1:LineRay, lineRay2:LineRay):void
-   		{   
-   			var angle1:Number =  MathUtils.calculateAngleOfTwoVector(Number3D.sub(lineRay1.end_point,lineRay1.start_point),this.getNormal());
-			var angle2:Number =  MathUtils.calculateAngleOfTwoVector(Number3D.sub(lineRay2.end_point,lineRay2.start_point),this.getNormal());
-            if(Math.abs(angle1-angle2)<(Math.PI/180)){
-            	displayDoubleSlitInterferenceImage(MathUtils.calculateAngleOfTwoVector(Number3D.sub(lineRay1.end_point,lineRay1.start_point),Number3D.sub(lineRay2.end_point,lineRay2.start_point)));
-            }else{
-            	StageObjectsManager.getDefault.addMessage("两条光线夹角之差大于一度");
-            }
-   		}
-   		
-   		private function handleMachZehnderInterference(lineRay1:LineRay, lineRay2:LineRay):void
-   		{
-   			var angle1:Number =  MathUtils.calculateAngleOfTwoVector(Number3D.sub(lineRay1.end_point,lineRay1.start_point),this.getNormal());
-			var angle2:Number =  MathUtils.calculateAngleOfTwoVector(Number3D.sub(lineRay2.end_point,lineRay2.start_point),this.getNormal());
-            if(Math.abs(angle1-angle2)<(Math.PI/180)){
-            	displayMachZehnderInterferenceImage(MathUtils.calculateAngleOfTwoVector(Number3D.sub(lineRay1.end_point,lineRay1.start_point),Number3D.sub(lineRay2.end_point,lineRay2.start_point)));
-            }else{
-            	StageObjectsManager.getDefault.addMessage("两条光线夹角之差大于一度");
-            }
-   		}
+
    		
     	/**
     	 *   get the distance between  the object's centrol point and the ray's start point 
