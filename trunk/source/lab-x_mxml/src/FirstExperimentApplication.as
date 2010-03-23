@@ -126,7 +126,6 @@ package
 			this.camera.useCulling = true;
 			this.camPitch = LabXConstant.DEFAULT_CAMERA_PITCH;
 			this.camYaw = LabXConstant.DEFAULT_CAMERA_YAW;
-			StageObjectsManager.getDefault.addMessage("恢复默认视角");
 		}
 		
 	}

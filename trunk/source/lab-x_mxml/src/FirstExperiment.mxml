@@ -84,16 +84,6 @@
 	 		       
 	 		   
 	 		}
-	 		public function open_stage_rotate():void{
-	 			StageObjectsManager.getDefault.rotate_stage=true;
-	 			StageObjectsManager.getDefault.addMessage("视角旋转打开.");
-	 		}
-	 		public function close_stage_rotate():void{
-	 		    StageObjectsManager.getDefault.rotate_stage=false;
-	 		    StageObjectsManager.getDefault.addMessage("视角旋转关闭.");
-	 		    //TODO: need reset the view  
-	 		    
-	 		}
 	 		public function checkBoxChanged(event:Event):void{
 	 			var checkBox:CheckBox = event.target as CheckBox;
                 if(checkBox.selected ==true){
@@ -137,20 +127,16 @@
 	 		     window.x=this.width/3;
 	 		     window.y=this.height/3;
 	 		}
-	 		public function movingObjects():void{
-	 		   ExperimentManager.getDefault.movingObjects();
-	 		
-	 		}
 	 	]]> 
 	 </mx:Script>
      <mx:VBox horizontalGap="10" verticalAlign="bottom" x="937" y="10">
      <!--button size 52*36 -->
-     		<mx:Button  click="open_stage_rotate()"  icon="@Embed('../assets/icon/open_stage_rotate.png')"  toolTip="打开屏幕旋转" />
-	 		<mx:Button  click="close_stage_rotate()" icon="@Embed('../assets/icon/close_stage_rotate.png')"  toolTip="关闭屏幕旋转"/>
+     		<mx:Button  click="StageObjectsManager.getDefault.open_stage_rotate()"  icon="@Embed('../assets/icon/open_stage_rotate.png')"  toolTip="打开屏幕旋转" />
+	 		<mx:Button  click="StageObjectsManager.getDefault.close_stage_rotate()" icon="@Embed('../assets/icon/close_stage_rotate.png')"  toolTip="关闭屏幕旋转"/>
      		<mx:Button  click="firstExperiment.reset_camera()"  icon="@Embed('../assets/icon/reset_camera.png')"  toolTip="默认视角" />
 	 		<mx:Button  buttonDown="StageObjectsManager.getDefault.mainView.camera.zoom++" autoRepeat="true" icon="@Embed('../assets/icon/zoom_add.png')" toolTip="放大"/>
 	 		<mx:Button  buttonDown="StageObjectsManager.getDefault.mainView.camera.zoom--" autoRepeat="true" icon="@Embed('../assets/icon/zoom_min.png')" toolTip="缩小"/>
-            <mx:Button  click="movingObjects()"  toolTip="最佳位置" icon="@Embed('../assets/icon/happy.png')" />
+            <mx:Button  click="StageObjectsManager.getDefault.movingObjects()"  toolTip="最佳位置" icon="@Embed('../assets/icon/happy.png')" />
             <mx:Button  click="choseComponentWindow()"  toolTip="选择器件" icon="@Embed('../assets/icon/objects.png')" />
      </mx:VBox>
      <mx:HBox x="700" y="554">
