@@ -340,6 +340,16 @@ package cn.edu.zju.labx.utils
 		}
 		
 		
+		public static function isParellel(v1:Number3D,v2:Number3D):Boolean{
+		    v1 = v1.clone();
+			v1.normalize();
+			v2 = v2.clone()
+			v2.normalize();
+			var _v:Number3D = Number3D.sub(v1,v2);
+			return ((Math.abs(_v.x)<0.05)&&(Math.abs(_v.y)<0.05)&&(Math.abs(_v.z)<0.05));
+		} 
+		
+		
 		/**
 		  * Calculate the intersaction of two lines. we assume the 2 lines are the same plane
 		  * @usage: MathUtil.calculateIntersaction(a, b, c, d); 
@@ -411,6 +421,7 @@ package cn.edu.zju.labx.utils
 		   _v2.normalize();
 		   return Math.acos(Number3D.dot(_v1,_v2));
 		}
+		
 		
 	}
 }
