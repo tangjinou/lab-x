@@ -14,7 +14,7 @@ package cn.edu.zju.labx.objects
 		 /**
 		 *  deal with when the ray on the object
 		 **/ 
-   		override public function onRayHanle(oldRay:Ray):void{
+   		override public function onRayHandle(oldRay:Ray):void{
    		    this._ray = makeNewRay1(oldRay);
 			if(_ray!=null){
 			    StageObjectsManager.getDefault.originPivot.addChild(_ray);

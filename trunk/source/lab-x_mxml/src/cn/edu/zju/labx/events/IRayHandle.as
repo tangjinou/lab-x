@@ -6,7 +6,7 @@ package cn.edu.zju.labx.events
 		/**
 		 *  deal with when the ray on the object
 		 **/ 
-   		function onRayHanle(ray:Ray):void;
+   		function onRayHandle(ray:Ray):void;
     
     	/**
     	 *   get the distance between  the object's centrol point and the ray's start point 

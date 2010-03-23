@@ -163,7 +163,7 @@ package cn.edu.zju.labx.objects
 		 /**
 		 *  deal with when the ray on the object
 		 **/ 
-   		public function onRayHanle(oldRay:Ray):void{
+   		public function onRayHandle(oldRay:Ray):void{
    		    this._ray = makeAnNewRay(oldRay);
 			if(this._ray != null)
 			{

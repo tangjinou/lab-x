@@ -56,7 +56,7 @@ package cn.edu.zju.labx.objects
             }
    		}
    		
-		override public function onRayHanle(oldRay:Ray):void
+		override public function onRayHandle(oldRay:Ray):void
 		{
 			super.onRayHandle(oldRay);
 			
