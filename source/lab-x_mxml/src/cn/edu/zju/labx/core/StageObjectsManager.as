@@ -62,6 +62,7 @@ package cn.edu.zju.labx.core
 	    
 	     /**
 		 * Get the current mouse X axis position, coordinate is start from originPivot.x
+		 * currently  not used
 		 */
 	    public function getMouse_originPivot_relative_x():int{
 	       return getMouse_x()-(LabXConstant.STAGE_WIDTH/2)-originPivot.x;
@@ -76,6 +77,7 @@ package cn.edu.zju.labx.core
 	    
 	     /**
 		 * Get the current mouse Y axis position, coordinate is start start from originPivot.y
+		 * currently  not used
 		 */
 	    public function getMouse_originPivot_relative_y():int{
 	       return getMouse_y()-(LabXConstant.STAGE_HEIGHT/2)-originPivot.y;
@@ -206,7 +208,9 @@ package cn.edu.zju.labx.core
 				}
 			}
 		}
-		 
+		/****
+		 *  check the labxobject if it is in the stage, if true it will be add the list where the ray notify
+		 */ 
 		public function objectStateChanged(object:LabXObject):void
 		{
 			if (stageObjectList.contains(object))
@@ -271,7 +275,7 @@ package cn.edu.zju.labx.core
 		 public var messageBox:TextArea;
 		 public function addMessage(msg:String):void{
 		    messageBox.text+="\n"+msg;
-		    messageBox.verticalScrollPosition=messageBox.maxVerticalScrollPosition;
+		    messageBox.verticalScrollPosition++;
 		 }
 		 public function clearMessage(msg:String):void{
 		    messageBox.text="公告栏";
@@ -341,6 +345,21 @@ package cn.edu.zju.labx.core
 		/***
 		 *  This for button listener 
 		 */
+		 
+	    public function open_stage_rotate():void{
+	 		StageObjectsManager.getDefault.rotate_stage=true;
+	 	    StageObjectsManager.getDefault.addMessage("视角旋转打开.");
+	    } 
+	    
+	    public function close_stage_rotate():void{
+	 		StageObjectsManager.getDefault.rotate_stage=false;
+	 		StageObjectsManager.getDefault.addMessage("视角旋转关闭.");
+	    }
+	    
+	    
+	    public function movingObjects():void{
+	 		   ExperimentManager.getDefault.movingObjects();
+	 	}
 		
 		public function rotate_left():void{
 		   if(labXObjectSelected!=null){
