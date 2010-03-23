@@ -140,7 +140,7 @@ package cn.edu.zju.labx.objects
                oldRay2 = oldRay;
             }
         }
-   		public function onRayHanle(oldRay:Ray):void{
+   		public function onRayHandle(oldRay:Ray):void{
    			
             saveRays(oldRay);
             

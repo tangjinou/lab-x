@@ -85,7 +85,7 @@ package cn.edu.zju.labx.core
 		      }
 		      if(nearestHandler!=null)
 		      {
-		        nearestHandler.onRayHanle(ray);
+		        nearestHandler.onRayHandle(ray);
     		  }
 		 }
 	}
