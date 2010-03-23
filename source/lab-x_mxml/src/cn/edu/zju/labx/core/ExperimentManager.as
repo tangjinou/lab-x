@@ -2,9 +2,11 @@ package cn.edu.zju.labx.core
 {
 	import cn.edu.zju.labx.objects.Board;
 	import cn.edu.zju.labx.objects.ConvexLens;
+	import cn.edu.zju.labx.objects.DoubleSlitInterfBoard;
 	import cn.edu.zju.labx.objects.LabXObject;
 	import cn.edu.zju.labx.objects.Lens;
 	import cn.edu.zju.labx.objects.LightSource;
+	import cn.edu.zju.labx.objects.MachZehnderInterfBoard;
 	import cn.edu.zju.labx.objects.Mirror;
 	import cn.edu.zju.labx.objects.SplitterBeam;
 	
@@ -53,11 +55,6 @@ package cn.edu.zju.labx.core
 		
 		
 		private var _experimentIndex:int;
-		
-		public function get experimentIndex():int
-		{
-			return _experimentIndex;
-		}
 		
 		public function createExperimentEquipments(experimentIndex:Number):ArrayCollection
 		{
@@ -220,7 +217,16 @@ package cn.edu.zju.labx.core
 		private function createBoard(name:String = "接收屏", material:MaterialObject3D=null):Board
 		{
 			material = material || new ColorMaterial(0x262626, 1, true);
-			var board:Board = new  Board(name, material);
+			var board:Board;
+			switch (_experimentIndex)
+			{
+				case LabXConstant.EXPERIMENT_FIRST:
+					board = new DoubleSlitInterfBoard(name, material);
+					break;
+				case LabXConstant.EXPERIMENT_SECOND:
+					board = new MachZehnderInterfBoard(name, material);
+					break;
+			}
 			return board;
 		}
 		
