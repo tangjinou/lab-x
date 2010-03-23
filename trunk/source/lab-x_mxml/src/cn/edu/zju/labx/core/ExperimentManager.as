@@ -1,8 +1,8 @@
 package cn.edu.zju.labx.core
 {
-	import cn.edu.zju.labx.objects.Board;
 	import cn.edu.zju.labx.objects.ConvexLens;
 	import cn.edu.zju.labx.objects.DoubleSlitInterfBoard;
+	import cn.edu.zju.labx.objects.FourierLens;
 	import cn.edu.zju.labx.objects.LabXObject;
 	import cn.edu.zju.labx.objects.Lens;
 	import cn.edu.zju.labx.objects.LightSource;
@@ -122,7 +122,7 @@ package cn.edu.zju.labx.core
 			lens4.scale = 0.8;
 			equipmentList.addItem(lens4);
 			
-			equipmentList.addItem(createBoard("接收屏"));
+			equipmentList.addItem(createDoubleSlitInterfBoard("接收屏"));
 			
 			return equipmentList;
 		}
@@ -189,10 +189,10 @@ package cn.edu.zju.labx.core
 			var lightSource:LightSource = createLightSource("激光光源");
             equipmentList.addItem(lightSource);
             
-			var lens1:Lens = createConvexLens("扩束镜1", 18);
+			var lens1:Lens = createConvexLens("扩束镜", 18);
 			lens1.scale = 0.4;
 			equipmentList.addItem(lens1);
-			var lens2:Lens = createConvexLens("准直物镜1", 108);
+			var lens2:Lens = createConvexLens("准直物镜", 108);
 			lens2.scale = 0.8;
 			equipmentList.addItem(lens2);
 			
@@ -212,7 +212,7 @@ package cn.edu.zju.labx.core
 			lens4.scale = 0.8;
 			equipmentList.addItem(lens4);
 			
-			equipmentList.addItem(createBoard("接收屏"));
+			equipmentList.addItem(createMachZehnderInterfBoard("接收屏"));
 			
 			return equipmentList;
 		}
@@ -229,10 +229,10 @@ package cn.edu.zju.labx.core
 		          if(labXObject.name =="激光光源"){
 		             TweenLite.to(labXObject,LabXConstant.MOVE_DELAY,{x:60, z:-100});
 		          }
-		          else if(labXObject.name =="扩束镜1"){ 
+		          else if(labXObject.name =="扩束镜"){ 
 		          	 TweenLite.to(labXObject,LabXConstant.MOVE_DELAY,{x:200, z:-100});	
 		          }
-		          else if(labXObject.name =="准直物镜1"){ 
+		          else if(labXObject.name =="准直物镜"){ 
 		          	 TweenLite.to(labXObject,LabXConstant.MOVE_DELAY,{x:327,z:-100});	
 		          }
 		          else if(labXObject.name =="分光镜"){
@@ -267,7 +267,34 @@ package cn.edu.zju.labx.core
 		}
 		
 		
-
+		public function createThirdExperimentEquipments():ArrayCollection
+		{
+			var equipmentList:ArrayCollection = new ArrayCollection();
+			
+			var lightSource:LightSource = createLightSource("激光光源");
+            equipmentList.addItem(lightSource);
+            
+			var lens1:Lens = createConvexLens("扩束镜", 18);
+			lens1.scale = 0.4;
+			equipmentList.addItem(lens1);
+			var lens2:Lens = createConvexLens("准直透镜", 108);
+			lens2.scale = 0.8;
+			equipmentList.addItem(lens2);
+			
+            var fourierlens1:Lens = createFourierLens("傅里叶变换镜头1");
+            equipmentList.addItem(fourierlens1);
+            var fourierlens2:Lens = createFourierLens("傅里叶变换镜头2");
+            equipmentList.addItem(fourierlens2);
+            
+            //lack of 3 equipment, "输入面", "频谱面", "输出面"
+			
+			equipmentList.addItem(createMachZehnderInterfBoard("接收屏"));
+			
+			return equipmentList;
+			
+		}
+		
+		
 
 
 		/*******************************************************************************************************
@@ -361,22 +388,29 @@ package cn.edu.zju.labx.core
 		}
 		
 		/**
+		 * Create a Lens
+		 */
+		private function createFourierLens(name:String = "傅里叶变换透镜", f:Number=LabXConstant.LENS_DEFAULT_FOCAL_LENGTH, material:MaterialObject3D=null):Lens
+		{
+			material = material || new PhongMaterial(light,0xFFFFFF,0x6ccff8,100);
+			material.interactive = true;
+			var fourierLens:FourierLens = new FourierLens(name,material, f);
+			return fourierLens;
+		}
+		
+		/**
 		 * create a board
 		 */
-		private function createBoard(name:String = "接收屏", material:MaterialObject3D=null):Board
+		private function createDoubleSlitInterfBoard(name:String = "接收屏", material:MaterialObject3D=null):DoubleSlitInterfBoard
 		{
 			material = material || new ColorMaterial(0x262626, 1, true);
-			var board:Board;
-			switch (_experimentIndex)
-			{
-				case LabXConstant.EXPERIMENT_FIRST:
-					board = new DoubleSlitInterfBoard(name, material);
-					break;
-				case LabXConstant.EXPERIMENT_SECOND:
-					board = new MachZehnderInterfBoard(name, material);
-					break;
-			}
-			return board;
+			return new DoubleSlitInterfBoard(name, material);
+		}
+		
+		private function createMachZehnderInterfBoard(name:String = "接收屏", material:MaterialObject3D=null):MachZehnderInterfBoard
+		{
+			material = material || new ColorMaterial(0x262626, 1, true);
+			return new MachZehnderInterfBoard(name, material);
 		}
 		
 
