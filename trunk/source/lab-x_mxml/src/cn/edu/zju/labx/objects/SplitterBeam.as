@@ -40,7 +40,7 @@ package cn.edu.zju.labx.objects
 		{
 			if(oldRay != null)
 			{
-				var resultRay:Ray =  new Ray(null, null, 0, 0)
+				var resultRay:Ray =  new Ray(this,null, null)
 //				oldRay.EndX = this.x;
 //				var lensLogic:LensLogic = new LensLogic(new Number3D(this.x, this.y, this.z), this._focus);
 				var newLineRays:ArrayCollection = new ArrayCollection();
@@ -78,7 +78,7 @@ package cn.edu.zju.labx.objects
 					var lineRayLogic:LineRayLogic = new LineRayLogic(oldLineRay.end_point.clone(),oldLineRay.normal);
                     newLineRays.addItem(new LineRay(lineRayLogic));
 				}
-				return  new Ray(null,newLineRays,0,0);
+				return  new Ray(this,null,newLineRays);
 		    }
 		    return  null
 		}

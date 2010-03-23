@@ -47,7 +47,7 @@ package cn.edu.zju.labx.objects
 		}
 		
 		public function createRay():void{
-		   	_ray = new Ray();
+		   	_ray = new Ray(this);
 			
 			var normal:Number3D = getNormal();
 			var lineNormal:Number3D = new Number3D(-normal.x, -normal.y, -normal.z);
