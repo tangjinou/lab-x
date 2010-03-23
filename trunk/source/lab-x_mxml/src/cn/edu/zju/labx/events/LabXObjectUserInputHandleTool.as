@@ -67,7 +67,6 @@ package cn.edu.zju.labx.events
 				}
 				
 				var keyBoradEvent:KeyboardEvent = event as KeyboardEvent;
-				if(keyDownAccelerate < 10)keyDownAccelerate += 0.5;
 				switch(keyBoradEvent.keyCode)
 				{
 					
@@ -103,6 +102,7 @@ package cn.edu.zju.labx.events
 						labXObject.objectRotate(0, LabXConstant.Y_KEY_ROTATE_MIN*keyDownAccelerate);
 						break;
 				}
+				if(keyDownAccelerate < 10)keyDownAccelerate += 0.5;
 			}
 		}
 	}

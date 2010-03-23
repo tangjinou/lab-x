@@ -388,6 +388,9 @@ package cn.edu.zju.labx.core
 				    labXObjectSelected.y++;
 		            this.addMessage(labXObjectSelected.name+"往上移动"+labXObjectSelected.y.toFixed(2));
 		    	}
+		    	trace("x: " + labXObjectSelected.x + "  y: " + labXObjectSelected.y + "  z: " + labXObjectSelected.z);
+		    	trace("rotateX: " + labXObjectSelected.rotationX + "  rotateY: " + labXObjectSelected.rotationY + "  rotateZ: " + labXObjectSelected.rotationZ);
+		    	
 		    	
 			    objectStateChanged(labXObjectSelected);
 		   }

@@ -55,44 +55,46 @@ package cn.edu.zju.labx.core
 		
 		
 		private var _experimentIndex:int;
+		private var _equipmentList:ArrayCollection;
 		
+		/**
+		 * Create the equipment according to the experiment
+		 */
 		public function createExperimentEquipments(experimentIndex:Number):ArrayCollection
 		{
-			var equipmentList:ArrayCollection = new ArrayCollection();
 			this._experimentIndex = experimentIndex;
 			switch (experimentIndex)
 			{
 				case LabXConstant.EXPERIMENT_FIRST:
-					equipmentList = createFirstExperimentEquipments();
+					_equipmentList = createFirstExperimentEquipments();
 					break;
 				case LabXConstant.EXPERIMENT_SECOND:
-					equipmentList = createSecondExperimentEquipments();
+					_equipmentList = createSecondExperimentEquipments();
 					break;
 			}
 			
-			for (var i:int=0; i<equipmentList.length; i++)
+			for (var i:int=0; i<_equipmentList.length; i++)
 			{
-				var equipment:LabXObject = equipmentList.getItemAt(i) as LabXObject;
+				var equipment:LabXObject = _equipmentList.getItemAt(i) as LabXObject;
 				equipment.moveUp(LabXConstant.LABX_OBJECT_HEIGHT/2);
 				equipment.moveForward(LabXConstant.STAGE_DEPTH/2);
-				equipment.moveRight(i*LabXConstant.STAGE_WIDTH/equipmentList.length);
+				equipment.moveRight(i*LabXConstant.STAGE_WIDTH/_equipmentList.length);
 				StageObjectsManager.getDefault.addObject(equipment);
 			}
-			return equipmentList;
+			
+			return _equipmentList;
 		}
 		
 		
-		private var equipmentList:ArrayCollection;
 		
 		/**
 		 * Create equipment for first experiment
 		 */
 		private function createFirstExperimentEquipments():ArrayCollection
 		{
-			equipmentList = new ArrayCollection();
+			var equipmentList:ArrayCollection = new ArrayCollection();
 			
 			var lightSource:LightSource = createLightSource("激光光源");
-            lightSource.moveDown(10);
             equipmentList.addItem(lightSource);
             
             var splitterBeam:SplitterBeam = createSplitterBeam("分光镜");
@@ -107,16 +109,16 @@ package cn.edu.zju.labx.core
             var mirror3:Mirror = createMirror("反射镜3")
 			equipmentList.addItem(mirror3);
 			
-			var lens1:Lens = createLens("扩束镜1", 18);
+			var lens1:Lens = createConvexLens("扩束镜1", 18);
 			lens1.scale = 0.4;
 			equipmentList.addItem(lens1);
-			var lens2:Lens = createLens("扩束镜2", 18);
+			var lens2:Lens = createConvexLens("扩束镜2", 18);
 			lens2.scale = 0.4;
 			equipmentList.addItem(lens2);
-			var lens3:Lens = createLens("准直物镜1", 108);
+			var lens3:Lens = createConvexLens("准直物镜1", 108);
 			lens3.scale = 0.8;
 			equipmentList.addItem(lens3);
-			var lens4:Lens = createLens("准直物镜2", 108);
+			var lens4:Lens = createConvexLens("准直物镜2", 108);
 			lens4.scale = 0.8;
 			equipmentList.addItem(lens4);
 			
@@ -126,6 +128,58 @@ package cn.edu.zju.labx.core
 		}
 		
 		/**
+		 * Move the equipments in first experiment to optimize place
+		 */
+		public function moveFirstExperimentEquipments():void{
+		
+		      for(var i:int=0;i<_equipmentList.length;i++){
+		      
+		          var labXObject:LabXObject = _equipmentList.getItemAt(i) as LabXObject;
+		          
+		          if(labXObject.name =="激光光源"){
+		             TweenLite.to(labXObject,LabXConstant.MOVE_DELAY,{x:50,z:0});
+		          }
+		          else if(labXObject.name =="分光镜"){
+		             TweenLite.to(labXObject,LabXConstant.MOVE_DELAY,{x:200,z:0,rotationY:45});
+		          }
+		          else if(labXObject.name =="反射镜1"){
+                     TweenLite.to(labXObject,LabXConstant.MOVE_DELAY,{x:200,z:200,rotationY:54.217});		            
+		          }
+		          else if(labXObject.name =="反射镜2"){ 
+		          	 TweenLite.to(labXObject,LabXConstant.MOVE_DELAY,{x:300,z:0,rotationY:-45});	
+		          }
+		          else if(labXObject.name =="反射镜3"){ 
+		          	 TweenLite.to(labXObject,LabXConstant.MOVE_DELAY,{x:300,z:-166.7,rotationY:-54.2});	
+		          }
+		          else if(labXObject.name =="扩束镜1"){ 
+		          	 TweenLite.to(labXObject,LabXConstant.MOVE_DELAY,{x:380,z:140,rotationY:18.5});	
+		          }
+		          else if(labXObject.name =="扩束镜2"){ 
+		          	 TweenLite.to(labXObject,LabXConstant.MOVE_DELAY,{x:380,z:-140,rotationY:-18.5});	
+		          }
+		          else if(labXObject.name =="准直物镜1"){ 
+		          	 TweenLite.to(labXObject,LabXConstant.MOVE_DELAY,{x:500,z:100,rotationY:18.5});	
+		          }
+		          else if(labXObject.name =="准直物镜2"){ 
+		          	 TweenLite.to(labXObject,LabXConstant.MOVE_DELAY,{x:500,z:-100,rotationY:-18.5});	
+		          }
+		          else if(labXObject.name =="接收屏"){ 
+		          	 TweenLite.to(labXObject,LabXConstant.MOVE_DELAY,{x:LabXConstant.DESK_WIDTH*0.9,z:0});	
+		          }
+                     
+		      }
+		      var timer:Timer= new Timer((LabXConstant.MOVE_DELAY+1)*1000);
+		      timer.addEventListener(TimerEvent.TIMER, onTimer);
+    				function onTimer(event:TimerEvent):void{
+         			   for(var i:int=0;i<_equipmentList.length;i++){
+         			       StageObjectsManager.getDefault.objectStateChanged(_equipmentList.getItemAt(i) as LabXObject);
+         			   }
+         			   timer.stop();
+                    }
+              timer.start();
+		}
+				
+		/**
 		 * Create equipment for second experiment
 		 */
 		private function createSecondExperimentEquipments():ArrayCollection
@@ -133,9 +187,15 @@ package cn.edu.zju.labx.core
 			var equipmentList:ArrayCollection = new ArrayCollection();
 			
 			var lightSource:LightSource = createLightSource("激光光源");
-            lightSource.moveDown(10);
             equipmentList.addItem(lightSource);
             
+			var lens1:Lens = createConvexLens("扩束镜1", 18);
+			lens1.scale = 0.4;
+			equipmentList.addItem(lens1);
+			var lens2:Lens = createConvexLens("准直物镜1", 108);
+			lens2.scale = 0.8;
+			equipmentList.addItem(lens2);
+			
             var splitterBeam:SplitterBeam = createSplitterBeam("分光镜");
             equipmentList.addItem(splitterBeam);
             
@@ -148,14 +208,7 @@ package cn.edu.zju.labx.core
             var mirror2:Mirror = createMirror("反射镜2")
 			equipmentList.addItem(mirror2);
 			
-			var lens1:Lens = createLens("扩束镜1", 18);
-			lens1.scale = 0.4;
-			equipmentList.addItem(lens1);
-			var lens2:Lens = createLens("准直物镜1", 108);
-			lens2.scale = 0.8;
-			equipmentList.addItem(lens2);
-			
-			var lens4:Lens = createLens("透镜", 108);
+			var lens4:Lens = createConvexLens("透镜", 400);
 			lens4.scale = 0.8;
 			equipmentList.addItem(lens4);
 			
@@ -164,6 +217,102 @@ package cn.edu.zju.labx.core
 			return equipmentList;
 		}
 		
+		/**
+		 * Move the equipments in second experiment to optimize place
+		 */
+		public function moveSecondExperimentEquipments():void{
+		
+		      for(var i:int=0;i<_equipmentList.length;i++){
+		      
+		          var labXObject:LabXObject = _equipmentList.getItemAt(i) as LabXObject;
+		          
+		          if(labXObject.name =="激光光源"){
+		             TweenLite.to(labXObject,LabXConstant.MOVE_DELAY,{x:60, z:-100});
+		          }
+		          else if(labXObject.name =="扩束镜1"){ 
+		          	 TweenLite.to(labXObject,LabXConstant.MOVE_DELAY,{x:200, z:-100});	
+		          }
+		          else if(labXObject.name =="准直物镜1"){ 
+		          	 TweenLite.to(labXObject,LabXConstant.MOVE_DELAY,{x:327,z:-100});	
+		          }
+		          else if(labXObject.name =="分光镜"){
+		             TweenLite.to(labXObject,LabXConstant.MOVE_DELAY,{x:450,z:-100,rotationY:32.5});
+		          }
+		          else if(labXObject.name =="反射镜2"){ 
+		          	 TweenLite.to(labXObject,LabXConstant.MOVE_DELAY,{x:753,z:-100,rotationY:32.5});	
+		          }
+		          else if(labXObject.name =="反射镜1"){
+                     TweenLite.to(labXObject,LabXConstant.MOVE_DELAY,{x:350,z:110,rotationY:32.5});		            
+		          }
+		          else if(labXObject.name =="透镜"){ 
+		          	 TweenLite.to(labXObject,LabXConstant.MOVE_DELAY,{x:500,z:110});	
+		          }
+		          else if(labXObject.name =="分光镜2"){ 
+		          	 TweenLite.to(labXObject,LabXConstant.MOVE_DELAY,{x:650,z:110,rotationY:32.5});	
+		          }
+		          else if(labXObject.name =="接收屏"){ 
+		          	 TweenLite.to(labXObject,LabXConstant.MOVE_DELAY,{x:LabXConstant.DESK_WIDTH*0.9,z:110});	
+		          }
+                     
+		      }
+		      var timer:Timer= new Timer((LabXConstant.MOVE_DELAY+1)*1000);
+		      timer.addEventListener(TimerEvent.TIMER, onTimer);
+    				function onTimer(event:TimerEvent):void{
+         			   for(var i:int=0;i<_equipmentList.length;i++){
+         			       StageObjectsManager.getDefault.objectStateChanged(_equipmentList.getItemAt(i) as LabXObject);
+         			   }
+         			   timer.stop();
+                    }
+              timer.start();
+		}
+		
+		
+
+
+
+		/*******************************************************************************************************
+		 * move the objects to the right place
+		 *******************************************************************************************************/
+		private var opitimize:Boolean = false;
+		public function movingObjects():void{
+		   if(opitimize == false){  
+		    		switch (_experimentIndex)
+					{
+						case LabXConstant.EXPERIMENT_FIRST:
+					 		moveFirstExperimentEquipments();
+					 		break;
+						case LabXConstant.EXPERIMENT_SECOND:
+					 		moveSecondExperimentEquipments();
+					 		break;
+					}
+			  opitimize = true;
+		   }
+	       else{
+	          moveExperimentEquipmentsDefault();
+	          opitimize = false;
+	       }	
+		}
+		
+		/**
+		 * Move equipments to default place.
+		 */
+		public function  moveExperimentEquipmentsDefault():void{
+			for(var i:int=0;i<_equipmentList.length;i++){
+		        var labXObject:LabXObject = _equipmentList.getItemAt(i) as LabXObject;
+	          	TweenLite.to(labXObject,LabXConstant.MOVE_DELAY,{x:i*LabXConstant.STAGE_WIDTH/_equipmentList.length,y:LabXConstant.LABX_OBJECT_HEIGHT/2,z:LabXConstant.STAGE_DEPTH/2,rotationY:0,rotationX:0,rotationZ:0});
+		    }
+		    
+		   	var timer:Timer= new Timer((LabXConstant.MOVE_DELAY+1)*1000);
+		      timer.addEventListener(TimerEvent.TIMER, onTimer);
+    				function onTimer(event:TimerEvent):void{
+         			   for(var i:int=0;i<_equipmentList.length;i++){
+         			       StageObjectsManager.getDefault.objectStateChanged(_equipmentList.getItemAt(i) as LabXObject);
+         			   }
+         			   timer.stop();
+                    }
+              timer.start();
+		}	
+
 		/**
 		 * Create a ray light source
 		 */
@@ -203,7 +352,7 @@ package cn.edu.zju.labx.core
 		/**
 		 * Create a Lens
 		 */
-		private function createLens(name:String = "透镜", f:Number=LabXConstant.LENS_DEFAULT_FOCAL_LENGTH, material:MaterialObject3D=null):Lens
+		private function createConvexLens(name:String = "透镜", f:Number=LabXConstant.LENS_DEFAULT_FOCAL_LENGTH, material:MaterialObject3D=null):Lens
 		{
 			material = material || new PhongMaterial(light,0xFFFFFF,0x6ccff8,100);
 			material.interactive = true;
@@ -230,87 +379,6 @@ package cn.edu.zju.labx.core
 			return board;
 		}
 		
-		private var opitimize:Boolean = false;
-		public function movingObjects():void{
-		   if(opitimize == false){  
-		    		switch (_experimentIndex)
-					{
-						case LabXConstant.EXPERIMENT_FIRST:
-					 		moveFirstExperimentEquipments();
-					 		break;
-					}
-			  opitimize = true;
-		   }
-	       else{
-	          moveExperimentEquipmentsDefault();
-	          opitimize = false;
-	       }	
-		}
-		
-		
-		public function  moveExperimentEquipmentsDefault():void{
-			for(var i:int=0;i<equipmentList.length;i++){
-		          var labXObject:LabXObject = equipmentList.getItemAt(i) as LabXObject;
-		          TweenLite.to(labXObject,LabXConstant.MOVE_DELAY,{x:100*i,y:0,z:300,rotationY:0,rotationX:0,rotationZ:0});
-		    }
-		   	var timer:Timer= new Timer((LabXConstant.MOVE_DELAY+1)*1000);
-		      timer.addEventListener(TimerEvent.TIMER, onTimer);
-    				function onTimer(event:TimerEvent):void{
-         			   for(var i:int=0;i<equipmentList.length;i++){
-         			       StageObjectsManager.getDefault.objectStateChanged(equipmentList.getItemAt(i) as LabXObject);
-         			   }
-         			   timer.stop();
-                    }
-              timer.start();
-		}	
 
-		public function moveFirstExperimentEquipments():void{
-		
-		      for(var i:int=0;i<equipmentList.length;i++){
-		      
-		          var labXObject:LabXObject = equipmentList.getItemAt(i) as LabXObject;
-		          
-		          if(labXObject.name =="激光光源"){
-		             TweenLite.to(labXObject,LabXConstant.MOVE_DELAY,{x:50,z:0});
-		          }
-		          else if(labXObject.name =="分光镜"){
-		             TweenLite.to(labXObject,LabXConstant.MOVE_DELAY,{x:200,z:0,rotationY:45});
-		          }
-		          else if(labXObject.name =="反射镜1"){
-                     TweenLite.to(labXObject,LabXConstant.MOVE_DELAY,{x:200,z:200,rotationY:54.217});		            
-		          }
-		          else if(labXObject.name =="反射镜2"){ 
-		          	 TweenLite.to(labXObject,LabXConstant.MOVE_DELAY,{x:300,z:0,rotationY:-45});	
-		          }
-		          else if(labXObject.name =="反射镜3"){ 
-		          	 TweenLite.to(labXObject,LabXConstant.MOVE_DELAY,{x:300,z:-166.7,rotationY:-54.2});	
-		          }
-		          else if(labXObject.name =="扩束镜1"){ 
-		          	 TweenLite.to(labXObject,LabXConstant.MOVE_DELAY,{x:380,z:140,rotationY:18.5});	
-		          }
-		          else if(labXObject.name =="扩束镜2"){ 
-		          	 TweenLite.to(labXObject,LabXConstant.MOVE_DELAY,{x:380,z:-140,rotationY:-18.5});	
-		          }
-		          else if(labXObject.name =="准直物镜1"){ 
-		          	 TweenLite.to(labXObject,LabXConstant.MOVE_DELAY,{x:500,z:100,rotationY:18.5});	
-		          }
-		          else if(labXObject.name =="准直物镜2"){ 
-		          	 TweenLite.to(labXObject,LabXConstant.MOVE_DELAY,{x:500,z:-100,rotationY:-18.5});	
-		          }
-		          else if(labXObject.name =="接收屏"){ 
-		          	 TweenLite.to(labXObject,LabXConstant.MOVE_DELAY,{x:LabXConstant.DESK_WIDTH*0.9,z:0});	
-		          }
-                     
-		      }
-		      var timer:Timer= new Timer((LabXConstant.MOVE_DELAY+1)*1000);
-		      timer.addEventListener(TimerEvent.TIMER, onTimer);
-    				function onTimer(event:TimerEvent):void{
-         			   for(var i:int=0;i<equipmentList.length;i++){
-         			       StageObjectsManager.getDefault.objectStateChanged(equipmentList.getItemAt(i) as LabXObject);
-         			   }
-         			   timer.stop();
-                    }
-              timer.start();
-		}
 	}
 }

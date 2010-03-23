@@ -53,19 +53,19 @@ package cn.edu.zju.labx.objects
 			var lineNormal:Number3D = new Number3D(-normal.x, -normal.y, -normal.z);
 			
 			
-			var royLogic0:LineRayLogic = new LineRayLogic(new Number3D(this.x,this.y+10,this.z), lineNormal);
+			var royLogic0:LineRayLogic = new LineRayLogic(new Number3D(this.x,this.y,this.z), lineNormal);
 			var lineRay0:LineRay = new LineRay(royLogic0);
 			
-			var royLogic1:LineRayLogic = new LineRayLogic(new Number3D(this.x,this.y+10+5,this.z), lineNormal);
+			var royLogic1:LineRayLogic = new LineRayLogic(new Number3D(this.x,this.y+5,this.z), lineNormal);
 			var lineRay1:LineRay = new LineRay(royLogic1);
 			
-			var royLogic2:LineRayLogic = new LineRayLogic(new Number3D(this.x,this.y+10-5,this.z), lineNormal);
+			var royLogic2:LineRayLogic = new LineRayLogic(new Number3D(this.x,this.y-5,this.z), lineNormal);
 			var lineRay2:LineRay = new LineRay(royLogic2);
 			
-			var royLogic3:LineRayLogic = new LineRayLogic(new Number3D(this.x,this.y+10,this.z+5), lineNormal);
+			var royLogic3:LineRayLogic = new LineRayLogic(new Number3D(this.x,this.y,this.z+5), lineNormal);
 			var lineRay3:LineRay = new LineRay(royLogic3);
 			
-			var royLogic4:LineRayLogic = new LineRayLogic(new Number3D(this.x,this.y+10,this.z-5), lineNormal);
+			var royLogic4:LineRayLogic = new LineRayLogic(new Number3D(this.x,this.y,this.z-5), lineNormal);
 			var lineRay4:LineRay = new LineRay(royLogic4);
 			
 			var lineRays:ArrayCollection =new ArrayCollection();
@@ -95,7 +95,7 @@ package cn.edu.zju.labx.objects
 			if (event is MouseEvent)
 			{
 				 var mouseEvent:MouseEvent = event as MouseEvent;
-	   	    	 if ((mouseEvent.type == MouseEvent.MOUSE_DOWN) && StageObjectsManager.getDefault.isObjectInStage(this))
+	   	    	 if ((mouseEvent.type == MouseEvent.MOUSE_UP) && StageObjectsManager.getDefault.isObjectInStage(this))
 	   	    	 {
 	   	    	 	isOn = !isOn;
 	   	    	 	
