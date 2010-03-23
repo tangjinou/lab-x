@@ -1,8 +1,8 @@
 package cn.edu.zju.labx.objects
 {   
+    import cn.edu.zju.labx.core.ExperimentManager;
     import cn.edu.zju.labx.core.LabXConstant;
     import cn.edu.zju.labx.core.StageObjectsManager;
-    import cn.edu.zju.labx.core.ExperimentManager;
     import cn.edu.zju.labx.events.IRayHandle;
     import cn.edu.zju.labx.events.IUserInputListener;
     import cn.edu.zju.labx.events.LabXObjectUserInputHandleTool;
@@ -10,6 +10,7 @@ package cn.edu.zju.labx.objects
     import cn.edu.zju.labx.utils.MathUtils;
     
     import flash.display.BitmapData;
+    import flash.display.Shape;
     import flash.events.Event;
     import flash.geom.Rectangle;
     
@@ -126,15 +127,20 @@ package cn.edu.zju.labx.objects
 		
 		public function displayMachZehnderInterferenceImage(theta:Number):void
 		{   
-			var distance:Number = InterferenceLogic.doubleSlitInterferenceLogic(theta, LabXConstant.WAVE_LENGTH);
-//			trace(distance);
-			
-			distance /= 300;
-			var numOfColumns:Number = depth/distance/2;
+			//TODO: add relationship with input parameter
+			var interval:Number = 5;
+			var numOfCircles:Number = height/interval;
 			bmp = new BitmapData(depth, height, false, 0x0);
-			for (var i:Number = 0; i < numOfColumns; i++)
+			var circle:Shape = new Shape();
+			var baseColor:Number = 0x0000FF;
+			var color:Number = baseColor;
+			circle.graphics.beginFill(color);
+			for (var i:Number = numOfCircles; i > 0; i--)
 			{
-				bmp.fillRect(new Rectangle(i*distance*2, 0, distance, height), 0x0000FF);
+				circle.graphics.drawCircle(depth/2, height/2 ,i*interval);
+				color = baseColor - color;
+				circle.graphics.beginFill(color);
+				bmp.draw(circle);
 			}
 			new_material = new BitmapMaterial(bmp);
 			new_material.smooth = true;
@@ -204,8 +210,10 @@ package cn.edu.zju.labx.objects
 					{
 						case LabXConstant.EXPERIMENT_FIRST:	
 							handleDoubleSlitInterference(lineRay1, lineRay2);
+							break;
 						case LabXConstant.EXPERIMENT_SECOND:
 							handleMachZehnderInterference(lineRay1, lineRay2);
+							break;
 					}
                }else{
                		  StageObjectsManager.getDefault.addMessage("光线没有经过挡板");
