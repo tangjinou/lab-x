@@ -63,12 +63,14 @@ package cn.edu.zju.labx.objects
 			var ty:Number = (dy==0) ? Number.MAX_VALUE : ((dy>0) ? (500-y)/dy : (-50-y)/dy);
 			var tz:Number = (dz==0) ? Number.MAX_VALUE : ((dz>0) ? (LabXConstant.DESK_Z_MAX-z)/dz : (LabXConstant.DESK_Z_MIN-z)/dz);
 			
+			var t:Number;
 			if(tx < 0 || ty < 0 || tz < 0)
 			{
-				trace("calculate end point error");
+				t = LabXConstant.RAY_DEFAULT_LENGTH;
+			} else {
+				t = ((tx <= ty) && (tx <= tz)) ? tx : ((ty <= tz) ? ty : tz)
 			}
 			
-			var t:Number = ((tx <= ty) && (tx <= tz)) ? tx : ((ty <= tz) ? ty : tz);
 			if (t != ty)t += 200;
 			
 			x = t * dx + x;
