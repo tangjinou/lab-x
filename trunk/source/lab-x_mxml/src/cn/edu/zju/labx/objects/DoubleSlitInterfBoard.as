@@ -46,21 +46,19 @@ package cn.edu.zju.labx.objects
 			
 			if(oldRay1!=null&&oldRay2!=null)
 			{
-		       if(isParellel(oldRay1)==false || isParellel(oldRay2)==false){
+		       if(isParellel(oldRay1)==false || isParellel(oldRay2)==false)
+		       {
 		       	  StageObjectsManager.getDefault.addMessage("射入挡板入射光线不平行");
 		          return;
 		       }
 		       
-				if(oldRay1!=null&&oldRay2!=null)
-				{
-				   var lineRay1:LineRay = oldRay1.getLineRays().getItemAt(0) as LineRay;
-				   var lineRay2:LineRay = oldRay2.getLineRays().getItemAt(0) as LineRay;
-				   if(lineRay1!=null&&lineRay2!=null){
-						handleDoubleSlitInterference(lineRay1, lineRay2);
-	               }else{
-	               		StageObjectsManager.getDefault.addMessage("光线没有经过挡板");
-	               }
-	    		}
+				var lineRay1:LineRay = oldRay1.getLineRays().getItemAt(0) as LineRay;
+				var lineRay2:LineRay = oldRay2.getLineRays().getItemAt(0) as LineRay;
+				if(lineRay1!=null&&lineRay2!=null){
+					handleDoubleSlitInterference(lineRay1, lineRay2);
+	           	}else{
+	               	StageObjectsManager.getDefault.addMessage("光线没有经过挡板");
+	           	}
    			}   
         } 
         
