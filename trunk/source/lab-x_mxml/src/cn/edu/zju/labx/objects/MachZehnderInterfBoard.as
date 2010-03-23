@@ -63,12 +63,12 @@ package cn.edu.zju.labx.objects
 			   var isOldRay1Parellel:Boolean = 	isParellel(oldRay1);
 			   var isOldRay2Parellel:Boolean = 	isParellel(oldRay2);
 			   
-		       if(isOldRay1Parellel==true && isOldRay1Parellel==true)
+		       if(isOldRay1Parellel==true && isOldRay2Parellel==true)
 		       {
 		       	  StageObjectsManager.getDefault.addMessage("两条入射挡板线都平行");
 		          return;
 		       }
-		       if(isOldRay1Parellel==false && isOldRay1Parellel==false)
+		       if(isOldRay1Parellel==false && isOldRay2Parellel==false)
 		       {
 		       	  StageObjectsManager.getDefault.addMessage("两条入射挡板线都不平行");
 		          return;
