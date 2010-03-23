@@ -1,16 +1,14 @@
 package cn.edu.zju.labx.objects
 {
+	import cn.edu.zju.labx.core.StageObjectsManager;
+	import cn.edu.zju.labx.utils.MathUtils;
+	
+	import flash.display.BitmapData;
+	import flash.display.Shape;
+	
+	import org.papervision3d.core.math.Number3D;
 	import org.papervision3d.core.proto.MaterialObject3D;
-    import org.papervision3d.materials.BitmapMaterial;
-    import org.papervision3d.core.math.Number3D;
-    import cn.edu.zju.labx.logicObject.InterferenceLogic;
-    import cn.edu.zju.labx.core.LabXConstant;
-    import cn.edu.zju.labx.utils.MathUtils;
-    import cn.edu.zju.labx.core.StageObjectsManager;	
-    import flash.display.BitmapData;
-    import flash.events.Event;
-    import flash.geom.Rectangle;
-    import flash.display.Shape;
+	import org.papervision3d.materials.BitmapMaterial;
 	    
 	public class MachZehnderInterfBoard extends Board
 	{
@@ -61,12 +59,21 @@ package cn.edu.zju.labx.objects
 			super.onRayHandle(oldRay);
 			
 			if(oldRay1!=null&&oldRay2!=null)
-			{
-		       if(isParellel(oldRay1)==false || isParellel(oldRay2)==false)
+			{  
+			   var isOldRay1Parellel:Boolean = 	isParellel(oldRay1);
+			   var isOldRay2Parellel:Boolean = 	isParellel(oldRay2);
+			   
+		       if(isOldRay1Parellel==true && isOldRay1Parellel==true)
 		       {
-		       	  StageObjectsManager.getDefault.addMessage("射入挡板入射光线不平行");
+		       	  StageObjectsManager.getDefault.addMessage("两条入射挡板线都平行");
 		          return;
 		       }
+		       if(isOldRay1Parellel==false && isOldRay1Parellel==false)
+		       {
+		       	  StageObjectsManager.getDefault.addMessage("两条入射挡板线都不平行");
+		          return;
+		       }
+		       
 		       
 				var lineRay1:LineRay = oldRay1.getLineRays().getItemAt(0) as LineRay;
 				var lineRay2:LineRay = oldRay2.getLineRays().getItemAt(0) as LineRay;
