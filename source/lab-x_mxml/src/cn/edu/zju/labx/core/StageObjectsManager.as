@@ -129,7 +129,6 @@ package cn.edu.zju.labx.core
 		 * ***********************************************************************
 		 */
 		public function get layerManager():LayerManager{
-		
 		   return LayerManager.getDefault;
 		}
 		

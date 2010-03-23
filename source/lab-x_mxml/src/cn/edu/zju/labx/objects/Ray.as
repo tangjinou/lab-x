@@ -1,6 +1,5 @@
 package cn.edu.zju.labx.objects
 {   
-	import cn.edu.zju.labx.core.LabXConstant;
 	import cn.edu.zju.labx.core.StageObjectsManager;
 	
 	import mx.collections.ArrayCollection;
@@ -25,6 +24,8 @@ package cn.edu.zju.labx.objects
 		private var startX:Number;
 		private var endX:Number;
 		
+		private var sender:LabXObject;
+		
 		//This array is in for lineRay
 		public var lineRays:ArrayCollection =new ArrayCollection();//FOR TEST
 		
@@ -32,13 +33,16 @@ package cn.edu.zju.labx.objects
 		private var lineMaterial:LineMaterial = new LineMaterial(0x00ffff,1);
 		private var effectLayer:ViewportLayer = new ViewportLayer(StageObjectsManager.getDefault.mainView.viewport, null);
 		
-		public function Ray(material:MaterialObject3D=null,lineRays:ArrayCollection =null, startX:Number=0, endX:Number=0)
+		public function Ray(sender:LabXObject,material:MaterialObject3D=null,lineRays:ArrayCollection =null)
 		{
 			super(material,null);
 			this.lineBold = lineBold;
             this.lineRays= lineRays;
+            this.sender = sender;
 		}
-		
+		public function getSender():LabXObject{
+		   return this.sender;
+		}
 		public function getLineRays():ArrayCollection
 		{
 		    return lineRays;
@@ -85,6 +89,8 @@ package cn.edu.zju.labx.objects
 			StageObjectsManager.getDefault.layerManager.addRayLayer(effectLayer);
 		    addChild(lines);
 	    }
+	    
+	    
 	    
 	    public function destroy():void
 	    {

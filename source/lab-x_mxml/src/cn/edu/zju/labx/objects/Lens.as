@@ -107,7 +107,7 @@ package cn.edu.zju.labx.objects
 					}
 				}
 			    oldRay.displayRays();
-				return  new Ray(null, newLineRays, 0, 0);
+				return  new Ray(this,null, newLineRays);
 			}
 			return null;
 		}
