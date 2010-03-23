@@ -203,6 +203,10 @@ package cn.edu.zju.labx.objects
 			}
 			oldRay.displayRays();
 			if(oldRay1!=null&&oldRay2!=null){
+		       if(isParellel(oldRay1)==false || isParellel(oldRay2)==false){
+		       	  StageObjectsManager.getDefault.addMessage("射入挡板入射光线不平行");
+		          return;
+		       }
 			   var lineRay1:LineRay = oldRay1.getLineRays().getItemAt(0) as LineRay;
 			   var lineRay2:LineRay = oldRay2.getLineRays().getItemAt(0) as LineRay;
 			   if(lineRay1!=null&&lineRay2!=null){
@@ -222,8 +226,21 @@ package cn.edu.zju.labx.objects
             } 
    		}
    		
+   		private function isParellel(ray:Ray):Boolean{
+   		       for(var i:int=0;i<ray.getLineRays().length;i++){
+			       for(var j:int=0;j<ray.getLineRays().length;j++){
+			       	var lineRay1:LineRay = ray.getLineRays().getItemAt(i) as LineRay;
+			       	var lineRay2:LineRay = ray.getLineRays().getItemAt(j) as LineRay;
+                      if(!MathUtils.isParellel(lineRay1.normal,lineRay2.normal)){
+                         return false;
+                      }			       
+			       }
+			   }
+			   return true;
+   		}
+   		
    		private function handleDoubleSlitInterference(lineRay1:LineRay, lineRay2:LineRay):void
-   		{
+   		{   
    			var angle1:Number =  MathUtils.calculateAngleOfTwoVector(Number3D.sub(lineRay1.end_point,lineRay1.start_point),this.getNormal());
 			var angle2:Number =  MathUtils.calculateAngleOfTwoVector(Number3D.sub(lineRay2.end_point,lineRay2.start_point),this.getNormal());
             if(Math.abs(angle1-angle2)<(Math.PI/180)){
