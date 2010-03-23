@@ -295,6 +295,40 @@ package cn.edu.zju.labx.core
 		}
 		
 		
+		public function createForthExperimentEquipments():ArrayCollection
+		{
+			var equipmentList:ArrayCollection = new ArrayCollection();
+			
+			var lightSource:LightSource = createLightSource("激光光源");
+            equipmentList.addItem(lightSource);
+            
+			var lens1:Lens = createConvexLens("扩束镜", 18);
+			lens1.scale = 0.4;
+			equipmentList.addItem(lens1);
+			var lens2:Lens = createConvexLens("准直透镜", 108);
+			lens2.scale = 0.8;
+			equipmentList.addItem(lens2);
+			
+			var splitterBeam:SplitterBeam = createSplitterBeam("偏振分光镜");
+			equipmentList.addItem(splitterBeam);
+			
+			var lens3:Lens = createConvexLens("成像透镜", 80);
+			equipmentList.addItem(lens3);
+			
+			equipmentList.addItem(createMachZehnderInterfBoard("接收屏"));
+			
+			//lack "液晶光阀"
+			var lens4:Lens = createConvexLens("成像透镜", 80);
+			equipmentList.addItem(lens4);
+			
+			//lack "图像透明片", "非相干照明光源"
+			
+			
+			return equipmentList;
+			
+		}
+		
+		
 
 
 		/*******************************************************************************************************
