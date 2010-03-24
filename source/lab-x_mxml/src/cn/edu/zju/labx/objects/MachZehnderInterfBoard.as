@@ -34,8 +34,8 @@ package cn.edu.zju.labx.objects
 				circle.graphics.drawCircle(depth/2, height/2 ,i*interval);
 				color = baseColor - color;
 				circle.graphics.beginFill(color);
-				bmp.draw(circle);
 			}
+			bmp.draw(circle);
 			new_material = new BitmapMaterial(bmp);
 			new_material.smooth = true;
 			new_material.interactive = true;
