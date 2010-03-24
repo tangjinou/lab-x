@@ -71,7 +71,6 @@ package cn.edu.zju.labx.objects
 				removeChild(lines);
 				StageObjectsManager.getDefault.layerManager.removeRayLayer(this.effectLayer);
 			}
-
 			lines = new Lines3D(lineMaterial);
 			for(var i:int=0;i<lineRays.length;i++){
 			  if(lineRays.getItemAt(i) is LineRay)
@@ -84,14 +83,20 @@ package cn.edu.zju.labx.objects
 			  	lines.addLine(new Line3D(lines, lineMaterial, lineBold, start_point, end_point));
 			  }
 		    }
-		    
 			effectLayer.addDisplayObject3D(lines, true);
 			StageObjectsManager.getDefault.layerManager.addRayLayer(effectLayer);
 		    addChild(lines);
 	    }
-	    
-	    
-	    
+	    /**
+	    *  this other info is the info witch ray can bring
+	    */
+	    private var otherInfo:Object;
+	    public function getOtherInfo():Object{
+            return otherInfo;	       
+	    }
+	    public function setOtherInfo(obj:Object):void{
+	        this.otherInfo = obj;
+	    }
 	    public function destroy():void
 	    {
 	    	removeChild(lines);
@@ -102,6 +107,7 @@ package cn.edu.zju.labx.objects
 	    	lineMaterial = null;
 	    	StageObjectsManager.getDefault.layerManager.removeRayLayer(this.effectLayer);
 	    	effectLayer = null;
+	    	otherInfo = null;
 	    }
         
 	}

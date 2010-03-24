@@ -24,7 +24,6 @@
             private var all_checkBox:CheckBox = new CheckBox();
             
             
-            
             private var chooseExperimentwindow:ChooseExperimentWindow
             
             private var experiment:ExperimentApplication;
