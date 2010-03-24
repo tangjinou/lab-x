@@ -24,7 +24,7 @@ package cn.edu.zju.labx.objects
 	
 	public class BeamSplitter extends LabXObject implements IUserInputListener,IRayHandle
 	{   
-		private var splitterBeam:Cube;
+		protected var displayObject:Cube;
 		
 		private var userInputhandleTool:LabXObjectUserInputHandleTool;
 		
@@ -103,21 +103,20 @@ package cn.edu.zju.labx.objects
 			materialsList.addMaterial(material,"right");
 			materialsList.addMaterial(material,"top");
 			materialsList.addMaterial(material,"bottom");
-		   	splitterBeam = new Cube(materialsList,width,depth,height);
+		   	displayObject = new Cube(materialsList,width,depth,height);
 		   	
 		   	var effectLayer:ViewportLayer = new ViewportLayer(StageObjectsManager.getDefault.mainView.viewport, null);
-			effectLayer.addDisplayObject3D(splitterBeam, true);
+			effectLayer.addDisplayObject3D(displayObject, true);
 			effectLayer.blendMode = BlendMode.HARDLIGHT;
 			StageObjectsManager.getDefault.layerManager.equipmentLayer.addLayer(effectLayer);
-
 		   	
-		   	this.addChild(splitterBeam);
+		   	this.addChild(displayObject);
 		}
 	    
 	    // should destribute the listener 
         override public function addEventListener(type:String, listener:Function,useCapture:Boolean = false, priority:int = 0, useWeakReference:Boolean = false):void
 		{   
-			splitterBeam.addEventListener(type, listener, useCapture, priority, useWeakReference);
+			displayObject.addEventListener(type, listener, useCapture, priority, useWeakReference);
 		}
 		
 	     /************************************************************
@@ -183,7 +182,7 @@ package cn.edu.zju.labx.objects
 		 * 
 		 */ 
 		override public function getObjectWithMaterial():TriangleMesh3D{
-		    return splitterBeam;
+		    return displayObject;
 		}
 	}
 }
