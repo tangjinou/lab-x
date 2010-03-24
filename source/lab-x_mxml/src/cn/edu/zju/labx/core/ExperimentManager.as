@@ -444,7 +444,7 @@ package cn.edu.zju.labx.core
 		 */
 		private function createFourierGrating(name:String = "傅立叶光栅", material:MaterialObject3D=null):FourierGrating
 		{
-		    material = material || new PhongMaterial(light,0xFFFFFF,0x6ccff8,100);
+		    material = material || new ColorMaterial(0x6ccff8, 1, true);
 			material.interactive = true;
 			var grating:FourierGrating =new FourierGrating(name, material);
 			return grating;
