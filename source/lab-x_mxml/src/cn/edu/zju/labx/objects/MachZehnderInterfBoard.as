@@ -19,7 +19,7 @@ package cn.edu.zju.labx.objects
 
 
 		
-		public function displayMachZehnderInterferenceImage(theta:Number):void
+		private function displayMachZehnderInterferenceImage(theta:Number):void
 		{   
 			//TODO: add relationship with input parameter
 			var interval:Number = 5;
