@@ -1,6 +1,6 @@
 package
 {
-	import cn.edu.zju.labx.objects.SplitterBeam;
+	import cn.edu.zju.labx.objects.BeamSplitter;
 	
 	import flash.events.Event;
 	import flash.events.MouseEvent;
@@ -99,7 +99,7 @@ package
 			
 			var shadeMaterialLens:PhongMaterial = new PhongMaterial(light,0xFFFFFF,0x6ccff8,100);
 			shadeMaterialLens.interactive = true;
-			var beam:SplitterBeam =new SplitterBeam(shadeMaterialLens);
+			var beam:BeamSplitter =new BeamSplitter(shadeMaterialLens);
 			originPivot.addChild(beam);		
 			
 		}

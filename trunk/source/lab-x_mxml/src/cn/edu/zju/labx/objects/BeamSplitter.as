@@ -22,13 +22,13 @@ package cn.edu.zju.labx.objects
 	import org.papervision3d.objects.primitives.Cube;
 	import org.papervision3d.view.layer.ViewportLayer;
 	
-	public class SplitterBeam extends LabXObject implements IUserInputListener,IRayHandle
+	public class BeamSplitter extends LabXObject implements IUserInputListener,IRayHandle
 	{   
 		private var splitterBeam:Cube;
 		
 		private var userInputhandleTool:LabXObjectUserInputHandleTool;
 		
-		public function SplitterBeam(name:String,material:MaterialObject3D,vertices:Array=null, faces:Array=null)
+		public function BeamSplitter(name:String,material:MaterialObject3D,vertices:Array=null, faces:Array=null)
 		{
 			super(material,name, vertices, faces);
 			createDisplayObject();

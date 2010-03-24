@@ -9,7 +9,7 @@ package cn.edu.zju.labx.core
 	import cn.edu.zju.labx.objects.MachZehnderInterfBoard;
 	import cn.edu.zju.labx.objects.FourierDisplayBoard;
 	import cn.edu.zju.labx.objects.Mirror;
-	import cn.edu.zju.labx.objects.SplitterBeam;
+	import cn.edu.zju.labx.objects.BeamSplitter;
 	
 	import com.greensock.TweenLite;
 	
@@ -104,7 +104,7 @@ package cn.edu.zju.labx.core
 			var lightSource:LightSource = createLightSource("激光光源");
             equipmentList.addItem(lightSource);
             
-            var splitterBeam:SplitterBeam = createSplitterBeam("分光镜");
+            var splitterBeam:BeamSplitter = createSplitterBeam("分光镜");
             equipmentList.addItem(splitterBeam);
             
             var mirror1:Mirror = createMirror("反射镜1")
@@ -203,10 +203,10 @@ package cn.edu.zju.labx.core
 			lens2.scale = 0.8;
 			equipmentList.addItem(lens2);
 			
-            var splitterBeam:SplitterBeam = createSplitterBeam("分光镜");
+            var splitterBeam:BeamSplitter = createSplitterBeam("分光镜");
             equipmentList.addItem(splitterBeam);
             
-             var splitterBeam2:SplitterBeam = createSplitterBeam("分光镜2");
+             var splitterBeam2:BeamSplitter = createSplitterBeam("分光镜2");
             equipmentList.addItem(splitterBeam2);
             
             var mirror1:Mirror = createMirror("反射镜1")
@@ -323,7 +323,7 @@ package cn.edu.zju.labx.core
 			lens2.scale = 0.8;
 			equipmentList.addItem(lens2);
 			
-			var splitterBeam:SplitterBeam = createSplitterBeam("偏振分光镜");
+			var splitterBeam:BeamSplitter = createSplitterBeam("偏振分光镜");
 			equipmentList.addItem(splitterBeam);
 			
 			var lens3:Lens = createConvexLens("成像透镜", 80);
@@ -417,11 +417,11 @@ package cn.edu.zju.labx.core
 		/**
 		 * Create a Splitter Beam
 		 */
-		private function createSplitterBeam(name:String = "分光镜", material:MaterialObject3D=null):SplitterBeam
+		private function createSplitterBeam(name:String = "分光镜", material:MaterialObject3D=null):BeamSplitter
 		{
 			material = material || new PhongMaterial(light,0xFFFFFF,0xFF0000,100);
 			material.interactive = true;
-			var beam:SplitterBeam =new SplitterBeam(name, material);
+			var beam:BeamSplitter =new BeamSplitter(name, material);
 			return beam;
 		}
 		
