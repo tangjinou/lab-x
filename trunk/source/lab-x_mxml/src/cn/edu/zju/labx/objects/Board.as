@@ -49,6 +49,8 @@ package cn.edu.zju.labx.objects
 		    userInputTool = new LabXObjectUserInputHandleTool(this);
 		}
 		
+		protected var effectLayer:ViewportLayer = new ViewportLayer(StageObjectsManager.getDefault.mainView.viewport, null);
+			   	
 		public function createDisplayObject():void{
 	        
 	        width=LabXConstant.LABX_OBJECT_WIDTH/10;
@@ -65,12 +67,15 @@ package cn.edu.zju.labx.objects
 		   	cube = new Cube(materialsList,width,depth,height);
 		   	this.addChild(cube);
 		   	
-		   	var effectLayer:ViewportLayer = new ViewportLayer(StageObjectsManager.getDefault.mainView.viewport, null);
 			effectLayer.addDisplayObject3D(cube, true);
 			StageObjectsManager.getDefault.layerManager.equipmentLayer.addLayer(effectLayer);
-			
-			/* display a cursor */
-			var lines:Lines3D = new Lines3D;
+			displayCursor();
+
+		}
+		
+		private var lines:Lines3D = new Lines3D;
+		private function displayCursor():void
+		{
 			var blueMaterial:LineMaterial = new LineMaterial(0x0000FF);
 			var start:Vertex3D;
 			var end:Vertex3D;
@@ -86,8 +91,11 @@ package cn.edu.zju.labx.objects
 			effectLayer.addDisplayObject3D(lines);
 			this.addChild(lines);
 		}
-
 		
+		protected function removeCursor():void
+		{
+			effectLayer.removeDisplayObject3D(lines);
+		}
 		
 		public function hanleUserInputEvent(event:Event):void
 		{

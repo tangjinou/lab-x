@@ -37,7 +37,7 @@ package cn.edu.zju.labx.objects
 			new_material.smooth = true;
 			new_material.interactive = true;
 			cube.replaceMaterialByName(new_material, "left");
-			
+			this.removeCursor();
 		}
 		
 		override public function onRayHandle(oldRay:Ray):void
