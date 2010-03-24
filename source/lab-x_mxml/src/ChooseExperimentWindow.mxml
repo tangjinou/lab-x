@@ -3,6 +3,7 @@
     title="实验选择"  showCloseButton="true" close="PopUpManager.removePopUp(this);" creationComplete="init()" borderAlpha="0.75" width="304" height="146">
 	<mx:Script>
 		<![CDATA[
+			import cn.edu.zju.labx.core.LabXConstant;
 			import mx.collections.ArrayCollection;
 			import cn.edu.zju.labx.core.StageObjectsManager;
 			import mx.managers.PopUpManager;
@@ -10,8 +11,11 @@
 			
 			[Bindable]
 		    public static var exps:ArrayCollection = new ArrayCollection(
-                [ {label:"实验一", data:1}, 
-                  {label:"实验二", data:2}]);
+                [ {label:"实验一", data:LabXConstant.EXPERIMENT_FIRST}, 
+                  {label:"实验二", data:LabXConstant.EXPERIMENT_SECOND},
+                  {label:"实验三", data:LabXConstant.EXPERIMENT_THIRD},
+                  {label:"实验四", data:LabXConstant.EXPERIMENT_FORTH}
+                  ]);
 			public function init():void{
 			}
 			public var experiment_id:int=1;

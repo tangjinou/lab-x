@@ -71,6 +71,11 @@ package cn.edu.zju.labx.core
 				case LabXConstant.EXPERIMENT_SECOND:
 					_equipmentList = createSecondExperimentEquipments();
 					break;
+				case LabXConstant.EXPERIMENT_THIRD:
+					_equipmentList = createThirdExperimentEquipments();
+				case LabXConstant.EXPERIMENT_FORTH:
+					_equipmentList = createForthExperimentEquipments();
+					break;
 			}
 			
 			for (var i:int=0; i<_equipmentList.length; i++)
@@ -294,6 +299,13 @@ package cn.edu.zju.labx.core
 			
 		}
 		
+		/**
+		 * Move the equipments in third experiment to optimize place
+		 */
+		public function moveThirdExperimentEquipments():void{
+			//TODO:
+		}
+		
 		
 		public function createForthExperimentEquipments():ArrayCollection
 		{
@@ -328,6 +340,12 @@ package cn.edu.zju.labx.core
 			
 		}
 		
+		/**
+		 * Move the equipments in forth experiment to optimize place
+		 */
+		public function moveForthExperimentEquipments():void{
+			//TODO:
+		}
 		
 
 
@@ -344,6 +362,12 @@ package cn.edu.zju.labx.core
 					 		break;
 						case LabXConstant.EXPERIMENT_SECOND:
 					 		moveSecondExperimentEquipments();
+					 		break;
+					 	case LabXConstant.EXPERIMENT_THIRD:
+					 		moveThirdExperimentEquipments();
+					 		break;
+					 	case LabXConstant.EXPERIMENT_FORTH:
+					 		moveForthExperimentEquipments();
 					 		break;
 					}
 			  opitimize = true;
