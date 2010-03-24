@@ -7,7 +7,7 @@ package cn.edu.zju.labx.core
 	import cn.edu.zju.labx.objects.Lens;
 	import cn.edu.zju.labx.objects.LightSource;
 	import cn.edu.zju.labx.objects.MachZehnderInterfBoard;
-	import cn.edu.zju.labx.objects.FourierBoard;
+	import cn.edu.zju.labx.objects.FourierDisplayBoard;
 	import cn.edu.zju.labx.objects.Mirror;
 	import cn.edu.zju.labx.objects.SplitterBeam;
 	
@@ -473,10 +473,10 @@ package cn.edu.zju.labx.core
 			return new MachZehnderInterfBoard(name, material);
 		}
 
-		private function createFourierBoard(name:String = "接收屏", material:MaterialObject3D=null):FourierBoard
+		private function createFourierBoard(name:String = "接收屏", material:MaterialObject3D=null):FourierDisplayBoard
 		{
 			material = material || new ColorMaterial(0x262626, 1, true);
-			return new FourierBoard(name, material);
+			return new FourierDisplayBoard(name, material);
 		}		
 
 	}

@@ -6,12 +6,12 @@ package cn.edu.zju.labx.objects
 	import org.papervision3d.core.proto.MaterialObject3D;
 	import org.papervision3d.materials.BitmapMaterial;
 	
-	public class FourierBoard extends Board
+	public class FourierDisplayBoard extends Board
 	{
-		public function FourierBoard(name:String,material:MaterialObject3D=null)
+		public function FourierDisplayBoard(name:String,material:MaterialObject3D=null)
 		{
 			super(name, material);
-			this.displayImage(false); //temp to display image always on receiving rays
+			this.displayImage(false); //temp to display image always
 		}
 		
 		override public function onRayHandle(oldRay:Ray):void
