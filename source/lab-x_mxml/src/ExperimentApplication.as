@@ -19,7 +19,7 @@ package
 	import org.papervision3d.view.layer.ViewportLayer;
 	import org.papervision3d.view.stats.StatsView;
 	
-	public class FirstExperimentApplication extends BasicView
+	public class ExperimentApplication extends BasicView
 	{
         private var camPitch:Number = LabXConstant.DEFAULT_CAMERA_PITCH;
         private var camYaw:Number = LabXConstant.DEFAULT_CAMERA_YAW;
@@ -34,7 +34,7 @@ package
 		
 		private var equipmentLayer:ViewportLayer;
 		
-		public function FirstExperimentApplication(viewportWidth:Number=LabXConstant.STAGE_WIDTH, viewportHeight:Number=LabXConstant.STAGE_HEIGHT, scaleToStage:Boolean=true, interactive:Boolean=false, cameraType:String="Target")
+		public function ExperimentApplication(viewportWidth:Number=LabXConstant.STAGE_WIDTH, viewportHeight:Number=LabXConstant.STAGE_HEIGHT, scaleToStage:Boolean=true, interactive:Boolean=false, cameraType:String="Target")
 		{
 			super(viewportWidth, viewportHeight, true, false, CameraType.FREE);
 			viewport.interactive = true;
