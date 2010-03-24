@@ -4,6 +4,7 @@ package cn.edu.zju.labx.core
 	import cn.edu.zju.labx.objects.ConvexLens;
 	import cn.edu.zju.labx.objects.DoubleSlitInterfBoard;
 	import cn.edu.zju.labx.objects.FourierDisplayBoard;
+	import cn.edu.zju.labx.objects.ObjectPlane;
 	import cn.edu.zju.labx.objects.FourierGrating;
 	import cn.edu.zju.labx.objects.FourierLens;
 	import cn.edu.zju.labx.objects.LabXObject;
@@ -294,7 +295,7 @@ package cn.edu.zju.labx.core
             var fourierlens2:Lens = createFourierLens("傅里叶变换镜头2");
             equipmentList.addItem(fourierlens2);
             
-            //lack of 3 equipment, "输入面"
+            equipmentList.addItem(createObjectPlane("输入面"));
             equipmentList.addItem(createFourierGrating("傅立叶光栅"));
 			equipmentList.addItem(createFourierBoard("接收屏"));
 
@@ -448,6 +449,18 @@ package cn.edu.zju.labx.core
 			var grating:FourierGrating =new FourierGrating(name, material);
 			return grating;
 		}
+		
+		 /**
+		 * Create a ObjectPlane
+		 */
+		private function createObjectPlane(name:String = "输入面", material:MaterialObject3D=null):ObjectPlane
+		{
+		    material = material || new PhongMaterial(light,0xFFFFFF,0x6ccff8,100);
+			material.interactive = true;
+			var plane:ObjectPlane =new ObjectPlane(name, material);
+			return plane;
+		}
+		
 		/**
 		 * Create a Lens
 		 */
