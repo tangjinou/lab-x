@@ -1,15 +1,16 @@
 package cn.edu.zju.labx.core
 {
+	import cn.edu.zju.labx.objects.BeamSplitter;
 	import cn.edu.zju.labx.objects.ConvexLens;
 	import cn.edu.zju.labx.objects.DoubleSlitInterfBoard;
+	import cn.edu.zju.labx.objects.FourierDisplayBoard;
+	import cn.edu.zju.labx.objects.FourierGrating;
 	import cn.edu.zju.labx.objects.FourierLens;
 	import cn.edu.zju.labx.objects.LabXObject;
 	import cn.edu.zju.labx.objects.Lens;
 	import cn.edu.zju.labx.objects.LightSource;
 	import cn.edu.zju.labx.objects.MachZehnderInterfBoard;
-	import cn.edu.zju.labx.objects.FourierDisplayBoard;
 	import cn.edu.zju.labx.objects.Mirror;
-	import cn.edu.zju.labx.objects.BeamSplitter;
 	
 	import com.greensock.TweenLite;
 	
@@ -293,7 +294,8 @@ package cn.edu.zju.labx.core
             var fourierlens2:Lens = createFourierLens("傅里叶变换镜头2");
             equipmentList.addItem(fourierlens2);
             
-            //lack of 3 equipment, "输入面", "频谱面", "输出面"
+            //lack of 3 equipment, "输入面"
+            equipmentList.addItem(createFourierGrating("傅立叶光栅"));
 			equipmentList.addItem(createFourierBoard("接收屏"));
 
 			
@@ -436,6 +438,16 @@ package cn.edu.zju.labx.core
 			return mirror;
 		}
 		
+		 /**
+		 * Create a FourierGrating
+		 */
+		private function createFourierGrating(name:String = "傅立叶光栅", material:MaterialObject3D=null):FourierGrating
+		{
+		    material = material || new PhongMaterial(light,0xFFFFFF,0x6ccff8,100);
+			material.interactive = true;
+			var grating:FourierGrating =new FourierGrating(name, material);
+			return grating;
+		}
 		/**
 		 * Create a Lens
 		 */
@@ -473,7 +485,7 @@ package cn.edu.zju.labx.core
 			return new MachZehnderInterfBoard(name, material);
 		}
 
-		private function createFourierBoard(name:String = "接收屏", material:MaterialObject3D=null):FourierDisplayBoard
+		private function createFourierBoard(name:String = "输出面", material:MaterialObject3D=null):FourierDisplayBoard
 		{
 			material = material || new ColorMaterial(0x262626, 1, true);
 			return new FourierDisplayBoard(name, material);
