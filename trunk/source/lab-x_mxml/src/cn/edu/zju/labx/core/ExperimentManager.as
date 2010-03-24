@@ -308,7 +308,45 @@ package cn.edu.zju.labx.core
 		 * Move the equipments in third experiment to optimize place
 		 */
 		public function moveThirdExperimentEquipments():void{
-			//TODO:
+		for(var i:int=0;i<StageObjectsManager.getDefault.getObjectList().length;i++){
+		      
+		          var labXObject:LabXObject = StageObjectsManager.getDefault.getObjectList().getItemAt(i) as LabXObject;
+		          
+		          if(labXObject.name =="激光光源"){
+		             TweenLite.to(labXObject,LabXConstant.MOVE_DELAY,{x:50,z:0});
+		          }
+		          else if(labXObject.name =="扩束镜"){
+		             TweenLite.to(labXObject,LabXConstant.MOVE_DELAY,{x:200,z:0});
+		          }
+		          else if(labXObject.name =="准直透镜"){
+                     TweenLite.to(labXObject,LabXConstant.MOVE_DELAY,{x:300,z:0});		            
+		          }
+		          else if(labXObject.name =="傅里叶变换镜头1"){
+                     TweenLite.to(labXObject,LabXConstant.MOVE_DELAY,{x:400,z:0});		            
+		          }
+		          else if(labXObject.name =="傅里叶变换镜头2"){
+                     TweenLite.to(labXObject,LabXConstant.MOVE_DELAY,{x:500,z:0});		            
+		          }
+		          else if(labXObject.name =="输入面"){
+                     TweenLite.to(labXObject,LabXConstant.MOVE_DELAY,{x:600,z:0});		            
+		          }
+		          else if(labXObject.name =="傅立叶光栅"){
+                     TweenLite.to(labXObject,LabXConstant.MOVE_DELAY,{x:700,z:0});		            
+		          }
+		          else if(labXObject.name =="接收屏"){
+                     TweenLite.to(labXObject,LabXConstant.MOVE_DELAY,{x:800,z:0});		            
+		          }
+                     
+		      }
+		      var timer:Timer= new Timer((LabXConstant.MOVE_DELAY+1)*1000);
+		      timer.addEventListener(TimerEvent.TIMER, onTimer);
+    				function onTimer(event:TimerEvent):void{
+         			   for(var i:int=0;i<_equipmentList.length;i++){
+         			       StageObjectsManager.getDefault.objectStateChanged(_equipmentList.getItemAt(i) as LabXObject);
+         			   }
+         			   timer.stop();
+                    }
+              timer.start();
 		}
 		
 		
