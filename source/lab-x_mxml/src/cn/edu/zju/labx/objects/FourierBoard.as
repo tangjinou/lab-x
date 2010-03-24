@@ -2,7 +2,7 @@ package cn.edu.zju.labx.objects
 {
 	import flash.display.BitmapData;
 	import flash.geom.Rectangle;
-	
+	import cn.edu.zju.labx.core.LabXConstant;
 	import org.papervision3d.core.proto.MaterialObject3D;
 	import org.papervision3d.materials.BitmapMaterial;
 	
@@ -21,10 +21,13 @@ package cn.edu.zju.labx.objects
 		
 		private function displayImage(isAdd:Boolean):void
 		{
-			var w:Number = 10;
-			var h:Number = 40;
+			var w:Number = LabXConstant.rectW;
+			var h:Number = LabXConstant.rectH;
 			bmp = new BitmapData(depth, height, false, 0x0);
-			bmp.fillRect(new Rectangle(0, 0, w, h), 0x0000FF);
+			bmp.fillRect(new Rectangle(depth/2-w/2, height/2-h/2, w, h), 0x0000FF);
+			bmp.fillRect(new Rectangle(depth/5-w/2, height/2-h/2, w, h), 0x0000FF);
+			bmp.fillRect(new Rectangle(depth/2-h/2, height/2-w/2, h, w), 0x0000FF);
+			bmp.fillRect(new Rectangle(depth/5*4-h/2, height/2-w/2, h, w), 0x0000FF);
 			new_material = new BitmapMaterial(bmp);
 			new_material.smooth = true;
 			new_material.interactive = true;

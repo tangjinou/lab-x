@@ -78,5 +78,12 @@ package cn.edu.zju.labx.core
 		 *  Reset Moving objects Delay time
 		 */ 
 		public static const MOVE_DELAY:int =3;
+		
+		/**
+		 * For small rectangle
+		 */
+		public static const rectW:Number = 8;
+		public static const rectH:Number = 25;
+		 
 	}
 }
