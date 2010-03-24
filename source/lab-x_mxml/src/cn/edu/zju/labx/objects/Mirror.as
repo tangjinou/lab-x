@@ -4,7 +4,7 @@ package cn.edu.zju.labx.objects
 	
 	import org.papervision3d.core.proto.MaterialObject3D;
 
-	public class Mirror extends SplitterBeam
+	public class Mirror extends BeamSplitter
 	{
 		public function Mirror(name:String,material:MaterialObject3D, vertices:Array=null, faces:Array=null)
 		{
