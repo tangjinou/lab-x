@@ -14,7 +14,6 @@
 	 		import org.papervision3d.core.utils.Mouse3D;
 	 		import cn.edu.zju.labx.core.UserInputHandler;
 	 		import cn.edu.zju.labx.core.StageObjectsManager;
-	 		import FirstExperimentApplication;
 	 	    import mx.core.UIComponent;
 	 	    import flash.events.Event;
 			import flash.events.MouseEvent;
@@ -28,7 +27,7 @@
             
             private var chooseExperimentwindow:ChooseExperimentWindow
             
-            private var firstExperiment:FirstExperimentApplication;
+            private var experiment:ExperimentApplication;
 	 		public function init():void{
 	 		   message_box.text="公告栏";
 	 		   
@@ -49,19 +48,19 @@
 	 		}
 	 		public function start(event:MouseEvent):void{
 	 			PopUpManager.removePopUp(chooseExperimentwindow);
- 		   		firstExperiment = new FirstExperimentApplication();
+ 		   		experiment = new ExperimentApplication();
  		   		Mouse3D.enabled = true;
- 		   		firstExperiment.viewport.interactive = true; 
+ 		   		experiment.viewport.interactive = true; 
  		   		var uic:UIComponent = new UIComponent();
 		   		stage.frameRate = 40;
-           		stage.addEventListener(MouseEvent.MOUSE_DOWN, firstExperiment.onMouseDown);
-           		stage.addEventListener(MouseEvent.MOUSE_MOVE, firstExperiment.onMouseMove);
+           		stage.addEventListener(MouseEvent.MOUSE_DOWN, experiment.onMouseDown);
+           		stage.addEventListener(MouseEvent.MOUSE_MOVE, experiment.onMouseMove);
            		stage.addEventListener(MouseEvent.MOUSE_UP, UserInputHandler.getDefault.mouseUpHandler);
            		stage.addEventListener(KeyboardEvent.KEY_DOWN, UserInputHandler.getDefault.keyDownHandler);
            		stage.addEventListener(KeyboardEvent.KEY_UP, UserInputHandler.getDefault.keyUpHandler);
-		  		uic.addChild(firstExperiment);
+		  		uic.addChild(experiment);
            		addChild(uic);
-           		firstExperiment.experimentSelected(chooseExperimentwindow.experiment_id);
+           		experiment.experimentSelected(chooseExperimentwindow.experiment_id);
 	 		   
 				createCheckBoxes();
 	 		}
@@ -133,7 +132,7 @@
      <!--button size 52*36 -->
      		<mx:Button  click="StageObjectsManager.getDefault.open_stage_rotate()"  icon="@Embed('../assets/icon/open_stage_rotate.png')"  toolTip="打开屏幕旋转" />
 	 		<mx:Button  click="StageObjectsManager.getDefault.close_stage_rotate()" icon="@Embed('../assets/icon/close_stage_rotate.png')"  toolTip="关闭屏幕旋转"/>
-     		<mx:Button  click="firstExperiment.reset_camera()"  icon="@Embed('../assets/icon/reset_camera.png')"  toolTip="默认视角" />
+     		<mx:Button  click="experiment.reset_camera()"  icon="@Embed('../assets/icon/reset_camera.png')"  toolTip="默认视角" />
 	 		<mx:Button  buttonDown="StageObjectsManager.getDefault.mainView.camera.zoom++" autoRepeat="true" icon="@Embed('../assets/icon/zoom_add.png')" toolTip="放大"/>
 	 		<mx:Button  buttonDown="StageObjectsManager.getDefault.mainView.camera.zoom--" autoRepeat="true" icon="@Embed('../assets/icon/zoom_min.png')" toolTip="缩小"/>
             <mx:Button  click="StageObjectsManager.getDefault.movingObjects()"  toolTip="最佳位置" icon="@Embed('../assets/icon/happy.png')" />

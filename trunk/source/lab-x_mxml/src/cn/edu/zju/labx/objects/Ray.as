@@ -26,7 +26,7 @@ package cn.edu.zju.labx.objects
 		
 		private var sender:LabXObject;
 		
-		//This array is in for lineRay
+		//This public array is in for lineRay
 		public var lineRays:ArrayCollection =new ArrayCollection();//FOR TEST
 		
 		private var lines:Lines3D = null;
