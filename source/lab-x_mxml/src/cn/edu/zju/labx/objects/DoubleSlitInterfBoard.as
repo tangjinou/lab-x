@@ -1,16 +1,17 @@
 package cn.edu.zju.labx.objects
 {
+	import cn.edu.zju.labx.core.LabXConstant;
+	import cn.edu.zju.labx.core.RayManager;
+	import cn.edu.zju.labx.core.StageObjectsManager;
+	import cn.edu.zju.labx.logicObject.InterferenceLogic;
+	import cn.edu.zju.labx.utils.MathUtils;
+	
+	import flash.display.BitmapData;
+	import flash.geom.Rectangle;
+	
+	import org.papervision3d.core.math.Number3D;
 	import org.papervision3d.core.proto.MaterialObject3D;
-    import org.papervision3d.materials.BitmapMaterial;
-    import org.papervision3d.core.math.Number3D;
-    import cn.edu.zju.labx.logicObject.InterferenceLogic;
-    import cn.edu.zju.labx.core.LabXConstant;
-    import cn.edu.zju.labx.utils.MathUtils;
-    import cn.edu.zju.labx.core.StageObjectsManager;
-    import cn.edu.zju.labx.objects.Board;	
-    import flash.display.BitmapData;
-    import flash.events.Event;
-    import flash.geom.Rectangle;
+	import org.papervision3d.materials.BitmapMaterial;
 
 	
 	public class DoubleSlitInterfBoard extends Board

@@ -24,7 +24,7 @@ package cn.edu.zju.labx.objects
 		private var startX:Number;
 		private var endX:Number;
 		
-		private var sender:LabXObject;
+		public var sender:LabXObject;
 		
 		//This public array is in for lineRay
 		public var lineRays:ArrayCollection =new ArrayCollection();//FOR TEST
@@ -87,6 +87,15 @@ package cn.edu.zju.labx.objects
 			StageObjectsManager.getDefault.layerManager.addRayLayer(effectLayer);
 		    addChild(lines);
 	    }
+//	    /**
+//	    *  The Ray before this ray
+//	    */ 
+//	    public var frontRay:Ray;
+//	    /***
+// 	    *  The Ray after this Ray
+//	    */ 
+//	    public var nextRay:Ray; 
+	    
 	    /**
 	    *  this other info is the info witch ray can bring
 	    */
