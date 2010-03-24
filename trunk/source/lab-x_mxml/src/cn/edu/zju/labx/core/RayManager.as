@@ -32,6 +32,19 @@ package cn.edu.zju.labx.core
 		
 		private var rayList:ArrayCollection = new ArrayCollection();
 		
+		
+		
+		/***
+		 *   get the front Ray
+		 */ 
+		public function getFrontRay(ray:Ray):Ray{
+		    var index:int = rayList.getItemIndex(ray);
+		    if(index>1){
+               return 	rayList.getItemAt(index-1) as Ray;	    
+		    }
+		    return null;
+		}
+		
 		public function clearRays():void{
 		    for(var i:int=0;i<rayList.length;i++){
 		    	var ray:Ray = rayList.getItemAt(i) as Ray;
@@ -65,7 +78,9 @@ package cn.edu.zju.labx.core
 		 /* This is for RayHandle                                  */
 		 /**********************************************************/
 		 public function notify(ray:Ray):void{
-		 	rayList.addItem(ray);	
+		 	if(!rayList.contains(ray)){
+		 	  rayList.addItem(ray);
+		 	}	
 		 	var nearestHandler:IRayHandle;
 		 	var minDistance:Number = Number.MAX_VALUE;
 		      for(var i:int=0;i<StageObjectsManager.getDefault.getStageObjectList().length;i++){
@@ -84,8 +99,8 @@ package cn.edu.zju.labx.core
 		         }
 		      }
 		      if(nearestHandler!=null)
-		      {
-		        nearestHandler.onRayHandle(ray);
+		      { 
+		         nearestHandler.onRayHandle(ray);
     		  }
 		 }
 	}
