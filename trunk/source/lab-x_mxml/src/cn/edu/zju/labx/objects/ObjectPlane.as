@@ -41,26 +41,44 @@ package cn.edu.zju.labx.objects
 	        
 			var w:Number = LabXConstant.rectW;
 			var h:Number = LabXConstant.rectH;
-			var bmp:BitmapData = new BitmapData(depth, height, true, 0x0);
-			var rect:Shape = new Shape();
-			rect.graphics.beginFill(0x000000);
-			rect.graphics.drawRect(depth/5-w/2, height/2-h/2, w, h);
-			bmp.draw(rect);
-			rect.graphics.drawRect(depth/5*4-h/2, height/2-w/2, h, w);
-			bmp.draw(rect);
 			
-			var rectMaterial:BitmapMaterial = new BitmapMaterial(bmp);
-			rectMaterial.smooth = true;
+			/* create right side */
+			var bmpRight:BitmapData = new BitmapData(depth, height, true, 0x0);
+			var rectRight:Shape = new Shape();
+			rectRight.graphics.beginFill(0x000000, 1);
+			rectRight.graphics.drawRect(depth/5-w/2, height/2-h/2, w, h);
+			rectRight.graphics.drawRect(depth/5*4-h/2, height/2-w/2, h, w);
+			bmpRight.draw(rectRight);
+			
+			var rectMaterialRight:BitmapMaterial = new BitmapMaterial(bmpRight);
+			rectMaterialRight.smooth = true;
 	        
-	        var compMaterial:CompositeMaterial = new CompositeMaterial();
-	        compMaterial.addMaterial(material);
-	        compMaterial.addMaterial(rectMaterial);
+	        var compMaterialRight:CompositeMaterial = new CompositeMaterial();
+	        compMaterialRight.addMaterial(material);
+	        compMaterialRight.addMaterial(rectMaterialRight);
+	        compMaterialRight.interactive = true;
+	        
+	        /* create left side */
+	        var bmpLeft:BitmapData = new BitmapData(depth, height, true, 0x0);
+			var rectLeft:Shape = new Shape();
+			rectLeft.graphics.beginFill(0x000000, 1);
+			rectLeft.graphics.drawRect(depth/5*4-w/2, height/2-h/2, w, h);
+			rectLeft.graphics.drawRect(depth/5-h/2, height/2-w/2, h, w);
+			bmpLeft.draw(rectLeft);
+			
+			var rectMaterialLeft:BitmapMaterial = new BitmapMaterial(bmpLeft);
+			rectMaterialLeft.smooth = true;
+	        
+	        var compMaterialLeft:CompositeMaterial = new CompositeMaterial();
+	        compMaterialLeft.addMaterial(material);
+	        compMaterialLeft.addMaterial(rectMaterialLeft);
+	        compMaterialLeft.interactive = true;
 	        
 		    var materialsList:MaterialsList = new MaterialsList();
 			materialsList.addMaterial(material,"front");
 			materialsList.addMaterial(material,"back");
-			materialsList.addMaterial(compMaterial,"left");
-			materialsList.addMaterial(compMaterial,"right");
+			materialsList.addMaterial(compMaterialLeft,"left");
+			materialsList.addMaterial(compMaterialRight,"right");
 			materialsList.addMaterial(material,"top");
 			materialsList.addMaterial(material,"bottom");
 		   	displayObject = new Cube(materialsList,width,depth,height);
