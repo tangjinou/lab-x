@@ -21,7 +21,7 @@ package cn.edu.zju.labx.objects
 		}
 
 
-		public function displayDoubleSlitInterferenceImage(theta:Number):void
+		private function displayDoubleSlitInterferenceImage(theta:Number):void
 		{   
 			var distance:Number = InterferenceLogic.doubleSlitInterferenceLogic(theta, LabXConstant.WAVE_LENGTH);
 //			trace(distance);

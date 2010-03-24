@@ -7,6 +7,7 @@ package cn.edu.zju.labx.core
 	import cn.edu.zju.labx.objects.Lens;
 	import cn.edu.zju.labx.objects.LightSource;
 	import cn.edu.zju.labx.objects.MachZehnderInterfBoard;
+	import cn.edu.zju.labx.objects.FourierBoard;
 	import cn.edu.zju.labx.objects.Mirror;
 	import cn.edu.zju.labx.objects.SplitterBeam;
 	
@@ -73,6 +74,7 @@ package cn.edu.zju.labx.core
 					break;
 				case LabXConstant.EXPERIMENT_THIRD:
 					_equipmentList = createThirdExperimentEquipments();
+					break;
 				case LabXConstant.EXPERIMENT_FORTH:
 					_equipmentList = createForthExperimentEquipments();
 					break;
@@ -285,15 +287,15 @@ package cn.edu.zju.labx.core
 			var lens2:Lens = createConvexLens("准直透镜", 108);
 			lens2.scale = 0.8;
 			equipmentList.addItem(lens2);
-			
+						
             var fourierlens1:Lens = createFourierLens("傅里叶变换镜头1");
             equipmentList.addItem(fourierlens1);
             var fourierlens2:Lens = createFourierLens("傅里叶变换镜头2");
             equipmentList.addItem(fourierlens2);
             
             //lack of 3 equipment, "输入面", "频谱面", "输出面"
-			
-			equipmentList.addItem(createMachZehnderInterfBoard("接收屏"));
+			equipmentList.addItem(createFourierBoard("接收屏"));
+
 			
 			return equipmentList;
 			
@@ -470,7 +472,12 @@ package cn.edu.zju.labx.core
 			material = material || new ColorMaterial(0x262626, 1, true);
 			return new MachZehnderInterfBoard(name, material);
 		}
-		
+
+		private function createFourierBoard(name:String = "接收屏", material:MaterialObject3D=null):FourierBoard
+		{
+			material = material || new ColorMaterial(0x262626, 1, true);
+			return new FourierBoard(name, material);
+		}		
 
 	}
 }
