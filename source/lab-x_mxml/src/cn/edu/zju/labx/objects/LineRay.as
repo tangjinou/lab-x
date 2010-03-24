@@ -14,13 +14,11 @@ package cn.edu.zju.labx.objects
 		 *  This is for line's end point
 		 */
 		private var endPoint:Number3D;
-		
 		public function LineRay(logic:LineRayLogic=null,length:Number=LabXConstant.RAY_DEFAULT_LENGTH)
 		{
 			_logic = logic;
 			_length= length;
 		}
-		
 		public function newLineRay(startPoint:Number3D,endPoint:Number3D):void{
 		    this.endPoint = endPoint;
 		    this._length  = MathUtils.distanceToNumber3D(startPoint,endPoint);
@@ -30,7 +28,6 @@ package cn.edu.zju.labx.objects
 		    _logic =new LineRayLogic(startPoint,new Number3D(cosx,cosy,cosz));
 
 		}
-		
 		public function get start_point():Number3D{
 		   return new Number3D(_logic.x,_logic.y,_logic.z);
 		}
@@ -40,15 +37,12 @@ package cn.edu.zju.labx.objects
            this._logic.y = p.y;		
            this._logic.z = p.z;
 		}
-		
-		
 		public function get end_point():Number3D{
 		   if(endPoint ==null){
 		     endPoint =optimizeEndPoint(_logic);
 		   }
            return endPoint;		
 		}
-		
 		private function optimizeEndPoint(logic:LineRayLogic):Number3D
 		{
 			var x:Number = logic.x;
@@ -87,14 +81,16 @@ package cn.edu.zju.labx.objects
 		    _logic.dy  = (endPoint.y - start_point.y)/_length;
 		    _logic.dz  = (endPoint.z - start_point.z)/_length;
 		}
-		
-		
 		public function get logic():LineRayLogic
 	    {
 	    	return this._logic;
 	    }
 	    public function get normal():Number3D{
 	        return new Number3D(this._logic.dx,this._logic.dy,this._logic.dz);
+	    }
+	    
+	    public function get length():int{
+	        return Number3D.sub(endPoint,start_point).modulo;
 	    }
 	}
 }
