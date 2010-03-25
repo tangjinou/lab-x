@@ -1,4 +1,4 @@
-package cn.edu.zju.labx.objects
+package cn.edu.zju.labx.objects.beam
 {
 	import cn.edu.zju.labx.core.LabXConstant;
 	import cn.edu.zju.labx.core.StageObjectsManager;
@@ -7,6 +7,9 @@ package cn.edu.zju.labx.objects
 	import cn.edu.zju.labx.events.LabXObjectUserInputHandleTool;
 	import cn.edu.zju.labx.logicObject.LineRayLogic;
 	import cn.edu.zju.labx.logicObject.SplitterBeamLogic;
+	import cn.edu.zju.labx.objects.LabXObject;
+	import cn.edu.zju.labx.objects.ray.LineRay;
+	import cn.edu.zju.labx.objects.ray.Ray;
 	import cn.edu.zju.labx.utils.MathUtils;
 	
 	import flash.display.BlendMode;
@@ -49,7 +52,6 @@ package cn.edu.zju.labx.objects
 					var beamLogic:SplitterBeamLogic =new SplitterBeamLogic(getPosition(),getNormal());
                     var lineRayLogic:LineRayLogic = beamLogic.calculateRayAfterSplit(oldLineRay.logic);
                     if(lineRayLogic!=null){
-                    	
                     	newLineRays.addItem(new LineRay(lineRayLogic));
                     	oldLineRay.end_point = new Number3D(lineRayLogic.x, lineRayLogic.y, lineRayLogic.z);
                     }
@@ -71,14 +73,19 @@ package cn.edu.zju.labx.objects
 		
 		protected function makeNewRay2(oldRay:Ray):Ray{
 		   	if(oldRay != null)
-			{
+			{   
+				var resultRay:Ray =  new Ray(this,null, null);
 		     	var newLineRays:ArrayCollection = new ArrayCollection();
 				for each (var oldLineRay:LineRay in oldRay.getLineRays())
 				{   
-					var lineRayLogic:LineRayLogic = new LineRayLogic(oldLineRay.end_point.clone(),oldLineRay.normal);
+					var start_point_new:Number3D = MathUtils.calculatePointInPlane2(getPosition(),getNormal(),oldLineRay.normal,oldLineRay.start_point);
+                    oldLineRay.end_point = start_point_new.clone();					
+					var lineRayLogic:LineRayLogic = new LineRayLogic(start_point_new.clone(),oldLineRay.normal);
                     newLineRays.addItem(new LineRay(lineRayLogic));
 				}
-				return  new Ray(this,null,newLineRays);
+				oldRay.displayRays();
+				if (resultRay != null)resultRay.setLineRays(newLineRays);
+				return resultRay;
 		    }
 		    return  null
 		}

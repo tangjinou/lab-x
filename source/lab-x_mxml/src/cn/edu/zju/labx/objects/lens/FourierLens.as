@@ -1,6 +1,7 @@
-package cn.edu.zju.labx.objects
+package cn.edu.zju.labx.objects.lens
 {
 	import cn.edu.zju.labx.core.LabXConstant;
+	import cn.edu.zju.labx.objects.lens.Lens;
 	
 	import org.papervision3d.core.proto.MaterialObject3D;
 

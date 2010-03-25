@@ -2,10 +2,10 @@ package cn.edu.zju.labx.objects
 {
 	import cn.edu.zju.labx.core.LabXConstant;
 	import cn.edu.zju.labx.logicObject.LineRayLogic;
+	import cn.edu.zju.labx.objects.ray.LineRay;
 	
 	import flexunit.framework.TestCase;
 	
-	import org.papervision3d.core.geom.renderables.Vertex3D;
 	import org.papervision3d.core.math.Number3D;
 	
 	public class LineRaysTest extends TestCase

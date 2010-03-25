@@ -1,6 +1,11 @@
-package cn.edu.zju.labx.objects
+package cn.edu.zju.labx.objects.board
 {
 	import cn.edu.zju.labx.core.LabXConstant;
+	import cn.edu.zju.labx.core.RayManager;
+	import cn.edu.zju.labx.objects.beam.FourierGrating;
+	import cn.edu.zju.labx.objects.beam.ObjectPlane;
+	import cn.edu.zju.labx.objects.lens.FourierLens;
+	import cn.edu.zju.labx.objects.ray.Ray;
 	
 	import flash.display.BitmapData;
 	import flash.geom.Rectangle;
@@ -13,7 +18,7 @@ package cn.edu.zju.labx.objects
 		public function FourierDisplayBoard(name:String,material:MaterialObject3D=null)
 		{
 			super(name, material);
-			this.displayImage(false); //temp to display image always
+//			this.displayImage(false); //temp to display image always
 		}
 		
 		override public function onRayHandle(oldRay:Ray):void
@@ -47,14 +52,42 @@ package cn.edu.zju.labx.objects
 		
 		override protected function isRayWayRight(_ray:Ray):Boolean{
    		   var ray_tmp:Ray = _ray;
+
+   		   var f_s:Array = new Array();
+           
+           if(!(ray_tmp.getSender() is FourierLens)){
+              return false;
+           }
+           f_s[0] = ray_tmp.getLengthOfFirstLineRay();
+           
+           ray_tmp = RayManager.getDefault.getFrontRay(ray_tmp);
            if(!(ray_tmp.getSender() is FourierGrating)){
               return false;
            }
-//           ray_tmp = RayManager.getDefault.getFrontRay(ray_tmp);
-//           if(!(ray_tmp.getSender() is Lens)){
-//              return false;
-//           }
+           f_s[1] = ray_tmp.getLengthOfFirstLineRay();
+           
+           ray_tmp = RayManager.getDefault.getFrontRay(ray_tmp);
+           if(!(ray_tmp.getSender() is FourierLens)){
+              return false;
+           }
+           f_s[2] = ray_tmp.getLengthOfFirstLineRay();
+           
+           ray_tmp = RayManager.getDefault.getFrontRay(ray_tmp);
+           if(!(ray_tmp.getSender() is ObjectPlane)){
+              return false;
+           }
+           f_s[3] = ray_tmp.getLengthOfFirstLineRay();
+           
+           for(var i:int=0;i<f_s.length;i++){
+              for(var j:int=0;j<f_s.length;j++){
+                 if(Math.abs(f_s[i]-f_s[j])>3){
+                    return false;
+                 }              
+              }
+           }
            return true;
    		}
+   		
+
 	}
 }

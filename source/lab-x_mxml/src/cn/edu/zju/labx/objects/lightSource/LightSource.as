@@ -1,9 +1,12 @@
-package cn.edu.zju.labx.objects
+package cn.edu.zju.labx.objects.lightSource
 {
 	import cn.edu.zju.labx.core.StageObjectsManager;
 	import cn.edu.zju.labx.events.IUserInputListener;
 	import cn.edu.zju.labx.events.LabXObjectUserInputHandleTool;
 	import cn.edu.zju.labx.logicObject.LineRayLogic;
+	import cn.edu.zju.labx.objects.LabXObject;
+	import cn.edu.zju.labx.objects.ray.LineRay;
+	import cn.edu.zju.labx.objects.ray.Ray;
 	
 	import flash.events.Event;
 	import flash.events.MouseEvent;

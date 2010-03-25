@@ -1,4 +1,4 @@
-package cn.edu.zju.labx.objects
+package cn.edu.zju.labx.objects.ray
 {
 	import cn.edu.zju.labx.core.LabXConstant;
 	import cn.edu.zju.labx.logicObject.LineRayLogic;

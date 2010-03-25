@@ -3,13 +3,11 @@ package
 	import cn.edu.zju.labx.core.LabXConstant;
 	import cn.edu.zju.labx.core.StageObjectsManager;
 	import cn.edu.zju.labx.core.UserInputHandler;
-	import cn.edu.zju.labx.objects.Desk;
 	import cn.edu.zju.labx.objects.Grid;
+	import cn.edu.zju.labx.objects.desk.Desk;
 	
 	import flash.events.Event;
 	import flash.events.MouseEvent;
-	
-	import mx.collections.ArrayCollection;
 	
 	import org.papervision3d.cameras.CameraType;
 	import org.papervision3d.core.utils.virtualmouse.VirtualMouseMouseEvent;
