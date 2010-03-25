@@ -219,7 +219,7 @@ package cn.edu.zju.labx.core
 					stageObjectList.removeItemAt(stageObjectList.getItemIndex(object));
 					if (object is LightSource)
 					{
-						rayManager.setLightSource(null);
+						rayManager.lightSources.removeItemAt(rayManager.lightSources.getItemIndex(object));
 					} else if (object is Board)
 					{
 						rayManager.setBorad(null);
@@ -233,7 +233,7 @@ package cn.edu.zju.labx.core
 					stageObjectList.addItem(object);
 					if (object is LightSource)
 					{
-						rayManager.setLightSource(object as LightSource);
+						rayManager.lightSources.addItem(object as LightSource);
 					} else if (object is Board)
 					{
 						rayManager.setBorad(object as Board);
