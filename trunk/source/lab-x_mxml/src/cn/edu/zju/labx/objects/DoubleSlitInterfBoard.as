@@ -46,7 +46,12 @@ package cn.edu.zju.labx.objects
 			super.onRayHandle(oldRay);
 			
 			if(oldRay1!=null&&oldRay2!=null)
-			{
+			{  
+			   if(isRayWayRight(oldRay1)==false || isRayWayRight(oldRay2)==false)
+			   {
+		          return;
+			   }	
+				
 		       if(isParellel(oldRay1)==false || isParellel(oldRay2)==false)
 		       {
 		       	  StageObjectsManager.getDefault.addMessage("射入挡板入射光线不平行");
@@ -63,8 +68,20 @@ package cn.edu.zju.labx.objects
    			}   
         } 
         
+        override protected function isRayWayRight(_ray:Ray):Boolean{
+           var ray_tmp:Ray = _ray;
+           if(!(ray_tmp.getSender() is Lens)){
+              return false;
+           }
+           ray_tmp = RayManager.getDefault.getFrontRay(ray_tmp);
+           if(!(ray_tmp.getSender() is Lens)){
+              return false;
+           }
+           return true;
+        }
+        
         private function handleDoubleSlitInterference(lineRay1:LineRay, lineRay2:LineRay):void
-   		{
+   		{ 
    			var angle1:Number =  MathUtils.calculateAngleOfTwoVector(Number3D.sub(lineRay1.end_point,lineRay1.start_point),this.getNormal());
 			var angle2:Number =  MathUtils.calculateAngleOfTwoVector(Number3D.sub(lineRay2.end_point,lineRay2.start_point),this.getNormal());
             if(Math.abs(angle1-angle2)<(Math.PI/180)){
