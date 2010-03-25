@@ -148,6 +148,10 @@ package cn.edu.zju.labx.objects
                oldRay2 = oldRay;
             }
         }
+        
+        /***
+        *  save the oldRay and reproduce the oldRay
+        */ 
    		public function onRayHandle(oldRay:Ray):void{
    			
             saveRays(oldRay);
@@ -164,6 +168,8 @@ package cn.edu.zju.labx.objects
 				}
 			}
 			oldRay.displayRays();
+			
+			
    		}
    		protected function isParellel(ray:Ray):Boolean{
    		       for(var i:int=0;i<ray.getLineRays().length;i++){
@@ -177,7 +183,13 @@ package cn.edu.zju.labx.objects
 			   }
 			   return true;
    		}
+   		/***  
+   		 *   it should be override in sub class
+   		 */ 
+   		protected function isRayWayRight(_ray:Ray):Boolean{
    		
+   		      return true;
+   		}
 
    		
     	/**

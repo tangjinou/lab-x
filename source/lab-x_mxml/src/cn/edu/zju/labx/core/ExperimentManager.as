@@ -319,7 +319,7 @@ package cn.edu.zju.labx.core
 		             TweenLite.to(labXObject,LabXConstant.MOVE_DELAY,{x:200,z:0});
 		          }
 		          else if(labXObject.name =="准直透镜"){
-                     TweenLite.to(labXObject,LabXConstant.MOVE_DELAY,{x:300,z:0});		            
+                     TweenLite.to(labXObject,LabXConstant.MOVE_DELAY,{x:326,z:0});		            
 		          }
 		          else if(labXObject.name =="傅里叶变换镜头1"){
                      TweenLite.to(labXObject,LabXConstant.MOVE_DELAY,{x:400,z:0});		            

@@ -1,8 +1,10 @@
 package cn.edu.zju.labx.objects
 {
+	import cn.edu.zju.labx.core.LabXConstant;
+	
 	import flash.display.BitmapData;
 	import flash.geom.Rectangle;
-	import cn.edu.zju.labx.core.LabXConstant;
+	
 	import org.papervision3d.core.proto.MaterialObject3D;
 	import org.papervision3d.materials.BitmapMaterial;
 	
@@ -17,6 +19,9 @@ package cn.edu.zju.labx.objects
 		override public function onRayHandle(oldRay:Ray):void
 		{
 			super.onRayHandle(oldRay);
+			if(isRayWayRight(oldRay)){
+			    displayImage(false);
+			}
 		}
 		
 		private function displayImage(isAdd:Boolean):void
@@ -39,6 +44,17 @@ package cn.edu.zju.labx.objects
 			cube.replaceMaterialByName(new_material, "left");
 			this.removeCursor();
 		}
-
+		
+		override protected function isRayWayRight(_ray:Ray):Boolean{
+   		   var ray_tmp:Ray = _ray;
+           if(!(ray_tmp.getSender() is FourierGrating)){
+              return false;
+           }
+//           ray_tmp = RayManager.getDefault.getFrontRay(ray_tmp);
+//           if(!(ray_tmp.getSender() is Lens)){
+//              return false;
+//           }
+           return true;
+   		}
 	}
 }
