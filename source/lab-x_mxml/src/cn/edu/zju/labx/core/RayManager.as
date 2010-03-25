@@ -18,7 +18,10 @@ package cn.edu.zju.labx.core
 	    	return instance;
 	    }
 		
-		private var lightSource:LightSource;
+		
+		public var lightSources:ArrayCollection = new ArrayCollection();
+		
+//		private var lightSource:LightSource;
 		
 		private var board:Board;
 		
@@ -27,11 +30,10 @@ package cn.edu.zju.labx.core
 		}
 		
 		public function setLightSource(l:LightSource):void{
-		   this.lightSource = l;
+		   lightSources.addItem(l);
 		}
 		
 		private var rayList:ArrayCollection = new ArrayCollection();
-		
 		
 		
 		/***
@@ -60,17 +62,25 @@ package cn.edu.zju.labx.core
 		}
 		
 		public function isLightOn():Boolean{
-		    if(this.lightSource!=null)
-		     {
-		        return this.lightSource.isLightOn;
+		    if(this.lightSources!=null)
+		     {  
+		     	for(var i:int=0;i<lightSources.length;i++){
+		     	    var l:LightSource = lightSources.getItemAt(i) as LightSource;
+		     	    if(l.isLightOn){
+		     	      return true;
+		     	    }
+		     	}
 		     }
 		     return false;
 		}
 		
 		public function reProduceRays():void{
 			this.clearRays();
-			if(this.lightSource!=null && this.lightSource.isLightOn){
-				lightSource.openRay();
+			if(isLightOn()){
+				for(var i:int=0;i<lightSources.length;i++){
+		     	    var l:LightSource = lightSources.getItemAt(i) as LightSource;
+                    l.openRay();
+		     	}
 		    }
 		}
 		 
