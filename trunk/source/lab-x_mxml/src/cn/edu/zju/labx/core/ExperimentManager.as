@@ -1,17 +1,17 @@
 package cn.edu.zju.labx.core
 {
-	import cn.edu.zju.labx.objects.BeamSplitter;
-	import cn.edu.zju.labx.objects.ConvexLens;
-	import cn.edu.zju.labx.objects.DoubleSlitInterfBoard;
-	import cn.edu.zju.labx.objects.FourierDisplayBoard;
-	import cn.edu.zju.labx.objects.ObjectPlane;
-	import cn.edu.zju.labx.objects.FourierGrating;
-	import cn.edu.zju.labx.objects.FourierLens;
 	import cn.edu.zju.labx.objects.LabXObject;
-	import cn.edu.zju.labx.objects.Lens;
-	import cn.edu.zju.labx.objects.LightSource;
-	import cn.edu.zju.labx.objects.MachZehnderInterfBoard;
-	import cn.edu.zju.labx.objects.Mirror;
+	import cn.edu.zju.labx.objects.beam.BeamSplitter;
+	import cn.edu.zju.labx.objects.beam.FourierGrating;
+	import cn.edu.zju.labx.objects.beam.Mirror;
+	import cn.edu.zju.labx.objects.beam.ObjectPlane;
+	import cn.edu.zju.labx.objects.board.DoubleSlitInterfBoard;
+	import cn.edu.zju.labx.objects.board.FourierDisplayBoard;
+	import cn.edu.zju.labx.objects.board.MachZehnderInterfBoard;
+	import cn.edu.zju.labx.objects.lens.ConvexLens;
+	import cn.edu.zju.labx.objects.lens.FourierLens;
+	import cn.edu.zju.labx.objects.lens.Lens;
+	import cn.edu.zju.labx.objects.lightSource.LightSource;
 	
 	import com.greensock.TweenLite;
 	
@@ -290,9 +290,9 @@ package cn.edu.zju.labx.core
 			lens2.scale = 0.8;
 			equipmentList.addItem(lens2);
 						
-            var fourierlens1:Lens = createFourierLens("傅里叶变换镜头1");
+            var fourierlens1:Lens = createFourierLens("傅里叶变换镜头1",100);
             equipmentList.addItem(fourierlens1);
-            var fourierlens2:Lens = createFourierLens("傅里叶变换镜头2");
+            var fourierlens2:Lens = createFourierLens("傅里叶变换镜头2",100);
             equipmentList.addItem(fourierlens2);
             
             equipmentList.addItem(createObjectPlane("输入面"));
@@ -321,16 +321,16 @@ package cn.edu.zju.labx.core
 		          else if(labXObject.name =="准直透镜"){
                      TweenLite.to(labXObject,LabXConstant.MOVE_DELAY,{x:326,z:0});		            
 		          }
-		          else if(labXObject.name =="傅里叶变换镜头1"){
+		          else if(labXObject.name =="输入面"){
                      TweenLite.to(labXObject,LabXConstant.MOVE_DELAY,{x:400,z:0});		            
 		          }
-		          else if(labXObject.name =="傅里叶变换镜头2"){
+		          else if(labXObject.name =="傅里叶变换镜头1"){
                      TweenLite.to(labXObject,LabXConstant.MOVE_DELAY,{x:500,z:0});		            
 		          }
-		          else if(labXObject.name =="输入面"){
+		          else if(labXObject.name =="傅立叶光栅"){
                      TweenLite.to(labXObject,LabXConstant.MOVE_DELAY,{x:600,z:0});		            
 		          }
-		          else if(labXObject.name =="傅立叶光栅"){
+		          else if(labXObject.name =="傅里叶变换镜头2"){
                      TweenLite.to(labXObject,LabXConstant.MOVE_DELAY,{x:700,z:0});		            
 		          }
 		          else if(labXObject.name =="接收屏"){

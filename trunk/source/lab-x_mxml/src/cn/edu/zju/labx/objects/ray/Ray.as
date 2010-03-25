@@ -1,6 +1,7 @@
-package cn.edu.zju.labx.objects
+package cn.edu.zju.labx.objects.ray
 {   
 	import cn.edu.zju.labx.core.StageObjectsManager;
+	import cn.edu.zju.labx.objects.LabXObject;
 	
 	import mx.collections.ArrayCollection;
 	
@@ -117,6 +118,17 @@ package cn.edu.zju.labx.objects
 	    	StageObjectsManager.getDefault.layerManager.removeRayLayer(this.effectLayer);
 	    	effectLayer = null;
 	    	otherInfo = null;
+	    }
+	    
+	    /**
+	    *  if return -1, it cases error
+	    */ 
+	    public function getLengthOfFirstLineRay():int{
+	       if(lineRays!=null && lineRays.length>0){
+               var lineRay:LineRay = lineRays.getItemAt(0) as LineRay;
+               return lineRay.length;       
+	       }
+	       return -1;
 	    }
         
 	}

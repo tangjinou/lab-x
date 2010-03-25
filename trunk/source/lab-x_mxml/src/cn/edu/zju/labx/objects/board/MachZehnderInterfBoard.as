@@ -1,6 +1,8 @@
-package cn.edu.zju.labx.objects
+package cn.edu.zju.labx.objects.board
 {
 	import cn.edu.zju.labx.core.StageObjectsManager;
+	import cn.edu.zju.labx.objects.ray.LineRay;
+	import cn.edu.zju.labx.objects.ray.Ray;
 	import cn.edu.zju.labx.utils.MathUtils;
 	
 	import flash.display.BitmapData;

@@ -1,4 +1,4 @@
-package cn.edu.zju.labx.objects
+package cn.edu.zju.labx.objects.lens
 {   
 	import cn.edu.zju.labx.core.LabXConstant;
 	import cn.edu.zju.labx.core.StageObjectsManager;
@@ -7,6 +7,9 @@ package cn.edu.zju.labx.objects
 	import cn.edu.zju.labx.events.LabXObjectUserInputHandleTool;
 	import cn.edu.zju.labx.logicObject.LensLogic;
 	import cn.edu.zju.labx.logicObject.LineRayLogic;
+	import cn.edu.zju.labx.objects.LabXObject;
+	import cn.edu.zju.labx.objects.ray.LineRay;
+	import cn.edu.zju.labx.objects.ray.Ray;
 	import cn.edu.zju.labx.utils.MathUtils;
 	
 	import com.greensock.*;

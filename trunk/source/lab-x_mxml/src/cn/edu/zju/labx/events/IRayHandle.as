@@ -1,6 +1,6 @@
 package cn.edu.zju.labx.events
 {
-	import cn.edu.zju.labx.objects.Ray;
+	import cn.edu.zju.labx.objects.ray.Ray;
 	   
 	public  interface IRayHandle{
 		/**

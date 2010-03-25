@@ -1,16 +1,17 @@
-package cn.edu.zju.labx.objects
+package cn.edu.zju.labx.objects.beam
 {
 	import cn.edu.zju.labx.core.StageObjectsManager;
+	import cn.edu.zju.labx.objects.ray.Ray;
 	
 	import flash.display.BitmapData;
 	import flash.display.BlendMode;
 	import flash.geom.Rectangle;
 	
 	import org.papervision3d.core.proto.MaterialObject3D;
+	import org.papervision3d.materials.BitmapMaterial;
 	import org.papervision3d.materials.utils.MaterialsList;
 	import org.papervision3d.objects.primitives.Cube;
 	import org.papervision3d.view.layer.ViewportLayer;
-	import org.papervision3d.materials.BitmapMaterial;
 	
 	public class FourierGrating extends BeamSplitter
 	{

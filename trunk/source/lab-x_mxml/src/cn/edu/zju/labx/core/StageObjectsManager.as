@@ -1,8 +1,8 @@
 package cn.edu.zju.labx.core
 {
-	import cn.edu.zju.labx.objects.Board;
 	import cn.edu.zju.labx.objects.LabXObject;
-	import cn.edu.zju.labx.objects.LightSource;
+	import cn.edu.zju.labx.objects.board.Board;
+	import cn.edu.zju.labx.objects.lightSource.LightSource;
 	
 	import flash.filters.DropShadowFilter;
 	
