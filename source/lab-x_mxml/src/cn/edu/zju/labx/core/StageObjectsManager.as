@@ -295,13 +295,30 @@ package cn.edu.zju.labx.core
 		 **/
 		 public var rotate_left_button:Button;
 		 /***
-		 *  This is object_up button in the view
+		 *  This is object_uping button in the view
 		 */ 
-		 public var object_up_button:Button;
+		 public var object_uping_button:Button;
 		 /***
-		 *  This is object_down button in the view
+		 *  This is object_downing button in the view
 		 */ 
-		 public var object_down_button:Button;
+		 public var object_downing_button:Button;
+		 /***
+		 *  This is object_forwarding button in the view
+		 */ 
+		 public var object_forwarding_button:Button; 
+		 /***
+		 *  This is object_backwarding button in the view
+		 */ 
+		 public var object_backwarding_button:Button; 
+		 /***
+		 *  This is object_lefting button in the view
+		 */ 
+		 public var object_lefting_button:Button;
+		 /***
+		 *  This is object_righting button in the view
+		 */ 
+		 public var object_righting_button:Button;  
+		 
 		 
 		 
 		 
@@ -317,8 +334,14 @@ package cn.edu.zju.labx.core
 		 	// enable the button list
 		 	rotate_right_button.enabled=true;
 		 	rotate_left_button.enabled=true;
-		 	object_up_button.enabled=true;
-		 	object_down_button.enabled=true;
+		 	object_uping_button.enabled=true;
+		 	object_downing_button.enabled=true;
+		 	object_forwarding_button.enabled=true;
+		 	object_backwarding_button.enabled=true;
+		 	object_lefting_button.enabled=true;
+		 	object_righting_button.enabled=true;
+		 	
+		 	
 		 	labXObjectSelected = labXObject;
 		 	var viewportLayer:ViewportLayer = mainView.viewport.getChildLayer(labXObject.getObjectWithMaterial(), true, true);
 			viewportLayer.filters =[dropShadowFilter]; 
@@ -334,9 +357,13 @@ package cn.edu.zju.labx.core
 	 	   		//disable the button list
 		        rotate_right_button.enabled=false;
 		        rotate_left_button.enabled=false;
-		        object_up_button.enabled=false;
-		 	    object_down_button.enabled=false;
-		        labXObjectSelected =null
+		        object_uping_button.enabled=false;
+		 	    object_downing_button.enabled=false;
+		 	    object_forwarding_button.enabled=false;
+		 	    object_backwarding_button.enabled=false;
+		 	    object_lefting_button.enabled=false;
+		 	    object_righting_button.enabled=false;
+		        labXObjectSelected=null
 		   }
 		 }
 		 
@@ -378,7 +405,7 @@ package cn.edu.zju.labx.core
 		   }
 		}
 		
-		public function object_up():void{
+		public function object_uping():void{
 		    if(labXObjectSelected!=null){
 		    	if (labXObjectSelected is LightSource)
 		    	{
@@ -394,7 +421,8 @@ package cn.edu.zju.labx.core
 			   refresh();
 		   }
 		}
-		public function object_down():void{
+		
+		public function object_downing():void{
 			
 		    if(labXObjectSelected!=null){
 		    	if (labXObjectSelected is LightSource)
@@ -408,6 +436,39 @@ package cn.edu.zju.labx.core
 		    	refresh();
 		   }
 		}
+		public function object_lefting():void{
+		   if(labXObjectSelected!=null){
+				labXObjectSelected.x--;
+				this.addMessage(labXObjectSelected.name+"往左移动"+labXObjectSelected.x.toFixed(2));
+		    	refresh();
+		   }
+		}
+		
+	   public function object_righting():void{
+		   if(labXObjectSelected!=null){
+				labXObjectSelected.x++;
+				this.addMessage(labXObjectSelected.name+"往右移动"+labXObjectSelected.x.toFixed(2));
+		    	refresh();
+		   }
+		}
+		
+	    public function object_forwarding():void{
+		   if(labXObjectSelected!=null){
+		    	labXObjectSelected.y++;
+				this.addMessage(labXObjectSelected.name+"往前移动"+labXObjectSelected.y.toFixed(2));
+		    	refresh();
+		   }
+		}
+		
+	    public function object_backingwarding():void{
+		   if(labXObjectSelected!=null){
+		    	labXObjectSelected.y--;
+				this.addMessage(labXObjectSelected.name+"往后移动"+labXObjectSelected.y.toFixed(2));
+		    	refresh();
+		   }
+		}
+		
+		
 		private function refresh():void{
 			var timer:Timer= new Timer(600);
 		      timer.addEventListener(TimerEvent.TIMER, onTimer);
