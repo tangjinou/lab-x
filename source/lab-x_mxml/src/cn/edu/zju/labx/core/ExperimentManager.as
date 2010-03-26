@@ -11,6 +11,8 @@ package cn.edu.zju.labx.core
 	import cn.edu.zju.labx.objects.lens.ConvexLens;
 	import cn.edu.zju.labx.objects.lens.FourierLens;
 	import cn.edu.zju.labx.objects.lens.Lens;
+	import cn.edu.zju.labx.objects.lightSource.Lamps;
+	import cn.edu.zju.labx.objects.lightSource.Laser;
 	import cn.edu.zju.labx.objects.lightSource.LightSource;
 	
 	import com.greensock.TweenLite;
@@ -103,7 +105,7 @@ package cn.edu.zju.labx.core
 		{
 			var equipmentList:ArrayCollection = new ArrayCollection();
 			
-			var lightSource:LightSource = createLightSource("激光光源");
+			var lightSource:LightSource = createLaser("激光光源");
             equipmentList.addItem(lightSource);
             
             var splitterBeam:BeamSplitter = createSplitterBeam("分光镜");
@@ -195,7 +197,7 @@ package cn.edu.zju.labx.core
 		{
 			var equipmentList:ArrayCollection = new ArrayCollection();
 			
-			var lightSource:LightSource = createLightSource("激光光源");
+			var lightSource:LightSource = createLaser("激光光源");
             equipmentList.addItem(lightSource);
             
 			var lens1:Lens = createConvexLens("扩束镜", 18);
@@ -280,7 +282,7 @@ package cn.edu.zju.labx.core
 		{
 			var equipmentList:ArrayCollection = new ArrayCollection();
 			
-			var lightSource:LightSource = createLightSource("激光光源");
+			var lightSource:LightSource = createLaser("激光光源");
             equipmentList.addItem(lightSource);
             
 			var lens1:Lens = createConvexLens("扩束镜", 18);
@@ -354,8 +356,11 @@ package cn.edu.zju.labx.core
 		{
 			var equipmentList:ArrayCollection = new ArrayCollection();
 			
-			var lightSource:LightSource = createLightSource("激光光源");
-            equipmentList.addItem(lightSource);
+			var lightSource1:LightSource = createLaser("激光光源");
+            equipmentList.addItem(lightSource1);
+            
+            var lightSource2:LightSource = createLamps("照明光源");
+            equipmentList.addItem(lightSource2);
             
 			var lens1:Lens = createConvexLens("扩束镜", 18);
 			lens1.scale = 0.4;
@@ -442,19 +447,31 @@ package cn.edu.zju.labx.core
 		}	
 
 		/**
-		 * Create a ray light source
+		 * Create a Laser
 		 */
 		[Embed (source="../assets/textures/metal.jpg")]
 		public var LIGHTSOURCE_TEXTURE:Class;
-		private function createLightSource(name:String = "激光光源"):LightSource
+		private function createLaser(name:String = "激光光源"):LightSource
 		{
 			var bitmap:Bitmap =new LIGHTSOURCE_TEXTURE() as Bitmap;
 			var bitmapMaterial:BitmapMaterial = new BitmapMaterial(bitmap.bitmapData);
 			bitmapMaterial.interactive = true;
-			var lightSource:LightSource = new LightSource(name, bitmapMaterial);
+			var lightSource:LightSource = new Laser(name, bitmapMaterial);
 			return lightSource;
 		}
-
+		
+		/***
+		 * Create a Lamps
+		 */
+		private function createLamps(name:String = "照明光源"):LightSource
+		{
+		    var bitmap:Bitmap =new LIGHTSOURCE_TEXTURE() as Bitmap;
+			var bitmapMaterial:BitmapMaterial = new BitmapMaterial(bitmap.bitmapData);
+			bitmapMaterial.interactive = true;
+			var lightSource:LightSource = new Lamps(name, bitmapMaterial);
+			return lightSource;
+		}
+		
 		/**
 		 * Create a Splitter Beam
 		 */

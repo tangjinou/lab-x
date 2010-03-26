@@ -27,26 +27,11 @@ package cn.edu.zju.labx.objects.lightSource
 		
 		private var userInputTool:LabXObjectUserInputHandleTool;
 		private var isOn:Boolean = false;
-		protected var light:DAE;
-	    
-	    
-		
-		[Embed (source="../assets/models/lightSource.DAE",mimeType="application/octet-stream")]
-		public var LightSource_DAE:Class;
 		
 		public function LightSource(name:String,material:MaterialObject3D=null)
 		{
 			super(material,name);
-			light=new DAE(true);  
-			light.addEventListener(FileLoadEvent.LOAD_COMPLETE,daeFileOnloaded);  
-			light.load(new LightSource_DAE() as ByteArray,new MaterialsList( {all:this.material} ) );		
-			addEventListener(InteractiveScene3DEvent.OBJECT_PRESS, objectPressHandler);
-			createDisplayObject();
 			userInputTool = new LabXObjectUserInputHandleTool(this);
-		}
-		private function createDisplayObject():void
-		{   
-			
 		}
 		
 		public function createRay():void{
@@ -132,14 +117,5 @@ package cn.edu.zju.labx.objects.lightSource
 		}
 		
 		
-	    private function daeFileOnloaded(evt:FileLoadEvent):void{  
-	    	addChild(light);  
-//			trace(light.childrenList());
-			var effectLayer:ViewportLayer = new ViewportLayer(StageObjectsManager.getDefault.mainView.viewport, null);
-			effectLayer.addDisplayObject3D(this, true);
-			StageObjectsManager.getDefault.layerManager.equipmentLayer.addLayer(effectLayer);
-			light.getChildByName("COLLADA_Scene").getChildByName("Cylinder01").addEventListener(InteractiveScene3DEvent.OBJECT_PRESS, objectPressHandler);
-            light.getChildByName("COLLADA_Scene").getChildByName("Cylinder02").addEventListener(InteractiveScene3DEvent.OBJECT_PRESS, objectPressHandler);
-        } 
 	}
 }
