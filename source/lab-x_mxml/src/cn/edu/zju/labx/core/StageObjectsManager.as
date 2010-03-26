@@ -4,7 +4,9 @@ package cn.edu.zju.labx.core
 	import cn.edu.zju.labx.objects.board.Board;
 	import cn.edu.zju.labx.objects.lightSource.LightSource;
 	
+	import flash.events.TimerEvent;
 	import flash.filters.DropShadowFilter;
+	import flash.utils.Timer;
 	
 	import mx.collections.ArrayCollection;
 	import mx.controls.Button;
@@ -363,7 +365,7 @@ package cn.edu.zju.labx.core
 		public function rotate_left():void{
 		   if(labXObjectSelected!=null){
 		     labXObjectSelected.localRotationY--;
-		     objectStateChanged(labXObjectSelected);
+		     refresh();
 		     this.addMessage(labXObjectSelected.name+"绕Y转动"+labXObjectSelected.localRotationY.toFixed(2));
 		   }
 		}
@@ -371,7 +373,7 @@ package cn.edu.zju.labx.core
 		public function rotate_right():void{
            if(labXObjectSelected!=null){
 		     labXObjectSelected.localRotationY++;
-		     objectStateChanged(labXObjectSelected);
+		     refresh();
              this.addMessage(labXObjectSelected.name+"绕Y转动"+labXObjectSelected.localRotationY.toFixed(2));
 		   }
 		}
@@ -389,9 +391,7 @@ package cn.edu.zju.labx.core
 		    	}
 		    	trace("x: " + labXObjectSelected.x + "  y: " + labXObjectSelected.y + "  z: " + labXObjectSelected.z);
 		    	trace("rotateX: " + labXObjectSelected.rotationX + "  rotateY: " + labXObjectSelected.rotationY + "  rotateZ: " + labXObjectSelected.rotationZ);
-		    	
-		    	
-			    objectStateChanged(labXObjectSelected);
+			   refresh();
 		   }
 		}
 		public function object_down():void{
@@ -405,8 +405,17 @@ package cn.edu.zju.labx.core
 					labXObjectSelected.y--;
 					this.addMessage(labXObjectSelected.name+"往下移动"+labXObjectSelected.z.toFixed(2));
 		    	}
-				objectStateChanged(labXObjectSelected);
+		    	refresh();
 		   }
+		}
+		private function refresh():void{
+			var timer:Timer= new Timer(600);
+		      timer.addEventListener(TimerEvent.TIMER, onTimer);
+    				function onTimer(event:TimerEvent):void{
+                       objectStateChanged(labXObjectSelected);
+         			   timer.stop();
+                    }
+              timer.start();
 		}
         
 	}   
