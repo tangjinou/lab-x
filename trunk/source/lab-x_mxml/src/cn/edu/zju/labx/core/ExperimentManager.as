@@ -359,9 +359,6 @@ package cn.edu.zju.labx.core
 			var lightSource1:LightSource = createLaser("激光光源");
             equipmentList.addItem(lightSource1);
             
-            var lightSource2:LightSource = createLamps("照明光源");
-            equipmentList.addItem(lightSource2);
-            
 			var lens1:Lens = createConvexLens("扩束镜", 18);
 			lens1.scale = 0.4;
 			equipmentList.addItem(lens1);
@@ -382,6 +379,8 @@ package cn.edu.zju.labx.core
 			equipmentList.addItem(lens4);
 			
 			//lack "图像透明片", "非相干照明光源"
+			var lightSource2:LightSource = createLamps("照明光源");
+            equipmentList.addItem(lightSource2);
 			
 			
 			return equipmentList;
@@ -392,7 +391,28 @@ package cn.edu.zju.labx.core
 		 * Move the equipments in forth experiment to optimize place
 		 */
 		public function moveForthExperimentEquipments():void{
-			//TODO:
+          
+              for(var i:int=0;i<StageObjectsManager.getDefault.getObjectList().length;i++){
+		      
+		          var labXObject:LabXObject = StageObjectsManager.getDefault.getObjectList().getItemAt(i) as LabXObject;
+		          if(labXObject.name =="激光光源"){
+		             TweenLite.to(labXObject,LabXConstant.MOVE_DELAY,{x:50,z:0});
+		          }
+		          else if(labXObject.name =="照明光源"){
+		             TweenLite.to(labXObject,LabXConstant.MOVE_DELAY,{x:800,z:0,rotationY:180});
+		          }
+		          
+		          
+              }
+			  var timer:Timer= new Timer((LabXConstant.MOVE_DELAY+1)*1000);
+		      timer.addEventListener(TimerEvent.TIMER, onTimer);
+    				function onTimer(event:TimerEvent):void{
+         			   for(var i:int=0;i<_equipmentList.length;i++){
+         			       StageObjectsManager.getDefault.objectStateChanged(_equipmentList.getItemAt(i) as LabXObject);
+         			   }
+         			   timer.stop();
+                    }
+              timer.start();
 		}
 		
 
