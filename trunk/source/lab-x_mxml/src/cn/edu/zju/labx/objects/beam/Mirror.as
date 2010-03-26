@@ -5,23 +5,19 @@ package cn.edu.zju.labx.objects.beam
 	
 	import org.papervision3d.core.proto.MaterialObject3D;
 
-	public class Mirror extends BeamSplitter
+	public class Mirror extends Beam
 	{
 		public function Mirror(name:String,material:MaterialObject3D, vertices:Array=null, faces:Array=null)
 		{
-			super(name,material, vertices, faces);
+			super(material, name, vertices, faces);
 		}
 		
 		 /**
 		 *  deal with when the ray on the object
 		 **/ 
-   		override public function onRayHandle(oldRay:Ray):void{
-   		    this._ray = makeNewRay1(oldRay);
-			if(_ray!=null){
-			    StageObjectsManager.getDefault.originPivot.addChild(_ray);
-				_ray.displayRays();
-				StageObjectsManager.getDefault.rayManager.notify(_ray);
-			}
+   		override protected function handleRay(oldRay:Ray):void{
+   		    this._ray = makePassThroughRay(oldRay);
+			displayNewRay(this._ray);
    		}
 	}
 }

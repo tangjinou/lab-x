@@ -2,7 +2,6 @@ package cn.edu.zju.labx.objects.beam
 {
 	import cn.edu.zju.labx.core.LabXConstant;
 	import cn.edu.zju.labx.core.StageObjectsManager;
-	import cn.edu.zju.labx.logicObject.LineRayLogic;
 	import cn.edu.zju.labx.logicObject.ObjectPlaneLogic;
 	import cn.edu.zju.labx.objects.ray.LineRay;
 	import cn.edu.zju.labx.objects.ray.Ray;
@@ -22,38 +21,20 @@ package cn.edu.zju.labx.objects.beam
 	import org.papervision3d.objects.primitives.Cube;
 	import org.papervision3d.view.layer.ViewportLayer;
 	
-	public class ObjectPlane extends BeamSplitter
+	public class ObjectPlane extends Beam
 	{
 		public function ObjectPlane(name:String,material:MaterialObject3D, vertices:Array=null, faces:Array=null)
 		{
-			super(name,material, vertices, faces);
+			super(material, name, vertices, faces);
 		}
 		
 		 /**
 		 *  deal with when the ray on the object
 		 **/ 
-   		override public function onRayHandle(oldRay:Ray):void{
-//   		    this._ray = makeNewRay2(oldRay);
-			
-			stopOldRay(oldRay);
+   		override protected function handleRay(oldRay:Ray):void{
 			var logic:ObjectPlaneLogic = new ObjectPlaneLogic(this);
 			this._ray = logic.processRay(oldRay);
-			
-			if(_ray!=null){
-			    StageObjectsManager.getDefault.originPivot.addChild(_ray);
-				_ray.displayRays();
-				StageObjectsManager.getDefault.rayManager.notify(_ray);
-			}
-   		}
-   		
-   		private function stopOldRay(oldRay:Ray):void
-   		{
-   			for each (var oldLineRay:LineRay in oldRay.getLineRays())
-			{   
-				var intersactionPoint:Number3D = MathUtils.calculatePointInPlane2(getPosition(),getNormal(),oldLineRay.normal,oldLineRay.start_point);
-				if (intersactionPoint != null)oldLineRay.end_point = intersactionPoint.clone();					
-			}
-			oldRay.displayRays();
+			displayNewRay(this._ray);
    		}
    		
    		override public function createDisplayObject():void

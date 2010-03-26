@@ -13,23 +13,19 @@ package cn.edu.zju.labx.objects.beam
 	import org.papervision3d.objects.primitives.Cube;
 	import org.papervision3d.view.layer.ViewportLayer;
 	
-	public class FourierGrating extends BeamSplitter
+	public class FourierGrating extends Beam
 	{
 		public function FourierGrating(name:String,material:MaterialObject3D, vertices:Array=null, faces:Array=null)
 		{
-			super(name,material, vertices, faces);
+			super(material, name, vertices, faces);
 		}
 		
 		 /**
 		 *  deal with when the ray on the object
 		 **/ 
-   		override public function onRayHandle(oldRay:Ray):void{
-   		    this._ray = makeNewRay2(oldRay);
-			if(_ray!=null){
-			    StageObjectsManager.getDefault.originPivot.addChild(_ray);
-				_ray.displayRays();
-				StageObjectsManager.getDefault.rayManager.notify(_ray);
-			}
+   		override protected function handleRay(oldRay:Ray):void{
+   		    this._ray = makePassThroughRay(oldRay);
+			displayNewRay(this._ray);
    		}
    		
    		override public function createDisplayObject():void
