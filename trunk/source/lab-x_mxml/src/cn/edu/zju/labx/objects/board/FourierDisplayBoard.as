@@ -78,7 +78,7 @@ package cn.edu.zju.labx.objects.board
            }
            f_s[3] = ray_tmp.getLengthOfFirstLineRay();
            
-           if((Math.abs(f_s[0] - f_s[3]) < 1) && (Math.abs(f_s[1] - f_s[2]) < 1))
+           if(Math.abs(f_s[1] - f_s[2]) < 3)
            {
            		return true;
            }
