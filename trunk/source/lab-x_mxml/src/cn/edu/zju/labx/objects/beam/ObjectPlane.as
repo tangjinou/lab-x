@@ -2,12 +2,19 @@ package cn.edu.zju.labx.objects.beam
 {
 	import cn.edu.zju.labx.core.LabXConstant;
 	import cn.edu.zju.labx.core.StageObjectsManager;
+	import cn.edu.zju.labx.logicObject.LineRayLogic;
+	import cn.edu.zju.labx.logicObject.ObjectPlaneLogic;
+	import cn.edu.zju.labx.objects.ray.LineRay;
 	import cn.edu.zju.labx.objects.ray.Ray;
+	import cn.edu.zju.labx.utils.MathUtils;
 	
 	import flash.display.BitmapData;
 	import flash.display.BlendMode;
 	import flash.display.Shape;
 	
+	import mx.collections.ArrayCollection;
+	
+	import org.papervision3d.core.math.Number3D;
 	import org.papervision3d.core.proto.MaterialObject3D;
 	import org.papervision3d.materials.BitmapMaterial;
 	import org.papervision3d.materials.special.CompositeMaterial;
@@ -26,12 +33,27 @@ package cn.edu.zju.labx.objects.beam
 		 *  deal with when the ray on the object
 		 **/ 
    		override public function onRayHandle(oldRay:Ray):void{
-   		    this._ray = makeNewRay2(oldRay);
+//   		    this._ray = makeNewRay2(oldRay);
+			
+			stopOldRay(oldRay);
+			var logic:ObjectPlaneLogic = new ObjectPlaneLogic(this);
+			this._ray = logic.processRay(oldRay);
+			
 			if(_ray!=null){
 			    StageObjectsManager.getDefault.originPivot.addChild(_ray);
 				_ray.displayRays();
 				StageObjectsManager.getDefault.rayManager.notify(_ray);
 			}
+   		}
+   		
+   		private function stopOldRay(oldRay:Ray):void
+   		{
+   			for each (var oldLineRay:LineRay in oldRay.getLineRays())
+			{   
+				var intersactionPoint:Number3D = MathUtils.calculatePointInPlane2(getPosition(),getNormal(),oldLineRay.normal,oldLineRay.start_point);
+				if (intersactionPoint != null)oldLineRay.end_point = intersactionPoint.clone();					
+			}
+			oldRay.displayRays();
    		}
    		
    		override public function createDisplayObject():void
@@ -93,5 +115,38 @@ package cn.edu.zju.labx.objects.beam
 		}
 
 
+		public function getRectPoints():ArrayCollection
+		{
+			var w:Number = LabXConstant.rectW;
+			var h:Number = LabXConstant.rectH;
+			
+//			rectRight.graphics.drawRect(depth/5-w/2, height/2-h/2, w, h);
+//			rectRight.graphics.drawRect(depth/5*4-h/2, height/2-w/2, h, w);
+
+			//point with clockwise
+			var rect1_point1:Number3D = new Number3D(x, y-h/2, z-3*depth/10-w/2);
+			var rect1_point2:Number3D = new Number3D(x, y+h/2, z-3*depth/10-w/2);
+			var rect1_point3:Number3D = new Number3D(x, y+h/2, z-3*depth/10+w/2);
+			var rect1_point4:Number3D = new Number3D(x, y-h/2, z-3*depth/10+w/2);
+			
+			//point with clockwise
+			var rect2_point1:Number3D = new Number3D(x, y-w/2, z+3*depth/10-h/2);
+			var rect2_point2:Number3D = new Number3D(x, y+w/2, z+3*depth/10-h/2);
+			var rect2_point3:Number3D = new Number3D(x, y+w/2, z+3*depth/10+h/2);
+			var rect2_point4:Number3D = new Number3D(x, y-w/2, z+3*depth/10+h/2);
+			
+			var result:ArrayCollection = new ArrayCollection();
+			
+			result.addItem(rect1_point1);
+			result.addItem(rect1_point2);
+			result.addItem(rect1_point3);
+			result.addItem(rect1_point4);
+			result.addItem(rect2_point1);
+			result.addItem(rect2_point2);
+			result.addItem(rect2_point3);
+			result.addItem(rect2_point4);
+			
+			return result;
+		}
 	}
 }

@@ -352,7 +352,20 @@ package cn.edu.zju.labx.utils
 		
 		/**
 		  * Calculate the intersaction of two lines. we assume the 2 lines are the same plane
-		  * @usage: MathUtil.calculateIntersaction(a, b, c, d); 
+		  * @usage: MathUtil.calculate3DIntersection(a, b, c, d); 
+		  * 
+		  * Algorithm for this method:
+		  * 1. v0 = ab.normarlize;			vector of line ab.
+		  * 2. |ap| = ac . v0				p is the projection of point c on line ab 
+		  * 3. p = a + |ap|*v0
+		  * 3. normal = cp.normalize		normal is the normal of line cp
+		  * 4. d0 = ac . normal
+		  * 5. d1 = ad . normal
+		  * 6. intersaction = d + d1 * (dc)/(d1 - d0);
+		  * 
+		  * if d1 - d0  = 0  means the two line are parallel
+		  * if intersaction is not in line ab, means the two line are not the same plane
+		  * 
 		  * 
 		  * @param a (Number3D) first point in first line
 		  * @param b (Number3D) second point in first line
@@ -362,21 +375,21 @@ package cn.edu.zju.labx.utils
 		  */
 		public static function calculate3DIntersection(a:Number3D, b:Number3D, c:Number3D, d:Number3D):Number3D
 		{
+			//calculate the vector of line ab.
 			var v0:Number3D = Number3D.sub(b, a);
 			v0.normalize();
 			
+			//calculate p,  the project point of c at line ab
 			var p0:Number = Number3D.dot(Number3D.sub(c, a), v0);
-			
-			//point is p = a + v*p0;
 			var tmp:Number3D = v0.clone();
 			tmp.multiplyEq(p0);
-			var conj:Number3D = Number3D.add(tmp, a);
+			var p:Number3D = Number3D.add(tmp, a);
 			
-			//normal is p - c
-			var normal:Number3D = Number3D.sub(conj, c);
+			//line cp normal
+			var normal:Number3D = Number3D.sub(p, c);
 			normal.normalize();
 			
-			
+			//calculate intersaction
 			var d0:Number = Number3D.dot(Number3D.sub(c, a), normal);
 			var d1:Number = Number3D.dot(Number3D.sub(d, a), normal);
 			

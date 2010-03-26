@@ -78,14 +78,20 @@ package cn.edu.zju.labx.objects.board
            }
            f_s[3] = ray_tmp.getLengthOfFirstLineRay();
            
-           for(var i:int=0;i<f_s.length;i++){
-              for(var j:int=0;j<f_s.length;j++){
-                 if(Math.abs(f_s[i]-f_s[j])>3){
-                    return false;
-                 }              
-              }
+           if((Math.abs(f_s[0] - f_s[3]) < 1) && (Math.abs(f_s[1] - f_s[2]) < 1))
+           {
+           		return true;
            }
-           return true;
+           
+//           for(var i:int=0;i<f_s.length;i++){
+//              for(var j:int=0;j<f_s.length;j++){
+//                 if(Math.abs(f_s[i]-f_s[j])>3){
+//                    return false;
+//                 }              
+//              }
+//           }
+			
+           return false;
    		}
    		
 
