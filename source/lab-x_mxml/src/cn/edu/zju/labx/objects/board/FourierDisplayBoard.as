@@ -14,18 +14,20 @@ package cn.edu.zju.labx.objects.board
 	import org.papervision3d.materials.BitmapMaterial;
 	
 	public class FourierDisplayBoard extends Board
-	{
+	{   
 		public function FourierDisplayBoard(name:String,material:MaterialObject3D=null)
 		{
 			super(name, material);
 //			this.displayImage(false); //temp to display image always
 		}
 		
+		
+		private var isBrighten:Boolean;
 		override public function onRayHandle(oldRay:Ray):void
 		{
 			super.onRayHandle(oldRay);
 			if(isRayWayRight(oldRay)){
-			    displayImage(false);
+			    displayImage(isBrighten);
 			}
 		}
 		
@@ -64,6 +66,15 @@ package cn.edu.zju.labx.objects.board
            if(!(ray_tmp.getSender() is FourierGrating)){
               return false;
            }
+           
+           if(ray_tmp.getSender().z%10>5)
+           {
+              isBrighten = true;
+           }else{
+              isBrighten = false;
+           }
+           
+           
            f_s[1] = ray_tmp.getLengthOfFirstLineRay();
            
            ray_tmp = RayManager.getDefault.getFrontRay(ray_tmp);
