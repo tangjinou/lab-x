@@ -2,6 +2,7 @@ package cn.edu.zju.labx.core
 {
 	import cn.edu.zju.labx.objects.LabXObject;
 	import cn.edu.zju.labx.objects.beam.BeamSplitter;
+	import cn.edu.zju.labx.objects.beam.PolarizationBeamSplitter;
 	import cn.edu.zju.labx.objects.beam.FourierGrating;
 	import cn.edu.zju.labx.objects.beam.Mirror;
 	import cn.edu.zju.labx.objects.beam.ObjectPlane;
@@ -108,7 +109,7 @@ package cn.edu.zju.labx.core
 			var lightSource:LightSource = createLaser("激光光源");
             equipmentList.addItem(lightSource);
             
-            var splitterBeam:BeamSplitter = createSplitterBeam("分光镜");
+            var splitterBeam:BeamSplitter = createBeamSplitter("分光镜");
             equipmentList.addItem(splitterBeam);
             
             var mirror1:Mirror = createMirror("反射镜1")
@@ -207,10 +208,10 @@ package cn.edu.zju.labx.core
 			lens2.scale = 0.8;
 			equipmentList.addItem(lens2);
 			
-            var splitterBeam:BeamSplitter = createSplitterBeam("分光镜");
+            var splitterBeam:BeamSplitter = createBeamSplitter("分光镜");
             equipmentList.addItem(splitterBeam);
             
-             var splitterBeam2:BeamSplitter = createSplitterBeam("分光镜2");
+             var splitterBeam2:BeamSplitter = createBeamSplitter("分光镜2");
             equipmentList.addItem(splitterBeam2);
             
             var mirror1:Mirror = createMirror("反射镜1")
@@ -366,8 +367,8 @@ package cn.edu.zju.labx.core
 			lens2.scale = 0.8;
 			equipmentList.addItem(lens2);
 			
-			var splitterBeam:BeamSplitter = createSplitterBeam("偏振分光镜");
-			equipmentList.addItem(splitterBeam);
+			var splitter:PolarizationBeamSplitter = createPolarizationBeamSplitter("偏振分光镜");
+			equipmentList.addItem(splitter);
 			
 			var lens3:Lens = createConvexLens("成像透镜", 80);
 			equipmentList.addItem(lens3);
@@ -495,11 +496,22 @@ package cn.edu.zju.labx.core
 		/**
 		 * Create a Splitter Beam
 		 */
-		private function createSplitterBeam(name:String = "分光镜", material:MaterialObject3D=null):BeamSplitter
+		private function createBeamSplitter(name:String = "分光镜", material:MaterialObject3D=null):BeamSplitter
 		{
 			material = material || new PhongMaterial(light,0xFFFFFF,0xFF0000,100);
 			material.interactive = true;
 			var beam:BeamSplitter =new BeamSplitter(name, material);
+			return beam;
+		}
+		
+		/**
+		 * Create a PBS
+		 */
+		private function createPolarizationBeamSplitter(name:String = "分光镜", material:MaterialObject3D=null):PolarizationBeamSplitter
+		{
+			material = material || new PhongMaterial(light,0xFFFFFF,0xFF0000,100);
+			material.interactive = true;
+			var beam:PolarizationBeamSplitter =new PolarizationBeamSplitter(name, material);
 			return beam;
 		}
 		
