@@ -3,6 +3,7 @@ package cn.edu.zju.labx.core
 	import cn.edu.zju.labx.objects.LabXObject;
 	import cn.edu.zju.labx.objects.beam.BeamSplitter;
 	import cn.edu.zju.labx.objects.beam.FourierGrating;
+	import cn.edu.zju.labx.objects.beam.LCLV;
 	import cn.edu.zju.labx.objects.beam.Mirror;
 	import cn.edu.zju.labx.objects.beam.ObjectPlane;
 	import cn.edu.zju.labx.objects.beam.PolarizationBeamSplitter;
@@ -376,13 +377,9 @@ package cn.edu.zju.labx.core
 			equipmentList.addItem(lens3);
 			
 			equipmentList.addItem(createMachZehnderInterfBoard("接收屏"));
-			
-			
+			equipmentList.addItem(createLCLV("液晶光阀"));
 			equipmentList.addItem(createRetangleObjectPlane("物1"));
-			
 			equipmentList.addItem(createTTypeObjectPlane("物2"));
-			
-			
 			
 			
 			//lack "液晶光阀"
@@ -578,6 +575,17 @@ package cn.edu.zju.labx.core
 			material.interactive = true;
 			var fourierLens:FourierLens = new FourierLens(name,material, f);
 			return fourierLens;
+		}
+		
+		/**
+		 * Create a LCLV
+		 */
+		private function createLCLV(name:String = "液晶光阀", material:MaterialObject3D=null):LCLV
+		{
+			material = material || new PhongMaterial(light,0xFFFFFF,0x6ccff8,100);
+			material.interactive = true;
+			var lclv:LCLV = new LCLV(name,material);
+			return lclv;
 		}
 		
 		/**

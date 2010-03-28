@@ -47,6 +47,9 @@ package cn.edu.zju.labx.objects.beam
 		}
 		
 		/**
+		 * @@@@@@@@@@@@@@@@@@@@@
+		 * 		This function will not intend to override by children
+		 * @@@@@@@@@@@@@@@@@@@@@
 		 * we should stop the old ray when process the ray
 		 */
 		public function onRayHandle(oldRay:Ray):void{
@@ -55,7 +58,7 @@ package cn.edu.zju.labx.objects.beam
 		}
 		
 		/**
-		 * we should stop the old ray when process the ray
+		 * Child Class override this method to process ray.
 		 */
 		protected function handleRay(oldRay:Ray):void{
 			//do nothing
@@ -124,7 +127,7 @@ package cn.edu.zju.labx.objects.beam
 		/**
 		 * make a reflection ray through input ray
 		 */
-		protected function makeReflectionRay(oldRay:Ray):Ray
+		protected function makeReflectionRay(oldRay:Ray, reverse:Boolean=false):Ray
 		{
 			if(oldRay != null)
 			{
@@ -137,7 +140,7 @@ package cn.edu.zju.labx.objects.beam
                     if(lineRayLogic!=null){
                     	newLineRays.addItem(new LineRay(lineRayLogic));
                     }
-                	if(isReverseNormal(lineRayLogic, oldLineRay.logic)) resultRay = null;
+                	if(!reverse && isReverseNormal(lineRayLogic, oldLineRay.logic)) resultRay = null;
 				}
 				if (resultRay != null)resultRay.setLineRays(newLineRays);
 				return resultRay;
