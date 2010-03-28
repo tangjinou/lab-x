@@ -2,10 +2,12 @@ package cn.edu.zju.labx.core
 {
 	import cn.edu.zju.labx.objects.LabXObject;
 	import cn.edu.zju.labx.objects.beam.BeamSplitter;
-	import cn.edu.zju.labx.objects.beam.PolarizationBeamSplitter;
 	import cn.edu.zju.labx.objects.beam.FourierGrating;
 	import cn.edu.zju.labx.objects.beam.Mirror;
 	import cn.edu.zju.labx.objects.beam.ObjectPlane;
+	import cn.edu.zju.labx.objects.beam.PolarizationBeamSplitter;
+	import cn.edu.zju.labx.objects.beam.RetangleObjectPlane;
+	import cn.edu.zju.labx.objects.beam.TTypeObjectPlane;
 	import cn.edu.zju.labx.objects.board.DoubleSlitInterfBoard;
 	import cn.edu.zju.labx.objects.board.FourierDisplayBoard;
 	import cn.edu.zju.labx.objects.board.MachZehnderInterfBoard;
@@ -375,6 +377,14 @@ package cn.edu.zju.labx.core
 			
 			equipmentList.addItem(createMachZehnderInterfBoard("接收屏"));
 			
+			
+			equipmentList.addItem(createRetangleObjectPlane("物1"));
+			
+			equipmentList.addItem(createTTypeObjectPlane("物2"));
+			
+			
+			
+			
 			//lack "液晶光阀"
 			var lens4:Lens = createConvexLens("成像透镜", 80);
 			equipmentList.addItem(lens4);
@@ -589,7 +599,15 @@ package cn.edu.zju.labx.core
 		{
 			material = material || new ColorMaterial(0x262626, 1, true);
 			return new FourierDisplayBoard(name, material);
-		}		
+		}
+		private function createRetangleObjectPlane(name:String = "物1", material:MaterialObject3D=null):RetangleObjectPlane{
+		    material = material || new ColorMaterial(0x262626, 1, true);
+		    return new RetangleObjectPlane(name, material);
+		}
+		private function createTTypeObjectPlane(name:String = "物2", material:MaterialObject3D=null):TTypeObjectPlane{
+			material = material || new ColorMaterial(0x262626, 1, true);
+		    return new TTypeObjectPlane(name, material);
+		}
 
 	}
 }
