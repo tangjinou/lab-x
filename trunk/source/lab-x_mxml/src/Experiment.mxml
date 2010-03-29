@@ -68,7 +68,6 @@
 		  		uic.addChild(experiment);
            		addChild(uic);
            		experiment.experimentSelected(chooseExperimentwindow.experiment_id);
-	 		   
 				createCheckBoxes();
 	 		}
 	 		
@@ -77,6 +76,12 @@
 	 		   all_checkBox.label ="所有器件";
 	 		   all_checkBox.addEventListener(Event.CHANGE,allCheckBoxChanged);
 	 		   
+	 		   /**
+	 		   *  clear the array 
+	 		   */ 
+	 		   if(checkBoxList.length>0){
+	 		      checkBoxList.removeAll();
+	 		   }
 	 		   for(var i:int=0;i<StageObjectsManager.getDefault.getObjectList().length;i++){
 	 		       var obj:LabXObject = StageObjectsManager.getDefault.getObjectList().getItemAt(i) as LabXObject;
                    if(obj !=null){	 		       

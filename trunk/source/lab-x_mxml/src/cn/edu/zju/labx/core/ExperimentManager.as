@@ -114,6 +114,7 @@ package cn.edu.zju.labx.core
                    StageObjectsManager.getDefault.removeObject(equipment);
                }			
 			}
+			_equipmentList = null;
 		}
 		
 		/**
