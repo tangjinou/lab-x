@@ -23,7 +23,7 @@ package cn.edu.zju.labx.events
 		 */
 	    public var oldMouseY:Number = -1;
 	    
-	    private var keyDownAccelerate:Number = 1;
+	    private var keyDownAccelerate:Number = 0.5;
 	    
 	    private var needReproduceRay:Boolean = false;
 	    
@@ -59,7 +59,7 @@ package cn.edu.zju.labx.events
 				}
 			} else if (event is KeyboardEvent)
 			{
-				if(event.type == KeyboardEvent.KEY_UP)
+				if((event.type == KeyboardEvent.KEY_UP) && (keyDownAccelerate != 1))
 				{
 					StageObjectsManager.getDefault.objectStateChanged(this.labXObject);
 					keyDownAccelerate = 1;
@@ -102,7 +102,7 @@ package cn.edu.zju.labx.events
 						labXObject.objectRotate(0, LabXConstant.Y_KEY_ROTATE_MIN*keyDownAccelerate);
 						break;
 				}
-				if(keyDownAccelerate < 10)keyDownAccelerate += 0.5;
+				if(keyDownAccelerate < 10)keyDownAccelerate += 1;
 			}
 		}
 	}

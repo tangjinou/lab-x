@@ -122,28 +122,32 @@ package cn.edu.zju.labx.core
             equipmentList.addItem(lightSource);
             
             var splitterBeam:BeamSplitter = createBeamSplitter("分光镜");
+            splitterBeam.scale = 0.5;
             equipmentList.addItem(splitterBeam);
             
             var mirror1:Mirror = createMirror("反射镜1")
+            mirror1.scale = 0.5;
 			equipmentList.addItem(mirror1);
 			
             var mirror2:Mirror = createMirror("反射镜2")
+            mirror2.scale = 0.5;
 			equipmentList.addItem(mirror2);
 			
             var mirror3:Mirror = createMirror("反射镜3")
+            mirror3.scale = 0.5;
 			equipmentList.addItem(mirror3);
 			
 			var lens1:Lens = createConvexLens("扩束镜1", 18);
-			lens1.scale = 0.4;
+			lens1.scale = 0.3;
 			equipmentList.addItem(lens1);
 			var lens2:Lens = createConvexLens("扩束镜2", 18);
-			lens2.scale = 0.4;
+			lens2.scale = 0.3;
 			equipmentList.addItem(lens2);
 			var lens3:Lens = createConvexLens("准直物镜1", 108);
-			lens3.scale = 0.8;
+			lens3.scale = 0.7;
 			equipmentList.addItem(lens3);
 			var lens4:Lens = createConvexLens("准直物镜2", 108);
-			lens4.scale = 0.8;
+			lens4.scale = 0.7;
 			equipmentList.addItem(lens4);
 			
 			equipmentList.addItem(createDoubleSlitInterfBoard("接收屏"));
