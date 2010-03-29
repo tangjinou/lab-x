@@ -6,13 +6,11 @@ package cn.edu.zju.labx.objects.desk
 	import flash.display.Bitmap;
 	import flash.utils.ByteArray;
 	
-	import org.papervision3d.core.geom.TriangleMesh3D;
 	import org.papervision3d.events.FileLoadEvent;
 	import org.papervision3d.materials.BitmapMaterial;
 	import org.papervision3d.materials.utils.MaterialsList;
+	import org.papervision3d.objects.DisplayObject3D;
 	import org.papervision3d.objects.parsers.DAE;
-
-	import org.papervision3d.view.layer.ViewportLayer;
 		
 	public class Desk
 	{
@@ -25,7 +23,7 @@ package cn.edu.zju.labx.objects.desk
 		public var DESK_TEXTURE:Class;
 		
 		public function Desk()
-		{
+		{   
           	var bitmap:Bitmap = new DESK_TEXTURE() as Bitmap;
 			var bitmapMaterial:BitmapMaterial = new BitmapMaterial(bitmap.bitmapData);
 			bitmapMaterial.interactive = true;
@@ -37,11 +35,9 @@ package cn.edu.zju.labx.objects.desk
             desk.scale = 3;
             desk.scaleX = 6;
             desk.scaleZ = 5;
-			
 		}
 		
 		private function deskOnLoaded(evt:FileLoadEvent):void{
-
 			desk.moveDown(LabXConstant.STAGE_HEIGHT/2-40);
             desk.moveRight(LabXConstant.STAGE_WIDTH/2);
             StageObjectsManager.getDefault.originPivot.addChild(desk);
@@ -50,8 +46,12 @@ package cn.edu.zju.labx.objects.desk
             StageObjectsManager.getDefault.layerManager.deskLegLayer.addDisplayObject3D(desk.getChildByName("COLLADA_Scene").getChildByName("Cylinder10"), true);
             StageObjectsManager.getDefault.layerManager.deskLegLayer.addDisplayObject3D(desk.getChildByName("COLLADA_Scene").getChildByName("Cylinder15"), true);
             StageObjectsManager.getDefault.layerManager.deskLegLayer.addDisplayObject3D(desk.getChildByName("COLLADA_Scene").getChildByName("Cylinder16"), true);
+        }
+        
+        public function destroy():void{
+             StageObjectsManager.getDefault.originPivot.removeChild(desk);
+        	 StageObjectsManager.getDefault.layerManager.deskLegLayer.removeAllLayers();
         } 
-          
 
 	}
 }

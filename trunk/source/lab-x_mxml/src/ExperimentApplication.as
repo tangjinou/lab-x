@@ -43,6 +43,7 @@ package
 			 */ 
 			StageObjectsManager.getDefault.mainView = this;
 			equipmentLayer = StageObjectsManager.getDefault.layerManager.equipmentLayer;
+			
 			desk = new Desk();
 			
 			originPivot = new DisplayObject3D();
@@ -124,6 +125,11 @@ package
 			this.camera.useCulling = true;
 			this.camPitch = LabXConstant.DEFAULT_CAMERA_PITCH;
 			this.camYaw = LabXConstant.DEFAULT_CAMERA_YAW;
+		}
+		
+		public function destroy():void{
+		    desk.destroy();   
+		    grid.destroy();
 		}
 		
 	}
