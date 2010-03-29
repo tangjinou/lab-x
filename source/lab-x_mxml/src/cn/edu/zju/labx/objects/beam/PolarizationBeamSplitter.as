@@ -32,13 +32,13 @@ package cn.edu.zju.labx.objects.beam
 			materialsList.addMaterial(material,"right");
 			materialsList.addMaterial(material,"top");
 			materialsList.addMaterial(material,"bottom");
-		   	var inner:Cube = new Cube(materialsList,width,depth,height);
+		   	var inner:Cube = new Cube(materialsList,width,depth*Math.sqrt(2),height);
 		
 			var light:PointLight3D = new PointLight3D(true);
 			light.x = 200;
-			light.y = 200;
-			light.z = -200;
-			var outMaterial:PhongMaterial = new PhongMaterial(light,0xFFFFFF,0x00FF00,100);
+			light.y = 150;
+			light.z = -400;
+			var outMaterial:PhongMaterial = new PhongMaterial(light,0xFFFFFF,0xff0000,100);
 			outMaterial.interactive = true;
 			var outMatList:MaterialsList = new MaterialsList();
 			outMatList.addMaterial(outMaterial,"front");
@@ -52,7 +52,7 @@ package cn.edu.zju.labx.objects.beam
 		   	var effectLayer:ViewportLayer = new ViewportLayer(StageObjectsManager.getDefault.mainView.viewport, null);
 			effectLayer.addDisplayObject3D(inner, true);
 			effectLayer.addDisplayObject3D(displayObject, true);
-			effectLayer.blendMode = BlendMode.HARDLIGHT;
+			effectLayer.alpha = 0.7;
 			StageObjectsManager.getDefault.layerManager.equipmentLayer.addLayer(effectLayer);
 			inner.localRotationY = 45;
 			displayObject.localRotationY = -45;
