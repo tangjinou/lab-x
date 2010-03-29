@@ -16,7 +16,7 @@ package cn.edu.zju.labx.objects.beam
 		 *  deal with when the ray on the object
 		 **/ 
    		override protected function handleRay(oldRay:Ray):void{
-   		    this._ray = makePassThroughRay(oldRay);
+   		    this._ray = makeReflectionRay(oldRay);
 			displayNewRay(this._ray);
    		}
 	}
