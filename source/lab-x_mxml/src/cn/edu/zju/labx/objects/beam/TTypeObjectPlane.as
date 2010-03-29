@@ -43,8 +43,8 @@ package cn.edu.zju.labx.objects.beam
 			var bmpRight:BitmapData = new BitmapData(depth, height, true, 0x0);
 			var rectRight:Shape = new Shape();
 			rectRight.graphics.beginFill(0x000000, 1);
-			rectRight.graphics.drawRect(depth/5-w/2, height/2-h/2, w, h);
-			rectRight.graphics.drawRect(depth/5*4-h/2, height/2-w/2, h, w);
+			rectRight.graphics.drawRect(depth/5*2, height/2-h/2, w, h);
+			rectRight.graphics.drawRect(depth/5*2+w, height/2-w/2, h, w);
 			bmpRight.draw(rectRight);
 			
 			var rectMaterialRight:BitmapMaterial = new BitmapMaterial(bmpRight);
@@ -59,8 +59,8 @@ package cn.edu.zju.labx.objects.beam
 	        var bmpLeft:BitmapData = new BitmapData(depth, height, true, 0x0);
 			var rectLeft:Shape = new Shape();
 			rectLeft.graphics.beginFill(0x000000, 1);
-			rectLeft.graphics.drawRect(depth/5*4-w/2, height/2-h/2, w, h);
-			rectLeft.graphics.drawRect(depth/5-h/2, height/2-w/2, h, w);
+			rectLeft.graphics.drawRect(depth/5*3-w, height/2-h/2, w, h);
+			rectLeft.graphics.drawRect(depth/5*3-w-h, height/2-w/2, h, w);
 			bmpLeft.draw(rectLeft);
 			
 			var rectMaterialLeft:BitmapMaterial = new BitmapMaterial(bmpLeft);
