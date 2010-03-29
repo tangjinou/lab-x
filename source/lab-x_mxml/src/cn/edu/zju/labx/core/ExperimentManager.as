@@ -18,15 +18,11 @@ package cn.edu.zju.labx.core
 	import cn.edu.zju.labx.objects.lightSource.Lamps;
 	import cn.edu.zju.labx.objects.lightSource.Laser;
 	import cn.edu.zju.labx.objects.lightSource.LightSource;
-	
 	import com.greensock.TweenLite;
-	
 	import flash.display.Bitmap;
 	import flash.events.TimerEvent;
 	import flash.utils.Timer;
-	
 	import mx.collections.ArrayCollection;
-	
 	import org.papervision3d.core.proto.LightObject3D;
 	import org.papervision3d.core.proto.MaterialObject3D;
 	import org.papervision3d.materials.BitmapMaterial;
@@ -72,6 +68,9 @@ package cn.edu.zju.labx.core
 		public function createExperimentEquipments(experimentIndex:Number):ArrayCollection
 		{
 			this._experimentIndex = experimentIndex;
+			
+			remove();
+			
 			switch (experimentIndex)
 			{
 				case LabXConstant.EXPERIMENT_FIRST:
@@ -100,13 +99,23 @@ package cn.edu.zju.labx.core
 			return _equipmentList;
 		}
 		
-		
+		/**
+		 *  remove the last experiment's equipments
+		 */ 
+		private function remove():void{
+		   	if(_equipmentList!=null){
+               for (var i:int=0; i<_equipmentList.length; i++){
+                   var equipment:LabXObject = _equipmentList.getItemAt(i) as LabXObject;
+                   StageObjectsManager.getDefault.removeObject(equipment);
+               }			
+			}
+		}
 		
 		/**
 		 * Create equipment for first experiment
 		 */
 		private function createFirstExperimentEquipments():ArrayCollection
-		{
+		{   
 			var equipmentList:ArrayCollection = new ArrayCollection();
 			
 			var lightSource:LightSource = createLaser("激光光源");
@@ -596,22 +605,33 @@ package cn.edu.zju.labx.core
 			material = material || new ColorMaterial(0x262626, 1, true);
 			return new DoubleSlitInterfBoard(name, material);
 		}
-		
+		/**
+		 * create mach zehnder interfBoard
+		 */ 
 		private function createMachZehnderInterfBoard(name:String = "接收屏", material:MaterialObject3D=null):MachZehnderInterfBoard
 		{
 			material = material || new ColorMaterial(0x262626, 1, true);
 			return new MachZehnderInterfBoard(name, material);
 		}
 
+        /**
+        * create a fourier board 
+        */ 
 		private function createFourierBoard(name:String = "输出面", material:MaterialObject3D=null):FourierDisplayBoard
 		{
 			material = material || new ColorMaterial(0x262626, 1, true);
 			return new FourierDisplayBoard(name, material);
 		}
+		/**
+		 * create a retangle object plane
+		 */ 
 		private function createRetangleObjectPlane(name:String = "物1", material:MaterialObject3D=null):RetangleObjectPlane{
 		    material = material || new ColorMaterial(0x262626, 1, true);
 		    return new RetangleObjectPlane(name, material);
 		}
+		/**
+		 *  create a ttype plane
+		 */ 
 		private function createTTypeObjectPlane(name:String = "物2", material:MaterialObject3D=null):TTypeObjectPlane{
 			material = material || new ColorMaterial(0x262626, 1, true);
 		    return new TTypeObjectPlane(name, material);

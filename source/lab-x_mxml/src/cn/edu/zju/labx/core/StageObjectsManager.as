@@ -155,6 +155,13 @@ package cn.edu.zju.labx.core
          private var objectList:ArrayCollection = new ArrayCollection();
          
          private var stageObjectList:ArrayCollection = new ArrayCollection();
+         
+         
+         public  function clear():void{
+            objectAllSavedList.removeAll();
+            objectList.removeAll();
+            stageObjectList.removeAll();
+         }
 		 
 		/**
 		 * add an object to the stage
@@ -366,7 +373,7 @@ package cn.edu.zju.labx.core
 		        labXObjectSelected=null
 		   }
 		 }
-		 
+		
 	
 		
 		///////////////////////////////////////////////////////////////////////////////////////////////////

@@ -45,5 +45,9 @@ package cn.edu.zju.labx.objects
 			StageObjectsManager.getDefault.layerManager.gridLayer.filters = [dropShadowFilter];
 			
 		}
+		public function destroy():void{
+			StageObjectsManager.getDefault.originPivot.removeChild(_lines);
+			StageObjectsManager.getDefault.layerManager.gridLayer.removeAllLayers();
+		}
 	}
 }

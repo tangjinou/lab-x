@@ -48,14 +48,17 @@
 	 		   chooseExperimentwindow = ChooseExperimentWindow(PopUpManager.createPopUp( this, ChooseExperimentWindow , true));
                chooseExperimentwindow.x =this.width/3;
                chooseExperimentwindow.y= this.height/3;
+               
+               experiment = new ExperimentApplication();
                chooseExperimentwindow.confirm.addEventListener(MouseEvent.CLICK,start);
 	 		}
+	 		
+	 		private var uic:UIComponent;
 	 		public function start(event:MouseEvent):void{
 	 			PopUpManager.removePopUp(chooseExperimentwindow);
- 		   		experiment = new ExperimentApplication();
  		   		Mouse3D.enabled = true;
  		   		experiment.viewport.interactive = true; 
- 		   		var uic:UIComponent = new UIComponent();
+ 		   	    uic = new UIComponent();
 		   		stage.frameRate = 40;
            		stage.addEventListener(MouseEvent.MOUSE_DOWN, experiment.onMouseDown);
            		stage.addEventListener(MouseEvent.MOUSE_MOVE, experiment.onMouseMove);
@@ -130,6 +133,14 @@
 	 		     window.x=this.width/3;
 	 		     window.y=this.height/3;
 	 		}
+	 		
+	 		public function choseExperimentWindow():void{
+	 		    chooseExperimentwindow = ChooseExperimentWindow(PopUpManager.createPopUp( this, ChooseExperimentWindow , true));
+               	chooseExperimentwindow.x =this.width/3;
+               	chooseExperimentwindow.y= this.height/3;
+               	chooseExperimentwindow.confirm.addEventListener(MouseEvent.CLICK,start);
+	 		
+	 		}
 	 	]]> 
 	 </mx:Script>
      <mx:VBox horizontalGap="10" verticalAlign="bottom" x="937" y="10">
@@ -140,6 +151,7 @@
 	 		<mx:Button  buttonDown="StageObjectsManager.getDefault.mainView.camera.zoom++" autoRepeat="true" icon="@Embed('../assets/icon/zoom_add.png')" toolTip="放大"/>
 	 		<mx:Button  buttonDown="StageObjectsManager.getDefault.mainView.camera.zoom--" autoRepeat="true" icon="@Embed('../assets/icon/zoom_min.png')" toolTip="缩小"/>
             <mx:Button  click="choseComponentWindow()"  toolTip="选择器件" icon="@Embed('../assets/icon/objects.png')" />
+            <mx:Button  click="choseExperimentWindow()"  toolTip="选择实验" icon="@Embed('../assets/icon/experimentChose.png')" />
      </mx:VBox>
      
      <mx:Label   text="物体移动" fontSize="12"/>
