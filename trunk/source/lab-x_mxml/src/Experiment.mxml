@@ -92,7 +92,6 @@
 	 		         checkBoxList.addItem(checkbox);
                    }
 	 		   }
-	 		       
 	 		   
 	 		}
 	 		public function checkBoxChanged(event:Event):void{
