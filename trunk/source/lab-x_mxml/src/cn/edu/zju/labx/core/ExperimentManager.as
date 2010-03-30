@@ -519,24 +519,29 @@ package cn.edu.zju.labx.core
 		 */
 		[Embed (source="../assets/textures/metal.jpg")]
 		public var LIGHTSOURCE_TEXTURE:Class;
-		private function createLaser(name:String = "激光光源"):LightSource
+		private function createLaser(name:String = "激光光源",material:MaterialObject3D=null):LightSource
 		{
-			var bitmap:Bitmap =new LIGHTSOURCE_TEXTURE() as Bitmap;
-			var bitmapMaterial:BitmapMaterial = new BitmapMaterial(bitmap.bitmapData);
-			bitmapMaterial.interactive = true;
-			var lightSource:LightSource = new Laser(name, bitmapMaterial);
+//			var bitmap:Bitmap =new LIGHTSOURCE_TEXTURE() as Bitmap;
+//			var bitmapMaterial:BitmapMaterial = new BitmapMaterial(bitmap.bitmapData);
+//			bitmapMaterial.interactive = true;
+//			var lightSource:LightSource = new Laser(name, bitmapMaterial);
+			material = material || new PhongMaterial(light,0xFFFFFF,0x0000FF,100);
+			material.interactive = true;
+			var lightSource:LightSource = new Laser(name, material);
 			return lightSource;
 		}
 		
 		/***
 		 * Create a Lamps
 		 */
-		private function createLamps(name:String = "照明光源"):LightSource
+		private function createLamps(name:String = "照明光源",material:MaterialObject3D=null):LightSource
 		{
-		    var bitmap:Bitmap =new LIGHTSOURCE_TEXTURE() as Bitmap;
-			var bitmapMaterial:BitmapMaterial = new BitmapMaterial(bitmap.bitmapData);
-			bitmapMaterial.interactive = true;
-			var lightSource:LightSource = new Lamps(name, bitmapMaterial);
+//		    var bitmap:Bitmap =new LIGHTSOURCE_TEXTURE() as Bitmap;
+//			var bitmapMaterial:BitmapMaterial = new BitmapMaterial(bitmap.bitmapData);
+//			bitmapMaterial.interactive = true;
+			material = material || new PhongMaterial(light,0xFFFFFF,0x00FF00,100);
+			material.interactive = true;
+			var lightSource:LightSource = new Lamps(name, material);
 			return lightSource;
 		}
 		
