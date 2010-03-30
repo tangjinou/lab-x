@@ -72,9 +72,7 @@ package cn.edu.zju.labx.core
 		public function createExperimentEquipments(experimentIndex:Number):ArrayCollection
 		{
 			this._experimentIndex = experimentIndex;
-			
 			remove();
-			
 			switch (experimentIndex)
 			{
 				case LabXConstant.EXPERIMENT_FIRST:
@@ -90,7 +88,6 @@ package cn.edu.zju.labx.core
 					_equipmentList = createForthExperimentEquipments();
 					break;
 			}
-			
 			for (var i:int=0; i<_equipmentList.length; i++)
 			{
 				var equipment:LabXObject = _equipmentList.getItemAt(i) as LabXObject;
@@ -99,7 +96,6 @@ package cn.edu.zju.labx.core
 				equipment.moveRight(i*LabXConstant.STAGE_WIDTH/_equipmentList.length);
 				StageObjectsManager.getDefault.addObject(equipment);
 			}
-			
 			return _equipmentList;
 		}
 		
@@ -389,10 +385,10 @@ package cn.edu.zju.labx.core
 			lens2.scale = 0.8;
 			equipmentList.addItem(lens2);
 			
-			var splitter:PolarizationBeamSplitter = createPolarizationBeamSplitter("偏振分光镜");
+			var splitter:PolarizationBeamSplitter = createPolarizationBeamSplitter("偏振分光棱镜");
 			equipmentList.addItem(splitter);
 			
-			var lens3:Lens = createConvexLens("成像透镜", 80);
+			var lens3:Lens = createConvexLens("成像透镜1", 80);
 			equipmentList.addItem(lens3);
 			
 			equipmentList.addItem(createMachZehnderInterfBoard("接收屏"));
@@ -402,7 +398,7 @@ package cn.edu.zju.labx.core
 			
 			
 			//lack "液晶光阀"
-			var lens4:Lens = createConvexLens("成像透镜", 80);
+			var lens4:Lens = createConvexLens("成像透镜2", 80);
 			equipmentList.addItem(lens4);
 			
 			//lack "图像透明片", "非相干照明光源"
@@ -425,11 +421,36 @@ package cn.edu.zju.labx.core
 		          if(labXObject.name =="激光光源"){
 		             TweenLite.to(labXObject,LabXConstant.MOVE_DELAY,{x:50,z:0});
 		          }
+		          else if(labXObject.name =="扩束镜"){
+		             TweenLite.to(labXObject,LabXConstant.MOVE_DELAY,{x:150,z:0});
+		          }
+		          else if(labXObject.name =="成像透镜2"){
+		             TweenLite.to(labXObject,LabXConstant.MOVE_DELAY,{x:250,z:0});
+		          }
+		          else if(labXObject.name =="物2"){
+		             TweenLite.to(labXObject,LabXConstant.MOVE_DELAY,{x:300,z:0});
+		          }
+		          else if(labXObject.name =="偏振分光棱镜"){
+		             TweenLite.to(labXObject,LabXConstant.MOVE_DELAY,{x:400,z:0,rotationY:45});
+		          }
+		          else if(labXObject.name =="液晶光阀"){
+		             TweenLite.to(labXObject,LabXConstant.MOVE_DELAY,{x:500,z:0});
+		          }
+		          else if(labXObject.name =="成像透镜1"){
+		             TweenLite.to(labXObject,LabXConstant.MOVE_DELAY,{x:600,z:0});
+		          }
+		          else if(labXObject.name =="物1"){
+		             TweenLite.to(labXObject,LabXConstant.MOVE_DELAY,{x:700,z:0});
+		          }
 		          else if(labXObject.name =="照明光源"){
 		             TweenLite.to(labXObject,LabXConstant.MOVE_DELAY,{x:800,z:0,rotationY:180});
 		          }
-		          
-		          
+		          else if(labXObject.name =="准直透镜"){
+		             TweenLite.to(labXObject,LabXConstant.MOVE_DELAY,{x:400,z:-150,rotationY:90});
+		          }
+		          else if(labXObject.name =="接收屏"){
+		             TweenLite.to(labXObject,LabXConstant.MOVE_DELAY,{x:400,z:-250,rotationY:90});
+		          }
               }
 			  var timer:Timer= new Timer((LabXConstant.MOVE_DELAY+1)*1000);
 		      timer.addEventListener(TimerEvent.TIMER, onTimer);

@@ -17,14 +17,13 @@ package cn.edu.zju.labx.objects.beam
 		public function PolarizationBeamSplitter(name:String,material:MaterialObject3D, vertices:Array=null, faces:Array=null)
 		{
 			super(name, material, vertices, faces);
-			this.rotationY += 45;
+//			this.rotationY += 45;
 		}
 		
 		override public function createDisplayObject():void{
 			
 	        width=3;
 	        depth=100;
-	        
 		    var materialsList:MaterialsList = new MaterialsList();
 			materialsList.addMaterial(material,"front");
 			materialsList.addMaterial(material,"back");
