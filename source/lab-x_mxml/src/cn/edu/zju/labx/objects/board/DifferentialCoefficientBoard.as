@@ -19,16 +19,16 @@ package cn.edu.zju.labx.objects.board
 			/** for test only
 			 */
 			var shape1:Shape = new Shape();
-			shape1.graphics.beginFill(0x0000FF, 1);
-			shape1.graphics.drawCircle(30, 30, 20);
+			shape1.graphics.beginFill(material.fillColor, 1);
+			shape1.graphics.drawCircle(50, 50, 20);
+			
+			var shape2:Shape = new Shape();
+			shape2.graphics.beginFill(0x000000, 1);
+			shape2.graphics.drawCircle(50, 50, 40);
 			
 			var bmp:BitmapData = new BitmapData(depth, height, true, 0x0);
-			bmp.draw(shape1);
-
-			var shape2:Shape = new Shape();
-			shape2.graphics.beginFill(0xFF0000, 1);
-			shape2.graphics.drawCircle(70, 70, 20);
 			bmp.draw(shape2);
+			bmp.draw(shape1);
 			
 			var shape_material:BitmapMaterial = new BitmapMaterial(bmp);
 			shape_material.smooth = true;
