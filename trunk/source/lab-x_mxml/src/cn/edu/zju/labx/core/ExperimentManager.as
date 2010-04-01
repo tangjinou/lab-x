@@ -9,6 +9,7 @@ package cn.edu.zju.labx.core
 	import cn.edu.zju.labx.objects.beam.PolarizationBeamSplitter;
 	import cn.edu.zju.labx.objects.beam.RetangleObjectPlane;
 	import cn.edu.zju.labx.objects.beam.TTypeObjectPlane;
+	import cn.edu.zju.labx.objects.board.DifferentialCoefficientBoard;
 	import cn.edu.zju.labx.objects.board.DoubleSlitInterfBoard;
 	import cn.edu.zju.labx.objects.board.FourierDisplayBoard;
 	import cn.edu.zju.labx.objects.board.MachZehnderInterfBoard;
@@ -21,7 +22,6 @@ package cn.edu.zju.labx.core
 	
 	import com.greensock.TweenLite;
 	
-	import flash.display.Bitmap;
 	import flash.events.TimerEvent;
 	import flash.utils.Timer;
 	
@@ -29,7 +29,6 @@ package cn.edu.zju.labx.core
 	
 	import org.papervision3d.core.proto.LightObject3D;
 	import org.papervision3d.core.proto.MaterialObject3D;
-	import org.papervision3d.materials.BitmapMaterial;
 	import org.papervision3d.materials.ColorMaterial;
 	import org.papervision3d.materials.shadematerials.PhongMaterial;
 	
@@ -391,7 +390,7 @@ package cn.edu.zju.labx.core
 			var lens3:Lens = createConvexLens("成像透镜1", 80);
 			equipmentList.addItem(lens3);
 			
-			equipmentList.addItem(createMachZehnderInterfBoard("接收屏"));
+			equipmentList.addItem(createDifferentialCoefficientBoard("接收屏"));
 			equipmentList.addItem(createLCLV("液晶光阀"));
 			equipmentList.addItem(createRetangleObjectPlane("物1"));
 			equipmentList.addItem(createTTypeObjectPlane("物2"));
@@ -446,10 +445,10 @@ package cn.edu.zju.labx.core
 		             TweenLite.to(labXObject,LabXConstant.MOVE_DELAY,{x:800,z:0,rotationY:180});
 		          }
 		          else if(labXObject.name =="准直透镜"){
-		             TweenLite.to(labXObject,LabXConstant.MOVE_DELAY,{x:400,z:-150,rotationY:90});
+		             TweenLite.to(labXObject,LabXConstant.MOVE_DELAY,{x:400,z:-100,rotationY:90});
 		          }
 		          else if(labXObject.name =="接收屏"){
-		             TweenLite.to(labXObject,LabXConstant.MOVE_DELAY,{x:400,z:-250,rotationY:90});
+		             TweenLite.to(labXObject,LabXConstant.MOVE_DELAY,{x:400,z:-230,rotationY:90});
 		          }
               }
 			  var timer:Timer= new Timer((LabXConstant.MOVE_DELAY+1)*1000);
@@ -648,6 +647,14 @@ package cn.edu.zju.labx.core
 		{
 			material = material || new ColorMaterial(0x262626, 1, true);
 			return new MachZehnderInterfBoard(name, material);
+		}
+		/**
+		 * create Differential Coefficient board zehnder interfBoard
+		 */ 
+		private function createDifferentialCoefficientBoard(name:String = "接收屏", material:MaterialObject3D=null):DifferentialCoefficientBoard
+		{
+			material = material || new ColorMaterial(0x262626, 1, true);
+			return new DifferentialCoefficientBoard(name, material);
 		}
 
         /**

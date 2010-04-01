@@ -6,6 +6,7 @@ package cn.edu.zju.labx.objects
 	import cn.edu.zju.labx.events.IRayMaker;
 	import cn.edu.zju.labx.events.IUserInputListener;
 	import cn.edu.zju.labx.logicObject.LineRayLogic;
+	import cn.edu.zju.labx.objects.ray.LineRay;
 	import cn.edu.zju.labx.objects.ray.Ray;
 	import cn.edu.zju.labx.utils.MathUtils;
 	
@@ -201,6 +202,19 @@ package cn.edu.zju.labx.objects
 			}
 	    }
 
+		
+		/**
+		 * Stop the input ray
+		 */
+		protected function stopOldRay(oldRay:Ray):void
+   		{
+   			for each (var oldLineRay:LineRay in oldRay.getLineRays())
+			{   
+				var intersactionPoint:Number3D = MathUtils.calculatePointInPlane2(getPosition(),getNormal(),oldLineRay.normal,oldLineRay.start_point);
+				if (intersactionPoint != null)oldLineRay.end_point = intersactionPoint.clone();					
+			}
+			oldRay.displayRays();
+   		}
 		
 	}
 }

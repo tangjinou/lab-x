@@ -95,6 +95,7 @@ package cn.edu.zju.labx.objects.lens
 		{
 			if(oldRay != null)
 			{
+				var resultRay:Ray = new Ray(this,null, null);
 				var lensLogic:LensLogic = new LensLogic(getPosition(), getNormal(), this._focus);
 				var newLineRays:ArrayCollection = new ArrayCollection();
 				for each (var oldLineRay:LineRay in oldRay.getLineRays())
@@ -104,13 +105,13 @@ package cn.edu.zju.labx.objects.lens
 						if (resultLogic != null)
 						{
 							newLineRays.addItem(new LineRay(resultLogic));
-							oldLineRay.end_point = new Number3D(resultLogic.x, resultLogic.y, resultLogic.z);
 						}
 							
 					}
 				}
-			    oldRay.displayRays();
-				return  new Ray(this,null, newLineRays);
+			    resultRay.setLineRays(newLineRays);
+			    resultRay.setOtherInfo(oldRay.getOtherInfo());
+				return  resultRay;
 			}
 			return null;
 		}
@@ -167,6 +168,7 @@ package cn.edu.zju.labx.objects.lens
 		 *  deal with when the ray on the object
 		 **/ 
    		public function onRayHandle(oldRay:Ray):void{
+   			stopOldRay(oldRay);
    		    this._ray = makeAnNewRay(oldRay);
 			if(this._ray != null)
 			{

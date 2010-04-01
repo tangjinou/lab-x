@@ -32,7 +32,7 @@ package cn.edu.zju.labx.objects.board
 			
 			distance /= 300;
 			var numOfColumns:Number = depth/distance/2;
-			bmp = new BitmapData(depth, height, false, 0x0);
+			var bmp:BitmapData = new BitmapData(depth, height, false, 0x0);
 			for (var i:Number = 0; i < numOfColumns; i++)
 			{
 				bmp.fillRect(new Rectangle(i*distance*2, 0, distance, height), 0x0000FF);

@@ -96,35 +96,7 @@ package cn.edu.zju.labx.logicObject
 			{
 				return null;
 //				rayPoint = Number3D.sub(intersaction, new Number3D(lineRay.dx, lineRay.dy, lineRay.dz));
-			} 
-			
-			//calculate the image point of ray point.
-//			var focusPoint:Number3D = getImageFocus(rayPoint);
-//			var paraPoint:Number3D = lensPlane.closestPointOnPlane(rayPoint, position);
-//			
-//			var resultPoint:Number3D = MathUtils.calculate3DIntersection(paraPoint, focusPoint, rayPoint, position);
-			
-//			if (resultPoint == null)
-//			{
-//				return null;
-//			}
-//			
-			/**
-			 * This block is for test the MathUtils.calculate3DIntersection is correct or not
-			 */
-//			var checkLine1:LineRayLogic = new LineRayLogic(paraPoint, Number3D.sub(focusPoint, paraPoint))
-//			if(!checkLine1.isPointOnRay(resultPoint))
-//			{
-//				trace("Errror---------------------------");
-//			}
-//			var checkLine2:LineRayLogic = new LineRayLogic(rayPoint, Number3D.sub(position, rayPoint))
-//			if(!checkLine2.isPointOnRay(resultPoint))
-//			{
-//				trace("Errror---------------------------");
-//			}
-			/***********************************************************************************/
-			
-			
+			}
 			
 			var vector:Number3D = Number3D.sub(resultPoint, intersaction);
 			vector.normalize();

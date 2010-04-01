@@ -21,7 +21,6 @@ package cn.edu.zju.labx.objects.board
     import org.papervision3d.core.math.Plane3D;
     import org.papervision3d.core.proto.MaterialObject3D;
     import org.papervision3d.events.InteractiveScene3DEvent;
-    import org.papervision3d.materials.BitmapMaterial;
     import org.papervision3d.materials.special.LineMaterial;
     import org.papervision3d.materials.utils.MaterialsList;
     import org.papervision3d.objects.primitives.Cube;
@@ -34,6 +33,7 @@ package cn.edu.zju.labx.objects.board
 	public class Board extends LabXObject implements IUserInputListener ,IRayHandle
 	{   
 		protected var cube:Cube;
+		private var leftMaterial:MaterialObject3D;
 		
 		private var userInputTool:LabXObjectUserInputHandleTool;
 		
@@ -58,7 +58,7 @@ package cn.edu.zju.labx.objects.board
 	        width=LabXConstant.LABX_OBJECT_WIDTH/10;
 			
 			var materialsList:MaterialsList = new MaterialsList();
-			var leftMaterial:MaterialObject3D = material.clone();
+			leftMaterial = material.clone();
 			leftMaterial.interactive = true;
 			materialsList.addMaterial(material,"front");
 			materialsList.addMaterial(material,"back");
@@ -110,17 +110,17 @@ package cn.edu.zju.labx.objects.board
 		}
 		
 		    //should keep the reference to free resource
-	    protected var bmp:BitmapData;
-	    protected var new_material:BitmapMaterial;
+//	    protected var bmp:BitmapData;
+	    protected var new_material:MaterialObject3D;
 	    	
 		//This is will be  automaticlly called when Ray chenged 
 		public function unDisplayInterferenceImage():void{
-			if(new_material!=null && bmp!=null){
+			if(new_material!=null){
 				new_material.destroy();
 				new_material = null;
-				bmp.dispose();
-				bmp = null;
-		    	cube.replaceMaterialByName(material, "left");
+//				bmp.dispose();
+//				bmp = null;
+		    	cube.replaceMaterialByName(leftMaterial, "left");
 		 	}
 		 	oldRay1 =null;
 		 	oldRay2 =null;
@@ -208,7 +208,7 @@ package cn.edu.zju.labx.objects.board
     	    return -1;
     	}
     	
-   		 /**
+   		/**
    		 *   judge the ray if is on the object
    		 */ 
     	public function isOnTheRay(ray:Ray):Boolean{
