@@ -11,8 +11,9 @@
 <sourceAttachmentPath/>
 </compiler>
 <applications>
-<application path="FirstExperiment.mxml"/>
 <application path="MyTest.mxml"/>
+<application path="Experiment.mxml"/>
+<application path="LabX.mxml"/>
 </applications>
 <modules/>
 <buildCSSFiles/>
