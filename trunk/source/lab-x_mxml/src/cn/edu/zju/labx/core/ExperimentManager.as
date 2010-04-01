@@ -87,6 +87,7 @@ package cn.edu.zju.labx.core
 					_equipmentList = createForthExperimentEquipments();
 					break;
 			}
+			addDefaultExperimentEquipments(_equipmentList);
 			for (var i:int=0; i<_equipmentList.length; i++)
 			{
 				var equipment:LabXObject = _equipmentList.getItemAt(i) as LabXObject;
@@ -96,6 +97,12 @@ package cn.edu.zju.labx.core
 				StageObjectsManager.getDefault.addObject(equipment);
 			}
 			return _equipmentList;
+		}
+		
+		private function addDefaultExperimentEquipments(eqList:ArrayCollection):void
+		{
+			eqList.addItem(createMirror("平行平晶"));
+			eqList.addItem(createDoubleSlitInterfBoard("剪切干涉屏幕"));	
 		}
 		
 		/**
