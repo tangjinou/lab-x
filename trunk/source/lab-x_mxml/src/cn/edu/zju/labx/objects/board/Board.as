@@ -155,7 +155,7 @@ package cn.edu.zju.labx.objects.board
         *  save the oldRay and reproduce the oldRay
         */ 
    		public function onRayHandle(oldRay:Ray):void{
-   			
+   			stopOldRay(oldRay);
             saveRays(oldRay);
             
 			for each (var oldLineRay:LineRay in oldRay.getLineRays())
@@ -166,10 +166,8 @@ package cn.edu.zju.labx.objects.board
 					var plane:Plane3D = getObjectPlane();
 					var anPoint:Number3D = Number3D.sub(point, vector);
 					var intersection:Number3D = plane.getIntersectionLineNumbers(point, anPoint);
-					oldLineRay.end_point = new Number3D(intersection.x, intersection.y, intersection.z);
 				}
 			}
-			oldRay.displayRays();
 			
 			
    		}
