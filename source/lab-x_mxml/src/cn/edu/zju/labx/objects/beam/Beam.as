@@ -97,20 +97,6 @@ package cn.edu.zju.labx.objects.beam
 			displayObject.addEventListener(type, listener, useCapture, priority, useWeakReference);
 		}
 		
-		
-		/**
-		 * Stop the input ray
-		 */
-		private function stopOldRay(oldRay:Ray):void
-   		{
-   			for each (var oldLineRay:LineRay in oldRay.getLineRays())
-			{   
-				var intersactionPoint:Number3D = MathUtils.calculatePointInPlane2(getPosition(),getNormal(),oldLineRay.normal,oldLineRay.start_point);
-				if (intersactionPoint != null)oldLineRay.end_point = intersactionPoint.clone();					
-			}
-			oldRay.displayRays();
-   		}
-		
 		/**
 		 * help method to display a ray
 		 */
@@ -142,7 +128,11 @@ package cn.edu.zju.labx.objects.beam
                     }
                 	if(!reverse && isReverseNormal(lineRayLogic, oldLineRay.logic)) resultRay = null;
 				}
-				if (resultRay != null)resultRay.setLineRays(newLineRays);
+				if (resultRay != null)
+				{
+					resultRay.setLineRays(newLineRays);
+					resultRay.setOtherInfo(oldRay.getOtherInfo());
+				}
 				return resultRay;
 			}
 			return null;
@@ -159,10 +149,14 @@ package cn.edu.zju.labx.objects.beam
 				for each (var oldLineRay:LineRay in oldRay.getLineRays())
 				{   
 					var start_point_new:Number3D = MathUtils.calculatePointInPlane2(getPosition(),getNormal(),oldLineRay.normal,oldLineRay.start_point);
-					var lineRayLogic:LineRayLogic = new LineRayLogic(start_point_new.clone(),oldLineRay.normal);
-                    newLineRays.addItem(new LineRay(lineRayLogic));
+					if (start_point_new != null)
+					{
+						var lineRayLogic:LineRayLogic = new LineRayLogic(start_point_new.clone(),oldLineRay.normal);
+                    	newLineRays.addItem(new LineRay(lineRayLogic));
+					}
 				}
 				resultRay.setLineRays(newLineRays);
+				resultRay.setOtherInfo(oldRay.getOtherInfo());
 				return resultRay;
 		    }
 		    return  null

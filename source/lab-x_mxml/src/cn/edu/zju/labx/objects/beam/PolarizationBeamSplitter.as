@@ -1,10 +1,10 @@
 package cn.edu.zju.labx.objects.beam
 {
 	import cn.edu.zju.labx.core.StageObjectsManager;
+	import cn.edu.zju.labx.objects.ray.LineRay;
+	import cn.edu.zju.labx.objects.ray.Ray;
 	
-	import flash.display.BlendMode;
-	
-	import org.papervision3d.core.geom.TriangleMesh3D;
+	import org.papervision3d.core.math.Number3D;
 	import org.papervision3d.core.proto.MaterialObject3D;
 	import org.papervision3d.lights.PointLight3D;
 	import org.papervision3d.materials.shadematerials.PhongMaterial;
@@ -17,7 +17,22 @@ package cn.edu.zju.labx.objects.beam
 		public function PolarizationBeamSplitter(name:String,material:MaterialObject3D, vertices:Array=null, faces:Array=null)
 		{
 			super(name, material, vertices, faces);
-//			this.rotationY += 45;
+		}
+		
+		 /**
+		 *  deal with when the ray on the object
+		 **/ 
+   		override protected function handleRay(oldRay:Ray):void
+   		{
+   			var lineRay:LineRay = oldRay.getLineRays().getItemAt(0) as LineRay;
+			var lineRayNormal:Number3D = new Number3D(lineRay.logic.dx, lineRay.logic.dy, lineRay.logic.dz);
+			var normal:Number3D = getNormal();
+   			if (Number3D.dot(lineRayNormal, normal) < 0)
+   			{
+   				displayNewRay(makePassThroughRay(oldRay));
+   			} else {
+   				displayNewRay(makeReflectionRay(oldRay, true));
+   			}
 		}
 		
 		override public function createDisplayObject():void{

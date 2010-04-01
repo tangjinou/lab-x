@@ -18,7 +18,7 @@ package cn.edu.zju.labx.core
 		 *  Constants for Desk
 		 */
 		public static const DESK_WIDTH:Number = 930;
-		public static const DESK_DEPTH:Number = 440;
+		public static const DESK_DEPTH:Number = 500;
 		
 		
 		public static const DESK_X_MIN:Number = 30;

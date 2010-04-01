@@ -35,7 +35,7 @@ package cn.edu.zju.labx.objects.board
 		{
 			var w:Number = LabXConstant.rectW;
 			var h:Number = LabXConstant.rectH;
-			bmp = new BitmapData(depth, height, false, 0x0);
+			var bmp:BitmapData  = new BitmapData(depth, height, false, 0x0);
 			bmp.fillRect(new Rectangle(depth/2-w/2, height/2-h/2, w, h), 0x0000AA);
 			bmp.fillRect(new Rectangle(depth/5-w/2, height/2-h/2, w, h), 0x0000FF);
 			bmp.fillRect(new Rectangle(depth/2-h/2, height/2-w/2, h, w), 0x0000AA);

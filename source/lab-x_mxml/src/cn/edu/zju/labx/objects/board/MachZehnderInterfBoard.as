@@ -26,7 +26,7 @@ package cn.edu.zju.labx.objects.board
 			//TODO: add relationship with input parameter
 			var interval:Number = 5;
 			var numOfCircles:Number = height/interval;
-			bmp = new BitmapData(depth, height, false, 0x0);
+			var bmp:BitmapData = new BitmapData(depth, height, false, 0x0);
 			var circle:Shape = new Shape();
 			var baseColor:Number = 0x0000FF;
 			var color:Number = baseColor;

@@ -31,7 +31,8 @@ package cn.edu.zju.labx.logicObject
 		{
 			var precisionXY:Number = ((point.x - x) * dy - (point.y - y) * dx);
 			var precisionXZ:Number = ((point.x - x) * dz - (point.z - z) * dx);
-			return ((Math.abs(precisionXY) < LabXConstant.NUMBER_PRECISION) && (Math.abs(precisionXZ) < LabXConstant.NUMBER_PRECISION));
+			var precisionYZ:Number = ((point.y - y) * dz - (point.z - z) * dy);
+			return ((Math.abs(precisionXY) < LabXConstant.NUMBER_PRECISION) && (Math.abs(precisionXZ) < LabXConstant.NUMBER_PRECISION) && (Math.abs(precisionYZ) < LabXConstant.NUMBER_PRECISION));
 		}
 
 	}

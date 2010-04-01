@@ -100,7 +100,7 @@ package cn.edu.zju.labx.objects.ray
 	    /**
 	    *  this other info is the info witch ray can bring
 	    */
-	    private var otherInfo:Object;
+	    public var otherInfo:Object;
 	    public function getOtherInfo():Object{
             return otherInfo;	       
 	    }

@@ -22,30 +22,23 @@ package cn.edu.zju.labx.objects.beam
 			super(material, name, vertices, faces);
 		}
 		
-				/**
+		/**
 		 *  deal with when the ray on the object
 		 **/ 
    		override protected function handleRay(oldRay:Ray):void{
-//			var logic:ObjectPlaneLogic = new ObjectPlaneLogic(this);
-//			this._ray = logic.processRay(oldRay);
+			this._ray = makePassThroughRay(oldRay);
+			_ray.setOtherInfo(createLeftShape());
 			displayNewRay(this._ray);
-   		}
+		}
    		
    		override public function createDisplayObject():void
    		{	
-	        width=3;
-	        depth=100;
-	        
-			var w:Number = LabXConstant.rectW;
-			var h:Number = LabXConstant.rectH;
+			
+	        var width:uint = 3;
 			
 			/* create right side */
 			var bmpRight:BitmapData = new BitmapData(depth, height, true, 0x0);
-			var rectRight:Shape = new Shape();
-			rectRight.graphics.beginFill(0x000000, 1);
-			rectRight.graphics.drawRect(depth/5*2, height/2-h/2, w, h);
-			rectRight.graphics.drawRect(depth/5*2+w, height/2-w/2, h, w);
-			bmpRight.draw(rectRight);
+			bmpRight.draw(createRightShape());
 			
 			var rectMaterialRight:BitmapMaterial = new BitmapMaterial(bmpRight);
 			rectMaterialRight.smooth = true;
@@ -57,14 +50,8 @@ package cn.edu.zju.labx.objects.beam
 	        
 	        /* create left side */
 	        var bmpLeft:BitmapData = new BitmapData(depth, height, true, 0x0);
-			var rectLeft:Shape = new Shape();
-			rectLeft.graphics.beginFill(0x000000, 1);
-			rectLeft.graphics.drawRect(depth/5*3-w, height/2-h/2, w, h);
-			rectLeft.graphics.drawRect(depth/5*3-w-h, height/2-w/2, h, w);
-			bmpLeft.draw(rectLeft);
-			
+			bmpLeft.draw(createLeftShape());
 			var rectMaterialLeft:BitmapMaterial = new BitmapMaterial(bmpLeft);
-			
 			rectMaterialLeft.smooth = true;
 	        
 	        var compMaterialLeft:CompositeMaterial = new CompositeMaterial();
@@ -90,5 +77,26 @@ package cn.edu.zju.labx.objects.beam
 		   	this.addChild(displayObject);
 		}
 		
+		
+		private function createLeftShape():Shape
+		{
+			var w:Number = LabXConstant.rectW;
+			var h:Number = LabXConstant.rectH;
+			var rectLeft:Shape = new Shape();
+			rectLeft.graphics.beginFill(0x000000, 1);
+			rectLeft.graphics.drawRect(depth/5*3-w, height/2-h/2, w, h);
+			rectLeft.graphics.drawRect(depth/5*3-w-h, height/2-w/2, h, w);
+			return rectLeft;
+		}
+		private function createRightShape():Shape
+		{
+			var w:Number = LabXConstant.rectW;
+			var h:Number = LabXConstant.rectH;
+			var rectRight:Shape = new Shape();
+			rectRight.graphics.beginFill(0x000000, 1);
+			rectRight.graphics.drawRect(depth/5*2, height/2-h/2, w, h);
+			rectRight.graphics.drawRect(depth/5*2+w, height/2-w/2, h, w);
+			return rectRight;
+		}
 	}
 }
