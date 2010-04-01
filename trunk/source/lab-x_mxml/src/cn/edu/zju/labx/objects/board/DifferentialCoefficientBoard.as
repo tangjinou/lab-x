@@ -16,6 +16,31 @@ package cn.edu.zju.labx.objects.board
 		{
 			super(name, material);
 //			displayImage(createLeftShape());
+			/** for test only
+			 */
+			var shape1:Shape = new Shape();
+			shape1.graphics.beginFill(0x0000FF, 1);
+			shape1.graphics.drawCircle(30, 30, 20);
+			
+			var bmp:BitmapData = new BitmapData(depth, height, true, 0x0);
+			bmp.draw(shape1);
+
+			var shape2:Shape = new Shape();
+			shape2.graphics.beginFill(0xFF0000, 1);
+			shape2.graphics.drawCircle(70, 70, 20);
+			bmp.draw(shape2);
+			
+			var shape_material:BitmapMaterial = new BitmapMaterial(bmp);
+			shape_material.smooth = true;
+			
+			var compMaterial:CompositeMaterial = new CompositeMaterial();
+	        compMaterial.addMaterial(material);
+	        compMaterial.addMaterial(shape_material);
+	        compMaterial.interactive = true;
+			
+			new_material = compMaterial;
+	        
+	        cube.replaceMaterialByName(new_material, "left");
 		}
 		
 		/**
