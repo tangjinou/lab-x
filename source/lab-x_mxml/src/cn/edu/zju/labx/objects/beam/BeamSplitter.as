@@ -38,20 +38,5 @@ package cn.edu.zju.labx.objects.beam
 			displayNewRay(this._ray);
 			displayNewRay(ray2);
    		}
-   		
-    	
-    	 /**
-		 *   This is for get object with the material on it, it should be overrite 
-		 * 
-		 *   when the this materials not on the basic object,
-		 * 
-		 *   for example: lens may not have the materials on 
-		 * 
-		 *   root,but on the sphere
-		 * 
-		 */ 
-		override public function getObjectWithMaterial():TriangleMesh3D{
-		    return displayObject;
-		}
 	}
 }
