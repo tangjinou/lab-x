@@ -73,6 +73,13 @@ package cn.edu.zju.labx.core
 		     return false;
 		}
 		
+		public function closeAllLight():void{
+		   for(var i:int=0;i<lightSources.length;i++){
+		      var l:LightSource = lightSources.getItemAt(i) as LightSource;
+		      l.light_on = false;
+		   }
+		}
+		
 		public function reProduceRays():void{
 			this.clearRays();
 			for(var i:int=0;i<lightSources.length;i++){

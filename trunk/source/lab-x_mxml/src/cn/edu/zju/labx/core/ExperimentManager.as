@@ -109,6 +109,7 @@ package cn.edu.zju.labx.core
 		 *  remove the last experiment's equipments
 		 */ 
 		private function remove():void{
+			StageObjectsManager.getDefault.rayManager.closeAllLight();
 			StageObjectsManager.getDefault.rayManager.clearRays();
 		   	if(_equipmentList!=null){
                for (var i:int=0; i<_equipmentList.length; i++){

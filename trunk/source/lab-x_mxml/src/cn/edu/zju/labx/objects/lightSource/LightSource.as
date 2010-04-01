@@ -10,17 +10,11 @@ package cn.edu.zju.labx.objects.lightSource
 	
 	import flash.events.Event;
 	import flash.events.MouseEvent;
-	import flash.utils.ByteArray;
 	
 	import mx.collections.ArrayCollection;
 	
 	import org.papervision3d.core.math.Number3D;
 	import org.papervision3d.core.proto.MaterialObject3D;
-	import org.papervision3d.events.FileLoadEvent;
-	import org.papervision3d.events.InteractiveScene3DEvent;
-	import org.papervision3d.materials.utils.MaterialsList;
-	import org.papervision3d.objects.parsers.DAE;
-	import org.papervision3d.view.layer.ViewportLayer;
 
 	public class LightSource extends LabXObject implements IUserInputListener
 	{
@@ -39,7 +33,6 @@ package cn.edu.zju.labx.objects.lightSource
 			
 			var normal:Number3D = getNormal();
 			var lineNormal:Number3D = new Number3D(-normal.x, -normal.y, -normal.z);
-			
 			
 			var royLogic0:LineRayLogic = new LineRayLogic(new Number3D(this.x,this.y,this.z), lineNormal);
 			var lineRay0:LineRay = new LineRay(royLogic0);
@@ -64,6 +57,10 @@ package cn.edu.zju.labx.objects.lightSource
 			lineRays.addItem(lineRay4);
 			_ray.setLineRays(lineRays);
 
+		}
+		
+		public function set light_on(isOn:Boolean):void{
+		    this.isOn = isOn;
 		}
 		
 		public function get isLightOn():Boolean{
