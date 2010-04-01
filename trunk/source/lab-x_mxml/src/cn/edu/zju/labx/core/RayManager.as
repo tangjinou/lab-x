@@ -18,7 +18,6 @@ package cn.edu.zju.labx.core
 	    	return instance;
 	    }
 		
-		
 		public var lightSources:ArrayCollection = new ArrayCollection();
 		
 //		private var lightSource:LightSource;
@@ -76,11 +75,11 @@ package cn.edu.zju.labx.core
 		
 		public function reProduceRays():void{
 			this.clearRays();
-			if(isLightOn()){
-				for(var i:int=0;i<lightSources.length;i++){
+			for(var i:int=0;i<lightSources.length;i++){
 		     	    var l:LightSource = lightSources.getItemAt(i) as LightSource;
-                    l.openRay();
-		     	}
+		     	    if(l.isLightOn){
+						l.openRay();
+		     	    }
 		    }
 		}
 		 
