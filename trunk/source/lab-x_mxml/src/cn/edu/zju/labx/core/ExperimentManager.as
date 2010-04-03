@@ -497,7 +497,6 @@ package cn.edu.zju.labx.core
 		   }
 	       else{
 	          moveExperimentEquipmentsDefault();
-	          opitimize = false;
 	       }	
 		}
 		
@@ -505,6 +504,8 @@ package cn.edu.zju.labx.core
 		 * Move equipments to default place.
 		 */
 		public function  moveExperimentEquipmentsDefault():void{
+			opitimize = false;
+			
 			for(var i:int=0;i<StageObjectsManager.getDefault.getObjectList().length;i++){
 		        var labXObject:LabXObject = StageObjectsManager.getDefault.getObjectList().getItemAt(i) as LabXObject;
 	          	TweenLite.to(labXObject,LabXConstant.MOVE_DELAY,{x:i*LabXConstant.STAGE_WIDTH/_equipmentList.length,y:LabXConstant.LABX_OBJECT_HEIGHT/2,z:LabXConstant.STAGE_DEPTH/2,rotationY:0,rotationX:0,rotationZ:0});

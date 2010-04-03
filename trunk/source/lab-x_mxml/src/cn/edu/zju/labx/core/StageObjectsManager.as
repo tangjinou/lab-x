@@ -438,7 +438,7 @@ package cn.edu.zju.labx.core
 		    		addMessage(labXObjectSelected.name+"往下转动"+labXObjectSelected.localRotationZ.toFixed(2))
 		    	} else {
 					labXObjectSelected.y--;
-					this.addMessage(labXObjectSelected.name+"往下移动"+labXObjectSelected.z.toFixed(2));
+					this.addMessage(labXObjectSelected.name+"往下移动"+labXObjectSelected.y.toFixed(2));
 		    	}
 		    	refresh();
 		   }
@@ -461,16 +461,16 @@ package cn.edu.zju.labx.core
 		
 	    public function object_forwarding():void{
 		   if(labXObjectSelected!=null){
-		    	labXObjectSelected.y++;
-				this.addMessage(labXObjectSelected.name+"往前移动"+labXObjectSelected.y.toFixed(2));
+		    	labXObjectSelected.z++;
+				this.addMessage(labXObjectSelected.name+"往前移动"+labXObjectSelected.z.toFixed(2));
 		    	refresh();
 		   }
 		}
 		
 	    public function object_backingwarding():void{
 		   if(labXObjectSelected!=null){
-		    	labXObjectSelected.y--;
-				this.addMessage(labXObjectSelected.name+"往后移动"+labXObjectSelected.y.toFixed(2));
+		    	labXObjectSelected.z--;
+				this.addMessage(labXObjectSelected.name+"往后移动"+labXObjectSelected.z.toFixed(2));
 		    	refresh();
 		   }
 		}
