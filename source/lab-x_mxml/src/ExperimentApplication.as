@@ -1,5 +1,6 @@
 package
 {
+	import cn.edu.zju.labx.core.ExperimentManager;
 	import cn.edu.zju.labx.core.LabXConstant;
 	import cn.edu.zju.labx.core.StageObjectsManager;
 	import cn.edu.zju.labx.core.UserInputHandler;
@@ -125,6 +126,8 @@ package
 			this.camera.useCulling = true;
 			this.camPitch = LabXConstant.DEFAULT_CAMERA_PITCH;
 			this.camYaw = LabXConstant.DEFAULT_CAMERA_YAW;
+			
+//			ExperimentManager.getDefault.moveExperimentEquipmentsDefault();
 		}
 		
 		public function destroy():void{
