@@ -1,7 +1,7 @@
 package cn.edu.zju.labx.events
 {
 	import flash.events.Event;
-	
+
 	/**
 	 * User Input Listener is a listener which can handle User Input Event
 	 */
