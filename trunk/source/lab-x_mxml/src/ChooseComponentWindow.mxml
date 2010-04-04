@@ -1,27 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
-<mx:TitleWindow xmlns:mx="http://www.adobe.com/2006/mxml" 
-    title="器件选择" width="600" height="500" status="active" showCloseButton="true" close="PopUpManager.removePopUp(this);" creationComplete="init()" borderAlpha="0.75">
+<mx:TitleWindow xmlns:mx="http://www.adobe.com/2006/mxml"
+				title="器件选择"
+				width="600"
+				height="500"
+				status="active"
+				showCloseButton="true"
+				close="PopUpManager.removePopUp(this);"
+				creationComplete="init()"
+				borderAlpha="0.75">
 	<mx:Script>
 		<![CDATA[
 			import cn.edu.zju.labx.core.StageObjectsManager;
 			import mx.managers.PopUpManager;
-			
+
 			private var rotate_stage_status:Boolean;
-			
-			public function init():void{
-			    rotate_stage_status = StageObjectsManager.getDefault.rotate_stage;
-                StageObjectsManager.getDefault.rotate_stage = false;			
+
+			public function init():void
+			{
+				rotate_stage_status=StageObjectsManager.getDefault.rotate_stage;
+				StageObjectsManager.getDefault.rotate_stage=false;
 			}
-			public function confirm():void{
-			   StageObjectsManager.getDefault.rotate_stage = rotate_stage_status;
-			   PopUpManager.removePopUp(this);;
+
+			public function confirm():void
+			{
+				StageObjectsManager.getDefault.rotate_stage=rotate_stage_status;
+				PopUpManager.removePopUp(this);
+				;
 			}
 		]]>
 	</mx:Script>
-    <mx:VBox id="vbox_checkBoxes" horizontalGap="10" verticalAlign="bottom" x="849" y="10">
+	<mx:VBox id="vbox_checkBoxes"
+			 horizontalGap="10"
+			 verticalAlign="bottom"
+			 x="849"
+			 y="10">
 	</mx:VBox>
-	
+
 	<mx:HBox width="100%">
-        <mx:Button label="OK" click="confirm();"/>
-    </mx:HBox>
+		<mx:Button label="OK"
+				   click="confirm();"/>
+	</mx:HBox>
 </mx:TitleWindow>

@@ -1,43 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
-<mx:Application xmlns:mx="http://www.adobe.com/2006/mxml" layout="absolute" creationComplete="callLater(init)" width="800" height="600" xmlns:labx="cn.edu.zju.labx.*" xmlns:local="*">
-	 <mx:Script>
-	 	<![CDATA[
-	 		import cn.edu.zju.labx.objects.Lens;
-	 		import cn.edu.zju.labx.core.UserInputHandler;
-	 		import cn.edu.zju.labx.utils.ResourceManager;
-	 		import mx.controls.Image;
-	 		import cn.edu.zju.labx.core.StageObjectsManager;
-	 	    import mx.core.UIComponent;
-	 	    import flash.events.Event;
+<mx:Application xmlns:mx="http://www.adobe.com/2006/mxml"
+				layout="absolute"
+				creationComplete="callLater(init)"
+				width="800"
+				height="600"
+				xmlns:labx="cn.edu.zju.labx.*"
+				xmlns:local="*">
+	<mx:Script>
+		<![CDATA[
+			import cn.edu.zju.labx.objects.Lens;
+			import cn.edu.zju.labx.core.UserInputHandler;
+			import cn.edu.zju.labx.utils.ResourceManager;
+			import mx.controls.Image;
+			import cn.edu.zju.labx.core.StageObjectsManager;
+			import mx.core.UIComponent;
+			import flash.events.Event;
 			import flash.events.MouseEvent;
-	 		public function init():void{
-	 		   initStage();
-	 		   trace("stage_width:"+stage.width) ;
-	 		   trace("stage_height:"+stage.height) ;
-	 		   var uic:UIComponent = new UIComponent();
-			   uic.addChild(testMainViewApplication);
-               addChild(uic);   
-	 		} 
-	 		public function initStage():void{
-	 		   StageObjectsManager.getDefault.mainView=testMainViewApplication;
-	 		   stage.frameRate = 40;
+
+			public function init():void
+			{
+				initStage();
+				trace("stage_width:" + stage.width);
+				trace("stage_height:" + stage.height);
+				var uic:UIComponent=new UIComponent();
+				uic.addChild(testMainViewApplication);
+				addChild(uic);
+			}
+
+			public function initStage():void
+			{
+				StageObjectsManager.getDefault.mainView=testMainViewApplication;
+				stage.frameRate=40;
 //             stage.addEventListener(MouseEvent.MOUSE_DOWN,onMouseDownHandler);
 //             stage.addEventListener(MouseEvent.MOUSE_MOVE,onMouseMoveHandler);
-               stage.addEventListener(MouseEvent.MOUSE_UP, UserInputHandler.getDefault.mouseUpHandler); 
-	 		   StageObjectsManager.getDefault.stage_width=stage.width; 
-	 		   StageObjectsManager.getDefault.stage_height=stage.height; 
-	 		   StageObjectsManager.getDefault.mainView.camera.zoom =90;
+				stage.addEventListener(MouseEvent.MOUSE_UP, UserInputHandler.getDefault.mouseUpHandler);
+				StageObjectsManager.getDefault.stage_width=stage.width;
+				StageObjectsManager.getDefault.stage_height=stage.height;
+				StageObjectsManager.getDefault.mainView.camera.zoom=90;
 //	 		   StageObjectsManager.getDefault.mainView.camera.fov =30; 
-	 		}
-	 	]]> 
-	 </mx:Script>
-     <local:TestMainViewApplication id="testMainViewApplication"  />
-	  
-	 
-	  
-     <mx:HBox x="560" y="0" width="100%">
-     <mx:Button  label="zoom+" click="StageObjectsManager.getDefault.mainView.camera.zoom++" icon="@Embed('../assets/icon/zoom_add.png')"/>
-     <mx:Button  label="zoom-" click="StageObjectsManager.getDefault.mainView.camera.zoom--" icon="@Embed('../assets/icon/zoom_min.png')"/>
-     </mx:HBox>
+			}
+		]]>
+	</mx:Script>
+	<local:TestMainViewApplication id="testMainViewApplication"/>
+
+
+
+	<mx:HBox x="560"
+			 y="0"
+			 width="100%">
+		<mx:Button label="zoom+"
+				   click="StageObjectsManager.getDefault.mainView.camera.zoom++"
+				   icon="@Embed('../assets/icon/zoom_add.png')"/>
+		<mx:Button label="zoom-"
+				   click="StageObjectsManager.getDefault.mainView.camera.zoom--"
+				   icon="@Embed('../assets/icon/zoom_min.png')"/>
+	</mx:HBox>
 
 </mx:Application>

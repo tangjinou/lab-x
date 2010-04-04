@@ -1,18 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<mx:Application xmlns:mx="http://www.adobe.com/2006/mxml" layout="absolute" creationComplete="callLater(init)" xmlns:labx="cn.edu.zju.labx.*" xmlns:local="*">
+<mx:Application xmlns:mx="http://www.adobe.com/2006/mxml"
+				layout="absolute"
+				creationComplete="callLater(init)"
+				xmlns:labx="cn.edu.zju.labx.*"
+				xmlns:local="*">
 	<mx:Script>
 		<![CDATA[
 			import cn.edu.zju.labx.core.UserInputHandler;
 			import mx.core.UIComponent;
+
 			public function init():void
 			{
-				var uic:UIComponent = new UIComponent();
+				var uic:UIComponent=new UIComponent();
 				uic.addChild(simpleDemo);
-            	addChild(uic);
-            	
-            	stage.addEventListener(MouseEvent.MOUSE_DOWN, UserInputHandler.getDefault.mouseDownHandler);
-            	stage.addEventListener(MouseEvent.MOUSE_MOVE, UserInputHandler.getDefault.mouseMoveHandler);
-            	stage.addEventListener(MouseEvent.MOUSE_UP, UserInputHandler.getDefault.mouseUpHandler);
+				addChild(uic);
+
+				stage.addEventListener(MouseEvent.MOUSE_DOWN, UserInputHandler.getDefault.mouseDownHandler);
+				stage.addEventListener(MouseEvent.MOUSE_MOVE, UserInputHandler.getDefault.mouseMoveHandler);
+				stage.addEventListener(MouseEvent.MOUSE_UP, UserInputHandler.getDefault.mouseUpHandler);
 			}
 		]]>
 	</mx:Script>

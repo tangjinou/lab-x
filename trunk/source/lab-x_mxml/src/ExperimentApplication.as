@@ -6,10 +6,10 @@ package
 	import cn.edu.zju.labx.core.UserInputHandler;
 	import cn.edu.zju.labx.objects.Grid;
 	import cn.edu.zju.labx.objects.desk.Desk;
-	
+
 	import flash.events.Event;
 	import flash.events.MouseEvent;
-	
+
 	import org.papervision3d.cameras.CameraType;
 	import org.papervision3d.core.utils.virtualmouse.VirtualMouseMouseEvent;
 	import org.papervision3d.lights.PointLight3D;
@@ -17,123 +17,132 @@ package
 	import org.papervision3d.view.BasicView;
 	import org.papervision3d.view.layer.ViewportLayer;
 	import org.papervision3d.view.stats.StatsView;
-	
+
 	public class ExperimentApplication extends BasicView
 	{
-        private var camPitch:Number = LabXConstant.DEFAULT_CAMERA_PITCH;
-        private var camYaw:Number = LabXConstant.DEFAULT_CAMERA_YAW;
+		private var camPitch:Number=LabXConstant.DEFAULT_CAMERA_PITCH;
+		private var camYaw:Number=LabXConstant.DEFAULT_CAMERA_YAW;
 
-        private var previousMouseX:Number;
-        private var previousMouseY:Number;
-        
-        private var grid:Grid;
+		private var previousMouseX:Number;
+		private var previousMouseY:Number;
+
+		private var grid:Grid;
 		private var light:PointLight3D;
-		public  var originPivot:DisplayObject3D;
-		private var desk:Desk; 
-		
+		public var originPivot:DisplayObject3D;
+		private var desk:Desk;
+
 		private var equipmentLayer:ViewportLayer;
-		
+
 		public function ExperimentApplication(viewportWidth:Number=LabXConstant.STAGE_WIDTH, viewportHeight:Number=LabXConstant.STAGE_HEIGHT, scaleToStage:Boolean=true, interactive:Boolean=false, cameraType:String="Target")
 		{
 			super(viewportWidth, viewportHeight, true, false, CameraType.FREE);
-			viewport.interactive = true;
-			camera.zoom = LabXConstant.DEFAULT_CAMERA_ZOOM;
-			camera.useCulling = true;
+			viewport.interactive=true;
+			camera.zoom=LabXConstant.DEFAULT_CAMERA_ZOOM;
+			camera.useCulling=true;
 			/**
 			 *  set the mainView here ,if not it will make some problems
-			 */ 
-			StageObjectsManager.getDefault.mainView = this;
-			equipmentLayer = StageObjectsManager.getDefault.layerManager.equipmentLayer;
-			
-			desk = new Desk();
-			
-			originPivot = new DisplayObject3D();
-			originPivot.x = -LabXConstant.STAGE_WIDTH/2
+			 */
+			StageObjectsManager.getDefault.mainView=this;
+			equipmentLayer=StageObjectsManager.getDefault.layerManager.equipmentLayer;
+
+			desk=new Desk();
+
+			originPivot=new DisplayObject3D();
+			originPivot.x=-LabXConstant.STAGE_WIDTH / 2
 			scene.addChild(originPivot);
-			StageObjectsManager.getDefault.originPivot = originPivot;
-			
-			
-			grid = new Grid();
-			
-			light = new PointLight3D(true);
-			light.x = 200;
-			light.y = 50;
-			light.z = -50;
+			StageObjectsManager.getDefault.originPivot=originPivot;
+
+
+			grid=new Grid();
+
+			light=new PointLight3D(true);
+			light.x=200;
+			light.y=50;
+			light.z=-50;
 			originPivot.addChild(light);
-			
-			var stats:StatsView = new StatsView(renderer);
+
+			var stats:StatsView=new StatsView(renderer);
 			addChild(stats);
 			startRendering();
-			
+
 //			experimentSelected(LabXConstant.EXPERIMENT_FIRST);
 		}
-		
-		
+
+
 		/**
 		 * For select the experiment
 		 */
-		public function experimentSelected(experimentId:Number = LabXConstant.EXPERIMENT_FIRST):void
+		public function experimentSelected(experimentId:Number=LabXConstant.EXPERIMENT_FIRST):void
 		{
 			StageObjectsManager.getDefault.experimentManager.createExperimentEquipments(experimentId);
 		}
-		 		
+
 		override protected function onRenderTick(e:Event=null):void
 		{
 			camera.orbit(camPitch, camYaw);
-            StageObjectsManager.getDefault.layerManager.viewLayerChange();
+			StageObjectsManager.getDefault.layerManager.viewLayerChange();
 			super.onRenderTick();
 		}
-		
+
 		public function onMouseDown(e:MouseEvent):void
-        {
-        	if (e is VirtualMouseMouseEvent)return;
-            StageObjectsManager.getDefault.isOrbiting = true;
-            previousMouseX = e.stageX;
-            previousMouseY = e.stageY;
-            UserInputHandler.getDefault.mouseDownHandler(e);
-        }
-        public function onMouseUp(e:MouseEvent):void
-        {
-        	if (e is VirtualMouseMouseEvent)return;
-             StageObjectsManager.getDefault.isOrbiting = false;
-        }
-        
+		{
+			if (e is VirtualMouseMouseEvent)
+				return;
+			StageObjectsManager.getDefault.isOrbiting=true;
+			previousMouseX=e.stageX;
+			previousMouseY=e.stageY;
+			UserInputHandler.getDefault.mouseDownHandler(e);
+		}
+
+		public function onMouseUp(e:MouseEvent):void
+		{
+			if (e is VirtualMouseMouseEvent)
+				return;
+			StageObjectsManager.getDefault.isOrbiting=false;
+		}
+
 		public function onMouseMove(e:MouseEvent):void
-        {
-        	if (e is VirtualMouseMouseEvent || (!e.buttonDown))return;
-             var differenceX:Number = e.stageX - previousMouseX;
-             var differenceY:Number = e.stageY - previousMouseY;
-             if(StageObjectsManager.getDefault.isOrbiting==true && StageObjectsManager.getDefault.rotate_stage==true){
-                camPitch += differenceY;
-                camYaw += differenceX;
-  				if(camPitch < 5) camPitch = 5;
-  				if(camPitch > 175) camPitch = 175;
-             	//clamp yaw
-             	//if(camYaw > 355) camYaw = 355;
-  				//if(camYaw < 185) camYaw = 185;
-                previousMouseX = e.stageX;
-                previousMouseY = e.stageY;
-             }
-            if(StageObjectsManager.getDefault.rotate_stage==false){
-                UserInputHandler.getDefault.mouseMoveHandler(e);
-            }
-        }
-        
-        
+		{
+			if (e is VirtualMouseMouseEvent || (!e.buttonDown))
+				return;
+			var differenceX:Number=e.stageX - previousMouseX;
+			var differenceY:Number=e.stageY - previousMouseY;
+			if (StageObjectsManager.getDefault.isOrbiting == true && StageObjectsManager.getDefault.rotate_stage == true)
+			{
+				camPitch+=differenceY;
+				camYaw+=differenceX;
+				if (camPitch < 5)
+					camPitch=5;
+				if (camPitch > 175)
+					camPitch=175;
+				//clamp yaw
+				//if(camYaw > 355) camYaw = 355;
+				//if(camYaw < 185) camYaw = 185;
+				previousMouseX=e.stageX;
+				previousMouseY=e.stageY;
+			}
+			if (StageObjectsManager.getDefault.rotate_stage == false)
+			{
+				UserInputHandler.getDefault.mouseMoveHandler(e);
+			}
+		}
+
+
 		public function reset_camera():void
 		{
-			this.camera.zoom = LabXConstant.DEFAULT_CAMERA_ZOOM;
-			this.camera.useCulling = true;
-			this.camPitch = LabXConstant.DEFAULT_CAMERA_PITCH;
-			this.camYaw = LabXConstant.DEFAULT_CAMERA_YAW;
-			
+			this.camera.zoom=LabXConstant.DEFAULT_CAMERA_ZOOM;
+			this.camera.useCulling=true;
+			this.camPitch=LabXConstant.DEFAULT_CAMERA_PITCH;
+			this.camYaw=LabXConstant.DEFAULT_CAMERA_YAW;
+
 //			ExperimentManager.getDefault.moveExperimentEquipmentsDefault();
 		}
-		
-		public function destroy():void{
-		    desk.destroy();   
-		    grid.destroy();
+
+		public function destroy():void
+		{
+			desk.destroy();
+			grid.destroy();
 		}
-		
+
 	}
 }

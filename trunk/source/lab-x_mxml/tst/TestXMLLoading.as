@@ -8,14 +8,15 @@ package
 		{
 			super(methodName);
 		}
-		
+
 //		[Embed (source="../assets/xml/experiment.xml")]
 //		public var Experiment_xml:Class;
-	    public function Test_XMLLoading():void{
+		public function Test_XMLLoading():void
+		{
 //	        var xml:XMLList =new Experiment_xml() as XMLList;
 //	        assertTrue(xml !=null);
 //	        
 //	        trace(xml.length());
-	    }
+		}
 	}
 }

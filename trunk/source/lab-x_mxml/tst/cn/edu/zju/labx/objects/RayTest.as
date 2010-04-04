@@ -8,11 +8,11 @@ package cn.edu.zju.labx.objects
 		{
 			super(methodName);
 		}
-		
+
 		public function testCalculateRay():void
 		{
-			
+
 		}
-		
+
 	}
 }

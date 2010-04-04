@@ -8,13 +8,13 @@ package
 	import cn.edu.zju.labx.objects.LightSource;
 	import cn.edu.zju.labx.objects.Desk;
 	import cn.edu.zju.labx.utils.ResourceManager;
-	
+
 	import flash.display.Bitmap;
 	import flash.display.Loader;
 	import flash.events.Event;
 	import flash.events.MouseEvent;
 	import flash.net.URLRequest;
-	
+
 	import org.papervision3d.cameras.CameraType;
 	import org.papervision3d.core.utils.virtualmouse.VirtualMouseMouseEvent;
 	import org.papervision3d.events.FileLoadEvent;
@@ -25,7 +25,7 @@ package
 	import org.papervision3d.view.BasicView;
 	import org.papervision3d.view.layer.ViewportLayer;
 	import org.papervision3d.view.stats.StatsView;
-	
+
 	public class SecondExperimentApplication extends BasicView
 	{
 //		/**
