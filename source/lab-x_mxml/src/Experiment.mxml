@@ -1,342 +1,237 @@
 <?xml version="1.0" encoding="utf-8"?>
-<mx:Application xmlns:mx="http://www.adobe.com/2006/mxml"
-				backgroundColor="black"
-				layout="absolute"
-				preloader="cn.edu.zju.labx.core.LoadingBar"
-				creationComplete="callLater(init)"
-				xmlns:labx="cn.edu.zju.labx.*"
-				xmlns:local="*"
-				borderColor="#CD1A02"
-				fontWeight="bold"
-				fontSize="12">
-	<mx:Script>
-		<![CDATA[
-			import cn.edu.zju.labx.core.ExperimentManager;
-			import mx.events.CloseEvent;
-			import mx.controls.Alert;
-			import mx.managers.ToolTipManager;
-			import mx.collections.ArrayCollection;
-			import mx.containers.VBox;
-			import mx.managers.PopUpManager;
-			import mx.controls.CheckBox;
-			import cn.edu.zju.labx.objects.LabXObject;
-			import org.papervision3d.core.utils.Mouse3D;
-			import cn.edu.zju.labx.core.UserInputHandler;
-			import cn.edu.zju.labx.core.StageObjectsManager;
-			import mx.core.UIComponent;
-			import flash.events.Event;
+<mx:Application xmlns:mx="http://www.adobe.com/2006/mxml" backgroundColor="black" layout="absolute" preloader="cn.edu.zju.labx.core.LoadingBar" creationComplete="callLater(init)"  xmlns:labx="cn.edu.zju.labx.*" xmlns:local="*" borderColor="#CD1A02" fontWeight="bold" fontSize="12">
+	 <mx:Script>
+	 	<![CDATA[
+	 		import cn.edu.zju.labx.core.ExperimentManager;
+	 		import mx.events.CloseEvent;
+	 		import mx.controls.Alert;
+	 		import mx.managers.ToolTipManager;
+	 		import mx.collections.ArrayCollection;
+	 		import mx.containers.VBox;
+	 		import mx.managers.PopUpManager;
+	 		import mx.controls.CheckBox;
+	 		import cn.edu.zju.labx.objects.LabXObject;
+	 		import org.papervision3d.core.utils.Mouse3D;
+	 		import cn.edu.zju.labx.core.UserInputHandler;
+	 		import cn.edu.zju.labx.core.StageObjectsManager;
+	 	    import mx.core.UIComponent;
+	 	    import flash.events.Event;
 			import flash.events.MouseEvent;
 			import mx.controls.Alert;
 //			public var camera_yaw:int=0;
 
-			private var checkBoxList:ArrayCollection=new ArrayCollection();
-			private var all_checkBox:CheckBox=new CheckBox();
-
-
-			private var chooseExperimentwindow:ChooseExperimentWindow
-			private var experiment:ExperimentApplication;
-			private var timer:Timer;
-
-			public function init():void
-			{
-				timer=new Timer(1000);
-				timer.addEventListener(TimerEvent.TIMER, initExperiment);
-				timer.start();
-			}
-
-			public function initExperiment(event:TimerEvent):void
-			{
-				logo.visible=false;
-				timer.stop();
-				message_box.text="公告栏";
-				/************ Set tool tips**********************/
-				StyleManager.getStyleDeclaration("ToolTip").setStyle("fontSize", 16);
-				StyleManager.getStyleDeclaration("ToolTip").setStyle("backgroundColor", "#33CC99");
-
-				StageObjectsManager.getDefault.messageBox=message_box;
-				StageObjectsManager.getDefault.rotate_left_button=rotate_left_button;
-				StageObjectsManager.getDefault.rotate_right_button=rotate_right_button;
-				StageObjectsManager.getDefault.object_uping_button=object_up_button;
-				StageObjectsManager.getDefault.object_downing_button=object_down_button;
-				StageObjectsManager.getDefault.object_forwarding_button=object_forwarding_button;
-				StageObjectsManager.getDefault.object_backwarding_button=object_backwarding_button;
-				StageObjectsManager.getDefault.object_lefting_button=object_lefting_button;
-				StageObjectsManager.getDefault.object_righting_button=object_righting_button;
-
-				chooseExperimentwindow=ChooseExperimentWindow(PopUpManager.createPopUp(this, ChooseExperimentWindow, true));
-				chooseExperimentwindow.x=this.width / 3;
-				chooseExperimentwindow.y=this.height / 3;
-
-				experiment=new ExperimentApplication();
-				chooseExperimentwindow.confirm.addEventListener(MouseEvent.CLICK, start);
-
-			}
-			private var uic:UIComponent;
-
-			public function start(event:MouseEvent):void
-			{
-				PopUpManager.removePopUp(chooseExperimentwindow);
-				Mouse3D.enabled=true;
-				experiment.viewport.interactive=true;
-				uic=new UIComponent();
-				stage.frameRate=40;
-				stage.addEventListener(MouseEvent.MOUSE_DOWN, experiment.onMouseDown);
-				stage.addEventListener(MouseEvent.MOUSE_MOVE, experiment.onMouseMove);
-				stage.addEventListener(MouseEvent.MOUSE_UP, UserInputHandler.getDefault.mouseUpHandler);
-				stage.addEventListener(KeyboardEvent.KEY_DOWN, UserInputHandler.getDefault.keyDownHandler);
-				stage.addEventListener(KeyboardEvent.KEY_UP, UserInputHandler.getDefault.keyUpHandler);
-				uic.addChild(experiment);
-				addChild(uic);
-				experiment.experimentSelected(chooseExperimentwindow.experiment_id);
+            private var checkBoxList:ArrayCollection =new ArrayCollection();
+            private var all_checkBox:CheckBox = new CheckBox();
+            
+            
+            private var chooseExperimentwindow:ChooseExperimentWindow
+            private var experiment:ExperimentApplication;
+            private var timer:Timer;
+            
+            
+            private var step_length:int;
+	 		public function init():void{
+	 			
+	 			 addButtonListener();
+                 timer = new Timer(1000);
+                 timer.addEventListener(TimerEvent.TIMER,initExperiment);
+                 timer.start();
+	 		}
+	 		
+	 		public function addButtonListener():void{
+	 		     rotate_left_button.addEventListener(MouseEvent.MOUSE_UP,buttonMouseUp); 
+	 		     rotate_right_button.addEventListener(MouseEvent.MOUSE_UP,buttonMouseUp); 
+	 		     object_forwarding_button.addEventListener(MouseEvent.MOUSE_UP,buttonMouseUp);
+	 		     object_backwarding_button.addEventListener(MouseEvent.MOUSE_UP,buttonMouseUp);
+	 		     object_up_button.addEventListener(MouseEvent.MOUSE_UP,buttonMouseUp);
+	 		     object_down_button.addEventListener(MouseEvent.MOUSE_UP,buttonMouseUp);
+	 		     object_lefting_button.addEventListener(MouseEvent.MOUSE_UP,buttonMouseUp);
+	 		     object_righting_button.addEventListener(MouseEvent.MOUSE_UP,buttonMouseUp);
+	 		     
+	 		     
+//	 		     rotate_left_button.addEventListener(MouseEvent.M,buttonMouseDown); 
+//	 		     rotate_right_button.addEventListener(MouseEvent.MOUSE_DOWN,buttonMouseDown); 
+//	 		     object_forwarding_button.addEventListener(MouseEvent.MOUSE_DOWN,buttonMouseDown);
+//	 		     object_backwarding_button.addEventListener(MouseEvent.MOUSE_DOWN,buttonMouseDown);
+//	 		     object_up_button.addEventListener(MouseEvent.MOUSE_DOWN,buttonMouseDown);
+//	 		     object_down_button.addEventListener(MouseEvent.MOUSE_DOWN,buttonMouseDown);
+//	 		     object_lefting_button.addEventListener(MouseEvent.MOUSE_DOWN,buttonMouseDown);
+//	 		     object_righting_button.addEventListener(MouseEvent.MOUSE_DOWN,buttonMouseDown);
+	 		}
+	 		
+	 		
+	 		public function buttonMouseUp(event:MouseEvent):void{
+	 		    trace("mouse up~~~~");
+	 		    step_length =0;
+	 		}
+	 		
+//	 		public function buttonMouseDown(event:MouseEvent):void{
+//	 			trace("mouse down~~~");
+//	 		}
+	 		
+	 		
+	 	    public function initExperiment(event:TimerEvent):void{
+	 	       logo.visible = false;
+	 	       timer.stop();
+	 	       message_box.text="公告栏";		   
+	 		   /************ Set tool tips**********************/
+	 		   StyleManager.getStyleDeclaration("ToolTip").setStyle("fontSize",16);  
+               StyleManager.getStyleDeclaration("ToolTip").setStyle("backgroundColor","#33CC99"); 
+	 		   
+	 		   StageObjectsManager.getDefault.messageBox=message_box;
+	 		   StageObjectsManager.getDefault.rotate_left_button=rotate_left_button;
+	 		   StageObjectsManager.getDefault.rotate_right_button=rotate_right_button;
+	 		   StageObjectsManager.getDefault.object_uping_button=object_up_button;
+	 		   StageObjectsManager.getDefault.object_downing_button=object_down_button;
+	 		   StageObjectsManager.getDefault.object_forwarding_button=object_forwarding_button;
+	 		   StageObjectsManager.getDefault.object_backwarding_button=object_backwarding_button;
+	 		   StageObjectsManager.getDefault.object_lefting_button=object_lefting_button;
+	 		   StageObjectsManager.getDefault.object_righting_button=object_righting_button;
+	 		   
+	 		   chooseExperimentwindow = ChooseExperimentWindow(PopUpManager.createPopUp( this, ChooseExperimentWindow , true));
+               chooseExperimentwindow.x =this.width/3;
+               chooseExperimentwindow.y= this.height/3;
+               
+               experiment = new ExperimentApplication();
+               chooseExperimentwindow.confirm.addEventListener(MouseEvent.CLICK,start);
+	 	    
+	 	    }
+	 		private var uic:UIComponent;
+	 		public function start(event:MouseEvent):void{
+	 			PopUpManager.removePopUp(chooseExperimentwindow);
+ 		   		Mouse3D.enabled = true;
+ 		   		experiment.viewport.interactive = true; 
+ 		   	    uic = new UIComponent();
+		   		stage.frameRate = 40;
+           		stage.addEventListener(MouseEvent.MOUSE_DOWN, experiment.onMouseDown);
+           		stage.addEventListener(MouseEvent.MOUSE_MOVE, experiment.onMouseMove);
+           		stage.addEventListener(MouseEvent.MOUSE_UP, UserInputHandler.getDefault.mouseUpHandler);
+           		stage.addEventListener(KeyboardEvent.KEY_DOWN, UserInputHandler.getDefault.keyDownHandler);
+           		stage.addEventListener(KeyboardEvent.KEY_UP, UserInputHandler.getDefault.keyUpHandler);
+		  		uic.addChild(experiment);
+           		addChild(uic);
+           		experiment.experimentSelected(chooseExperimentwindow.experiment_id);
 				createCheckBoxes();
-			}
+	 		}
+	 		public function createCheckBoxes():void{
+	 		   all_checkBox.label ="所有器件";
+	 		   all_checkBox.addEventListener(Event.CHANGE,allCheckBoxChanged);
+	 		   
+	 		   /**
+	 		   *  clear the array 
+	 		   */ 
+	 		   if(checkBoxList.length>0){
+	 		      checkBoxList.removeAll();
+	 		   }
+	 		   for(var i:int=0;i<StageObjectsManager.getDefault.getObjectList().length;i++){
+	 		       var obj:LabXObject = StageObjectsManager.getDefault.getObjectList().getItemAt(i) as LabXObject;
+                   if(obj !=null){	 		       
+	 		         var checkbox:CheckBox = new CheckBox();
+	 		         checkbox.label = obj.name;
+	 		         checkbox.selected = true;
+	 		         checkbox.addEventListener(Event.CHANGE,checkBoxChanged);
+	 		         checkBoxList.addItem(checkbox);
+                   }
+	 		   }
+	 		}
+	 		public function checkBoxChanged(event:Event):void{
+	 			var checkBox:CheckBox = event.target as CheckBox;
+                if(checkBox.selected ==true){
+                    StageObjectsManager.getDefault.addMessage("增加"+checkBox.label);                
+                    StageObjectsManager.getDefault.addObjectByName(checkBox.label);
+                    
+                }
+                else{
+                    StageObjectsManager.getDefault.addMessage("移除"+checkBox.label);
+                    StageObjectsManager.getDefault.removeObjectByName(checkBox.label);
+                    all_checkBox.selected=false;
+                }
+	 		}
+	 		public function allCheckBoxChanged(event:Event):void{
+	 		    
+	 		    for(var i:int=0;i<checkBoxList.length;i++){
+	 		      var checkBox:CheckBox = checkBoxList.getItemAt(i) as CheckBox;
+	 		      checkBox.selected = all_checkBox.selected;
+	 		      if(checkBox.selected == true){
+	 		      	 StageObjectsManager.getDefault.addMessage("增加"+checkBox.label);  
+	 		         StageObjectsManager.getDefault.addObjectByName(checkBox.label);
+	 		      }else{
+	 		         StageObjectsManager.getDefault.addMessage("移除"+checkBox.label);
+                     StageObjectsManager.getDefault.removeObjectByName(checkBox.label);
+	 		      }
+	 		    }
+	 		    
+	 		};
+	 		public function choseComponentWindow():void{
+	 		    var window:ChooseComponentWindow=ChooseComponentWindow(PopUpManager.createPopUp( this, ChooseComponentWindow , true));
+	 		    window.vbox_checkBoxes.addChild(all_checkBox);
+	 		    all_checkBox.selected = true;
+	 		    for(var i:int=0;i<checkBoxList.length;i++){
+	 		      var checkBox:CheckBox = checkBoxList.getItemAt(i) as CheckBox;
+	 		      window.vbox_checkBoxes.addChild(checkBox);
+	 		      if(checkBox.selected == false){
+	 		         all_checkBox.selected = false;
+	 		      }
+	 		    }
+	 		     window.x=this.width/3;
+	 		     window.y=this.height/3;
+	 		}
+	 		public function choseExperimentWindow():void{
+	 		    chooseExperimentwindow = ChooseExperimentWindow(PopUpManager.createPopUp( this, ChooseExperimentWindow , true));
+               	chooseExperimentwindow.x =this.width/3;
+               	chooseExperimentwindow.y= this.height/3;
+               	chooseExperimentwindow.confirm.addEventListener(MouseEvent.CLICK,start);
+	 		
+	 		}
+	 		public function showAuthor():void{
+	 		   var str:String="will(sunnywill@gmail.com)\n";
+	 		   str +="rocky(gxrocky@gmail.com)\n";
+	 		   str +="clarke(tangjinou@gmail.com)\n";
+	 		   Alert.show(str,"作者",1,this,navigeteToAuthor);
 
-			public function createCheckBoxes():void
-			{
-				all_checkBox.label="所有器件";
-				all_checkBox.addEventListener(Event.CHANGE, allCheckBoxChanged);
-
-				/**
-				 *  clear the array
-				 */
-				if (checkBoxList.length > 0)
-				{
-					checkBoxList.removeAll();
-				}
-				for (var i:int=0; i < StageObjectsManager.getDefault.getObjectList().length; i++)
-				{
-					var obj:LabXObject=StageObjectsManager.getDefault.getObjectList().getItemAt(i) as LabXObject;
-					if (obj != null)
-					{
-						var checkbox:CheckBox=new CheckBox();
-						checkbox.label=obj.name;
-						checkbox.selected=true;
-						checkbox.addEventListener(Event.CHANGE, checkBoxChanged);
-						checkBoxList.addItem(checkbox);
-					}
-				}
-			}
-
-			public function checkBoxChanged(event:Event):void
-			{
-				var checkBox:CheckBox=event.target as CheckBox;
-				if (checkBox.selected == true)
-				{
-					StageObjectsManager.getDefault.addMessage("增加" + checkBox.label);
-					StageObjectsManager.getDefault.addObjectByName(checkBox.label);
-
-				}
-				else
-				{
-					StageObjectsManager.getDefault.addMessage("移除" + checkBox.label);
-					StageObjectsManager.getDefault.removeObjectByName(checkBox.label);
-					all_checkBox.selected=false;
-				}
-			}
-
-			public function allCheckBoxChanged(event:Event):void
-			{
-
-				for (var i:int=0; i < checkBoxList.length; i++)
-				{
-					var checkBox:CheckBox=checkBoxList.getItemAt(i) as CheckBox;
-					checkBox.selected=all_checkBox.selected;
-					if (checkBox.selected == true)
-					{
-						StageObjectsManager.getDefault.addMessage("增加" + checkBox.label);
-						StageObjectsManager.getDefault.addObjectByName(checkBox.label);
-					}
-					else
-					{
-						StageObjectsManager.getDefault.addMessage("移除" + checkBox.label);
-						StageObjectsManager.getDefault.removeObjectByName(checkBox.label);
-					}
-				}
-
-			}
-			;
-
-			public function choseComponentWindow():void
-			{
-				var window:ChooseComponentWindow=ChooseComponentWindow(PopUpManager.createPopUp(this, ChooseComponentWindow, true));
-				window.vbox_checkBoxes.addChild(all_checkBox);
-				all_checkBox.selected=true;
-				for (var i:int=0; i < checkBoxList.length; i++)
-				{
-					var checkBox:CheckBox=checkBoxList.getItemAt(i) as CheckBox;
-					window.vbox_checkBoxes.addChild(checkBox);
-					if (checkBox.selected == false)
-					{
-						all_checkBox.selected=false;
-					}
-				}
-				window.x=this.width / 3;
-				window.y=this.height / 3;
-			}
-
-			public function choseExperimentWindow():void
-			{
-				chooseExperimentwindow=ChooseExperimentWindow(PopUpManager.createPopUp(this, ChooseExperimentWindow, true));
-				chooseExperimentwindow.x=this.width / 3;
-				chooseExperimentwindow.y=this.height / 3;
-				chooseExperimentwindow.confirm.addEventListener(MouseEvent.CLICK, start);
-
-			}
-
-			public function showAuthor():void
-			{
-				var str:String="will(sunnywill@gmail.com)\n";
-				str+="rocky(gxrocky@gmail.com)\n";
-				str+="clarke(tangjinou@gmail.com)\n";
-				Alert.show(str, "作者", 1, this, navigeteToAuthor);
-
-			}
-
-			public function navigeteToAuthor(event:CloseEvent):void
-			{
-				var url:String="http://labx2010.appspot.com/author";
-				var request:URLRequest=new URLRequest(url);
-				navigateToURL(request, "_blank");
-			}
-		]]>
-	</mx:Script>
-	<mx:VBox horizontalGap="10"
-			 verticalAlign="bottom"
-			 x="1265"
-			 y="10">
-		<!--button size 52*36 -->
-		<mx:Button click="StageObjectsManager.getDefault.open_stage_rotate()"
-				   icon="@Embed('../assets/icon/open_stage_rotate.png')"
-				   toolTip="打开屏幕旋转"/>
-		<mx:Button click="StageObjectsManager.getDefault.close_stage_rotate()"
-				   icon="@Embed('../assets/icon/close_stage_rotate.png')"
-				   toolTip="关闭屏幕旋转"/>
-		<mx:Button click="experiment.reset_camera()"
-				   icon="@Embed('../assets/icon/reset_camera.png')"
-				   toolTip="默认视角"/>
-		<mx:Button buttonDown="StageObjectsManager.getDefault.mainView.camera.zoom++"
-				   autoRepeat="true"
-				   icon="@Embed('../assets/icon/zoom_add.png')"
-				   toolTip="放大"/>
-		<mx:Button buttonDown="StageObjectsManager.getDefault.mainView.camera.zoom--"
-				   autoRepeat="true"
-				   icon="@Embed('../assets/icon/zoom_min.png')"
-				   toolTip="缩小"/>
-		<mx:Button click="choseComponentWindow()"
-				   toolTip="选择器件"
-				   icon="@Embed('../assets/icon/objects.png')"/>
-		<mx:Button click="choseExperimentWindow()"
-				   toolTip="选择实验"
-				   icon="@Embed('../assets/icon/experimentChose.png')"/>
-		<mx:Button click="showAuthor()"
-				   toolTip="联系作者"
-				   icon="@Embed('../assets/icon/mail.png')"/>
-	</mx:VBox>
-
-	<mx:Label text="物体移动"
-			  fontSize="12"/>
-	<mx:VBox x="1146"
-			 y="536">
-		<mx:HBox>
-			<mx:Button buttonDown="StageObjectsManager.getDefault.rotate_left()"
-					   autoRepeat="true"
-					   id="rotate_left_button"
-					   enabled="false"
-					   icon="@Embed('../assets/icon/rotate_left.png')"
-					   disabledIcon="@Embed('../assets/icon/rotate_left_disable.png')"
-					   toolTip="物体向左旋转 快捷键Q"/>
-			<mx:Button buttonDown="StageObjectsManager.getDefault.object_forwarding()"
-					   autoRepeat="true"
-					   id="object_forwarding_button"
-					   enabled="false"
-					   icon="@Embed('../assets/icon/uping.png')"
-					   disabledIcon="@Embed('../assets/icon/uping_disable.png')"
-					   toolTip="物体向上方移动 快捷键W"/>
-			<mx:Button buttonDown="StageObjectsManager.getDefault.rotate_right()"
-					   autoRepeat="true"
-					   id="rotate_right_button"
-					   enabled="false"
-					   icon="@Embed('../assets/icon/rotate_right.png')"
-					   disabledIcon="@Embed('../assets/icon/rotate_right_disable.png')"
-					   toolTip="物体向右旋转 快捷键E"/>
-		</mx:HBox>
-		<mx:HBox>
-			<mx:Button buttonDown="StageObjectsManager.getDefault.object_lefting()"
-					   autoRepeat="true"
-					   id="object_lefting_button"
-					   enabled="false"
-					   icon="@Embed('../assets/icon/lefting.png')"
-					   disabledIcon="@Embed('../assets/icon/lefting_disable.png')"
-					   toolTip="物体向左方移动 快捷键A"/>
-			<mx:Button click="StageObjectsManager.getDefault.movingObjects()"
-					   toolTip="最佳位置"
-					   icon="@Embed('../assets/icon/happy.png')"/>
-			<mx:Button buttonDown="StageObjectsManager.getDefault.object_righting()"
-					   autoRepeat="true"
-					   id="object_righting_button"
-					   enabled="false"
-					   icon="@Embed('../assets/icon/righting.png')"
-					   disabledIcon="@Embed('../assets/icon/righting_disable.png')"
-					   toolTip="物体向右方移动 快捷键D"/>
-		</mx:HBox>
-		<mx:HBox>
-			<mx:Button buttonDown="StageObjectsManager.getDefault.object_uping()"
-					   autoRepeat="true"
-					   id="object_up_button"
-					   enabled="false"
-					   icon="@Embed('../assets/icon/up.png')"
-					   disabledIcon="@Embed('../assets/icon/up_disable.png')"
-					   toolTip="物体向上移动 快捷键page_up"/>
-			<mx:Button buttonDown="StageObjectsManager.getDefault.object_backingwarding()"
-					   autoRepeat="true"
-					   id="object_backwarding_button"
-					   enabled="false"
-					   icon="@Embed('../assets/icon/downing.png')"
-					   disabledIcon="@Embed('../assets/icon/downing_disable.png')"
-					   toolTip="物体向下方移动 快捷键S"/>
-			<mx:Button buttonDown="StageObjectsManager.getDefault.object_downing()"
-					   autoRepeat="true"
-					   id="object_down_button"
-					   enabled="false"
-					   icon="@Embed('../assets/icon/down.png')"
-					   disabledIcon="@Embed('../assets/icon/down_disable.png')"
-					   toolTip="物体向下移动 快捷键page_down"/>
-		</mx:HBox>
-	</mx:VBox>
-
-	<mx:Panel y="0"
-			  width="326"
-			  height="148"
-			  layout="absolute"
-			  color="#070707"
-			  horizontalCenter="-9"
-			  borderColor="#A4A8A1"
-			  alpha="0.79">
-		<mx:TextArea x="0"
-					 y="0"
-					 width="306"
-					 height="108"
-					 editable="false"
-					 id="message_box"
-					 fontSize="12"
-					 backgroundColor="#A69B9B"
-					 cornerRadius="1"
-					 borderStyle="solid"
-					 borderColor="#F31207"
-					 themeColor="#F0FF00"
-					 alpha="1.0"
-					 borderThickness="2"/>
-		<mx:Label text="LabX"
-				  width="60"
-				  color="#DFF4F4"
-				  fontFamily="Arial"
-				  fontWeight="bold"
-				  fontSize="21"
-				  x="236"
-				  y="78"/>
-	</mx:Panel>
-	<mx:Image id="logo"
-			  horizontalCenter="0"
-			  verticalCenter="0"
-			  source="../assets/icon/zjut_logo.jpg"/>
+	 		}
+	 		public function navigeteToAuthor(event:CloseEvent):void{
+	 		   var url:String = "http://labx2010.appspot.com/author";
+	 		   var request:URLRequest = new URLRequest(url); 
+               navigateToURL(request,"_blank");
+	 		} 
+	 		
+	 	]]> 
+	 </mx:Script>
+     <mx:VBox horizontalGap="10" verticalAlign="bottom" x="1265" y="10">
+     <!--button size 52*36 -->
+     		<mx:Button  click="StageObjectsManager.getDefault.open_stage_rotate()"  icon="@Embed('../assets/icon/open_stage_rotate.png')"  toolTip="打开屏幕旋转" />
+	 		<mx:Button  click="StageObjectsManager.getDefault.close_stage_rotate()" icon="@Embed('../assets/icon/close_stage_rotate.png')"  toolTip="关闭屏幕旋转"/>
+     		<mx:Button  click="experiment.reset_camera()"  icon="@Embed('../assets/icon/reset_camera.png')"  toolTip="默认视角" />
+	 		<mx:Button  buttonDown="StageObjectsManager.getDefault.mainView.camera.zoom++" autoRepeat="true" icon="@Embed('../assets/icon/zoom_add.png')" toolTip="放大"/>
+	 		<mx:Button  buttonDown="StageObjectsManager.getDefault.mainView.camera.zoom--" autoRepeat="true" icon="@Embed('../assets/icon/zoom_min.png')" toolTip="缩小"/>
+            <mx:Button  click="choseComponentWindow()"  toolTip="选择器件" icon="@Embed('../assets/icon/objects.png')" />
+            <mx:Button  click="choseExperimentWindow()"  toolTip="选择实验" icon="@Embed('../assets/icon/experimentChose.png')" />
+            <mx:Button  click="showAuthor()"  toolTip="联系作者" icon="@Embed('../assets/icon/mail.png')" />
+     </mx:VBox>
+     
+     <mx:Label text="物体移动" fontSize="12"/>
+     <mx:VBox x="1146" y="536">
+     <mx:HBox>
+            <mx:Button  buttonDown="StageObjectsManager.getDefault.rotate_left(++step_length)"   autoRepeat="true" id="rotate_left_button" enabled="false" icon="@Embed('../assets/icon/rotate_left.png')"  disabledIcon="@Embed('../assets/icon/rotate_left_disable.png')"  toolTip="物体向左旋转 快捷键Q"/>
+            <mx:Button  buttonDown="StageObjectsManager.getDefault.object_forwarding(++step_length)"   autoRepeat="true" id="object_forwarding_button"   enabled="false" icon="@Embed('../assets/icon/uping.png')"  disabledIcon="@Embed('../assets/icon/uping_disable.png')"  toolTip="物体向上方移动 快捷键W"/>
+            <mx:Button  buttonDown="StageObjectsManager.getDefault.rotate_right(++step_length)"  autoRepeat="true" id="rotate_right_button" enabled="false" icon="@Embed('../assets/icon/rotate_right.png')" disabledIcon="@Embed('../assets/icon/rotate_right_disable.png')" toolTip="物体向右旋转 快捷键E"/>
+     </mx:HBox>
+     <mx:HBox>
+            <mx:Button  buttonDown="StageObjectsManager.getDefault.object_lefting(++step_length)"   autoRepeat="true" id="object_lefting_button" enabled="false" icon="@Embed('../assets/icon/lefting.png')"  disabledIcon="@Embed('../assets/icon/lefting_disable.png')"  toolTip="物体向左方移动 快捷键A"/>
+            <mx:Button  click="StageObjectsManager.getDefault.movingObjects()"  toolTip="最佳位置" icon="@Embed('../assets/icon/happy.png')" />
+            <mx:Button  buttonDown="StageObjectsManager.getDefault.object_righting(++step_length)"   autoRepeat="true" id="object_righting_button" enabled="false" icon="@Embed('../assets/icon/righting.png')"  disabledIcon="@Embed('../assets/icon/righting_disable.png')"  toolTip="物体向右方移动 快捷键D"/>
+     </mx:HBox>
+     <mx:HBox>           
+     		<mx:Button  buttonDown="StageObjectsManager.getDefault.object_uping(++step_length)"     autoRepeat="true" id="object_up_button" enabled="false" icon="@Embed('../assets/icon/up.png')" disabledIcon="@Embed('../assets/icon/up_disable.png')" toolTip="物体向上移动 快捷键page_up"/>
+     		<mx:Button  buttonDown="StageObjectsManager.getDefault.object_backingwarding(++step_length)"   autoRepeat="true" id="object_backwarding_button" enabled="false" icon="@Embed('../assets/icon/downing.png')"  disabledIcon="@Embed('../assets/icon/downing_disable.png')"  toolTip="物体向下方移动 快捷键S"/>
+     		<mx:Button  buttonDown="StageObjectsManager.getDefault.object_downing(++step_length)"   autoRepeat="true" id="object_down_button" enabled="false" icon="@Embed('../assets/icon/down.png')" disabledIcon="@Embed('../assets/icon/down_disable.png')" toolTip="物体向下移动 快捷键page_down"/>
+     </mx:HBox>
+     </mx:VBox>
+	 
+	 <mx:Panel y="0" width="326" height="148" layout="absolute" color="#070707" horizontalCenter="-9" borderColor="#A4A8A1" alpha="0.79">
+	     <mx:TextArea  x="0" y="0" width="306" height="108" editable="false" id="message_box" fontSize="12" backgroundColor="#A69B9B" cornerRadius="1" borderStyle="solid" borderColor="#F31207" themeColor="#F0FF00" alpha="1.0" borderThickness="2"/>
+	     <mx:Label text="LabX" width="60" color="#DFF4F4" fontFamily="Arial" fontWeight="bold" fontSize="21" x="236" y="78"/>
+	 </mx:Panel>
+	 <mx:Image id="logo" horizontalCenter="0" verticalCenter="0" source="../assets/icon/zjut_logo.jpg" />
 </mx:Application>
