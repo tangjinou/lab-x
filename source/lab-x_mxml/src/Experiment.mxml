@@ -234,4 +234,16 @@
 	     <mx:Label text="LabX" width="60" color="#DFF4F4" fontFamily="Arial" fontWeight="bold" fontSize="21" x="236" y="78"/>
 	 </mx:Panel>
 	 <mx:Image id="logo" horizontalCenter="0" verticalCenter="0" source="../assets/icon/zjut_logo.jpg" />
+	 
+	 <mx:HBox x="10" y="636">
+	 <mx:Label text="坐标：x" color="#FC0F03"/>
+	 <mx:Text  id ="coordainate_x" text="0"/>
+	 <mx:Label text="y" color="#FC0F03"/>
+	 <mx:Text  id ="coordainate_y" text="0"/>
+	 <mx:Label text="z" color="#FC0F03"/>
+	 <mx:Text  id ="coordainate_z" text="0"/>
+	 <mx:Label text="选中物体" color="#FC0F03"/>
+	 <mx:Text  id ="object_selected" text="光源"/>
+	 </mx:HBox>
+	 
 </mx:Application>
