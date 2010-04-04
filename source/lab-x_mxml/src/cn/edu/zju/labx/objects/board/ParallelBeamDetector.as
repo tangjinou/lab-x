@@ -13,7 +13,7 @@ package cn.edu.zju.labx.objects.board
 		override public function onRayHandle(oldRay:Ray):void
 		{
 			super.onRayHandle(oldRay);
-
+			//TODO: ray must pass 平行平晶, add calculated theta insead of hardcoded value
 			if (isParellel(oldRay))
 			{
 					displayDoubleSlitInterferenceImage(Math.PI / 180 * 30);
