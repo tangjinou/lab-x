@@ -32,7 +32,7 @@
             private var step_length:int;
 	 		public function init():void{
 	 			 addButtonListener();
-                 timer = new Timer(1000);
+                 timer = new Timer(2000);
                  timer.addEventListener(TimerEvent.TIMER,initExperiment);
                  timer.start();
 	 		}
@@ -64,6 +64,10 @@
 	 		   StageObjectsManager.getDefault.coordainate_x=coordainate_x;
 	 		   StageObjectsManager.getDefault.coordainate_y=coordainate_y;
 	 		   StageObjectsManager.getDefault.coordainate_z=coordainate_z;
+	 		   StageObjectsManager.getDefault.rotate_x=rotate_x;
+	 		   StageObjectsManager.getDefault.rotate_y=rotate_y;
+	 		   StageObjectsManager.getDefault.rotate_z=rotate_z;
+	 		   
 	 		   StageObjectsManager.getDefault.object_selected=object_selected;
 	 		   StageObjectsManager.getDefault.rotate_left_button=rotate_left_button;
 	 		   StageObjectsManager.getDefault.rotate_right_button=rotate_right_button;
@@ -219,7 +223,7 @@
 	     <mx:TextArea  x="0" y="0" width="306" height="108" editable="false" id="message_box" fontSize="12" backgroundColor="#A69B9B" cornerRadius="1" borderStyle="solid" borderColor="#F31207" themeColor="#F0FF00" alpha="1.0" borderThickness="2"/>
 	     <mx:Label text="LabX" width="60" color="#DFF4F4" fontFamily="Arial" fontWeight="bold" fontSize="21" x="236" y="78"/>
 	 </mx:Panel>
-	 <mx:Image id="logo" horizontalCenter="0" verticalCenter="0" source="../assets/icon/zjut_logo.jpg" />
+	 <mx:Image id="logo" horizontalCenter="0" verticalCenter="0" source="@Embed('../assets/icon/zjut_oi_logo.png')" />
 	 
 	 <mx:VBox x="10" y="636">
 	 	 <mx:HBox>
@@ -233,7 +237,14 @@
 	 			<mx:Text  id ="coordainate_y" color="#0000FF" text="0"/>
 	 			<mx:Label text="z" color="#FC0F03"/>
 	 			<mx:Text  id ="coordainate_z" color="#0000FF" text="0"/>
-	 			
+	 	 </mx:HBox>
+	 	 <mx:HBox>
+	 			<mx:Label text="角度：α" color="#FC0F03"/>
+	 			<mx:Text  id ="rotate_x" color="#0000FF" text="0"/>
+	 			<mx:Label text="β" color="#FC0F03"/>
+	 			<mx:Text  id ="rotate_y" color="#0000FF" text="0"/>
+	 			<mx:Label text="γ" color="#FC0F03"/>
+	 			<mx:Text  id ="rotate_z" color="#0000FF" text="0"/>
 	 	 </mx:HBox>
 	 </mx:VBox>
 	 
