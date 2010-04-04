@@ -16,7 +16,7 @@ package cn.edu.zju.labx.objects.board
 
 			if (isParellel(oldRay))
 			{
-					displayDoubleSlitInterferenceImage(20);
+					displayDoubleSlitInterferenceImage(Math.PI / 180 * 30);
 			}
 
 		}
