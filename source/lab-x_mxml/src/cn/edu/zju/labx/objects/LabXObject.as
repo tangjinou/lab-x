@@ -46,9 +46,11 @@ package cn.edu.zju.labx.objects
 			{
 				UserInputHandler.getDefault.currentSelectedObject=this as IUserInputListener;
 				UserInputHandler.getDefault.objectPressHandlerHook(event, this);
-				StageObjectsManager.getDefault.addMessage("已经选中" + this.name);
-				StageObjectsManager.getDefault.addMessage("键盘 up:物体上移动,down:物体下移动");
-				StageObjectsManager.getDefault.addMessage("left:物体左移动,right:物体右移动");
+//				StageObjectsManager.getDefault.addMessage("已经选中" + this.name);
+//				StageObjectsManager.getDefault.addMessage("键盘 up:物体上移动,down:物体下移动");
+//				StageObjectsManager.getDefault.addMessage("left:物体左移动,right:物体右移动");
+				StageObjectsManager.getDefault.object_selected.text=this.name;
+
 			}
 		}
 
@@ -183,17 +185,20 @@ package cn.edu.zju.labx.objects
 			if (xMove != 0)
 			{
 				this.x+=xMove;
-				StageObjectsManager.getDefault.addMessage(this.name + " X move:" + xMove);
+//				StageObjectsManager.getDefault.addMessage(this.name + " X move:" + xMove);
+				StageObjectsManager.getDefault.changeCoordainate(this.x,this.y,this.z);
 			}
 			if (yMove != 0)
 			{
 				this.y+=yMove;
-				StageObjectsManager.getDefault.addMessage(this.name + " Y move:" + yMove);
+//				StageObjectsManager.getDefault.addMessage(this.name + " Y move:" + yMove);
+				StageObjectsManager.getDefault.changeCoordainate(this.x,this.y,this.z);
 			}
 			if (zMove != 0)
 			{
 				this.z+=zMove;
-				StageObjectsManager.getDefault.addMessage(this.name + " Z move:" + zMove);
+//				StageObjectsManager.getDefault.addMessage(this.name + " Z move:" + zMove);
+                StageObjectsManager.getDefault.changeCoordainate(this.x,this.y,this.z);
 			}
 		}
 
@@ -205,17 +210,20 @@ package cn.edu.zju.labx.objects
 			if (xRotate != 0)
 			{
 				this.rotationX+=xRotate;
-				StageObjectsManager.getDefault.addMessage(this.name + " X rotate:" + xRotate);
+//				StageObjectsManager.getDefault.addMessage(this.name + " X rotate:" + xRotate);
+				StageObjectsManager.getDefault.changeCoordainate(this.x,this.y,this.z);
 			}
 			if (yRotate != 0)
 			{
 				this.rotationY+=yRotate;
-				StageObjectsManager.getDefault.addMessage(this.name + " Y rotate:" + yRotate);
+//				StageObjectsManager.getDefault.addMessage(this.name + " Y rotate:" + yRotate);
+                StageObjectsManager.getDefault.changeCoordainate(this.x,this.y,this.z);
 			}
 			if (zRotate != 0)
 			{
 				this.rotationZ+=zRotate;
-				StageObjectsManager.getDefault.addMessage(this.name + " Z rotate:" + zRotate);
+//				StageObjectsManager.getDefault.addMessage(this.name + " Z rotate:" + zRotate);
+				StageObjectsManager.getDefault.changeCoordainate(this.x,this.y,this.z);
 			}
 		}
 

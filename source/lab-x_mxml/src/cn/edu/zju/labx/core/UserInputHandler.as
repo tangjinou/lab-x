@@ -3,13 +3,12 @@ package cn.edu.zju.labx.core
 
 	import cn.edu.zju.labx.events.IUserInputListener;
 	import cn.edu.zju.labx.objects.LabXObject;
-
+	
 	import flash.events.KeyboardEvent;
 	import flash.events.MouseEvent;
-	import flash.ui.Keyboard;
-
+	
 	import mx.controls.Button;
-
+	
 	import org.papervision3d.core.utils.virtualmouse.VirtualMouseMouseEvent;
 	import org.papervision3d.events.InteractiveScene3DEvent;
 
@@ -70,7 +69,7 @@ package cn.edu.zju.labx.core
 				if (currentObject is LabXObject)
 				{
 					var selected:LabXObject=currentObject as LabXObject;
-					StageObjectsManager.getDefault.addMessage("已经选中" + selected.name);
+//					StageObjectsManager.getDefault.addMessage("已经选中" + selected.name);
 				}
 			}
 			selectedLabxObject=currentObject;
@@ -92,7 +91,8 @@ package cn.edu.zju.labx.core
 				if (selectedLabxObject is LabXObject)
 				{
 					var selected:LabXObject=selectedLabxObject as LabXObject;
-					StageObjectsManager.getDefault.addMessage("取消选中" + selected.name);
+//					StageObjectsManager.getDefault.addMessage("取消选中" + selected.name);
+                    StageObjectsManager.getDefault.object_selected.text = "";
 				}
 				selectedLabxObject=null;
 				objectUnPressHandlerHook();
