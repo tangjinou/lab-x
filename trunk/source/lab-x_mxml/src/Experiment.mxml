@@ -31,7 +31,6 @@
             
             private var step_length:int;
 	 		public function init():void{
-	 			
 	 			 addButtonListener();
                  timer = new Timer(1000);
                  timer.addEventListener(TimerEvent.TIMER,initExperiment);
@@ -47,28 +46,11 @@
 	 		     object_down_button.addEventListener(MouseEvent.MOUSE_UP,buttonMouseUp);
 	 		     object_lefting_button.addEventListener(MouseEvent.MOUSE_UP,buttonMouseUp);
 	 		     object_righting_button.addEventListener(MouseEvent.MOUSE_UP,buttonMouseUp);
-	 		     
-	 		     
-//	 		     rotate_left_button.addEventListener(MouseEvent.M,buttonMouseDown); 
-//	 		     rotate_right_button.addEventListener(MouseEvent.MOUSE_DOWN,buttonMouseDown); 
-//	 		     object_forwarding_button.addEventListener(MouseEvent.MOUSE_DOWN,buttonMouseDown);
-//	 		     object_backwarding_button.addEventListener(MouseEvent.MOUSE_DOWN,buttonMouseDown);
-//	 		     object_up_button.addEventListener(MouseEvent.MOUSE_DOWN,buttonMouseDown);
-//	 		     object_down_button.addEventListener(MouseEvent.MOUSE_DOWN,buttonMouseDown);
-//	 		     object_lefting_button.addEventListener(MouseEvent.MOUSE_DOWN,buttonMouseDown);
-//	 		     object_righting_button.addEventListener(MouseEvent.MOUSE_DOWN,buttonMouseDown);
 	 		}
-	 		
 	 		
 	 		public function buttonMouseUp(event:MouseEvent):void{
-	 		    trace("mouse up~~~~");
 	 		    step_length =0;
 	 		}
-	 		
-//	 		public function buttonMouseDown(event:MouseEvent):void{
-//	 			trace("mouse down~~~");
-//	 		}
-	 		
 	 		
 	 	    public function initExperiment(event:TimerEvent):void{
 	 	       logo.visible = false;
@@ -79,6 +61,10 @@
                StyleManager.getStyleDeclaration("ToolTip").setStyle("backgroundColor","#33CC99"); 
 	 		   
 	 		   StageObjectsManager.getDefault.messageBox=message_box;
+	 		   StageObjectsManager.getDefault.coordainate_x=coordainate_x;
+	 		   StageObjectsManager.getDefault.coordainate_y=coordainate_y;
+	 		   StageObjectsManager.getDefault.coordainate_z=coordainate_z;
+	 		   StageObjectsManager.getDefault.object_selected=object_selected;
 	 		   StageObjectsManager.getDefault.rotate_left_button=rotate_left_button;
 	 		   StageObjectsManager.getDefault.rotate_right_button=rotate_right_button;
 	 		   StageObjectsManager.getDefault.object_uping_button=object_up_button;
@@ -235,15 +221,21 @@
 	 </mx:Panel>
 	 <mx:Image id="logo" horizontalCenter="0" verticalCenter="0" source="../assets/icon/zjut_logo.jpg" />
 	 
-	 <mx:HBox x="10" y="636">
-	 <mx:Label text="坐标：x" color="#FC0F03"/>
-	 <mx:Text  id ="coordainate_x" text="0"/>
-	 <mx:Label text="y" color="#FC0F03"/>
-	 <mx:Text  id ="coordainate_y" text="0"/>
-	 <mx:Label text="z" color="#FC0F03"/>
-	 <mx:Text  id ="coordainate_z" text="0"/>
-	 <mx:Label text="选中物体" color="#FC0F03"/>
-	 <mx:Text  id ="object_selected" text="光源"/>
-	 </mx:HBox>
+	 <mx:VBox x="10" y="636">
+	 	 <mx:HBox>
+	 	        <mx:Label text="选中物体" color="#FC0F03"/>
+	 	 		<mx:Text  id ="object_selected" color="#0000FF" text="无"/>
+	 	 </mx:HBox>
+	     <mx:HBox>
+	 			<mx:Label text="坐标：x" color="#FC0F03"/>
+	 			<mx:Text  id ="coordainate_x" color="#0000FF" text="0"/>
+	 			<mx:Label text="y" color="#FC0F03"/>
+	 			<mx:Text  id ="coordainate_y" color="#0000FF" text="0"/>
+	 			<mx:Label text="z" color="#FC0F03"/>
+	 			<mx:Text  id ="coordainate_z" color="#0000FF" text="0"/>
+	 			
+	 	 </mx:HBox>
+	 </mx:VBox>
+	 
 	 
 </mx:Application>
