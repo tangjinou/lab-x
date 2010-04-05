@@ -32,7 +32,6 @@ package cn.edu.zju.labx.objects.beam
 		{
 			if (oldRay.getLineRays() == null || oldRay.getLineRays().length == 0)
 				return;
-			if (!(oldRay.getOtherInfo() is ArrayCollection))return;
 			var lineRay:LineRay=oldRay.getLineRays().getItemAt(0) as LineRay;
 			var lineRayNormal:Number3D=new Number3D(lineRay.logic.dx, lineRay.logic.dy, lineRay.logic.dz);
 			var normal:Number3D=getNormal();
@@ -50,6 +49,7 @@ package cn.edu.zju.labx.objects.beam
 					sort(newInfo);
 					
 				}
+				ray.setOtherInfo(newInfo);
 				displayNewRay(ray);
 			}
 			else
