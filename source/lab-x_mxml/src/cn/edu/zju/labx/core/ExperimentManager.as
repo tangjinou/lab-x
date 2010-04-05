@@ -9,6 +9,7 @@ package cn.edu.zju.labx.core
 	import cn.edu.zju.labx.objects.beam.FourierGrating;
 	import cn.edu.zju.labx.objects.beam.LCLV;
 	import cn.edu.zju.labx.objects.beam.Mirror;
+	import cn.edu.zju.labx.objects.beam.ParallelCrystal
 	import cn.edu.zju.labx.objects.beam.ObjectPlane;
 	import cn.edu.zju.labx.objects.beam.PolarizationBeamSplitter;
 	import cn.edu.zju.labx.objects.beam.RetangleObjectPlane;
@@ -486,7 +487,7 @@ package cn.edu.zju.labx.core
 
 		private function addDefaultExperimentEquipments(eqList:ArrayCollection):void
 		{
-			eqList.addItem(createMirror("平行平晶"));
+			eqList.addItem(createParallelCrystal("平行平晶"));
 			eqList.addItem(createParallelBeamDetector("剪切干涉屏幕"));
 		}
 
@@ -677,6 +678,17 @@ package cn.edu.zju.labx.core
 		{
 			material=material || new ColorMaterial(0x262626, 1, true);
 			return new ParallelBeamDetector(name, material);
+		}
+		
+		/**
+		 * Create a ParallelCrystal
+		 */
+		private function createParallelCrystal(name:String="反射镜", material:MaterialObject3D=null):ParallelCrystal
+		{
+			material=material || new PhongMaterial(light, 0xFFFFFF, 0x6ccff8, 100);
+			material.interactive=true;
+			var crystal:ParallelCrystal=new ParallelCrystal(name, material);
+			return crystal;
 		}
 
 		/**
