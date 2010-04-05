@@ -66,10 +66,13 @@ package cn.edu.zju.labx.events
 			}
 			else if (event is KeyboardEvent)
 			{
-				if ((event.type == KeyboardEvent.KEY_UP) && (keyDownAccelerate != 1))
+				if (event.type == KeyboardEvent.KEY_UP)
 				{
-					StageObjectsManager.getDefault.objectStateChanged(this.labXObject);
-					keyDownAccelerate=1;
+					if(keyDownAccelerate != 1)
+					{
+						StageObjectsManager.getDefault.objectStateChanged(this.labXObject);
+						keyDownAccelerate=1;
+					}
 					return;
 				}
 

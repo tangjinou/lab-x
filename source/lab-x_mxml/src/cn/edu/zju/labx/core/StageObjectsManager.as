@@ -230,10 +230,7 @@ package cn.edu.zju.labx.core
 					if (object is LightSource)
 					{
 						rayManager.lightSources.removeItemAt(rayManager.lightSources.getItemIndex(object));
-					} else if (object is Board)
-					{
-						rayManager.setBorad(null);
-					}
+					} 
 				}
 				rayManager.reProduceRays();
 			} else 
@@ -244,9 +241,6 @@ package cn.edu.zju.labx.core
 					if (object is LightSource)
 					{
 						rayManager.lightSources.addItem(object as LightSource);
-					} else if (object is Board)
-					{
-						rayManager.setBorad(object as Board);
 					}
 					rayManager.reProduceRays();
 				}

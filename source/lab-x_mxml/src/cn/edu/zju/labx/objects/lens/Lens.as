@@ -11,13 +11,13 @@ package cn.edu.zju.labx.objects.lens
 	import cn.edu.zju.labx.objects.ray.LineRay;
 	import cn.edu.zju.labx.objects.ray.Ray;
 	import cn.edu.zju.labx.utils.MathUtils;
-
+	
 	import com.greensock.*;
-
+	
 	import flash.events.Event;
-
+	
 	import mx.collections.ArrayCollection;
-
+	
 	import org.papervision3d.core.geom.TriangleMesh3D;
 	import org.papervision3d.core.math.Number3D;
 	import org.papervision3d.core.math.Plane3D;
@@ -223,7 +223,7 @@ package cn.edu.zju.labx.objects.lens
 			return false;
 		}
 
-		public function get focus()
+		public function get focus():Number
 		{
 			return this._focus;
 		} 

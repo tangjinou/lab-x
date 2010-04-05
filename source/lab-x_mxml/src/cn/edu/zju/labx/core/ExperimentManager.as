@@ -112,6 +112,8 @@ package cn.edu.zju.labx.core
 		{
 			var equipmentList:ArrayCollection=new ArrayCollection();
 
+			var lightSource2:LightSource=createLamps("照明光源");
+			equipmentList.addItem(lightSource2);
 			var lightSource1:LightSource=createLaser("激光光源");
 			equipmentList.addItem(lightSource1);
 
@@ -133,15 +135,8 @@ package cn.edu.zju.labx.core
 			equipmentList.addItem(createArrowObjectPlane("物1", null, new ColorMaterial(0x00FFFF)));
 			equipmentList.addItem(createArrowObjectPlane("物2", null, new ColorMaterial(0xFFFF00)));
 
-
-			//lack "液晶光阀"
 			var lens4:Lens=createConvexLens("成像透镜2", 80);
 			equipmentList.addItem(lens4);
-
-			//lack "图像透明片", "非相干照明光源"
-			var lightSource2:LightSource=createLamps("照明光源");
-			equipmentList.addItem(lightSource2);
-
 
 			return equipmentList;
 
@@ -767,7 +762,6 @@ package cn.edu.zju.labx.core
 		private function remove():void
 		{
 			StageObjectsManager.getDefault.rayManager.closeAllLight();
-			StageObjectsManager.getDefault.rayManager.clearRays();
 			if (_equipmentList != null)
 			{
 				for (var i:int=0; i < _equipmentList.length; i++)

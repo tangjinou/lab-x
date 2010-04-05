@@ -242,6 +242,11 @@ package cn.edu.zju.labx.objects
 			}
 			oldRay.displayRays();
 		}
+		
+		public function onRayClear():void
+		{
+			//DO Nothing
+		}
 
 	}
 }
