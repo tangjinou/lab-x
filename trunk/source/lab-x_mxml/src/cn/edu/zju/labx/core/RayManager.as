@@ -2,10 +2,9 @@ package cn.edu.zju.labx.core
 {
 	import cn.edu.zju.labx.events.IRayHandle;
 	import cn.edu.zju.labx.objects.LabXObject;
-	import cn.edu.zju.labx.objects.board.Board;
 	import cn.edu.zju.labx.objects.lightSource.LightSource;
 	import cn.edu.zju.labx.objects.ray.Ray;
-
+	
 	import mx.collections.ArrayCollection;
 
 	public class RayManager
@@ -24,13 +23,6 @@ package cn.edu.zju.labx.core
 		public var lightSources:ArrayCollection=new ArrayCollection();
 
 //		private var lightSource:LightSource;
-
-		private var board:Board;
-
-		public function setBorad(board:Board):void
-		{
-			this.board=board;
-		}
 
 		public function setLightSource(l:LightSource):void
 		{
@@ -53,7 +45,7 @@ package cn.edu.zju.labx.core
 			return null;
 		}
 
-		public function clearRays():void
+		private function clearRays():void
 		{
 			for (var i:int=0; i < rayList.length; i++)
 			{
@@ -63,28 +55,16 @@ package cn.edu.zju.labx.core
 					ray.destroy();
 				ray=null;
 			}
-			// clean bmp in board
-			if (board != null)
+			
+			for each (var obj:LabXObject in StageObjectsManager.getDefault.getObjectList())
 			{
-				board.unDisplayInterferenceImage();
-			}
-			rayList.removeAll();
-		}
-
-		public function isLightOn():Boolean
-		{
-			if (this.lightSources != null)
-			{
-				for (var i:int=0; i < lightSources.length; i++)
+				if (obj is IRayHandle)
 				{
-					var l:LightSource=lightSources.getItemAt(i) as LightSource;
-					if (l.isLightOn)
-					{
-						return true;
-					}
+					var rayHandle:IRayHandle = obj as IRayHandle;
+					rayHandle.onRayClear();
 				}
 			}
-			return false;
+			rayList.removeAll();
 		}
 
 		public function closeAllLight():void
@@ -94,6 +74,7 @@ package cn.edu.zju.labx.core
 				var l:LightSource=lightSources.getItemAt(i) as LightSource;
 				l.light_on=false;
 			}
+			clearRays();
 		}
 
 		public function reProduceRays():void

@@ -87,15 +87,13 @@ package cn.edu.zju.labx.objects.lightSource
 				{
 					isOn=!isOn;
 
+					StageObjectsManager.getDefault.rayManager.reProduceRays();
 					if (isOn)
 					{
-						openRay();
 						StageObjectsManager.getDefault.addMessage("打开光源");
 					}
 					else
 					{
-						StageObjectsManager.getDefault.rayManager.clearRays();
-//		   	    	 	StageObjectsManager.getDefault.originPivot.removeChild(getRay());
 						this._ray=null;
 						StageObjectsManager.getDefault.addMessage("关闭光源");
 					}

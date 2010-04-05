@@ -259,6 +259,10 @@ package cn.edu.zju.labx.objects.board
 			return cube;
 		}
 
+		override public function onRayClear():void
+		{
+			unDisplayInterferenceImage();
+		}
 
 	}
 }

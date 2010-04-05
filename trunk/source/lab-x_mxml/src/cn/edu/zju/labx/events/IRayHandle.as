@@ -19,6 +19,10 @@ package cn.edu.zju.labx.events
 		 */
 		function isOnTheRay(ray:Ray):Boolean;
 
+		/**
+		 * On ray is clearing
+		 */
+		function onRayClear():void;
 
 	}
 }
