@@ -82,6 +82,10 @@ package cn.edu.zju.labx.objects.board
 				return false;
 			}
 			ray_tmp=RayManager.getDefault.getFrontRay(ray_tmp);
+			
+			if(ray_tmp==null || ray_tmp.getSender()==null){
+			   return false;
+			}
 			if (!(ray_tmp.getSender() is Lens))
 			{
 				return false;
