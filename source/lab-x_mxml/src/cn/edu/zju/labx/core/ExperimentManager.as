@@ -1,10 +1,7 @@
 package cn.edu.zju.labx.core
 {
-	import com.greensock.TweenLite;
-	import flash.events.TimerEvent;
-	import flash.utils.Timer;
-	import mx.collections.ArrayCollection;
 	import cn.edu.zju.labx.objects.LabXObject;
+	import cn.edu.zju.labx.objects.beam.ArrowObjectPlane;
 	import cn.edu.zju.labx.objects.beam.BeamSplitter;
 	import cn.edu.zju.labx.objects.beam.FourierGrating;
 	import cn.edu.zju.labx.objects.beam.LCLV;
@@ -12,8 +9,6 @@ package cn.edu.zju.labx.core
 	import cn.edu.zju.labx.objects.beam.ParallelCrystal
 	import cn.edu.zju.labx.objects.beam.ObjectPlane;
 	import cn.edu.zju.labx.objects.beam.PolarizationBeamSplitter;
-	import cn.edu.zju.labx.objects.beam.RetangleObjectPlane;
-	import cn.edu.zju.labx.objects.beam.TTypeObjectPlane;
 	import cn.edu.zju.labx.objects.board.DifferentialCoefficientBoard;
 	import cn.edu.zju.labx.objects.board.DoubleSlitInterfBoard;
 	import cn.edu.zju.labx.objects.board.FourierDisplayBoard;
@@ -25,6 +20,14 @@ package cn.edu.zju.labx.core
 	import cn.edu.zju.labx.objects.lightSource.Lamps;
 	import cn.edu.zju.labx.objects.lightSource.Laser;
 	import cn.edu.zju.labx.objects.lightSource.LightSource;
+	
+	import com.greensock.TweenLite;
+	
+	import flash.events.TimerEvent;
+	import flash.utils.Timer;
+	
+	import mx.collections.ArrayCollection;
+	
 	import org.papervision3d.core.proto.LightObject3D;
 	import org.papervision3d.core.proto.MaterialObject3D;
 	import org.papervision3d.materials.ColorMaterial;
@@ -127,8 +130,8 @@ package cn.edu.zju.labx.core
 
 			equipmentList.addItem(createDifferentialCoefficientBoard("接收屏"));
 			equipmentList.addItem(createLCLV("液晶光阀"));
-			equipmentList.addItem(createRetangleObjectPlane("物1"));
-			equipmentList.addItem(createTTypeObjectPlane("物2"));
+			equipmentList.addItem(createArrowObjectPlane("物1", null, new ColorMaterial(0x00FFFF)));
+			equipmentList.addItem(createArrowObjectPlane("物2", null, new ColorMaterial(0xFFFF00)));
 
 
 			//lack "液晶光阀"
@@ -702,14 +705,14 @@ package cn.edu.zju.labx.core
 			return beam;
 		}
 
-		/**
-		 * create a retangle object plane
-		 */
-		private function createRetangleObjectPlane(name:String="物1", material:MaterialObject3D=null):RetangleObjectPlane
-		{
-			material=material || new ColorMaterial(0x262626, 1, true);
-			return new RetangleObjectPlane(name, material);
-		}
+//		/**
+//		 * create a retangle object plane
+//		 */
+//		private function createRetangleObjectPlane(name:String="物1", material:MaterialObject3D=null):RetangleObjectPlane
+//		{
+//			material=material || new ColorMaterial(0x262626, 1, true);
+//			return new RetangleObjectPlane(name, material);
+//		}
 
 		/**
 		 * Create equipment for second experiment
@@ -752,10 +755,10 @@ package cn.edu.zju.labx.core
 		/**
 		 *  create a ttype plane
 		 */
-		private function createTTypeObjectPlane(name:String="物2", material:MaterialObject3D=null):TTypeObjectPlane
+		private function createArrowObjectPlane(name:String="物2", material:MaterialObject3D=null, objMaterial:MaterialObject3D=null):ArrowObjectPlane
 		{
 			material=material || new ColorMaterial(0x262626, 1, true);
-			return new TTypeObjectPlane(name, material);
+			return new ArrowObjectPlane(name, material, objMaterial);
 		}
 
 		/**
