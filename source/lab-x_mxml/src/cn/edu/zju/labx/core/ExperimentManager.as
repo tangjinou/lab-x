@@ -125,7 +125,7 @@ package cn.edu.zju.labx.core
 			var splitter:PolarizationBeamSplitter=createPolarizationBeamSplitter("偏振分光棱镜");
 			equipmentList.addItem(splitter);
 
-			var lens3:Lens=createConvexLens("成像透镜1", 80);
+			var lens3:Lens=createConvexLens("成像透镜1", 40);
 			equipmentList.addItem(lens3);
 
 			equipmentList.addItem(createDifferentialCoefficientBoard("接收屏"));
