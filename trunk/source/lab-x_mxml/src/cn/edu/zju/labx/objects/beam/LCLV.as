@@ -99,8 +99,8 @@ package cn.edu.zju.labx.objects.beam
 			var objA:Shape = a as Shape;
 			var objB:Shape = b as Shape;
 			
-			if (objA.transform.matrix.d < objB.transform.matrix.d)return 1;
-			if (objA.transform.matrix.d > objB.transform.matrix.d)return -1;
+			if (Math.abs(objA.transform.matrix.d) < Math.abs(objB.transform.matrix.d))return 1;
+			if (Math.abs(objA.transform.matrix.d) > Math.abs(objB.transform.matrix.d))return -1;
 			
 			return 0;
 		};
