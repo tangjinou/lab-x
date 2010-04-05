@@ -100,7 +100,7 @@
            		stage.addEventListener(KeyboardEvent.KEY_UP, UserInputHandler.getDefault.keyUpHandler);
 		  		uic.addChild(experiment);
            		addChild(uic);
-           		experiment.experimentSelected(4);
+           		experiment.experimentSelected(chooseExperimentwindow.experiment_id);
 				createCheckBoxes();
 	 		}
 	 		public function createCheckBoxes():void{
