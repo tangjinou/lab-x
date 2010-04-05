@@ -2,10 +2,12 @@ package cn.edu.zju.labx.objects.board
 {
 	import cn.edu.zju.labx.core.LabXConstant;
 	import cn.edu.zju.labx.objects.ray.Ray;
-
+	
 	import flash.display.BitmapData;
 	import flash.display.Shape;
-
+	
+	import mx.collections.ArrayCollection;
+	
 	import org.papervision3d.core.proto.MaterialObject3D;
 	import org.papervision3d.materials.BitmapMaterial;
 	import org.papervision3d.materials.special.CompositeMaterial;
@@ -21,24 +23,28 @@ package cn.edu.zju.labx.objects.board
 			var shape1:Shape=new Shape();
 			shape1.graphics.beginFill(material.fillColor, 1);
 			shape1.graphics.drawCircle(50, 50, 20);
+			var bmp1:BitmapData=new BitmapData(depth, height, true, 0x0);
+			bmp1.draw(shape1);
+			var shape_material1:BitmapMaterial=new BitmapMaterial(bmp1);
+			var compMaterial1:CompositeMaterial=new CompositeMaterial();
+			compMaterial1.addMaterial(shape_material1);
 
 			var shape2:Shape=new Shape();
 			shape2.graphics.beginFill(0x000000, 1);
 			shape2.graphics.drawCircle(50, 50, 40);
+			var bmp2:BitmapData=new BitmapData(depth, height, true, 0x0);
+			bmp2.draw(shape2);
+			var shape_material2:BitmapMaterial=new BitmapMaterial(bmp2);
+			var compMaterial2:CompositeMaterial=new CompositeMaterial();
+			compMaterial2.addMaterial(shape_material2);
 
-			var bmp:BitmapData=new BitmapData(depth, height, true, 0x0);
-			bmp.draw(shape2);
-			bmp.draw(shape1);
-
-			var shape_material:BitmapMaterial=new BitmapMaterial(bmp);
-			shape_material.smooth=true;
-
-			var compMaterial:CompositeMaterial=new CompositeMaterial();
-			compMaterial.addMaterial(material);
-			compMaterial.addMaterial(shape_material);
-			compMaterial.interactive=true;
-
-			new_material=compMaterial;
+			var compM:CompositeMaterial = new CompositeMaterial();
+			compM.addMaterial(material);
+			compM.addMaterial(compMaterial2);
+			compM.addMaterial(compMaterial1);
+			compM.interactive = true;
+			
+			new_material = compM;
 
 			cube.replaceMaterialByName(new_material, "left");
 		}
@@ -60,43 +66,25 @@ package cn.edu.zju.labx.objects.board
 		override public function onRayHandle(oldRay:Ray):void
 		{
 			super.onRayHandle(oldRay);
-
-			if (oldRay1 != null && oldRay2 != null)
-			{
-				displayAddImage(oldRay1, oldRay2);
-			}
-			else if (oldRay1 != null)
-			{
-				displayImage(oldRay1.getOtherInfo());
-			}
-			else if (oldRay2 != null)
-			{
-				displayImage(oldRay2.getOtherInfo());
-			}
-		}
-
-
-		public function displayAddImage(ray1:Ray, ray2:Ray):void
-		{
-
+			displayImage(oldRay.getOtherInfo());
 		}
 
 		private function displayImage(obj:Object):void
 		{
-			if (!(obj is Shape))
+			if (!(obj is ArrayCollection))
 				return;
-			var shape:Shape=obj as Shape;
-
-
+			
+			var imageInfo:ArrayCollection = obj as ArrayCollection;
 			var bmp:BitmapData=new BitmapData(depth, height, true, 0x0);
-			bmp.draw(shape);
-
-			var shape_material:BitmapMaterial=new BitmapMaterial(bmp);
-			shape_material.smooth=true;
+			for each (var shape:Shape in imageInfo)
+			{
+				bmp.draw(shape, shape.transform.matrix);
+			}
+			var imageMaterial:BitmapMaterial=new BitmapMaterial(bmp);
 
 			var compMaterial:CompositeMaterial=new CompositeMaterial();
 			compMaterial.addMaterial(material);
-			compMaterial.addMaterial(shape_material);
+			compMaterial.addMaterial(imageMaterial);
 			compMaterial.interactive=true;
 
 			new_material=compMaterial;

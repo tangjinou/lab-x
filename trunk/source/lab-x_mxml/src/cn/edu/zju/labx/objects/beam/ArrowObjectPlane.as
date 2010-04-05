@@ -1,24 +1,30 @@
 package cn.edu.zju.labx.objects.beam
 {
-	import cn.edu.zju.labx.core.LabXConstant;
 	import cn.edu.zju.labx.core.StageObjectsManager;
 	import cn.edu.zju.labx.objects.ray.Ray;
-
+	
 	import flash.display.BitmapData;
 	import flash.display.BlendMode;
+	import flash.display.Graphics;
 	import flash.display.Shape;
-
+	
+	import mx.collections.ArrayCollection;
+	
 	import org.papervision3d.core.proto.MaterialObject3D;
 	import org.papervision3d.materials.BitmapMaterial;
+	import org.papervision3d.materials.ColorMaterial;
 	import org.papervision3d.materials.special.CompositeMaterial;
 	import org.papervision3d.materials.utils.MaterialsList;
 	import org.papervision3d.objects.primitives.Cube;
 	import org.papervision3d.view.layer.ViewportLayer;
 
-	public class TTypeObjectPlane extends Beam
+	public class ArrowObjectPlane extends Beam
 	{
-		public function TTypeObjectPlane(name:String, material:MaterialObject3D, vertices:Array=null, faces:Array=null)
+		private var _objMaterial:MaterialObject3D;
+		public function ArrowObjectPlane(name:String, material:MaterialObject3D, objMaterial:MaterialObject3D, vertices:Array=null, faces:Array=null)
 		{
+			this._objMaterial = objMaterial || new ColorMaterial(0x0);
+			_objMaterial.smooth = true;
 			super(material, name, vertices, faces);
 		}
 
@@ -28,7 +34,9 @@ package cn.edu.zju.labx.objects.beam
 		override protected function handleRay(oldRay:Ray):void
 		{
 			this._ray=makePassThroughRay(oldRay);
-			_ray.setOtherInfo(createLeftShape());
+			var otherInfo:ArrayCollection = new ArrayCollection();
+			otherInfo.addItem(createLeftShape());
+			_ray.setOtherInfo(otherInfo);
 			displayNewRay(this._ray);
 		}
 
@@ -38,7 +46,7 @@ package cn.edu.zju.labx.objects.beam
 			var width:uint=3;
 
 			/* create right side */
-			var bmpRight:BitmapData=new BitmapData(depth, height, true, 0x0);
+			var bmpRight:BitmapData=new BitmapData(depth, height, true, this._objMaterial.fillColor);
 			bmpRight.draw(createRightShape());
 
 			var rectMaterialRight:BitmapMaterial=new BitmapMaterial(bmpRight);
@@ -50,7 +58,7 @@ package cn.edu.zju.labx.objects.beam
 			compMaterialRight.interactive=true;
 
 			/* create left side */
-			var bmpLeft:BitmapData=new BitmapData(depth, height, true, 0x0);
+			var bmpLeft:BitmapData=new BitmapData(depth, height, true, this._objMaterial.fillColor);
 			bmpLeft.draw(createLeftShape());
 			var rectMaterialLeft:BitmapMaterial=new BitmapMaterial(bmpLeft);
 			rectMaterialLeft.smooth=true;
@@ -81,24 +89,27 @@ package cn.edu.zju.labx.objects.beam
 
 		private function createLeftShape():Shape
 		{
-			var w:Number=LabXConstant.rectW;
-			var h:Number=LabXConstant.rectH;
-			var rectLeft:Shape=new Shape();
-			rectLeft.graphics.beginFill(0x000000, 1);
-			rectLeft.graphics.drawRect(depth / 5 * 3 - w, height / 2 - h / 2, w, h);
-			rectLeft.graphics.drawRect(depth / 5 * 3 - w - h, height / 2 - w / 2, h, w);
-			return rectLeft;
+			
+			var arrowLeft:Shape=new Shape();
+			var g:Graphics = arrowLeft.graphics;
+			g.beginFill(this._objMaterial.fillColor, 1);
+			g.moveTo(50, 30);
+			g.lineTo(35, 50);
+			g.lineTo(65, 50);
+			g.drawRect(45, 50, 10, 50);
+			return arrowLeft;
 		}
 
 		private function createRightShape():Shape
 		{
-			var w:Number=LabXConstant.rectW;
-			var h:Number=LabXConstant.rectH;
-			var rectRight:Shape=new Shape();
-			rectRight.graphics.beginFill(0x000000, 1);
-			rectRight.graphics.drawRect(depth / 5 * 2, height / 2 - h / 2, w, h);
-			rectRight.graphics.drawRect(depth / 5 * 2 + w, height / 2 - w / 2, h, w);
-			return rectRight;
+			var arrowRight:Shape=new Shape();
+			var g:Graphics = arrowRight.graphics;
+			g.beginFill(this._objMaterial.fillColor, 1);
+			g.moveTo(50, 30);
+			g.lineTo(35, 50);
+			g.lineTo(65, 50);
+			g.drawRect(45, 50, 10, 50);
+			return arrowRight;
 		}
 	}
 }
