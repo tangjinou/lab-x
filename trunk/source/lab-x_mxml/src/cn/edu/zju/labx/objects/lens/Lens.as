@@ -223,6 +223,9 @@ package cn.edu.zju.labx.objects.lens
 			return false;
 		}
 
-
+		public function get focus()
+		{
+			return this._focus;
+		} 
 	}
 }

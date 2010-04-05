@@ -80,38 +80,50 @@ package cn.edu.zju.labx.events
 					case "W".charCodeAt():
 					case Keyboard.UP:
 						labXObject.objectMove(0, 0, LabXConstant.Z_KEY_MOVE_MIN * keyDownAccelerate);
+						accelerateKeyPress();
 						break;
 
 					case "S".charCodeAt():
 					case Keyboard.DOWN:
 						labXObject.objectMove(0, 0, -LabXConstant.Z_KEY_MOVE_MIN * keyDownAccelerate);
+						accelerateKeyPress();
 						break;
 
 					case "A".charCodeAt():
 					case Keyboard.LEFT:
 						labXObject.objectMove(-LabXConstant.X_KEY_MOVE_MIN * keyDownAccelerate, 0, 0);
+						accelerateKeyPress();
 						break;
 
 					case "D".charCodeAt():
 					case Keyboard.RIGHT:
 						labXObject.objectMove(LabXConstant.X_KEY_MOVE_MIN * keyDownAccelerate, 0, 0);
+						accelerateKeyPress();
 						break;
 					case Keyboard.PAGE_UP:
 						labXObject.objectMove(0, LabXConstant.Y_KEY_MOVE_MIN * keyDownAccelerate, 0);
+						accelerateKeyPress();
 						break;
 					case Keyboard.PAGE_DOWN:
 						labXObject.objectMove(0, -LabXConstant.Y_KEY_MOVE_MIN * keyDownAccelerate, 0);
+						accelerateKeyPress();
 						break;
 					case "Q".charCodeAt():
 						labXObject.objectRotate(0, -LabXConstant.Y_KEY_ROTATE_MIN * keyDownAccelerate);
+						accelerateKeyPress();
 						break;
 					case "E".charCodeAt():
 						labXObject.objectRotate(0, LabXConstant.Y_KEY_ROTATE_MIN * keyDownAccelerate);
+						accelerateKeyPress();
 						break;
 				}
+			}
+		}
+		
+		private function accelerateKeyPress():void
+		{
 				if (keyDownAccelerate < 10)
 					keyDownAccelerate+=1;
-			}
 		}
 	}
 }
