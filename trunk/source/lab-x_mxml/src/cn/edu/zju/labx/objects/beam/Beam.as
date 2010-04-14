@@ -77,7 +77,7 @@ package cn.edu.zju.labx.objects.beam
 		public function createDisplayObject():void
 		{
 
-			width=3;
+			width=10;
 			depth=100;
 
 			var materialsList:MaterialsList=new MaterialsList();
