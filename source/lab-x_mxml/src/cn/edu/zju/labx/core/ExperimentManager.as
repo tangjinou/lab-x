@@ -106,9 +106,126 @@ package cn.edu.zju.labx.core
 			}
 			return _equipmentList;
 		}
+		
+		
+		/**
+		 * Create equipment for first experiment
+		 */
+		private function createFirstExperimentEquipments():ArrayCollection
+		{
+			var equipmentList:ArrayCollection=new ArrayCollection();
+
+			var lightSource:LightSource=createLaser("激光光源");
+			equipmentList.addItem(lightSource);
+
+			var splitterBeam:BeamSplitter=createBeamSplitter("分光镜");
+			splitterBeam.scale=0.5;
+			equipmentList.addItem(splitterBeam);
+
+			var mirror1:Mirror=createMirror("反射镜1")
+			mirror1.scale=0.5;
+			equipmentList.addItem(mirror1);
+
+			var mirror2:Mirror=createMirror("反射镜2")
+			mirror2.scale=0.5;
+			equipmentList.addItem(mirror2);
+
+			var mirror3:Mirror=createMirror("反射镜3")
+			mirror3.scale=0.5;
+			equipmentList.addItem(mirror3);
+
+			var lens1:Lens=createConvexLens("扩束镜1", 18);
+			lens1.scale=0.3;
+			equipmentList.addItem(lens1);
+			var lens2:Lens=createConvexLens("扩束镜2", 18);
+			lens2.scale=0.3;
+			equipmentList.addItem(lens2);
+			var lens3:Lens=createConvexLens("准直物镜1", 108);
+			lens3.scale=0.7;
+			equipmentList.addItem(lens3);
+			var lens4:Lens=createConvexLens("准直物镜2", 108);
+			lens4.scale=0.7;
+			equipmentList.addItem(lens4);
+
+			equipmentList.addItem(createDoubleSlitInterfBoard("接收屏"));
+
+			return equipmentList;
+		}
+		
+		/**
+		 * Create equipment for second experiment
+		 */
+		private function createSecondExperimentEquipments():ArrayCollection
+		{
+			var equipmentList:ArrayCollection=new ArrayCollection();
+
+			var lightSource:LightSource=createLaser("激光光源");
+			equipmentList.addItem(lightSource);
+
+			var lens1:Lens=createConvexLens("扩束镜", 18);
+			lens1.scale=0.4;
+			equipmentList.addItem(lens1);
+			var lens2:Lens=createConvexLens("准直物镜", 108);
+			lens2.scale=0.8;
+			equipmentList.addItem(lens2);
+
+			var splitterBeam:BeamSplitter=createBeamSplitter("分光镜");
+			equipmentList.addItem(splitterBeam);
+
+			var splitterBeam2:BeamSplitter=createBeamSplitter("分光镜2");
+			equipmentList.addItem(splitterBeam2);
+
+			var mirror1:Mirror=createMirror("反射镜1")
+			equipmentList.addItem(mirror1);
+
+			var mirror2:Mirror=createMirror("反射镜2")
+			equipmentList.addItem(mirror2);
+
+			var lens4:Lens=createConvexLens("透镜", 400);
+			lens4.scale=0.8;
+			equipmentList.addItem(lens4);
+
+			equipmentList.addItem(createMachZehnderInterfBoard("接收屏"));
+
+			return equipmentList;
+		}
+
+		/**
+		 * Create equipment for Third experiment
+		 */
+		private function createThirdExperimentEquipments():ArrayCollection
+		{
+			var equipmentList:ArrayCollection=new ArrayCollection();
+
+			var lightSource:LightSource=createLaser("激光光源");
+			equipmentList.addItem(lightSource);
+
+			var lens1:Lens=createConvexLens("扩束镜", 18);
+			lens1.scale=0.4;
+			equipmentList.addItem(lens1);
+			var lens2:Lens=createConvexLens("准直透镜", 108);
+			lens2.scale=0.8;
+			equipmentList.addItem(lens2);
+
+			var fourierlens1:Lens=createFourierLens("傅里叶变换镜头1", 100);
+			equipmentList.addItem(fourierlens1);
+			var fourierlens2:Lens=createFourierLens("傅里叶变换镜头2", 100);
+			equipmentList.addItem(fourierlens2);
+
+			equipmentList.addItem(createObjectPlane("输入面"));
+			equipmentList.addItem(createFourierGrating("傅立叶光栅"));
+			equipmentList.addItem(createFourierBoard("接收屏"));
 
 
-		public function createForthExperimentEquipments():ArrayCollection
+			return equipmentList;
+
+		}
+
+
+		/**
+		 * Create equipment for Forth experiment
+		 */
+		private function createForthExperimentEquipments():ArrayCollection
 		{
 			var equipmentList:ArrayCollection=new ArrayCollection();
 
@@ -141,35 +258,37 @@ package cn.edu.zju.labx.core
 			return equipmentList;
 
 		}
-
-
-		public function createThirdExperimentEquipments():ArrayCollection
+		
+		/**
+		 * Move Objects to it's optimize place
+		 */
+		public function movingObjects():void
 		{
-			var equipmentList:ArrayCollection=new ArrayCollection();
-
-			var lightSource:LightSource=createLaser("激光光源");
-			equipmentList.addItem(lightSource);
-
-			var lens1:Lens=createConvexLens("扩束镜", 18);
-			lens1.scale=0.4;
-			equipmentList.addItem(lens1);
-			var lens2:Lens=createConvexLens("准直透镜", 108);
-			lens2.scale=0.8;
-			equipmentList.addItem(lens2);
-
-			var fourierlens1:Lens=createFourierLens("傅里叶变换镜头1", 100);
-			equipmentList.addItem(fourierlens1);
-			var fourierlens2:Lens=createFourierLens("傅里叶变换镜头2", 100);
-			equipmentList.addItem(fourierlens2);
-
-			equipmentList.addItem(createObjectPlane("输入面"));
-			equipmentList.addItem(createFourierGrating("傅立叶光栅"));
-			equipmentList.addItem(createFourierBoard("接收屏"));
-
-
-			return equipmentList;
-
+			if (opitimize == false)
+			{
+				switch (_experimentIndex)
+				{
+					case LabXConstant.EXPERIMENT_FIRST:
+						moveFirstExperimentEquipments();
+						break;
+					case LabXConstant.EXPERIMENT_SECOND:
+						moveSecondExperimentEquipments();
+						break;
+					case LabXConstant.EXPERIMENT_THIRD:
+						moveThirdExperimentEquipments();
+						break;
+					case LabXConstant.EXPERIMENT_FORTH:
+						moveForthExperimentEquipments();
+						break;
+				}
+				opitimize=true;
+			}
+			else
+			{
+				moveExperimentEquipmentsDefault();
+			}
 		}
+
 
 		/**
 		 * Move equipments to default place.
@@ -200,7 +319,7 @@ package cn.edu.zju.labx.core
 		/**
 		 * Move the equipments in first experiment to optimize place
 		 */
-		public function moveFirstExperimentEquipments():void
+		private function moveFirstExperimentEquipments():void
 		{
 
 			for (var i:int=0; i < StageObjectsManager.getDefault.getObjectList().length; i++)
@@ -263,10 +382,130 @@ package cn.edu.zju.labx.core
 			timer.start();
 		}
 
+
+		/**
+		 * Move the equipments in second experiment to optimize place
+		 */
+		private function moveSecondExperimentEquipments():void
+		{
+
+			for (var i:int=0; i < StageObjectsManager.getDefault.getObjectList().length; i++)
+			{
+
+				var labXObject:LabXObject=StageObjectsManager.getDefault.getObjectList().getItemAt(i) as LabXObject;
+
+				if (labXObject.name == "激光光源")
+				{
+					TweenLite.to(labXObject, LabXConstant.MOVE_DELAY, {x: 60, z: -100});
+				}
+				else if (labXObject.name == "扩束镜")
+				{
+					TweenLite.to(labXObject, LabXConstant.MOVE_DELAY, {x: 200, z: -100});
+				}
+				else if (labXObject.name == "准直物镜")
+				{
+					TweenLite.to(labXObject, LabXConstant.MOVE_DELAY, {x: 327, z: -100});
+				}
+				else if (labXObject.name == "分光镜")
+				{
+					TweenLite.to(labXObject, LabXConstant.MOVE_DELAY, {x: 450, z: -100, rotationY: 32.5});
+				}
+				else if (labXObject.name == "反射镜2")
+				{
+					TweenLite.to(labXObject, LabXConstant.MOVE_DELAY, {x: 753, z: -100, rotationY: 32.5});
+				}
+				else if (labXObject.name == "反射镜1")
+				{
+					TweenLite.to(labXObject, LabXConstant.MOVE_DELAY, {x: 350, z: 110, rotationY: 32.5});
+				}
+				else if (labXObject.name == "透镜")
+				{
+					TweenLite.to(labXObject, LabXConstant.MOVE_DELAY, {x: 500, z: 110});
+				}
+				else if (labXObject.name == "分光镜2")
+				{
+					TweenLite.to(labXObject, LabXConstant.MOVE_DELAY, {x: 650, z: 110, rotationY: 32.5});
+				}
+				else if (labXObject.name == "接收屏")
+				{
+					TweenLite.to(labXObject, LabXConstant.MOVE_DELAY, {x: LabXConstant.DESK_WIDTH * 0.9, z: 110});
+				}
+
+			}
+			var timer:Timer=new Timer((LabXConstant.MOVE_DELAY + 1) * 1000);
+			timer.addEventListener(TimerEvent.TIMER, onTimer);
+			function onTimer(event:TimerEvent):void
+			{
+				for (var i:int=0; i < _equipmentList.length; i++)
+				{
+					StageObjectsManager.getDefault.objectStateChanged(_equipmentList.getItemAt(i) as LabXObject);
+				}
+				timer.stop();
+			}
+			timer.start();
+		}
+
+		/**
+		 * Move the equipments in third experiment to optimize place
+		 */
+		private function moveThirdExperimentEquipments():void
+		{
+			for (var i:int=0; i < StageObjectsManager.getDefault.getObjectList().length; i++)
+			{
+
+				var labXObject:LabXObject=StageObjectsManager.getDefault.getObjectList().getItemAt(i) as LabXObject;
+
+				if (labXObject.name == "激光光源")
+				{
+					TweenLite.to(labXObject, LabXConstant.MOVE_DELAY, {x: 50, z: 0});
+				}
+				else if (labXObject.name == "扩束镜")
+				{
+					TweenLite.to(labXObject, LabXConstant.MOVE_DELAY, {x: 200, z: 0});
+				}
+				else if (labXObject.name == "准直透镜")
+				{
+					TweenLite.to(labXObject, LabXConstant.MOVE_DELAY, {x: 326, z: 0});
+				}
+				else if (labXObject.name == "输入面")
+				{
+					TweenLite.to(labXObject, LabXConstant.MOVE_DELAY, {x: 400, z: 0});
+				}
+				else if (labXObject.name == "傅里叶变换镜头1")
+				{
+					TweenLite.to(labXObject, LabXConstant.MOVE_DELAY, {x: 500, z: 0});
+				}
+				else if (labXObject.name == "傅立叶光栅")
+				{
+					TweenLite.to(labXObject, LabXConstant.MOVE_DELAY, {x: 600, z: 0});
+				}
+				else if (labXObject.name == "傅里叶变换镜头2")
+				{
+					TweenLite.to(labXObject, LabXConstant.MOVE_DELAY, {x: 700, z: 0});
+				}
+				else if (labXObject.name == "接收屏")
+				{
+					TweenLite.to(labXObject, LabXConstant.MOVE_DELAY, {x: 800, z: 0});
+				}
+
+			}
+			var timer:Timer=new Timer((LabXConstant.MOVE_DELAY + 1) * 1000);
+			timer.addEventListener(TimerEvent.TIMER, onTimer);
+			function onTimer(event:TimerEvent):void
+			{
+				for (var i:int=0; i < _equipmentList.length; i++)
+				{
+					StageObjectsManager.getDefault.objectStateChanged(_equipmentList.getItemAt(i) as LabXObject);
+				}
+				timer.stop();
+			}
+			timer.start();
+		}
+		
 		/**
 		 * Move the equipments in forth experiment to optimize place
 		 */
-		public function moveForthExperimentEquipments():void
+		private function moveForthExperimentEquipments():void
 		{
 
 			for (var i:int=0; i < StageObjectsManager.getDefault.getObjectList().length; i++)
@@ -332,152 +571,8 @@ package cn.edu.zju.labx.core
 		}
 
 		/**
-		 * Move the equipments in second experiment to optimize place
+		 * Set the defualt light for the created object's materials
 		 */
-		public function moveSecondExperimentEquipments():void
-		{
-
-			for (var i:int=0; i < StageObjectsManager.getDefault.getObjectList().length; i++)
-			{
-
-				var labXObject:LabXObject=StageObjectsManager.getDefault.getObjectList().getItemAt(i) as LabXObject;
-
-				if (labXObject.name == "激光光源")
-				{
-					TweenLite.to(labXObject, LabXConstant.MOVE_DELAY, {x: 60, z: -100});
-				}
-				else if (labXObject.name == "扩束镜")
-				{
-					TweenLite.to(labXObject, LabXConstant.MOVE_DELAY, {x: 200, z: -100});
-				}
-				else if (labXObject.name == "准直物镜")
-				{
-					TweenLite.to(labXObject, LabXConstant.MOVE_DELAY, {x: 327, z: -100});
-				}
-				else if (labXObject.name == "分光镜")
-				{
-					TweenLite.to(labXObject, LabXConstant.MOVE_DELAY, {x: 450, z: -100, rotationY: 32.5});
-				}
-				else if (labXObject.name == "反射镜2")
-				{
-					TweenLite.to(labXObject, LabXConstant.MOVE_DELAY, {x: 753, z: -100, rotationY: 32.5});
-				}
-				else if (labXObject.name == "反射镜1")
-				{
-					TweenLite.to(labXObject, LabXConstant.MOVE_DELAY, {x: 350, z: 110, rotationY: 32.5});
-				}
-				else if (labXObject.name == "透镜")
-				{
-					TweenLite.to(labXObject, LabXConstant.MOVE_DELAY, {x: 500, z: 110});
-				}
-				else if (labXObject.name == "分光镜2")
-				{
-					TweenLite.to(labXObject, LabXConstant.MOVE_DELAY, {x: 650, z: 110, rotationY: 32.5});
-				}
-				else if (labXObject.name == "接收屏")
-				{
-					TweenLite.to(labXObject, LabXConstant.MOVE_DELAY, {x: LabXConstant.DESK_WIDTH * 0.9, z: 110});
-				}
-
-			}
-			var timer:Timer=new Timer((LabXConstant.MOVE_DELAY + 1) * 1000);
-			timer.addEventListener(TimerEvent.TIMER, onTimer);
-			function onTimer(event:TimerEvent):void
-			{
-				for (var i:int=0; i < _equipmentList.length; i++)
-				{
-					StageObjectsManager.getDefault.objectStateChanged(_equipmentList.getItemAt(i) as LabXObject);
-				}
-				timer.stop();
-			}
-			timer.start();
-		}
-
-		/**
-		 * Move the equipments in third experiment to optimize place
-		 */
-		public function moveThirdExperimentEquipments():void
-		{
-			for (var i:int=0; i < StageObjectsManager.getDefault.getObjectList().length; i++)
-			{
-
-				var labXObject:LabXObject=StageObjectsManager.getDefault.getObjectList().getItemAt(i) as LabXObject;
-
-				if (labXObject.name == "激光光源")
-				{
-					TweenLite.to(labXObject, LabXConstant.MOVE_DELAY, {x: 50, z: 0});
-				}
-				else if (labXObject.name == "扩束镜")
-				{
-					TweenLite.to(labXObject, LabXConstant.MOVE_DELAY, {x: 200, z: 0});
-				}
-				else if (labXObject.name == "准直透镜")
-				{
-					TweenLite.to(labXObject, LabXConstant.MOVE_DELAY, {x: 326, z: 0});
-				}
-				else if (labXObject.name == "输入面")
-				{
-					TweenLite.to(labXObject, LabXConstant.MOVE_DELAY, {x: 400, z: 0});
-				}
-				else if (labXObject.name == "傅里叶变换镜头1")
-				{
-					TweenLite.to(labXObject, LabXConstant.MOVE_DELAY, {x: 500, z: 0});
-				}
-				else if (labXObject.name == "傅立叶光栅")
-				{
-					TweenLite.to(labXObject, LabXConstant.MOVE_DELAY, {x: 600, z: 0});
-				}
-				else if (labXObject.name == "傅里叶变换镜头2")
-				{
-					TweenLite.to(labXObject, LabXConstant.MOVE_DELAY, {x: 700, z: 0});
-				}
-				else if (labXObject.name == "接收屏")
-				{
-					TweenLite.to(labXObject, LabXConstant.MOVE_DELAY, {x: 800, z: 0});
-				}
-
-			}
-			var timer:Timer=new Timer((LabXConstant.MOVE_DELAY + 1) * 1000);
-			timer.addEventListener(TimerEvent.TIMER, onTimer);
-			function onTimer(event:TimerEvent):void
-			{
-				for (var i:int=0; i < _equipmentList.length; i++)
-				{
-					StageObjectsManager.getDefault.objectStateChanged(_equipmentList.getItemAt(i) as LabXObject);
-				}
-				timer.stop();
-			}
-			timer.start();
-		}
-
-		public function movingObjects():void
-		{
-			if (opitimize == false)
-			{
-				switch (_experimentIndex)
-				{
-					case LabXConstant.EXPERIMENT_FIRST:
-						moveFirstExperimentEquipments();
-						break;
-					case LabXConstant.EXPERIMENT_SECOND:
-						moveSecondExperimentEquipments();
-						break;
-					case LabXConstant.EXPERIMENT_THIRD:
-						moveThirdExperimentEquipments();
-						break;
-					case LabXConstant.EXPERIMENT_FORTH:
-						moveForthExperimentEquipments();
-						break;
-				}
-				opitimize=true;
-			}
-			else
-			{
-				moveExperimentEquipmentsDefault();
-			}
-		}
-
-
 		public function setDefaultLight(defaultLight:LightObject3D):void
 		{
 			light=defaultLight;
@@ -529,49 +624,7 @@ package cn.edu.zju.labx.core
 			return new DoubleSlitInterfBoard(name, material);
 		}
 
-		/**
-		 * Create equipment for first experiment
-		 */
-		private function createFirstExperimentEquipments():ArrayCollection
-		{
-			var equipmentList:ArrayCollection=new ArrayCollection();
-
-			var lightSource:LightSource=createLaser("激光光源");
-			equipmentList.addItem(lightSource);
-
-			var splitterBeam:BeamSplitter=createBeamSplitter("分光镜");
-			splitterBeam.scale=0.5;
-			equipmentList.addItem(splitterBeam);
-
-			var mirror1:Mirror=createMirror("反射镜1")
-			mirror1.scale=0.5;
-			equipmentList.addItem(mirror1);
-
-			var mirror2:Mirror=createMirror("反射镜2")
-			mirror2.scale=0.5;
-			equipmentList.addItem(mirror2);
-
-			var mirror3:Mirror=createMirror("反射镜3")
-			mirror3.scale=0.5;
-			equipmentList.addItem(mirror3);
-
-			var lens1:Lens=createConvexLens("扩束镜1", 18);
-			lens1.scale=0.3;
-			equipmentList.addItem(lens1);
-			var lens2:Lens=createConvexLens("扩束镜2", 18);
-			lens2.scale=0.3;
-			equipmentList.addItem(lens2);
-			var lens3:Lens=createConvexLens("准直物镜1", 108);
-			lens3.scale=0.7;
-			equipmentList.addItem(lens3);
-			var lens4:Lens=createConvexLens("准直物镜2", 108);
-			lens4.scale=0.7;
-			equipmentList.addItem(lens4);
-
-			equipmentList.addItem(createDoubleSlitInterfBoard("接收屏"));
-
-			return equipmentList;
-		}
+		
 
 		/**
 		 * create a fourier board
@@ -709,44 +762,7 @@ package cn.edu.zju.labx.core
 //			return new RetangleObjectPlane(name, material);
 //		}
 
-		/**
-		 * Create equipment for second experiment
-		 */
-		private function createSecondExperimentEquipments():ArrayCollection
-		{
-			var equipmentList:ArrayCollection=new ArrayCollection();
-
-			var lightSource:LightSource=createLaser("激光光源");
-			equipmentList.addItem(lightSource);
-
-			var lens1:Lens=createConvexLens("扩束镜", 18);
-			lens1.scale=0.4;
-			equipmentList.addItem(lens1);
-			var lens2:Lens=createConvexLens("准直物镜", 108);
-			lens2.scale=0.8;
-			equipmentList.addItem(lens2);
-
-			var splitterBeam:BeamSplitter=createBeamSplitter("分光镜");
-			equipmentList.addItem(splitterBeam);
-
-			var splitterBeam2:BeamSplitter=createBeamSplitter("分光镜2");
-			equipmentList.addItem(splitterBeam2);
-
-			var mirror1:Mirror=createMirror("反射镜1")
-			equipmentList.addItem(mirror1);
-
-			var mirror2:Mirror=createMirror("反射镜2")
-			equipmentList.addItem(mirror2);
-
-			var lens4:Lens=createConvexLens("透镜", 400);
-			lens4.scale=0.8;
-			equipmentList.addItem(lens4);
-
-			equipmentList.addItem(createMachZehnderInterfBoard("接收屏"));
-
-			return equipmentList;
-		}
-
+		
 		/**
 		 *  create a ttype plane
 		 */
