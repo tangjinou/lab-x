@@ -51,7 +51,7 @@ package cn.edu.zju.labx.objects
 //				StageObjectsManager.getDefault.addMessage("left:物体左移动,right:物体右移动");
 				StageObjectsManager.getDefault.object_selected.text=this.name;
 				StageObjectsManager.getDefault.changeCoordainate(this.x,this.y,this.z,this.rotationX,this.rotationY,this.rotationZ);
-
+                StageObjectsManager.getDefault.changeStatus();
 			}
 		}
 
