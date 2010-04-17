@@ -248,6 +248,8 @@
 	 	 <mx:HBox>
 	 	        <mx:Label text="选中物体" color="#FC0F03"/>
 	 	 		<mx:Text  id ="object_selected" color="#0000FF" text="无"/>
+	 	 		<mx:Label text="场景旋转" color="#FC0F03"/>
+	 	 		<mx:Text  id ="scene_rotation" color="#0000FF" text="是"/>
 	 	 </mx:HBox>
 	     <mx:HBox>
 	 			<mx:Label text="坐标：x" color="#FC0F03"/>
