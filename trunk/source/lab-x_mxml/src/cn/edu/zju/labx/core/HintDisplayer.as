@@ -24,14 +24,13 @@ package cn.edu.zju.labx.core
 					"按PageUp, PageDown垂直移动\n" + 
 					"按Q, E进行旋转\n" + 
 					"移动鼠标到右下角按钮上方可获得相应帮助";
-			_text.textColor = 0xFF0000;
+			_text.textColor = 0xFF6600;
 			_text.x = LabXConstant.STAGE_WIDTH/3;
 			_text.y = LabXConstant.STAGE_HEIGHT;
 			_text.width = 600;
 			_text.height = 200;
-			_text.border = true;
 			_text.wordWrap = true;
-			_text.filters = [new DropShadowFilter(0, 45, 0xFFFFFF, 1, 2, 2)];
+			_text.filters = [new DropShadowFilter(1, 45, 0xa3610a, 1, 2, 2)];
 
 			
 		}
