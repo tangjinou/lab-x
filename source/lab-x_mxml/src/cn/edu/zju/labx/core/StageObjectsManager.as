@@ -1,7 +1,6 @@
 package cn.edu.zju.labx.core
 {
 	import cn.edu.zju.labx.objects.LabXObject;
-	import cn.edu.zju.labx.objects.board.Board;
 	import cn.edu.zju.labx.objects.lightSource.LightSource;
 	
 	import flash.events.TimerEvent;
@@ -338,6 +337,7 @@ package cn.edu.zju.labx.core
 		 
 		 private var dropShadowFilter:DropShadowFilter = new DropShadowFilter(0, 360, 0x00FF00, 1, 16, 16, 3, 2, false, false, false);
          
+         private var hint:HintDisplayer = new HintDisplayer();
          //This is stack for stage rotate
          private var rotate_stage_tmp:Boolean;
 		 public function objectPressHandlerHook(event:InteractiveScene3DEvent,labXObject:LabXObject):void{
@@ -364,6 +364,7 @@ package cn.edu.zju.labx.core
 		 	var viewportLayer:ViewportLayer = mainView.viewport.getChildLayer(labXObject.getObjectWithMaterial(), true, true);
 			viewportLayer.filters =[dropShadowFilter];
 			
+			hint.displayMoveHint();
 			
 		 } 
 		 
@@ -418,6 +419,7 @@ package cn.edu.zju.labx.core
 		    this.rotate_x.text = _x + "";
 		    this.rotate_y.text = _y + "";
 		    this.rotate_z.text = _z + "";
+		    
         }
 		
 		public function rotate_left(step_length:int):void{
