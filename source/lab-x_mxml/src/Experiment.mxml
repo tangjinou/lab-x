@@ -28,8 +28,10 @@
             private var chooseExperimentwindow:ChooseExperimentWindow
             private var experiment:ExperimentApplication;
             private var timer:Timer;
-            
             private var step_length:int;
+            
+            private var best_position_box_visiable:Boolean;
+            
 	 		public function init():void{
                  changeSize();                 
                  addEventListener(FlexEvent.UPDATE_COMPLETE, updateHandle);
@@ -45,6 +47,9 @@
                  setting_bar_box.y=0;
                  user_control_bar_box.x=this.width-180;
                  user_control_bar_box.y=this.height-130;
+                 
+                 best_position_box.x = this.width/2-60;
+                 best_position_box.y = this.height-40;
 	 		}
 	 		private function updateHandle(e:FlexEvent):void
             {
@@ -223,7 +228,7 @@
      </mx:HBox>
      <mx:HBox>
             <mx:Button  buttonDown="StageObjectsManager.getDefault.object_lefting(++step_length)"   autoRepeat="true" id="object_lefting_button" enabled="false" icon="@Embed('../assets/icon/lefting.png')"  disabledIcon="@Embed('../assets/icon/lefting_disable.png')"  toolTip="物体向左方移动 快捷键A"/>
-            <mx:Button  click="StageObjectsManager.getDefault.movingObjects()"  toolTip="最佳位置" icon="@Embed('../assets/icon/happy.png')" />
+            <mx:Button  click="best_position_box.visible=(best_position_box_visiable=!best_position_box_visiable)"  toolTip="最佳位置" icon="@Embed('../assets/icon/happy.png')" />
             <mx:Button  buttonDown="StageObjectsManager.getDefault.object_righting(++step_length)"   autoRepeat="true" id="object_righting_button" enabled="false" icon="@Embed('../assets/icon/righting.png')"  disabledIcon="@Embed('../assets/icon/righting_disable.png')"  toolTip="物体向右方移动 快捷键D"/>
      </mx:HBox>
      <mx:HBox>           
@@ -261,5 +266,11 @@
 	 			<mx:Text  id ="rotate_z" color="#0000FF" text="0"/>
 	 	 </mx:HBox>
 	 </mx:VBox>
+	 
+	 <mx:HBox id="best_position_box"  visible="false">
+		 <mx:Button  click="ExperimentManager.getDefault.movingPreStep()"    icon="@Embed('../assets/icon/pre_step.png')"   toolTip="前一步"/>
+	 	 <mx:Button  click="StageObjectsManager.getDefault.movingObjects()"  icon="@Embed('../assets/icon/happy.png')"      toolTip="最佳位置" />
+	 	 <mx:Button  click="ExperimentManager.getDefault.movingNextStep()"   icon="@Embed('../assets/icon/next_step.png')"  toolTip="后一步"/>
+	 </mx:HBox>
 	 
 </mx:Application>
