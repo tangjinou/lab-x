@@ -6,8 +6,8 @@ package cn.edu.zju.labx.core
 	import cn.edu.zju.labx.objects.beam.FourierGrating;
 	import cn.edu.zju.labx.objects.beam.LCLV;
 	import cn.edu.zju.labx.objects.beam.Mirror;
-	import cn.edu.zju.labx.objects.beam.ParallelCrystal
 	import cn.edu.zju.labx.objects.beam.ObjectPlane;
+	import cn.edu.zju.labx.objects.beam.ParallelCrystal;
 	import cn.edu.zju.labx.objects.beam.PolarizationBeamSplitter;
 	import cn.edu.zju.labx.objects.board.DifferentialCoefficientBoard;
 	import cn.edu.zju.labx.objects.board.DoubleSlitInterfBoard;
@@ -65,8 +65,9 @@ package cn.edu.zju.labx.core
 
 		private var _experimentIndex:int;
 		private var light:LightObject3D;
-
-
+		
+		
+		private var defaultEquipment_size:int = 2;
 
 		/*******************************************************************************************************
 		 * move the objects to the right place
@@ -259,6 +260,39 @@ package cn.edu.zju.labx.core
 
 		}
 		
+		
+		/**
+		 *  This is variable state is for moving Objects
+		 */ 
+		private static var _state:State = new State();
+		/**
+		 *  Move next step
+		 */
+		public function movingNextStep():void{
+			switch (_experimentIndex)
+				{
+					case LabXConstant.EXPERIMENT_FIRST:
+						moveFirstExperimentEquipments(_state);
+						break;
+					case LabXConstant.EXPERIMENT_SECOND:
+						moveSecondExperimentEquipments(_state);
+						break;
+					case LabXConstant.EXPERIMENT_THIRD:
+						moveThirdExperimentEquipments(_state);
+						break;
+					case LabXConstant.EXPERIMENT_FORTH:
+						moveForthExperimentEquipments(_state);
+						break;
+				}
+		}
+		/**
+		 *  Move pre step
+		 */
+		public function movingPreStep():void{
+			moveExperimentEquipmentBackByState(_state);
+			refresh();
+		}
+		
 		/**
 		 * Move Objects to it's optimize place
 		 */
@@ -296,37 +330,49 @@ package cn.edu.zju.labx.core
 		public function moveExperimentEquipmentsDefault():void
 		{
 			opitimize=false;
-
 			for (var i:int=0; i < StageObjectsManager.getDefault.getObjectList().length; i++)
 			{
-				var labXObject:LabXObject=StageObjectsManager.getDefault.getObjectList().getItemAt(i) as LabXObject;
-				TweenLite.to(labXObject, LabXConstant.MOVE_DELAY, {x: i * LabXConstant.STAGE_WIDTH / _equipmentList.length, y: LabXConstant.LABX_OBJECT_HEIGHT / 2, z: LabXConstant.STAGE_DEPTH / 2, rotationY: 0, rotationX: 0, rotationZ: 0});
+				moveExperimentEquipmentBack(i);
 			}
-
-			var timer:Timer=new Timer((LabXConstant.MOVE_DELAY + 1) * 1000);
-			timer.addEventListener(TimerEvent.TIMER, onTimer);
-			function onTimer(event:TimerEvent):void
-			{
-				for (var i:int=0; i < _equipmentList.length; i++)
-				{
-					StageObjectsManager.getDefault.objectStateChanged(_equipmentList.getItemAt(i) as LabXObject);
-				}
-				timer.stop();
-			}
-			timer.start();
+			refresh();
+		}
+		
+		private function moveExperimentEquipmentBackByState(state:State):void{
+			if(state.index>0 && state.index<StageObjectsManager.getDefault.getObjectList().length){
+			   moveExperimentEquipmentBack(--state.index);
+			 }
+		}
+		
+		private function moveExperimentEquipmentBack(i:int):void{
+		  	var labXObject:LabXObject=StageObjectsManager.getDefault.getObjectList().getItemAt(i) as LabXObject;
+			TweenLite.to(labXObject, LabXConstant.MOVE_DELAY, {x: i * LabXConstant.STAGE_WIDTH / _equipmentList.length, y: LabXConstant.LABX_OBJECT_HEIGHT / 2, z: LabXConstant.STAGE_DEPTH / 2, rotationY: 0, rotationX: 0, rotationZ: 0});
 		}
 
 		/**
 		 * Move the equipments in first experiment to optimize place
 		 */
-		private function moveFirstExperimentEquipments():void
+		private function moveFirstExperimentEquipments(state:State=null):void
 		{
-
-			for (var i:int=0; i < StageObjectsManager.getDefault.getObjectList().length; i++)
-			{
-
-				var labXObject:LabXObject=StageObjectsManager.getDefault.getObjectList().getItemAt(i) as LabXObject;
-
+          	if(state == null){
+          	    for (var i:int=0; i < StageObjectsManager.getDefault.getObjectList().length; i++)
+				{   
+					moveFirstExperimentOneEquipment(StageObjectsManager.getDefault.getObjectList().getItemAt(i) as LabXObject);
+				}
+				_state.index = StageObjectsManager.getDefault.getObjectList().length - defaultEquipment_size;
+				refresh();
+				return;
+         	}
+            if(0<=state.index && state.index<StageObjectsManager.getDefault.getObjectList().length - defaultEquipment_size){
+            	moveFirstExperimentOneEquipment(StageObjectsManager.getDefault.getObjectList().getItemAt(state.index++) as LabXObject);
+            	refresh();
+            	return;
+            }
+		}
+		
+		/**
+		 * Move One the equipment in first experiment to optimize place
+		 */
+		private function moveFirstExperimentOneEquipment(labXObject:LabXObject):void{
 				if (labXObject.name == "激光光源")
 				{
 					TweenLite.to(labXObject, LabXConstant.MOVE_DELAY, {x: 50, z: 0});
@@ -367,33 +413,36 @@ package cn.edu.zju.labx.core
 				{
 					TweenLite.to(labXObject, LabXConstant.MOVE_DELAY, {x: LabXConstant.DESK_WIDTH * 0.9, z: 0});
 				}
-
-			}
-			var timer:Timer=new Timer((LabXConstant.MOVE_DELAY + 1) * 1000);
-			timer.addEventListener(TimerEvent.TIMER, onTimer);
-			function onTimer(event:TimerEvent):void
-			{
-				for (var i:int=0; i < _equipmentList.length; i++)
-				{
-					StageObjectsManager.getDefault.objectStateChanged(_equipmentList.getItemAt(i) as LabXObject);
-				}
-				timer.stop();
-			}
-			timer.start();
 		}
+	    
 
 
 		/**
 		 * Move the equipments in second experiment to optimize place
 		 */
-		private function moveSecondExperimentEquipments():void
+		private function moveSecondExperimentEquipments(state:State=null):void
 		{
-
-			for (var i:int=0; i < StageObjectsManager.getDefault.getObjectList().length; i++)
-			{
-
-				var labXObject:LabXObject=StageObjectsManager.getDefault.getObjectList().getItemAt(i) as LabXObject;
-
+          	if(state == null){
+          	    for (var i:int=0; i < StageObjectsManager.getDefault.getObjectList().length; i++)
+				{   
+					moveSecondExperimentOneEquipment(StageObjectsManager.getDefault.getObjectList().getItemAt(i) as LabXObject);
+				}
+				_state.index = StageObjectsManager.getDefault.getObjectList().length - defaultEquipment_size;
+				refresh();
+				return;
+         	}
+            if(0<=state.index && state.index<StageObjectsManager.getDefault.getObjectList().length - defaultEquipment_size){
+            	moveSecondExperimentOneEquipment(StageObjectsManager.getDefault.getObjectList().getItemAt(state.index++) as LabXObject);
+            	refresh();
+            	return;
+            }
+		}
+		
+		
+		 /**
+		 * Move One the equipment in second experiment to optimize place
+		 */
+		private function moveSecondExperimentOneEquipment(labXObject:LabXObject):void{
 				if (labXObject.name == "激光光源")
 				{
 					TweenLite.to(labXObject, LabXConstant.MOVE_DELAY, {x: 60, z: -100});
@@ -430,31 +479,33 @@ package cn.edu.zju.labx.core
 				{
 					TweenLite.to(labXObject, LabXConstant.MOVE_DELAY, {x: LabXConstant.DESK_WIDTH * 0.9, z: 110});
 				}
-
-			}
-			var timer:Timer=new Timer((LabXConstant.MOVE_DELAY + 1) * 1000);
-			timer.addEventListener(TimerEvent.TIMER, onTimer);
-			function onTimer(event:TimerEvent):void
-			{
-				for (var i:int=0; i < _equipmentList.length; i++)
-				{
-					StageObjectsManager.getDefault.objectStateChanged(_equipmentList.getItemAt(i) as LabXObject);
-				}
-				timer.stop();
-			}
-			timer.start();
 		}
-
+		
 		/**
 		 * Move the equipments in third experiment to optimize place
 		 */
-		private function moveThirdExperimentEquipments():void
+		private function moveThirdExperimentEquipments(state:State=null):void
 		{
-			for (var i:int=0; i < StageObjectsManager.getDefault.getObjectList().length; i++)
-			{
-
-				var labXObject:LabXObject=StageObjectsManager.getDefault.getObjectList().getItemAt(i) as LabXObject;
-
+			if(state == null){
+          	    for (var i:int=0; i < StageObjectsManager.getDefault.getObjectList().length; i++)
+				{   
+					moveThirdExperimentOneEquipment(StageObjectsManager.getDefault.getObjectList().getItemAt(i) as LabXObject);
+				}
+				_state.index = StageObjectsManager.getDefault.getObjectList().length - defaultEquipment_size;
+				refresh();
+				return;
+         	}
+            if(0<=state.index && state.index<StageObjectsManager.getDefault.getObjectList().length - defaultEquipment_size){
+            	moveThirdExperimentOneEquipment(StageObjectsManager.getDefault.getObjectList().getItemAt(state.index++) as LabXObject);
+            	refresh();
+            	return;
+            }
+		}
+		
+	     /**
+		 * Move One the equipment in third experiment to optimize place
+		 */
+		private function moveThirdExperimentOneEquipment(labXObject:LabXObject):void{
 				if (labXObject.name == "激光光源")
 				{
 					TweenLite.to(labXObject, LabXConstant.MOVE_DELAY, {x: 50, z: 0});
@@ -487,31 +538,35 @@ package cn.edu.zju.labx.core
 				{
 					TweenLite.to(labXObject, LabXConstant.MOVE_DELAY, {x: 800, z: 0});
 				}
-
-			}
-			var timer:Timer=new Timer((LabXConstant.MOVE_DELAY + 1) * 1000);
-			timer.addEventListener(TimerEvent.TIMER, onTimer);
-			function onTimer(event:TimerEvent):void
-			{
-				for (var i:int=0; i < _equipmentList.length; i++)
-				{
-					StageObjectsManager.getDefault.objectStateChanged(_equipmentList.getItemAt(i) as LabXObject);
-				}
-				timer.stop();
-			}
-			timer.start();
 		}
+		
+		
 		
 		/**
 		 * Move the equipments in forth experiment to optimize place
 		 */
-		private function moveForthExperimentEquipments():void
-		{
-
-			for (var i:int=0; i < StageObjectsManager.getDefault.getObjectList().length; i++)
-			{
-
-				var labXObject:LabXObject=StageObjectsManager.getDefault.getObjectList().getItemAt(i) as LabXObject;
+		private function moveForthExperimentEquipments(state:State=null):void
+		{   
+			if(state == null){
+          	    for (var i:int=0; i < StageObjectsManager.getDefault.getObjectList().length; i++)
+				{   
+					moveFouthExperimentOneEquipment(StageObjectsManager.getDefault.getObjectList().getItemAt(i) as LabXObject);
+				}
+				_state.index = StageObjectsManager.getDefault.getObjectList().length - defaultEquipment_size;
+				refresh();
+				return;
+         	}
+            if(0<=state.index && state.index<StageObjectsManager.getDefault.getObjectList().length - defaultEquipment_size){
+            	moveFouthExperimentOneEquipment(StageObjectsManager.getDefault.getObjectList().getItemAt(state.index++) as LabXObject);
+            	refresh();
+            	return;
+            }
+		}
+		
+		 /**
+		 * Move One the equipment in fouth experiment to optimize place
+		 */
+		private function moveFouthExperimentOneEquipment(labXObject:LabXObject):void{
 				if (labXObject.name == "激光光源")
 				{
 					TweenLite.to(labXObject, LabXConstant.MOVE_DELAY, {x: 50, z: 0});
@@ -556,8 +611,14 @@ package cn.edu.zju.labx.core
 				{
 					TweenLite.to(labXObject, LabXConstant.MOVE_DELAY, {x: 400, z: -230, rotationY: 90});
 				}
-			}
-			var timer:Timer=new Timer((LabXConstant.MOVE_DELAY + 1) * 1000);
+		}
+		
+		
+		/***
+		 *  Refresh the state of object
+		 */
+		private function refresh():void{
+		    var timer:Timer=new Timer((LabXConstant.MOVE_DELAY + 1) * 1000);
 			timer.addEventListener(TimerEvent.TIMER, onTimer);
 			function onTimer(event:TimerEvent):void
 			{
@@ -786,6 +847,7 @@ package cn.edu.zju.labx.core
 					StageObjectsManager.getDefault.removeObject(equipment);
 				}
 			}
+			_state.index =0;
 			_equipmentList=null;
 		}
 	}
