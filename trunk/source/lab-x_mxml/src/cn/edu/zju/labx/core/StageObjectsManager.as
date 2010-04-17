@@ -364,7 +364,9 @@ package cn.edu.zju.labx.core
 		 	var viewportLayer:ViewportLayer = mainView.viewport.getChildLayer(labXObject.getObjectWithMaterial(), true, true);
 			viewportLayer.filters =[dropShadowFilter];
 			
-			hint.displayMoveHint();
+			if(stageObjectList.length < 2){
+				hint.displayMoveHint();
+			}
 			
 		 } 
 		 
