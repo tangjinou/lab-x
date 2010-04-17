@@ -295,6 +295,13 @@ package cn.edu.zju.labx.core
 		 public var rotate_z:Text;
 		 
 		 
+		  /*************************************************************************
+		 *  This is status of scene_rotation
+		 * ***********************************************************************
+		 */
+		 public var scene_rotation:Text;
+		 
+		 
 		 /******************************************************
 		 *  This is hook for objectPressHandler
 		 * *****************************************************/
@@ -368,6 +375,8 @@ package cn.edu.zju.labx.core
 				hint.displayMoveHint();
 			}
 			
+			changeStatus();
+			
 		 } 
 		 
 		 public function objectUnPressHandler():void{
@@ -414,6 +423,8 @@ package cn.edu.zju.labx.core
 	 		   ExperimentManager.getDefault.movingObjects();
 	 	}
 		
+		
+		
         public function changeCoordainate(x:int,y:int,z:int,_x:int,_y:int,_z:int):void{
             this.coordainate_x.text = x+"";
 		    this.coordainate_y.text = y+"";
@@ -421,15 +432,25 @@ package cn.edu.zju.labx.core
 		    this.rotate_x.text = _x + "";
 		    this.rotate_y.text = _y + "";
 		    this.rotate_z.text = _z + "";
-		    
+        }
+        
+        public function changeStatus():void{
+           
+//           if(StageObjectsManager.getDefault.rotate_stage == true){
+//             this.scene_rotation.text = "开";
+//           }
+//           else{
+//           	 this.scene_rotation.text = "关";
+//           }          
         }
 		
 		public function rotate_left(step_length:int):void{
 		   if(labXObjectSelected!=null){
 		     labXObjectSelected.localRotationY-=step_length;
 		     refresh();
-//		     this.addMessage(labXObjectSelected.name+"绕Y转动"+labXObjectSelected.localRotationY.toFixed(2));
+//		     this.addMessage(labXObjectSelected.name+this.scene_rotation.text = "是";"绕Y转动"+labXObjectSelected.localRotationY.toFixed(2));
 		     changeCoordainate(labXObjectSelected.x,labXObjectSelected.y,labXObjectSelected.z,labXObjectSelected.rotationX,labXObjectSelected.rotationY,labXObjectSelected.rotationZ);
+		     changeStatus();
 		   }
 		}
 		
@@ -439,6 +460,7 @@ package cn.edu.zju.labx.core
 		     refresh();
 //             this.addMessage(labXObjectSelected.name+"绕Y转动"+labXObjectSelected.localRotationY.toFixed(2));
              changeCoordainate(labXObjectSelected.x,labXObjectSelected.y,labXObjectSelected.z,labXObjectSelected.rotationX,labXObjectSelected.rotationY,labXObjectSelected.rotationZ);
+		     changeStatus();
 		   }
 		}
 		
@@ -448,16 +470,18 @@ package cn.edu.zju.labx.core
 		    	{
 		    		labXObjectSelected.rotationZ++;
 //		    		addMessage(labXObjectSelected.name+"往上转动"+labXObjectSelected.localRotationZ.toFixed(2));
-		    		 changeCoordainate(labXObjectSelected.x,labXObjectSelected.y,labXObjectSelected.z,labXObjectSelected.rotationX,labXObjectSelected.rotationY,labXObjectSelected.rotationZ);
+		    		changeCoordainate(labXObjectSelected.x,labXObjectSelected.y,labXObjectSelected.z,labXObjectSelected.rotationX,labXObjectSelected.rotationY,labXObjectSelected.rotationZ);
+		    	
 		    	} else 
 		    	{
 				    labXObjectSelected.y+=step_length;
 //		            this.addMessage(labXObjectSelected.name+"往上移动"+labXObjectSelected.y.toFixed(2));
 		             changeCoordainate(labXObjectSelected.x,labXObjectSelected.y,labXObjectSelected.z,labXObjectSelected.rotationX,labXObjectSelected.rotationY,labXObjectSelected.rotationZ);
 		    	}
+		    	changeStatus();
 //		    	trace("x: " + labXObjectSelected.x + "  y: " + labXObjectSelected.y + "  z: " + labXObjectSelected.z);
 //		    	trace("rotateX: " + labXObjectSelected.rotationX + "  rotateY: " + labXObjectSelected.rotationY + "  rotateZ: " + labXObjectSelected.rotationZ);
-			   refresh();
+			    refresh();
 		   }
 		}
 		
@@ -474,6 +498,7 @@ package cn.edu.zju.labx.core
 //					this.addMessage(labXObjectSelected.name+"往下移动"+labXObjectSelected.y.toFixed(2));
 					 changeCoordainate(labXObjectSelected.x,labXObjectSelected.y,labXObjectSelected.z,labXObjectSelected.rotationX,labXObjectSelected.rotationY,labXObjectSelected.rotationZ);
 		    	}
+		    	changeStatus();
 		    	refresh();
 		   }
 		}
@@ -481,7 +506,8 @@ package cn.edu.zju.labx.core
 		   if(labXObjectSelected!=null){
 				labXObjectSelected.x-=step_length;
 //				this.addMessage(labXObjectSelected.name+"往左移动"+labXObjectSelected.x.toFixed(2));
-				 changeCoordainate(labXObjectSelected.x,labXObjectSelected.y,labXObjectSelected.z,labXObjectSelected.rotationX,labXObjectSelected.rotationY,labXObjectSelected.rotationZ);
+				changeCoordainate(labXObjectSelected.x,labXObjectSelected.y,labXObjectSelected.z,labXObjectSelected.rotationX,labXObjectSelected.rotationY,labXObjectSelected.rotationZ);
+		    	changeStatus();
 		    	refresh();
 		   }
 		}
@@ -490,7 +516,8 @@ package cn.edu.zju.labx.core
 		   if(labXObjectSelected!=null){
 				labXObjectSelected.x+=step_length;
 //				this.addMessage(labXObjectSelected.name+"往右移动"+labXObjectSelected.x.toFixed(2));
-				 changeCoordainate(labXObjectSelected.x,labXObjectSelected.y,labXObjectSelected.z,labXObjectSelected.rotationX,labXObjectSelected.rotationY,labXObjectSelected.rotationZ);
+				changeCoordainate(labXObjectSelected.x,labXObjectSelected.y,labXObjectSelected.z,labXObjectSelected.rotationX,labXObjectSelected.rotationY,labXObjectSelected.rotationZ);
+		    	changeStatus();
 		    	refresh();
 		   }
 		}
@@ -499,7 +526,8 @@ package cn.edu.zju.labx.core
 		   if(labXObjectSelected!=null){
 		    	labXObjectSelected.z+=step_length;
 //				this.addMessage(labXObjectSelected.name+"往前移动"+labXObjectSelected.z.toFixed(2));
-				 changeCoordainate(labXObjectSelected.x,labXObjectSelected.y,labXObjectSelected.z,labXObjectSelected.rotationX,labXObjectSelected.rotationY,labXObjectSelected.rotationZ);
+				changeCoordainate(labXObjectSelected.x,labXObjectSelected.y,labXObjectSelected.z,labXObjectSelected.rotationX,labXObjectSelected.rotationY,labXObjectSelected.rotationZ);
+		    	changeStatus();
 		    	refresh();
 		   }
 		}
@@ -508,7 +536,8 @@ package cn.edu.zju.labx.core
 		   if(labXObjectSelected!=null){
 		    	labXObjectSelected.z-=step_length;
 //				this.addMessage(labXObjectSelected.name+"往后移动"+labXObjectSelected.z.toFixed(2));
-				 changeCoordainate(labXObjectSelected.x,labXObjectSelected.y,labXObjectSelected.z,labXObjectSelected.rotationX,labXObjectSelected.rotationY,labXObjectSelected.rotationZ);
+				changeCoordainate(labXObjectSelected.x,labXObjectSelected.y,labXObjectSelected.z,labXObjectSelected.rotationX,labXObjectSelected.rotationY,labXObjectSelected.rotationZ);
+		    	changeStatus();
 		    	refresh();
 		   }
 		}

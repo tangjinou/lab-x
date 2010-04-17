@@ -87,6 +87,9 @@
 	 		   StageObjectsManager.getDefault.rotate_y=rotate_y;
 	 		   StageObjectsManager.getDefault.rotate_z=rotate_z;
 	 		   
+	 		   
+//	 		   StageObjectsManager.getDefault.scene_rotation=scene_rotation;
+	 		   
 	 		   StageObjectsManager.getDefault.object_selected=object_selected;
 	 		   StageObjectsManager.getDefault.rotate_left_button=rotate_left_button;
 	 		   StageObjectsManager.getDefault.rotate_right_button=rotate_right_button;
@@ -248,8 +251,6 @@
 	 	 <mx:HBox>
 	 	        <mx:Label text="选中物体" color="#FC0F03"/>
 	 	 		<mx:Text  id ="object_selected" color="#0000FF" text="无"/>
-	 	 		<mx:Label text="场景旋转" color="#FC0F03"/>
-	 	 		<mx:Text  id ="scene_rotation" color="#0000FF" text="是"/>
 	 	 </mx:HBox>
 	     <mx:HBox>
 	 			<mx:Label text="坐标：x" color="#FC0F03"/>
