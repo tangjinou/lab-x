@@ -1,6 +1,5 @@
 package cn.edu.zju.labx.core
 {
-	import flash.events.Event;
 	import flash.events.TimerEvent;
 	import flash.filters.DropShadowFilter;
 	import flash.text.TextField;
@@ -28,36 +27,42 @@ package cn.edu.zju.labx.core
 			_text.x = LabXConstant.STAGE_WIDTH/3;
 			_text.y = LabXConstant.STAGE_HEIGHT;
 			_text.width = 600;
-			_text.height = 200;
+			_text.height = 180;
 			_text.wordWrap = true;
 			_text.filters = [new DropShadowFilter(1, 45, 0xa3610a, 1, 2, 2)];
 
-			
 		}
 		
 		public function displayMoveHint():void
 		{
 			if (_isDisplay)
-			{
+			{   
 				if ( _text.parent == null )
 				{
-					StageObjectsManager.getDefault.mainView.addChild(_text);
+				  StageObjectsManager.getDefault.mainView.addChild(_text);
 				}
 				else
 				{
 					_text.alpha = 1;
 				}
-
 				var timer:Timer = new Timer(100, 100);
 				timer.addEventListener(TimerEvent.TIMER, fadeOut);
+				timer.addEventListener(TimerEvent.TIMER_COMPLETE,onTimer);
 				timer.start();
-
 			}
 		}
 		
 		private function fadeOut(event:TimerEvent):void
 		{
 			_text.alpha -=0.01;
+		}
+		
+		private function onTimer(event:TimerEvent):void
+		{  
+		   if(StageObjectsManager.getDefault.mainView.contains(_text))
+		   {
+		   	 StageObjectsManager.getDefault.mainView.removeChild(_text);
+		   }
 		}
 		
 		public function disableHint():void
