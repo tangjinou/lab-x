@@ -47,7 +47,6 @@
                  setting_bar_box.y=0;
                  user_control_bar_box.x=this.width-180;
                  user_control_bar_box.y=this.height-130;
-                 
                  best_position_box.x = this.width/2-60;
                  best_position_box.y = this.height-40;
 	 		}
@@ -55,7 +54,6 @@
             {
 				 changeSize();
             }
-	 		
 	 		public function addButtonListener():void{
 	 		     rotate_left_button.addEventListener(MouseEvent.MOUSE_UP,buttonMouseUp); 
 	 		     rotate_right_button.addEventListener(MouseEvent.MOUSE_UP,buttonMouseUp); 
