@@ -26,6 +26,7 @@ package cn.edu.zju.labx.objects.beam
 		override public function onRayClear():void
 		{
 			imageInfo = null;
+			super.onRayClear();
 		}
 
 		override protected function handleRay(oldRay:Ray):void

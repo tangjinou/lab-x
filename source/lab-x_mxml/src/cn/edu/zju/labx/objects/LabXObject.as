@@ -3,13 +3,17 @@ package cn.edu.zju.labx.objects
 	import cn.edu.zju.labx.core.LabXConstant;
 	import cn.edu.zju.labx.core.StageObjectsManager;
 	import cn.edu.zju.labx.core.UserInputHandler;
+	import cn.edu.zju.labx.events.ILabXListener;
 	import cn.edu.zju.labx.events.IRayMaker;
 	import cn.edu.zju.labx.events.IUserInputListener;
+	import cn.edu.zju.labx.events.LabXEvent;
 	import cn.edu.zju.labx.logicObject.LineRayLogic;
 	import cn.edu.zju.labx.objects.ray.LineRay;
 	import cn.edu.zju.labx.objects.ray.Ray;
 	import cn.edu.zju.labx.utils.MathUtils;
-
+	
+	import mx.collections.ArrayCollection;
+	
 	import org.hamcrest.object.instanceOf;
 	import org.papervision3d.core.geom.TriangleMesh3D;
 	import org.papervision3d.core.math.Number3D;
@@ -201,6 +205,7 @@ package cn.edu.zju.labx.objects
 //				StageObjectsManager.getDefault.addMessage(this.name + " Z move:" + zMove);
                 StageObjectsManager.getDefault.changeCoordainate(this.x,this.y,this.z,this.rotationX,this.rotationY,this.rotationZ);
 			}
+			notify(new LabXEvent(this, LabXEvent.ON_MOVE));
 		}
 
 		/**
@@ -226,8 +231,17 @@ package cn.edu.zju.labx.objects
 //				StageObjectsManager.getDefault.addMessage(this.name + " Z rotate:" + zRotate);
 				StageObjectsManager.getDefault.changeCoordainate(this.x,this.y,this.z,this.rotationX,this.rotationY,this.rotationZ);
 			}
+			
+			notify(new LabXEvent(this, LabXEvent.ON_ROTATE));
 		}
 
+		/***
+		 *  save the oldRay and reproduce the oldRay
+		 */
+		public function onRayHandle(oldRay:Ray):void
+		{
+			notify(new LabXEvent(this, LabXEvent.ON_RAY_HANDLE));
+		}
 
 		/**
 		 * Stop the input ray
@@ -245,7 +259,37 @@ package cn.edu.zju.labx.objects
 		
 		public function onRayClear():void
 		{
-			//DO Nothing
+			notify(new LabXEvent(this, LabXEvent.ON_RAY_CLEAR));
+		}
+		
+		
+		private var listenerList:ArrayCollection = new ArrayCollection();
+		
+		/**
+		 * add Listener to the labxobject 
+		 */
+		public function addLabxListener(listener:ILabXListener):void
+		{
+			listenerList.addItem(listener);
+		}
+		
+		/**
+		 * remove Listener from the labxobject 
+		 */
+		public function removeLabxListener(listener:ILabXListener):void
+		{
+			listenerList.removeItemAt(listenerList.getItemIndex(listener));
+		}
+		
+		/**
+		 * notify event to all listeners.
+		 */
+		private function notify(event:LabXEvent):void
+		{
+			for each(var listener:ILabXListener in listenerList)
+			{
+				listener.handleLabXEvent(event);
+			}
 		}
 
 	}

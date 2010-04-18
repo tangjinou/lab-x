@@ -104,7 +104,12 @@ package cn.edu.zju.labx.core
 				equipment.moveForward(LabXConstant.STAGE_DEPTH / 2);
 				equipment.moveRight(i * LabXConstant.STAGE_WIDTH / _equipmentList.length);
 				StageObjectsManager.getDefault.addObject(equipment);
+				if(equipment.name == "接收屏")
+				{
+					StageObjectsManager.getDefault.setResultObject(equipment);
+				}
 			}
+			
 			return _equipmentList;
 		}
 		

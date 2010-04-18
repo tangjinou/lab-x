@@ -9,16 +9,13 @@ package cn.edu.zju.labx.objects.board
 	import cn.edu.zju.labx.objects.ray.LineRay;
 	import cn.edu.zju.labx.objects.ray.Ray;
 	import cn.edu.zju.labx.utils.MathUtils;
-
-	import flash.display.BitmapData;
+	
 	import flash.events.Event;
-
+	
 	import org.papervision3d.core.geom.Lines3D;
 	import org.papervision3d.core.geom.TriangleMesh3D;
 	import org.papervision3d.core.geom.renderables.Line3D;
 	import org.papervision3d.core.geom.renderables.Vertex3D;
-	import org.papervision3d.core.math.Number3D;
-	import org.papervision3d.core.math.Plane3D;
 	import org.papervision3d.core.proto.MaterialObject3D;
 	import org.papervision3d.events.InteractiveScene3DEvent;
 	import org.papervision3d.materials.special.LineMaterial;
@@ -162,24 +159,16 @@ package cn.edu.zju.labx.objects.board
 		/***
 		 *  save the oldRay and reproduce the oldRay
 		 */
-		public function onRayHandle(oldRay:Ray):void
+		override public function onRayHandle(oldRay:Ray):void
 		{
 			stopOldRay(oldRay);
-			saveRays(oldRay);
-
-			for each (var oldLineRay:LineRay in oldRay.getLineRays())
-			{
-				if (isLineRayOnObject(oldLineRay.logic))
-				{
-					var point:Number3D=new Number3D(oldLineRay.logic.x, oldLineRay.logic.y, oldLineRay.logic.z);
-					var vector:Number3D=new Number3D(oldLineRay.logic.dx, oldLineRay.logic.dy, oldLineRay.logic.dz);
-					var plane:Plane3D=getObjectPlane();
-					var anPoint:Number3D=Number3D.sub(point, vector);
-					var intersection:Number3D=plane.getIntersectionLineNumbers(point, anPoint);
-				}
-			}
-
-
+			handleRay(oldRay);
+			super.onRayHandle(oldRay);
+		}
+		
+		protected function handleRay(oldRay:Ray):void
+		{
+			//Do Nothing
 		}
 
 		protected function isParellel(ray:Ray):Boolean
@@ -262,6 +251,7 @@ package cn.edu.zju.labx.objects.board
 		override public function onRayClear():void
 		{
 			unDisplayInterferenceImage();
+			super.onRayClear();
 		}
 
 	}

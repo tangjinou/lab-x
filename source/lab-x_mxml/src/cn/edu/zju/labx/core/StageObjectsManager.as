@@ -1,5 +1,7 @@
 package cn.edu.zju.labx.core
 {
+	import cn.edu.zju.labx.events.ILabXListener;
+	import cn.edu.zju.labx.events.ResultObjectListener;
 	import cn.edu.zju.labx.objects.LabXObject;
 	import cn.edu.zju.labx.objects.lightSource.LightSource;
 	
@@ -9,6 +11,7 @@ package cn.edu.zju.labx.core
 	
 	import mx.collections.ArrayCollection;
 	import mx.controls.Button;
+	import mx.controls.Label;
 	import mx.controls.Text;
 	import mx.controls.TextArea;
 	
@@ -551,6 +554,31 @@ package cn.edu.zju.labx.core
          			   timer.stop();
                     }
               timer.start();
+		}
+		
+		/**
+		 * The experiment is on result Object
+		 */
+		private var _experimentResultObject:LabXObject;
+		private var _resultLabel:Label;
+		
+		public function setResultObject(resultObject:LabXObject):void
+		{
+			_experimentResultObject = resultObject;
+			if (_resultLabel != null) {
+				var listener:ILabXListener = new ResultObjectListener(_resultLabel);
+				_experimentResultObject.addLabxListener(listener);
+			}
+		}
+		
+		public function setResultLabel(resultLabel:Label):void
+		{
+			_resultLabel = resultLabel;
+		}
+		
+		public function getResultObject():LabXObject
+		{
+			return _experimentResultObject;
 		}
         
 	}   

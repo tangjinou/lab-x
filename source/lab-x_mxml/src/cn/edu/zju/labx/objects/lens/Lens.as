@@ -174,7 +174,7 @@ package cn.edu.zju.labx.objects.lens
 		/**
 		 *  deal with when the ray on the object
 		 **/
-		public function onRayHandle(oldRay:Ray):void
+		override public function onRayHandle(oldRay:Ray):void
 		{
 			stopOldRay(oldRay);
 			this._ray=makeAnNewRay(oldRay);

@@ -1,7 +1,7 @@
 package cn.edu.zju.labx.events
 {
 	import cn.edu.zju.labx.objects.LabXObject;
-
+	
 	import flash.events.Event;
 
 	/**
@@ -11,12 +11,11 @@ package cn.edu.zju.labx.events
 	public class LabXEvent extends Event
 	{
 
-		public static const LIGHT_ON:String="LightOn";
-		public static const LIGHT_OFF:String="LightOff";
-
-		public static const XOBJECT_MOVE:String="LabXObjectMove";
-		public static const XOBJECT_ADD:String="LabXObjectAdd";
-		public static const XOBJECT_REMOVE:String="LabXObjectRemove";
+		public static const ON_RAY_HANDLE:String="OnRayHandle";
+		public static const ON_RAY_CLEAR:String="OnRayClear";
+		public static const ON_MOVE:String = "OnMove";
+		public static const ON_ROTATE:String = "OnRotate";
+		
 
 		public var currentXObject:LabXObject;
 

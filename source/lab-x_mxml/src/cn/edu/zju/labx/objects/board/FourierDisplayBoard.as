@@ -24,9 +24,8 @@ package cn.edu.zju.labx.objects.board
 
 		private var isBrighten:Boolean;
 
-		override public function onRayHandle(oldRay:Ray):void
+		override protected function handleRay(oldRay:Ray):void
 		{
-			super.onRayHandle(oldRay);
 			if (isRayWayRight(oldRay))
 			{
 				displayImage(isBrighten);

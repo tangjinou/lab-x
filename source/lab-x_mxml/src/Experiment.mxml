@@ -74,7 +74,7 @@
 	 	    public function initExperiment(event:TimerEvent):void{
 	 	       logo.visible = false;
 	 	       timer.stop();
-	 	       message_box.text="公告栏";		   
+//	 	       message_box.text="公告栏";		   
 	 		   /************ Set tool tips**********************/
 	 		   StyleManager.getStyleDeclaration("ToolTip").setStyle("fontSize",16);  
                StyleManager.getStyleDeclaration("ToolTip").setStyle("backgroundColor","#33CC99"); 
@@ -99,6 +99,7 @@
 	 		   StageObjectsManager.getDefault.object_backwarding_button=object_backwarding_button;
 	 		   StageObjectsManager.getDefault.object_lefting_button=object_lefting_button;
 	 		   StageObjectsManager.getDefault.object_righting_button=object_righting_button;
+	 		   StageObjectsManager.getDefault.setResultLabel(resultLabel);
 	 		   
 	 		   chooseExperimentwindow = ChooseExperimentWindow(PopUpManager.createPopUp( this, ChooseExperimentWindow , true));
                chooseExperimentwindow.x =this.width/3;
@@ -240,10 +241,14 @@
      		<mx:Button  buttonDown="StageObjectsManager.getDefault.object_downing(++step_length)"   autoRepeat="true" id="object_down_button" enabled="false" icon="@Embed('../assets/icon/down.png')" disabledIcon="@Embed('../assets/icon/down_disable.png')" toolTip="物体向下移动 快捷键page_down"/>
      </mx:HBox>
      </mx:VBox>
+     
+	 <mx:Panel y="0" width="120" height="162" layout="absolute" color="#AAAAAA" horizontalCenter="-250" borderColor="#A4A8A1" title="实验结果" backgroundColor="#000000">
+		 <mx:Label id="resultLabel" x="0" y="0"/>
+	 </mx:Panel>
 	 
-	 <mx:Panel y="0" width="326" height="148" layout="absolute" color="#070707" horizontalCenter="-9" borderColor="#A4A8A1" alpha="0.79">
-	     <mx:TextArea  x="0" y="0" width="306" height="108" editable="false" id="message_box" fontSize="12" backgroundColor="#A69B9B" cornerRadius="1" borderStyle="solid" borderColor="#F31207" themeColor="#F0FF00" alpha="1.0" borderThickness="2"/>
-	     <mx:Label text="LabX" width="60" color="#DFF4F4" fontFamily="Arial" fontWeight="bold" fontSize="21" x="236" y="78"/>
+	 <mx:Panel y="0" width="326" height="148" layout="absolute" color="#AAAAAA" horizontalCenter="29" borderColor="#A4A8A1" alpha="0.79" title="公告栏">
+	     <mx:TextArea  x="0" y="0" width="306" height="106" editable="false" id="message_box" fontSize="12" backgroundColor="#A69B9B" cornerRadius="1" borderStyle="solid" borderColor="#F31207" color="0x070707" themeColor="#F0FF00" alpha="1.0" borderThickness="2"/>
+	     <mx:Label text="LabX" width="60" color="#DFF4F4" fontFamily="Arial" fontWeight="bold" fontSize="21" x="236" y="68"/>
 	 </mx:Panel>
 	 <mx:Image id="logo" horizontalCenter="0" verticalCenter="0" source="@Embed('../assets/icon/zjut_oi_logo.png')" />
 	 

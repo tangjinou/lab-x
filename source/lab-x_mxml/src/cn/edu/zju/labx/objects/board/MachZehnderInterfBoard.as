@@ -59,10 +59,9 @@ package cn.edu.zju.labx.objects.board
 			}
 		}
 
-		override public function onRayHandle(oldRay:Ray):void
+		override protected function handleRay(oldRay:Ray):void
 		{
-			super.onRayHandle(oldRay);
-
+			saveRays(oldRay);
 			if (oldRay1 != null && oldRay2 != null)
 			{
 				var isOldRay1Parellel:Boolean=isParellel(oldRay1);
