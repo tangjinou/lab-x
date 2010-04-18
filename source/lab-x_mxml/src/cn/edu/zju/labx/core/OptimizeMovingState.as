@@ -1,10 +1,10 @@
 package cn.edu.zju.labx.core
 {
-	public class State implements IState
+	public class OptimizeMovingState implements IState
 	{   
 		private var index:int;
 		
-		public function State()
+		public function OptimizeMovingState()
 		{
 			this.index =0;
 		}
