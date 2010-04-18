@@ -264,7 +264,7 @@ package cn.edu.zju.labx.core
 		/**
 		 *  This is variable state is for moving Objects
 		 */ 
-		private static var _state:State = new State();
+		private static var _state:OptimizeMovingState = new OptimizeMovingState();
 		/**
 		 *  Move next step
 		 */
@@ -337,7 +337,7 @@ package cn.edu.zju.labx.core
 			refresh();
 		}
 		
-		private function moveExperimentEquipmentBackByState(state:State):void{
+		private function moveExperimentEquipmentBackByState(state:OptimizeMovingState):void{
 			if(state.getCurrentState()>0 && state.getCurrentState()<StageObjectsManager.getDefault.getObjectList().length){
 			   state.preState();
 			   moveExperimentEquipmentBack(state.getCurrentState());
@@ -352,7 +352,7 @@ package cn.edu.zju.labx.core
 		/**
 		 * Move the equipments in first experiment to optimize place
 		 */
-		private function moveFirstExperimentEquipments(state:State=null):void
+		private function moveFirstExperimentEquipments(state:OptimizeMovingState=null):void
 		{
           	if(state == null){
           	    for (var i:int=0; i < StageObjectsManager.getDefault.getObjectList().length; i++)
@@ -421,7 +421,7 @@ package cn.edu.zju.labx.core
 		/**
 		 * Move the equipments in second experiment to optimize place
 		 */
-		private function moveSecondExperimentEquipments(state:State=null):void
+		private function moveSecondExperimentEquipments(state:OptimizeMovingState=null):void
 		{
           	if(state == null){
           	    for (var i:int=0; i < StageObjectsManager.getDefault.getObjectList().length; i++)
@@ -485,7 +485,7 @@ package cn.edu.zju.labx.core
 		/**
 		 * Move the equipments in third experiment to optimize place
 		 */
-		private function moveThirdExperimentEquipments(state:State=null):void
+		private function moveThirdExperimentEquipments(state:OptimizeMovingState=null):void
 		{
 			if(state == null){
           	    for (var i:int=0; i < StageObjectsManager.getDefault.getObjectList().length; i++)
@@ -546,7 +546,7 @@ package cn.edu.zju.labx.core
 		/**
 		 * Move the equipments in forth experiment to optimize place
 		 */
-		private function moveFouthExperimentEquipments(state:State=null):void
+		private function moveFouthExperimentEquipments(state:OptimizeMovingState=null):void
 		{   
 			if(state == null){
           	    for (var i:int=0; i < StageObjectsManager.getDefault.getObjectList().length; i++)
