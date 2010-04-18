@@ -281,7 +281,7 @@ package cn.edu.zju.labx.core
 						moveThirdExperimentEquipments(_state);
 						break;
 					case LabXConstant.EXPERIMENT_FORTH:
-						moveForthExperimentEquipments(_state);
+						moveFouthExperimentEquipments(_state);
 						break;
 				}
 		}
@@ -312,7 +312,7 @@ package cn.edu.zju.labx.core
 						moveThirdExperimentEquipments();
 						break;
 					case LabXConstant.EXPERIMENT_FORTH:
-						moveForthExperimentEquipments();
+						moveFouthExperimentEquipments();
 						break;
 				}
 				opitimize=true;
@@ -338,8 +338,9 @@ package cn.edu.zju.labx.core
 		}
 		
 		private function moveExperimentEquipmentBackByState(state:State):void{
-			if(state.index>0 && state.index<StageObjectsManager.getDefault.getObjectList().length){
-			   moveExperimentEquipmentBack(--state.index);
+			if(state.getCurrentState()>0 && state.getCurrentState()<StageObjectsManager.getDefault.getObjectList().length){
+			   state.preState();
+			   moveExperimentEquipmentBack(state.getCurrentState());
 			 }
 		}
 		
@@ -358,12 +359,12 @@ package cn.edu.zju.labx.core
 				{   
 					moveFirstExperimentOneEquipment(StageObjectsManager.getDefault.getObjectList().getItemAt(i) as LabXObject);
 				}
-				_state.index = StageObjectsManager.getDefault.getObjectList().length - defaultEquipment_size;
+				_state.setCurrentState(StageObjectsManager.getDefault.getObjectList().length - defaultEquipment_size); 
 				refresh();
 				return;
          	}
-            if(0<=state.index && state.index<StageObjectsManager.getDefault.getObjectList().length - defaultEquipment_size){
-            	moveFirstExperimentOneEquipment(StageObjectsManager.getDefault.getObjectList().getItemAt(state.index++) as LabXObject);
+            if(0<=state.getCurrentState() && state.getCurrentState()<StageObjectsManager.getDefault.getObjectList().length - defaultEquipment_size){
+            	moveFirstExperimentOneEquipment(StageObjectsManager.getDefault.getObjectList().getItemAt(state.nextState()) as LabXObject);
             	refresh();
             	return;
             }
@@ -427,12 +428,12 @@ package cn.edu.zju.labx.core
 				{   
 					moveSecondExperimentOneEquipment(StageObjectsManager.getDefault.getObjectList().getItemAt(i) as LabXObject);
 				}
-				_state.index = StageObjectsManager.getDefault.getObjectList().length - defaultEquipment_size;
+				_state.setCurrentState(StageObjectsManager.getDefault.getObjectList().length - defaultEquipment_size); 
 				refresh();
 				return;
          	}
-            if(0<=state.index && state.index<StageObjectsManager.getDefault.getObjectList().length - defaultEquipment_size){
-            	moveSecondExperimentOneEquipment(StageObjectsManager.getDefault.getObjectList().getItemAt(state.index++) as LabXObject);
+            if(0<=state.getCurrentState() && state.getCurrentState() <StageObjectsManager.getDefault.getObjectList().length - defaultEquipment_size){
+            	moveSecondExperimentOneEquipment(StageObjectsManager.getDefault.getObjectList().getItemAt(state.nextState()) as LabXObject);
             	refresh();
             	return;
             }
@@ -491,12 +492,12 @@ package cn.edu.zju.labx.core
 				{   
 					moveThirdExperimentOneEquipment(StageObjectsManager.getDefault.getObjectList().getItemAt(i) as LabXObject);
 				}
-				_state.index = StageObjectsManager.getDefault.getObjectList().length - defaultEquipment_size;
+				_state.setCurrentState(StageObjectsManager.getDefault.getObjectList().length - defaultEquipment_size); 
 				refresh();
 				return;
          	}
-            if(0<=state.index && state.index<StageObjectsManager.getDefault.getObjectList().length - defaultEquipment_size){
-            	moveThirdExperimentOneEquipment(StageObjectsManager.getDefault.getObjectList().getItemAt(state.index++) as LabXObject);
+            if(0<=state.getCurrentState() && state.getCurrentState()<StageObjectsManager.getDefault.getObjectList().length - defaultEquipment_size){
+            	moveThirdExperimentOneEquipment(StageObjectsManager.getDefault.getObjectList().getItemAt(state.nextState()) as LabXObject);
             	refresh();
             	return;
             }
@@ -545,19 +546,19 @@ package cn.edu.zju.labx.core
 		/**
 		 * Move the equipments in forth experiment to optimize place
 		 */
-		private function moveForthExperimentEquipments(state:State=null):void
+		private function moveFouthExperimentEquipments(state:State=null):void
 		{   
 			if(state == null){
           	    for (var i:int=0; i < StageObjectsManager.getDefault.getObjectList().length; i++)
 				{   
 					moveFouthExperimentOneEquipment(StageObjectsManager.getDefault.getObjectList().getItemAt(i) as LabXObject);
 				}
-				_state.index = StageObjectsManager.getDefault.getObjectList().length - defaultEquipment_size;
+				_state.setCurrentState(StageObjectsManager.getDefault.getObjectList().length - defaultEquipment_size); 
 				refresh();
 				return;
          	}
-            if(0<=state.index && state.index<StageObjectsManager.getDefault.getObjectList().length - defaultEquipment_size){
-            	moveFouthExperimentOneEquipment(StageObjectsManager.getDefault.getObjectList().getItemAt(state.index++) as LabXObject);
+            if(0<=state.getCurrentState() && state.getCurrentState()<StageObjectsManager.getDefault.getObjectList().length - defaultEquipment_size){
+            	moveFouthExperimentOneEquipment(StageObjectsManager.getDefault.getObjectList().getItemAt(state.nextState()) as LabXObject);
             	refresh();
             	return;
             }
@@ -847,7 +848,7 @@ package cn.edu.zju.labx.core
 					StageObjectsManager.getDefault.removeObject(equipment);
 				}
 			}
-			_state.index =0;
+			_state.resume();
 			_equipmentList=null;
 		}
 	}
