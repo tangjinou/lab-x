@@ -55,10 +55,11 @@ package cn.edu.zju.labx.objects.beam
 		 * @@@@@@@@@@@@@@@@@@@@@
 		 * we should stop the old ray when process the ray
 		 */
-		public function onRayHandle(oldRay:Ray):void
+		override public function onRayHandle(oldRay:Ray):void
 		{
 			stopOldRay(oldRay);
 			handleRay(oldRay);
+			super.onRayHandle(oldRay);
 		}
 
 		/**

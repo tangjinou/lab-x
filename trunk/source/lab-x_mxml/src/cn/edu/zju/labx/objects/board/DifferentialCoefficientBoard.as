@@ -19,9 +19,8 @@ package cn.edu.zju.labx.objects.board
 			super(name, material);
 		}
 
-		override public function onRayHandle(oldRay:Ray):void
+		override protected function handleRay(oldRay:Ray):void
 		{
-			super.onRayHandle(oldRay);
 			displayImage(oldRay.getOtherInfo());
 		}
 

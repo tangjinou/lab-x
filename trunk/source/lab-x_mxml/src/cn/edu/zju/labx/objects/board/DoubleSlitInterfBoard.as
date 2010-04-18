@@ -44,10 +44,9 @@ package cn.edu.zju.labx.objects.board
 			this.removeCursor();
 		}
 
-		override public function onRayHandle(oldRay:Ray):void
+		override protected function handleRay(oldRay:Ray):void
 		{
-			super.onRayHandle(oldRay);
-
+			saveRays(oldRay);
 			if (oldRay1 != null && oldRay2 != null)
 			{
 				if (isRayWayRight(oldRay1) == false || isRayWayRight(oldRay2) == false)
