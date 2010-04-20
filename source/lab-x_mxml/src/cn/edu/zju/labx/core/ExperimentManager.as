@@ -176,15 +176,19 @@ package cn.edu.zju.labx.core
 			equipmentList.addItem(lens2);
 
 			var splitterBeam:BeamSplitter=createBeamSplitter("分光镜");
+			splitterBeam.scale = 0.8;
 			equipmentList.addItem(splitterBeam);
 
 			var splitterBeam2:BeamSplitter=createBeamSplitter("分光镜2");
+			splitterBeam2.scale = 0.8;
 			equipmentList.addItem(splitterBeam2);
 
 			var mirror1:Mirror=createMirror("反射镜1")
+			mirror1.scale = 0.8;
 			equipmentList.addItem(mirror1);
 
 			var mirror2:Mirror=createMirror("反射镜2")
+			mirror2.scale = 0.8;
 			equipmentList.addItem(mirror2);
 
 			var lens4:Lens=createConvexLens("透镜", 400);
@@ -240,7 +244,7 @@ package cn.edu.zju.labx.core
 			var lightSource1:LightSource=createLaser("激光光源");
 			equipmentList.addItem(lightSource1);
 
-			var lens1:Lens=createConvexLens("扩束镜", 18);
+			var lens1:Lens=createConvexLens("扩束镜", 15);
 			lens1.scale=0.4;
 			equipmentList.addItem(lens1);
 			var lens2:Lens=createConvexLens("准直透镜", 108);
@@ -248,9 +252,11 @@ package cn.edu.zju.labx.core
 			equipmentList.addItem(lens2);
 
 			var splitter:PolarizationBeamSplitter=createPolarizationBeamSplitter("偏振分光棱镜");
+			splitter.scale = 0.8;
 			equipmentList.addItem(splitter);
 
 			var lens3:Lens=createConvexLens("成像透镜1", 40);
+			lens3.scale=0.8;
 			equipmentList.addItem(lens3);
 
 			equipmentList.addItem(createDifferentialCoefficientBoard("接收屏"));
@@ -258,7 +264,8 @@ package cn.edu.zju.labx.core
 			equipmentList.addItem(createArrowObjectPlane("物1", null, new ColorMaterial(0x00FFFF)));
 			equipmentList.addItem(createArrowObjectPlane("物2", null, new ColorMaterial(0xFFFF00)));
 
-			var lens4:Lens=createConvexLens("成像透镜2", 80);
+			var lens4:Lens=createConvexLens("成像透镜2", 115);
+			lens4.scale = 0.8;
 			equipmentList.addItem(lens4);
 
 			return equipmentList;
@@ -579,7 +586,7 @@ package cn.edu.zju.labx.core
 				}
 				else if (labXObject.name == "扩束镜")
 				{
-					TweenLite.to(labXObject, LabXConstant.MOVE_DELAY, {x: 150, z: 0});
+					TweenLite.to(labXObject, LabXConstant.MOVE_DELAY, {x: 120, z: 0});
 				}
 				else if (labXObject.name == "成像透镜2")
 				{
