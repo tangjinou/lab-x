@@ -17,7 +17,7 @@ package cn.edu.zju.labx.core
 			return index++;
 		}
 		public function preState():int{
-		    return index--;
+		    return --index;
 		}
 		public function getPreState():int
 		{
