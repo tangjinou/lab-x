@@ -1,13 +1,12 @@
 package cn.edu.zju.labx.objects.lightSource
 {
-	import cn.edu.zju.labx.core.StageObjectsManager;
-
+	import cn.edu.zju.labx.core.manager.StageObjectsManager;
+	
 	import org.papervision3d.core.proto.MaterialObject3D;
 	import org.papervision3d.events.InteractiveScene3DEvent;
 	import org.papervision3d.materials.utils.MaterialsList;
 	import org.papervision3d.objects.primitives.Cube;
 	import org.papervision3d.objects.primitives.Cylinder;
-	import org.papervision3d.objects.primitives.Sphere;
 	import org.papervision3d.view.layer.ViewportLayer;
 
 	public class Lamps extends LightSource

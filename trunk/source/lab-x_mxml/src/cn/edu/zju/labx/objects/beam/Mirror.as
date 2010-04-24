@@ -1,6 +1,5 @@
 package cn.edu.zju.labx.objects.beam
 {
-	import cn.edu.zju.labx.core.StageObjectsManager;
 	import cn.edu.zju.labx.objects.ray.Ray;
 
 	import org.papervision3d.core.proto.MaterialObject3D;

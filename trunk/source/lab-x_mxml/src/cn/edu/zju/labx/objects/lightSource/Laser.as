@@ -1,10 +1,9 @@
 package cn.edu.zju.labx.objects.lightSource
 {
-	import cn.edu.zju.labx.core.StageObjectsManager;
-	import cn.edu.zju.labx.events.LabXObjectUserInputHandleTool;
-
+	import cn.edu.zju.labx.core.manager.StageObjectsManager;
+	
 	import flash.utils.ByteArray;
-
+	
 	import org.papervision3d.core.proto.MaterialObject3D;
 	import org.papervision3d.events.FileLoadEvent;
 	import org.papervision3d.events.InteractiveScene3DEvent;

@@ -1,8 +1,8 @@
 package cn.edu.zju.labx.objects
 {
 	import cn.edu.zju.labx.core.LabXConstant;
-	import cn.edu.zju.labx.core.StageObjectsManager;
 	import cn.edu.zju.labx.core.UserInputHandler;
+	import cn.edu.zju.labx.core.manager.StageObjectsManager;
 	import cn.edu.zju.labx.events.ILabXListener;
 	import cn.edu.zju.labx.events.IRayMaker;
 	import cn.edu.zju.labx.events.IUserInputListener;

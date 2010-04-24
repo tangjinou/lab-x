@@ -1,10 +1,10 @@
 package cn.edu.zju.labx.objects
 {
 
-	import cn.edu.zju.labx.core.StageObjectsManager;
-
+	import cn.edu.zju.labx.core.manager.StageObjectsManager;
+	
 	import flash.filters.DropShadowFilter;
-
+	
 	import org.papervision3d.core.geom.Lines3D;
 	import org.papervision3d.core.geom.renderables.Line3D;
 	import org.papervision3d.core.geom.renderables.Vertex3D;

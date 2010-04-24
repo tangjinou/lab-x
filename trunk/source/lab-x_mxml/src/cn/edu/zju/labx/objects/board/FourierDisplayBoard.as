@@ -1,15 +1,15 @@
 package cn.edu.zju.labx.objects.board
 {
 	import cn.edu.zju.labx.core.LabXConstant;
-	import cn.edu.zju.labx.core.RayManager;
+	import cn.edu.zju.labx.core.manager.RayManager;
 	import cn.edu.zju.labx.objects.beam.FourierGrating;
 	import cn.edu.zju.labx.objects.beam.ObjectPlane;
 	import cn.edu.zju.labx.objects.lens.FourierLens;
 	import cn.edu.zju.labx.objects.ray.Ray;
-
+	
 	import flash.display.BitmapData;
 	import flash.geom.Rectangle;
-
+	
 	import org.papervision3d.core.proto.MaterialObject3D;
 	import org.papervision3d.materials.BitmapMaterial;
 
