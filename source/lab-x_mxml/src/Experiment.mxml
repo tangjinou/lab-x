@@ -2,8 +2,9 @@
 <mx:Application xmlns:mx="http://www.adobe.com/2006/mxml" backgroundColor="black" layout="absolute" preloader="cn.edu.zju.labx.core.LoadingBar" creationComplete="callLater(init)"  xmlns:labx="cn.edu.zju.labx.*" xmlns:local="*" borderColor="#CD1A02" fontWeight="bold" fontSize="12">
 	 <mx:Script>
 	 	<![CDATA[
+	 		import cn.edu.zju.labx.core.manager.StageObjectsManager;
+	 		import cn.edu.zju.labx.core.manager.ExperimentManager;
 	 		import mx.events.FlexEvent;
-	 		import cn.edu.zju.labx.core.ExperimentManager;
 	 		import mx.events.CloseEvent;
 	 		import mx.controls.Alert;
 	 		import mx.managers.ToolTipManager;
@@ -14,7 +15,6 @@
 	 		import cn.edu.zju.labx.objects.LabXObject;
 	 		import org.papervision3d.core.utils.Mouse3D;
 	 		import cn.edu.zju.labx.core.UserInputHandler;
-	 		import cn.edu.zju.labx.core.StageObjectsManager;
 	 	    import mx.core.UIComponent;
 	 	    import flash.events.Event;
 			import flash.events.MouseEvent;
