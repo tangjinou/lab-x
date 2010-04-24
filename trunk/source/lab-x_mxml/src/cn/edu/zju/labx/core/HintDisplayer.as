@@ -1,5 +1,7 @@
 package cn.edu.zju.labx.core
 {
+	import cn.edu.zju.labx.core.manager.StageObjectsManager;
+	
 	import flash.events.TimerEvent;
 	import flash.filters.DropShadowFilter;
 	import flash.text.TextField;
