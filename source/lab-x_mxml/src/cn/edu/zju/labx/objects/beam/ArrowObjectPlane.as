@@ -1,6 +1,6 @@
 package cn.edu.zju.labx.objects.beam
 {
-	import cn.edu.zju.labx.core.StageObjectsManager;
+	import cn.edu.zju.labx.core.manager.StageObjectsManager;
 	import cn.edu.zju.labx.objects.ray.Ray;
 	
 	import flash.display.BitmapData;

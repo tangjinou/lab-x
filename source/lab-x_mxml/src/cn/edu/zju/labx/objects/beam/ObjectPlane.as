@@ -1,18 +1,16 @@
 package cn.edu.zju.labx.objects.beam
 {
 	import cn.edu.zju.labx.core.LabXConstant;
-	import cn.edu.zju.labx.core.StageObjectsManager;
+	import cn.edu.zju.labx.core.manager.StageObjectsManager;
 	import cn.edu.zju.labx.logicObject.ObjectPlaneLogic;
-	import cn.edu.zju.labx.objects.ray.LineRay;
 	import cn.edu.zju.labx.objects.ray.Ray;
-	import cn.edu.zju.labx.utils.MathUtils;
-
+	
 	import flash.display.BitmapData;
 	import flash.display.BlendMode;
 	import flash.display.Shape;
-
+	
 	import mx.collections.ArrayCollection;
-
+	
 	import org.papervision3d.core.math.Number3D;
 	import org.papervision3d.core.proto.MaterialObject3D;
 	import org.papervision3d.materials.BitmapMaterial;

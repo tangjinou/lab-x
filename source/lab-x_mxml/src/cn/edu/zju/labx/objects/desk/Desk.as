@@ -1,15 +1,14 @@
 package cn.edu.zju.labx.objects.desk
 {
 	import cn.edu.zju.labx.core.LabXConstant;
-	import cn.edu.zju.labx.core.StageObjectsManager;
-
+	import cn.edu.zju.labx.core.manager.StageObjectsManager;
+	
 	import flash.display.Bitmap;
 	import flash.utils.ByteArray;
-
+	
 	import org.papervision3d.events.FileLoadEvent;
 	import org.papervision3d.materials.BitmapMaterial;
 	import org.papervision3d.materials.utils.MaterialsList;
-	import org.papervision3d.objects.DisplayObject3D;
 	import org.papervision3d.objects.parsers.DAE;
 
 	public class Desk

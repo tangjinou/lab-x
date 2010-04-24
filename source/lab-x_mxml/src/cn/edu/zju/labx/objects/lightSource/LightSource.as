@@ -1,18 +1,18 @@
 package cn.edu.zju.labx.objects.lightSource
 {
-	import cn.edu.zju.labx.core.StageObjectsManager;
+	import cn.edu.zju.labx.core.manager.StageObjectsManager;
 	import cn.edu.zju.labx.events.IUserInputListener;
 	import cn.edu.zju.labx.events.LabXObjectUserInputHandleTool;
 	import cn.edu.zju.labx.logicObject.LineRayLogic;
 	import cn.edu.zju.labx.objects.LabXObject;
 	import cn.edu.zju.labx.objects.ray.LineRay;
 	import cn.edu.zju.labx.objects.ray.Ray;
-
+	
 	import flash.events.Event;
 	import flash.events.MouseEvent;
-
+	
 	import mx.collections.ArrayCollection;
-
+	
 	import org.papervision3d.core.math.Number3D;
 	import org.papervision3d.core.proto.MaterialObject3D;
 
@@ -57,7 +57,6 @@ package cn.edu.zju.labx.objects.lightSource
 			lineRays.addItem(lineRay3);
 			lineRays.addItem(lineRay4);
 			_ray.setLineRays(lineRays);
-
 		}
 
 		public function set light_on(isOn:Boolean):void
@@ -77,9 +76,7 @@ package cn.edu.zju.labx.objects.lightSource
 				userInputHandle.call(this, event);
 				return;
 			}
-
 			userInputTool.handleUserInputEvent(event);
-
 			if (event is MouseEvent)
 			{
 				var mouseEvent:MouseEvent=event as MouseEvent;
@@ -91,6 +88,7 @@ package cn.edu.zju.labx.objects.lightSource
 					if (isOn)
 					{
 						StageObjectsManager.getDefault.addMessage("打开光源");
+						openRay();
 					}
 					else
 					{
@@ -107,7 +105,6 @@ package cn.edu.zju.labx.objects.lightSource
 			StageObjectsManager.getDefault.originPivot.addChild(getRay());
 			_ray.displayRays();
 			StageObjectsManager.getDefault.rayManager.notify(this._ray);
-
 		}
 
 		// should destribute the listener 

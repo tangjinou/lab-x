@@ -1,6 +1,6 @@
 package cn.edu.zju.labx.objects.beam
 {
-	import cn.edu.zju.labx.core.RayManager;
+	import cn.edu.zju.labx.core.manager.RayManager;
 	import cn.edu.zju.labx.objects.lens.Lens;
 	import cn.edu.zju.labx.objects.ray.LineRay;
 	import cn.edu.zju.labx.objects.ray.Ray;
