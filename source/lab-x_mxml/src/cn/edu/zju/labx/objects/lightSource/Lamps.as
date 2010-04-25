@@ -1,7 +1,7 @@
 package cn.edu.zju.labx.objects.lightSource
 {
 	import cn.edu.zju.labx.core.manager.StageObjectsManager;
-	
+	import cn.edu.zju.labx.core.LabXConstant;
 	import org.papervision3d.core.proto.MaterialObject3D;
 	import org.papervision3d.events.InteractiveScene3DEvent;
 	import org.papervision3d.materials.utils.MaterialsList;
@@ -21,6 +21,12 @@ package cn.edu.zju.labx.objects.lightSource
 			createDisplayObject();
 		}
 
+		override public function createRay():void
+		{
+			super.createRay();
+			_ray.setColor(LabXConstant.YELLOW);
+		}
+		
 		private function createDisplayObject():void
 		{
 

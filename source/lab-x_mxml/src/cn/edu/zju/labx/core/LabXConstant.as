@@ -84,6 +84,12 @@ package cn.edu.zju.labx.core
 		 */
 		public static const rectW:Number=8;
 		public static const rectH:Number=25;
+		
+		/**
+		 * Ray Color
+		 */
+		public static const BLUE:Number = 1;
+		public static const YELLOW:Number = 2;
 
 	}
 }
