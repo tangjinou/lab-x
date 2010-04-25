@@ -2,7 +2,7 @@ package cn.edu.zju.labx.objects.ray
 {
 	import cn.edu.zju.labx.core.manager.StageObjectsManager;
 	import cn.edu.zju.labx.objects.LabXObject;
-	
+	import cn.edu.zju.labx.core.LabXConstant;
 	import mx.collections.ArrayCollection;
 	
 	import org.papervision3d.core.geom.Lines3D;
@@ -26,12 +26,14 @@ package cn.edu.zju.labx.objects.ray
 		private var endX:Number;
 
 		public var sender:LabXObject;
+		
+		private var color:Number;
 
 		//This public array is in for lineRay
 		public var lineRays:ArrayCollection=new ArrayCollection(); //FOR TEST
 
 		private var lines:Lines3D=null;
-		private var lineMaterial:LineMaterial=new LineMaterial(0x00ffff, 1);
+		private var lineMaterial:LineMaterial=new LineMaterial(0xFFFFFF, 1);
 		private var effectLayer:ViewportLayer=new ViewportLayer(StageObjectsManager.getDefault.mainView.viewport, null);
 
 		public function Ray(sender:LabXObject, material:MaterialObject3D=null, lineRays:ArrayCollection=null)
@@ -40,6 +42,11 @@ package cn.edu.zju.labx.objects.ray
 			this.lineBold=lineBold;
 			this.lineRays=lineRays;
 			this.sender=sender;
+		}
+		
+		public function setColor(color:Number = LabXConstant.BLUE):void
+		{
+			this.color = color;
 		}
 
 		public function getSender():LabXObject
@@ -94,7 +101,7 @@ package cn.edu.zju.labx.objects.ray
 				}
 			}
 			effectLayer.addDisplayObject3D(lines, true);
-			StageObjectsManager.getDefault.layerManager.addRayLayer(effectLayer);
+			StageObjectsManager.getDefault.layerManager.addRayLayer(effectLayer, color);
 			addChild(lines);
 		}
 //	    /**

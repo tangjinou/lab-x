@@ -3,11 +3,12 @@ package cn.edu.zju.labx.core.manager
 	import flash.filters.BlurFilter;
 	import flash.filters.DropShadowFilter;
 	import flash.filters.GlowFilter;
-
+	
 	import org.papervision3d.view.Viewport3D;
 	import org.papervision3d.view.layer.ViewportLayer;
 	import org.papervision3d.view.layer.util.ViewportLayerSortMode;
 
+	import cn.edu.zju.labx.core.LabXConstant;
 	/***
 	 *
 	 *  Definition for different viewport layers for z-sorting ,should be newed in main application;
@@ -20,8 +21,8 @@ package cn.edu.zju.labx.core.manager
 		public var deskLegLayer:ViewportLayer;
 		public var gridLayer:ViewportLayer;
 
-		private var rayEffect:Array;
-
+		private var rayEffectBlue:Array;
+		private var rayEffectYellow:Array;
 		/*************************************************************************
 		 * Sigleton Method to make sure there are only one LayerManager
 		 * in an application
@@ -81,16 +82,23 @@ package cn.edu.zju.labx.core.manager
 			equipmentLayer.sortMode=ViewportLayerSortMode.Z_SORT;
 
 			var bf:BlurFilter=new BlurFilter(3, 3, 1);
-//			var growFilter_in:GlowFilter = new GlowFilter(0x00ffff, 2, 20, 10, 2, 3, true, false);
-			var growFilter_out:GlowFilter=new GlowFilter(0x00ffff, 2, 16, 10, 3, 9, false, false);
+			var growFilterBlueIn:GlowFilter = new GlowFilter(0x00ffff, 2, 20, 10, 2, 3, true, false);
+			var growFilterBlue:GlowFilter=new GlowFilter(0x00ffff, 2, 16, 10, 3, 9, false, false);
 //			var dropShadow:DropShadowFilter = new DropShadowFilter(0, 360, 0x000fff, 1, 70, 70, 5, 3, false, false, false);
-			var dropShadow:DropShadowFilter=new DropShadowFilter(0, 360, 0x000fff, 1, 50, 50, 3, 2, false, false, false);
-			rayEffect=[growFilter_out, dropShadow];
+			var dropShadowBlue:DropShadowFilter=new DropShadowFilter(0, 360, 0x000fff, 1, 50, 50, 3, 2, false, false, false);
+			rayEffectBlue = [growFilterBlueIn, growFilterBlue, dropShadowBlue];
+			var growFilterYellowIn:GlowFilter = new GlowFilter(0xFDD017, 2, 20, 10, 2, 3, true, false);
+			var growFilterYellow:GlowFilter = new GlowFilter(0xFDD017, 2, 16, 10, 3, 9, false, false);
+			var dropShadowYellow:DropShadowFilter = new DropShadowFilter(0, 360, 0xFDD017, 1, 50, 50, 3, 2, false, false, false);
+			rayEffectYellow = [growFilterYellowIn, growFilterYellow, dropShadowYellow];
 		}
 
-		public function addRayLayer(rayLayer:ViewportLayer, eqLayer:ViewportLayer=null):void
+		public function addRayLayer(rayLayer:ViewportLayer, color:Number = LabXConstant.BLUE, eqLayer:ViewportLayer=null):void
 		{
-			rayLayer.filters=rayEffect;
+			if (color == LabXConstant.BLUE) 
+				rayLayer.filters = rayEffectBlue;
+			else if (color == LabXConstant.YELLOW)
+				rayLayer.filters = rayEffectYellow;
 			if (eqLayer == null)
 				eqLayer=equipmentLayer;
 			eqLayer.addLayer(rayLayer);

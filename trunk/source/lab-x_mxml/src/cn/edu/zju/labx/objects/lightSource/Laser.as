@@ -1,6 +1,7 @@
 package cn.edu.zju.labx.objects.lightSource
 {
 	import cn.edu.zju.labx.core.manager.StageObjectsManager;
+	import cn.edu.zju.labx.core.LabXConstant;
 	
 	import flash.utils.ByteArray;
 	
@@ -21,6 +22,12 @@ package cn.edu.zju.labx.objects.lightSource
 		{
 			super(name, material);
 			createDisplayObject();
+		}
+		
+		override public function createRay():void
+		{
+			super.createRay();
+			_ray.setColor(LabXConstant.BLUE);
 		}
 
 		private function createDisplayObject():void
