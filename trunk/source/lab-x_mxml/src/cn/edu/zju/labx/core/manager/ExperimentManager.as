@@ -86,7 +86,7 @@ package cn.edu.zju.labx.core.manager
 			this._experimentIndex=experimentIndex;
 			remove();
 
-
+            opitimize = false;
             expriment = ExperimentFactory.getDefault.createExperiment(experimentIndex);
 			expriment.createExperimentEquipments();
 			expriment.addDefaultExperimentEquipments();
