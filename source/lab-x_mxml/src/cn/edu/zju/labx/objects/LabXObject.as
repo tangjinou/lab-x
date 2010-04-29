@@ -8,6 +8,7 @@ package cn.edu.zju.labx.objects
 	import cn.edu.zju.labx.events.IUserInputListener;
 	import cn.edu.zju.labx.events.LabXEvent;
 	import cn.edu.zju.labx.logicObject.LineRayLogic;
+	import cn.edu.zju.labx.objects.dock.BasicDock;
 	import cn.edu.zju.labx.objects.ray.LineRay;
 	import cn.edu.zju.labx.objects.ray.Ray;
 	import cn.edu.zju.labx.utils.MathUtils;
@@ -39,6 +40,10 @@ package cn.edu.zju.labx.objects
 		public function LabXObject(material:MaterialObject3D, name:String, vertices:Array=null, faces:Array=null)
 		{
 			super(material, vertices, faces, name);
+			
+			// addChild in the constructor of BasicDock
+			_dock = new BasicDock(this,material);
+			
 		}
 
 		/**
@@ -297,6 +302,33 @@ package cn.edu.zju.labx.objects
 			{
 				listener.handleLabXEvent(event);
 			}
+		}
+		
+		/**
+		 *  The dock will be created in the constructor 
+		 **/ 
+		private var _dock:BasicDock;
+		
+		/**
+		 *  Return the reference of the dock
+		 */ 
+		public function getDock():BasicDock{
+		     return _dock;
+		}
+		
+		/**
+		 *  we could change the dock at runtime
+		 */ 
+		public function setNewDock(dock:BasicDock):void{
+		     this._dock = dock;
+		}
+		
+		/***
+		 *  This will invoke the update of dock
+		 */ 
+		public function update():void{
+		     if(_dock!=null)
+		     	_dock.update();
 		}
 
 	}

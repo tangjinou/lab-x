@@ -249,6 +249,7 @@ package cn.edu.zju.labx.core.manager
 					rayManager.reProduceRays();
 				}
 			}
+			object.update();
 		}
 		
 		public function isObjectInStage(object:LabXObject):Boolean

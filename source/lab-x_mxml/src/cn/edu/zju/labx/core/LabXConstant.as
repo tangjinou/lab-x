@@ -14,11 +14,13 @@ package cn.edu.zju.labx.core
 		public static const DEFAULT_CAMERA_ZOOM:Number=90;
 		public static const DEFAULT_CAMERA_PITCH:Number=60;
 		public static const DEFAULT_CAMERA_YAW:Number=270;
+		
 		/**
 		 *  Constants for Desk
 		 */
 		public static const DESK_WIDTH:Number=930;
 		public static const DESK_DEPTH:Number=500;
+		public static const DESK_DOWN_OFFSET:Number=50;
 
 
 		public static const DESK_X_MIN:Number=30;
@@ -26,7 +28,10 @@ package cn.edu.zju.labx.core
 		public static const DESK_Z_MIN:Number=-LabXConstant.DESK_DEPTH / 2;
 		public static const DESK_Z_MAX:Number=LabXConstant.DESK_DEPTH / 2;
 
-
+        /**
+        *  Constants for GRID
+        */
+        public static const GRID_DOWN_OFFSET:Number=DESK_DOWN_OFFSET + 35; 
 
 
 		/**
@@ -90,6 +95,13 @@ package cn.edu.zju.labx.core
 		 */
 		public static const BLUE:Number = 1;
 		public static const YELLOW:Number = 2;
-
+		
+		/**
+		 * DOCK
+		 */ 
+		public static const DOCK_NOG_R:Number = 8;
+		public static const DOCK_BOTTOM_R:Number = 30;
+		public static const DOCK_BOTTOM_H:Number = 10;
+        public static const DOCK_NOG_H:Number = 100;
 	}
 }
