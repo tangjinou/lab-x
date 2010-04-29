@@ -33,6 +33,7 @@ package cn.edu.zju.labx.objects.beam
 		{
 			var logic:ObjectPlaneLogic=new ObjectPlaneLogic(this);
 			this._ray=logic.processRay(oldRay);
+			this._ray.setColor(oldRay.getColor());  // a bit tricky here because hard to use extendNewRay in LabXObject
 			displayNewRay(this._ray);
 		}
 
