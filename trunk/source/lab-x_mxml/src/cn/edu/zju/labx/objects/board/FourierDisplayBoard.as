@@ -87,14 +87,16 @@ package cn.edu.zju.labx.objects.board
 			f_s[1]=ray_tmp.getLengthOfFirstLineRay();
 
 			ray_tmp=RayManager.getDefault.getFrontRay(ray_tmp);
-			if (!(ray_tmp.getSender() is FourierLens))
+			if (ray_tmp.getSender() ==null ||!(ray_tmp.getSender() is FourierLens))
 			{
 				return false;
 			}
 			f_s[2]=ray_tmp.getLengthOfFirstLineRay();
 
 			ray_tmp=RayManager.getDefault.getFrontRay(ray_tmp);
-			if (!(ray_tmp.getSender() is ObjectPlane))
+			
+			
+			if (ray_tmp.getSender() ==null ||!(ray_tmp.getSender() is ObjectPlane))
 			{
 				return false;
 			}
