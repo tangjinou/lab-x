@@ -1,8 +1,9 @@
 package cn.edu.zju.labx.objects.ray
 {
+	import cn.edu.zju.labx.core.LabXConstant;
 	import cn.edu.zju.labx.core.manager.StageObjectsManager;
 	import cn.edu.zju.labx.objects.LabXObject;
-	import cn.edu.zju.labx.core.LabXConstant;
+	
 	import mx.collections.ArrayCollection;
 	
 	import org.papervision3d.core.geom.Lines3D;
@@ -47,6 +48,11 @@ package cn.edu.zju.labx.objects.ray
 		public function setColor(color:Number = LabXConstant.BLUE):void
 		{
 			this.color = color;
+		}
+		
+		public function getColor():Number
+		{
+			return this.color;
 		}
 
 		public function getSender():LabXObject
