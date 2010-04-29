@@ -1,6 +1,7 @@
 package cn.edu.zju.labx.objects
 {
 
+	import cn.edu.zju.labx.core.LabXConstant;
 	import cn.edu.zju.labx.core.manager.StageObjectsManager;
 	
 	import flash.filters.DropShadowFilter;
@@ -38,6 +39,9 @@ package cn.edu.zju.labx.objects
 				line=new Line3D(_lines, blueMaterial, 1, start, end);
 				_lines.addLine(line);
 			}
+			
+			_lines.moveDown(LabXConstant.GRID_DOWN_OFFSET);
+			
 			StageObjectsManager.getDefault.originPivot.addChild(_lines);
 			StageObjectsManager.getDefault.layerManager.gridLayer.addDisplayObject3D(_lines);
 			var dropShadowFilter:DropShadowFilter=new DropShadowFilter(0, 45, 0x00FF00, 1, 8, 8, 3, 2, false, false, false);

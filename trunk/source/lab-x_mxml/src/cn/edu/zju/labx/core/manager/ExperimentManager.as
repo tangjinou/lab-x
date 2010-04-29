@@ -1,7 +1,6 @@
 package cn.edu.zju.labx.core.manager
 {
 	import cn.edu.zju.labx.core.LabXConstant;
-	import cn.edu.zju.labx.core.OptimizeMovingState;
 	import cn.edu.zju.labx.experiment.ExperimentFactory;
 	import cn.edu.zju.labx.experiment.IExperiment;
 	import cn.edu.zju.labx.objects.LabXObject;
@@ -18,14 +17,13 @@ package cn.edu.zju.labx.core.manager
 	import cn.edu.zju.labx.objects.board.FourierDisplayBoard;
 	import cn.edu.zju.labx.objects.board.MachZehnderInterfBoard;
 	import cn.edu.zju.labx.objects.board.ParallelBeamDetector;
+	import cn.edu.zju.labx.objects.dock.BasicDock;
 	import cn.edu.zju.labx.objects.lens.ConvexLens;
 	import cn.edu.zju.labx.objects.lens.FourierLens;
 	import cn.edu.zju.labx.objects.lens.Lens;
 	import cn.edu.zju.labx.objects.lightSource.Lamps;
 	import cn.edu.zju.labx.objects.lightSource.Laser;
 	import cn.edu.zju.labx.objects.lightSource.LightSource;
-	
-	import com.greensock.TweenLite;
 	
 	import flash.events.TimerEvent;
 	import flash.utils.Timer;
@@ -370,6 +368,8 @@ package cn.edu.zju.labx.core.manager
 			material=material || new ColorMaterial(0x262626, 1, true);
 			return new ArrowObjectPlane(name, material, objMaterial);
 		}
+		
+		
 
 		/**
 		 *  remove the last experiment's equipments

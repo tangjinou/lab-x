@@ -74,6 +74,7 @@ package cn.edu.zju.labx.experiment
 			defaultEquipment_size++;
 			equipmentList.addItem(ExperimentManager.createParallelBeamDetector("剪切干涉屏幕"));
 		    defaultEquipment_size++;
+
 		}
 		
 		public function moveAllExperimentEquipmentsOptimize():void{

@@ -38,7 +38,7 @@ package cn.edu.zju.labx.objects.desk
 
 		private function deskOnLoaded(evt:FileLoadEvent):void
 		{
-			desk.moveDown(LabXConstant.STAGE_HEIGHT / 2 - 40);
+			desk.moveDown(LabXConstant.STAGE_HEIGHT / 2 + LabXConstant.DESK_DOWN_OFFSET);
 			desk.moveRight(LabXConstant.STAGE_WIDTH / 2);
 			StageObjectsManager.getDefault.originPivot.addChild(desk);
 			StageObjectsManager.getDefault.layerManager.deskLayer.addDisplayObject3D(desk.getChildByName("COLLADA_Scene").getChildByName("ChamferBox01"), true);
