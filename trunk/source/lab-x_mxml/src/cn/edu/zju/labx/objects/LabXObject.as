@@ -73,6 +73,13 @@ package cn.edu.zju.labx.objects
 		{
 			this._ray=ray;
 		}
+		
+		protected function extendNewRay(oldRay:Ray):Ray
+		{
+			var newRay:Ray = new Ray(this, null, null);
+			newRay.setColor(oldRay.getColor());
+			return newRay;
+		}
 
 		/********************************************************************/
 		/* This for find the ray if is on this object                       */

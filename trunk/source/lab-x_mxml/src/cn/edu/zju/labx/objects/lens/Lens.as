@@ -97,7 +97,7 @@ package cn.edu.zju.labx.objects.lens
 		{
 			if (oldRay != null)
 			{
-				var resultRay:Ray=new Ray(this, null, null);
+				var resultRay:Ray=extendNewRay(oldRay);
 				var lensLogic:LensLogic=new LensLogic(getPosition(), getNormal(), this._focus);
 				var newLineRays:ArrayCollection=new ArrayCollection();
 				for each (var oldLineRay:LineRay in oldRay.getLineRays())
