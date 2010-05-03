@@ -32,7 +32,7 @@ package cn.edu.zju.labx.objects.board
 								Number3D.sub(lineRay.end_point, lineRay.start_point),
 								Number3D.sub(lineRay2.end_point, lineRay2.start_point));
 							displayDoubleSlitInterferenceImage(angleOfLight);
-//							trace(angleOfLight);
+							trace("angle" + angleOfLight);
 						}
 					}
 				}
