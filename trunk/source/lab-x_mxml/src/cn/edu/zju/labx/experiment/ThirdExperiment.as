@@ -8,7 +8,7 @@ package cn.edu.zju.labx.experiment
 	
 	import com.greensock.TweenLite;
 	
-	public class ThirdExperiment extends AbsractExperiment
+	public class ThirdExperiment extends AbstractExperiment
 	{
 		public function ThirdExperiment()
 		{

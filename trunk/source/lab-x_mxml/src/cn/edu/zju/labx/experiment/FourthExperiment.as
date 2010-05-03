@@ -11,7 +11,7 @@ package cn.edu.zju.labx.experiment
 	
 	import org.papervision3d.materials.ColorMaterial;
 	
-	public class FourthExperiment extends AbsractExperiment
+	public class FourthExperiment extends AbstractExperiment
 	{
 		public function FourthExperiment()
 		{
