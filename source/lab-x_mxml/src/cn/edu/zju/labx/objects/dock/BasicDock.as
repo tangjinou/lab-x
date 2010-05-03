@@ -1,10 +1,12 @@
 package cn.edu.zju.labx.objects.dock
 {
 	import cn.edu.zju.labx.core.LabXConstant;
-	import cn.edu.zju.labx.objects.LabXObject;
 	import cn.edu.zju.labx.core.manager.StageObjectsManager;
+	import cn.edu.zju.labx.objects.LabXObject;
 	
 	import org.papervision3d.core.proto.MaterialObject3D;
+	import org.papervision3d.materials.utils.MaterialsList;
+	import org.papervision3d.objects.primitives.Cube;
 	import org.papervision3d.objects.primitives.Cylinder;
 	import org.papervision3d.view.layer.ViewportLayer;
 
@@ -12,7 +14,7 @@ package cn.edu.zju.labx.objects.dock
 	{   
 		private var _material:MaterialObject3D;
 		private var body:Cylinder;
-		private var bottom:Cylinder;
+		private var bottom:Cube;
 		private var effectLayer:ViewportLayer;
 		
 		/**
@@ -33,9 +35,15 @@ package cn.edu.zju.labx.objects.dock
 		}
 		
 		public function createDisplayObject():void{
-            bottom = new Cylinder(_material,LabXConstant.DOCK_BOTTOM_R,LabXConstant.DOCK_BOTTOM_H,4,3);
+            var materialsList:MaterialsList=new MaterialsList();
+			materialsList.addMaterial(_material, "front");
+			materialsList.addMaterial(_material, "back");
+			materialsList.addMaterial(_material, "left");
+			materialsList.addMaterial(_material, "right");
+			materialsList.addMaterial(_material, "top");
+			materialsList.addMaterial(_material, "bottom");
+            bottom = new Cube(materialsList,LabXConstant.DOCK_BOTTOM_R,LabXConstant.DOCK_BOTTOM_R,LabXConstant.DOCK_BOTTOM_H);
 		}
-		
 		
 		/***
 		 *  change the size of dock
