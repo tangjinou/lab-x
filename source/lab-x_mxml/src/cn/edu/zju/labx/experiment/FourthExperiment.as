@@ -4,11 +4,14 @@ package cn.edu.zju.labx.experiment
 	import cn.edu.zju.labx.core.manager.ExperimentManager;
 	import cn.edu.zju.labx.core.manager.StageObjectsManager;
 	import cn.edu.zju.labx.objects.LabXObject;
+	import cn.edu.zju.labx.objects.beam.LCLV;
 	import cn.edu.zju.labx.objects.beam.PolarizationBeamSplitter;
 	import cn.edu.zju.labx.objects.lens.Lens;
 	import cn.edu.zju.labx.objects.lightSource.LightSource;
 	
 	import com.greensock.TweenLite;
+	
+	import flash.events.MouseEvent;
 	
 	import mx.controls.Label;
 	import mx.controls.RadioButton;
@@ -16,7 +19,9 @@ package cn.edu.zju.labx.experiment
 	import org.papervision3d.materials.ColorMaterial;
 	
 	public class FourthExperiment extends AbstractExperiment
-	{
+	{   
+		private var lclv:LCLV;
+		
 		public function FourthExperiment()
 		{
 			super();
@@ -45,7 +50,10 @@ package cn.edu.zju.labx.experiment
 			equipmentList.addItem(lens3);
 
 			equipmentList.addItem(ExperimentManager.createDifferentialCoefficientBoard("接收屏"));
-			equipmentList.addItem(ExperimentManager.createLCLV("液晶光阀"));
+			
+			/**should be recorded*/
+			lclv = ExperimentManager.createLCLV("液晶光阀");
+			equipmentList.addItem(lclv);
 			equipmentList.addItem(ExperimentManager.createArrowObjectPlane("物1", null, new ColorMaterial(0x00FFFF)));
 			equipmentList.addItem(ExperimentManager.createArrowObjectPlane("物2", null, new ColorMaterial(0xFFFF00)));
 
@@ -60,7 +68,6 @@ package cn.edu.zju.labx.experiment
 			}
 			
 			private function createLCLVRadioButtons():void{
-				
 				var lclv_radio_label:Label = new Label();
 				lclv_radio_label.text = "LCLV 选项";
 				StageObjectsManager.getDefault.special_bar_box.addChild(lclv_radio_label);
@@ -69,21 +76,30 @@ package cn.edu.zju.labx.experiment
 			    lclv_radio_add.groupName = "lclv_radio";
 			    lclv_radio_add.id = "lclv_radio_add";
 			    lclv_radio_add.label = "add";
+			    lclv_radio_add.selected = true;
+			    lclv_radio_add.addEventListener(MouseEvent.CLICK, function (e:MouseEvent){
+			    			lclv.changeFunction(e,lclv_radio_add.label);
+			    		});
 			    StageObjectsManager.getDefault.special_bar_box.addChild(lclv_radio_add);
 			    
 			    var lclv_radio_subtract:RadioButton = new RadioButton();
 			    lclv_radio_subtract.groupName = "lclv_radio";
 			    lclv_radio_subtract.id = "lclv_radio_subtract";
 			    lclv_radio_subtract.label = "subtract";
+			    lclv_radio_subtract.addEventListener(MouseEvent.CLICK, function (e:MouseEvent){
+			    			lclv.changeFunction(e,lclv_radio_subtract.label);
+			    		});
 			    StageObjectsManager.getDefault.special_bar_box.addChild(lclv_radio_subtract);
 			    
 			    var lclv_radio_differential:RadioButton = new RadioButton();
 			    lclv_radio_differential.groupName = "lclv_radio";
 			    lclv_radio_differential.id = "lclv_radio_differential";
 			    lclv_radio_differential.label = "differential";
+			    lclv_radio_differential.addEventListener(MouseEvent.CLICK, function (e:MouseEvent){
+			    			lclv.changeFunction(e,lclv_radio_differential.label);
+			    		});
 			    StageObjectsManager.getDefault.special_bar_box.addChild(lclv_radio_differential);
 			}
-			
 			
 			override public function moveExperimentEquipmentOptimize(labXObject:LabXObject):void{
 				if (labXObject.name == "激光光源")
