@@ -17,7 +17,6 @@ package cn.edu.zju.labx.core.manager
 	import cn.edu.zju.labx.objects.board.FourierDisplayBoard;
 	import cn.edu.zju.labx.objects.board.MachZehnderInterfBoard;
 	import cn.edu.zju.labx.objects.board.ParallelBeamDetector;
-	import cn.edu.zju.labx.objects.dock.BasicDock;
 	import cn.edu.zju.labx.objects.lens.ConvexLens;
 	import cn.edu.zju.labx.objects.lens.FourierLens;
 	import cn.edu.zju.labx.objects.lens.Lens;
@@ -94,7 +93,7 @@ package cn.edu.zju.labx.core.manager
 //			addDefaultExperimentEquipments(_equipmentList);
 			for (var i:int=0; i < expriment.getEquipmentList().length; i++)
 			{
-				var equipment:LabXObject=expriment.getEquipmentList().getItemAt(i) as LabXObject;
+				var equipment:LabXObject =expriment.getEquipmentList().getItemAt(i) as LabXObject;
 				equipment.moveUp(LabXConstant.LABX_OBJECT_HEIGHT / 2);
 				equipment.moveForward(LabXConstant.STAGE_DEPTH / 2);
 				equipment.moveRight(i * LabXConstant.STAGE_WIDTH / expriment.getEquipmentList().length);

@@ -1,17 +1,16 @@
 package cn.edu.zju.labx.objects.beam
 {
 	import cn.edu.zju.labx.core.manager.RayManager;
-	import cn.edu.zju.labx.core.manager.StageObjectsManager;
 	import cn.edu.zju.labx.objects.lens.Lens;
 	import cn.edu.zju.labx.objects.ray.LineRay;
 	import cn.edu.zju.labx.objects.ray.Ray;
 	
 	import flash.display.Shape;
+	import flash.events.Event;
 	import flash.geom.Matrix;
 	
 	import mx.collections.ArrayCollection;
 	import mx.collections.Sort;
-	import mx.controls.Button;
 	
 	import org.papervision3d.core.math.Number3D;
 	import org.papervision3d.core.proto.MaterialObject3D;
@@ -20,7 +19,7 @@ package cn.edu.zju.labx.objects.beam
 	public class LCLV extends Beam
 	{
 		private var imageInfo:ArrayCollection;
-		public function LCLV(name:String, material:MaterialObject3D, vertices:Array=null, faces:Array=null)
+		public function LCLV(name:String, material:MaterialObject3D,vertices:Array=null, faces:Array=null)
 		{
 			super(material, name, vertices, faces);
 		}
@@ -113,6 +112,23 @@ package cn.edu.zju.labx.objects.beam
 		override protected function objectPressHandler(event:InteractiveScene3DEvent):void{
 			super.objectPressHandler(event);
 		} 
+		
+		public var radio_index:int = LCLV_RADIO_ADD;
+		public static const LCLV_RADIO_ADD:int = 0;
+		public static const LCLV_RADIO_SUBTRACT:int = 1;
+		public static const LCLV_RADIO_DIFFERENTIAL:int =2;
+		
+		public function changeFunction(event:Event,str:String):void{
+		    if(str == "add"){
+		       radio_index = LCLV_RADIO_ADD;
+		    }else if(str == ""){
+		       radio_index = LCLV_RADIO_SUBTRACT;
+		    }else if(str == ""){
+		       radio_index = LCLV_RADIO_DIFFERENTIAL;
+		    }else{
+               radio_index = LCLV_RADIO_ADD;		    
+		    }
+		}
 
 	}
 }
