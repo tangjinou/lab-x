@@ -47,6 +47,9 @@
                  setting_bar_box.y=0;
                  user_control_bar_box.x=this.width-180;
                  user_control_bar_box.y=this.height-130;
+                 special_bar_box.x = user_control_bar_box.x;
+                 special_bar_box.y = user_control_bar_box.y - 150;
+                 
                  best_position_box.x = this.width/2-60;
                  best_position_box.y = this.height-40;
 	 		}
@@ -77,6 +80,8 @@
 	 		   StyleManager.getStyleDeclaration("ToolTip").setStyle("fontSize",16);  
                StyleManager.getStyleDeclaration("ToolTip").setStyle("backgroundColor","#33CC99"); 
 	 		   
+	 		   StageObjectsManager.getDefault.application = this;
+	 		   StageObjectsManager.getDefault.stage = stage;
 	 		   StageObjectsManager.getDefault.messageBox=message_box;
 	 		   StageObjectsManager.getDefault.coordainate_x=coordainate_x;
 	 		   StageObjectsManager.getDefault.coordainate_y=coordainate_y;
@@ -84,10 +89,9 @@
 	 		   StageObjectsManager.getDefault.rotate_x=rotate_x;
 	 		   StageObjectsManager.getDefault.rotate_y=rotate_y;
 	 		   StageObjectsManager.getDefault.rotate_z=rotate_z;
-	 		   
+	 		   StageObjectsManager.getDefault.special_bar_box=special_bar_box;
 	 		   
 //	 		   StageObjectsManager.getDefault.scene_rotation=scene_rotation;
-	 		   
 	 		   StageObjectsManager.getDefault.object_selected=object_selected;
 	 		   StageObjectsManager.getDefault.rotate_left_button=rotate_left_button;
 	 		   StageObjectsManager.getDefault.rotate_right_button=rotate_right_button;
@@ -219,6 +223,9 @@
             <mx:Button  click="choseComponentWindow()"  toolTip="选择器件" icon="@Embed('../assets/icon/objects.png')" />
             <mx:Button  click="choseExperimentWindow()"  toolTip="选择实验" icon="@Embed('../assets/icon/experimentChose.png')" />
             <mx:Button  click="showAuthor()"  toolTip="联系作者" icon="@Embed('../assets/icon/mail.png')" />
+     </mx:VBox>
+     
+     <mx:VBox id="special_bar_box">
      </mx:VBox>
      
      <mx:Label text="物体移动" fontSize="12"/>
