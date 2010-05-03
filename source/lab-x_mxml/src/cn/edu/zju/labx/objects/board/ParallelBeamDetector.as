@@ -31,7 +31,7 @@ package cn.edu.zju.labx.objects.board
 							var angleOfLight:Number = MathUtils.calculateAngleOfTwoVector(
 								Number3D.sub(lineRay.end_point, lineRay.start_point),
 								Number3D.sub(lineRay2.end_point, lineRay2.start_point));
-							displayDoubleSlitInterferenceImage(angleOfLight);
+							displayDoubleSlitInterferenceImage(angleOfLight*300);
 							trace("angle" + angleOfLight);
 						}
 					}
