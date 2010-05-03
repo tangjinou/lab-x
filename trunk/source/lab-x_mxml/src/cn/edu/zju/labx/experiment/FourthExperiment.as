@@ -2,12 +2,16 @@ package cn.edu.zju.labx.experiment
 {
 	import cn.edu.zju.labx.core.LabXConstant;
 	import cn.edu.zju.labx.core.manager.ExperimentManager;
+	import cn.edu.zju.labx.core.manager.StageObjectsManager;
 	import cn.edu.zju.labx.objects.LabXObject;
 	import cn.edu.zju.labx.objects.beam.PolarizationBeamSplitter;
 	import cn.edu.zju.labx.objects.lens.Lens;
 	import cn.edu.zju.labx.objects.lightSource.LightSource;
 	
 	import com.greensock.TweenLite;
+	
+	import mx.controls.Label;
+	import mx.controls.RadioButton;
 	
 	import org.papervision3d.materials.ColorMaterial;
 	
@@ -19,6 +23,9 @@ package cn.edu.zju.labx.experiment
 		}
 		
 		override public function createExperimentEquipments():void{
+			
+			createSpecialBarBox();
+			
 			var lightSource2:LightSource=ExperimentManager.createLamps("照明光源");
 			equipmentList.addItem(lightSource2);
 			var lightSource1:LightSource=ExperimentManager.createLaser("激光光源");
@@ -44,8 +51,39 @@ package cn.edu.zju.labx.experiment
 
 			var lens4:Lens=ExperimentManager.createConvexLens("成像透镜2", 80);
 			equipmentList.addItem(lens4);
-
+			
 			}
+			
+			
+			private function createSpecialBarBox():void{
+			    createLCLVRadioButtons();
+			}
+			
+			private function createLCLVRadioButtons():void{
+				
+				var lclv_radio_label:Label = new Label();
+				lclv_radio_label.text = "LCLV 选项";
+				StageObjectsManager.getDefault.special_bar_box.addChild(lclv_radio_label);
+				
+			    var lclv_radio_add:RadioButton = new RadioButton();
+			    lclv_radio_add.groupName = "lclv_radio";
+			    lclv_radio_add.id = "lclv_radio_add";
+			    lclv_radio_add.label = "add";
+			    StageObjectsManager.getDefault.special_bar_box.addChild(lclv_radio_add);
+			    
+			    var lclv_radio_subtract:RadioButton = new RadioButton();
+			    lclv_radio_subtract.groupName = "lclv_radio";
+			    lclv_radio_subtract.id = "lclv_radio_subtract";
+			    lclv_radio_subtract.label = "subtract";
+			    StageObjectsManager.getDefault.special_bar_box.addChild(lclv_radio_subtract);
+			    
+			    var lclv_radio_differential:RadioButton = new RadioButton();
+			    lclv_radio_differential.groupName = "lclv_radio";
+			    lclv_radio_differential.id = "lclv_radio_differential";
+			    lclv_radio_differential.label = "differential";
+			    StageObjectsManager.getDefault.special_bar_box.addChild(lclv_radio_differential);
+			}
+			
 			
 			override public function moveExperimentEquipmentOptimize(labXObject:LabXObject):void{
 				if (labXObject.name == "激光光源")

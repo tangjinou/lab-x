@@ -33,7 +33,7 @@ package cn.edu.zju.labx.objects
 		 * This  Function is for add userInputHandle
 		 */
 		public var userInputHandle:Function;
-
+		
 		/**
 		 * Create an LabX Object
 		 */
