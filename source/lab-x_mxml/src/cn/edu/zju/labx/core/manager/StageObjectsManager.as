@@ -7,15 +7,18 @@ package cn.edu.zju.labx.core.manager
 	import cn.edu.zju.labx.objects.LabXObject;
 	import cn.edu.zju.labx.objects.lightSource.LightSource;
 	
+	import flash.display.Stage;
 	import flash.events.TimerEvent;
 	import flash.filters.DropShadowFilter;
 	import flash.utils.Timer;
 	
 	import mx.collections.ArrayCollection;
+	import mx.containers.VBox;
 	import mx.controls.Button;
 	import mx.controls.Label;
 	import mx.controls.Text;
 	import mx.controls.TextArea;
+	import mx.core.Application;
 	
 	import org.papervision3d.events.InteractiveScene3DEvent;
 	import org.papervision3d.objects.DisplayObject3D;
@@ -29,6 +32,21 @@ package cn.edu.zju.labx.core.manager
         */
         public  var mainView:BasicView;
         
+        /**
+        * Current Application
+        **/ 
+        public var application:Application;
+        
+        /**
+        *  Current stage
+        */ 
+        public  var stage:Stage;   
+        
+        /**
+        *  special_bar_box
+        */ 
+        public var special_bar_box:VBox;
+           
         /**
          * Current stage width
          */ 

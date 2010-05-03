@@ -1,6 +1,7 @@
 package cn.edu.zju.labx.objects.beam
 {
 	import cn.edu.zju.labx.core.manager.RayManager;
+	import cn.edu.zju.labx.core.manager.StageObjectsManager;
 	import cn.edu.zju.labx.objects.lens.Lens;
 	import cn.edu.zju.labx.objects.ray.LineRay;
 	import cn.edu.zju.labx.objects.ray.Ray;
@@ -10,9 +11,11 @@ package cn.edu.zju.labx.objects.beam
 	
 	import mx.collections.ArrayCollection;
 	import mx.collections.Sort;
+	import mx.controls.Button;
 	
 	import org.papervision3d.core.math.Number3D;
 	import org.papervision3d.core.proto.MaterialObject3D;
+	import org.papervision3d.events.InteractiveScene3DEvent;
 
 	public class LCLV extends Beam
 	{
@@ -105,5 +108,11 @@ package cn.edu.zju.labx.objects.beam
 			
 			return 0;
 		};
+		
+		
+		override protected function objectPressHandler(event:InteractiveScene3DEvent):void{
+			super.objectPressHandler(event);
+		} 
+
 	}
 }
