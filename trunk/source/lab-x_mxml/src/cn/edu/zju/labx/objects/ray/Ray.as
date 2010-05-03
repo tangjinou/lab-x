@@ -34,7 +34,7 @@ package cn.edu.zju.labx.objects.ray
 		public var lineRays:ArrayCollection=new ArrayCollection(); //FOR TEST
 
 		private var lines:Lines3D=null;
-		private var lineMaterial:LineMaterial=new LineMaterial(0xFFFFFF, 1);
+		private var lineMaterial:LineMaterial=new LineMaterial(0x00ffff, 1);
 		private var effectLayer:ViewportLayer=new ViewportLayer(StageObjectsManager.getDefault.mainView.viewport, null);
 
 		public function Ray(sender:LabXObject, material:MaterialObject3D=null, lineRays:ArrayCollection=null)
