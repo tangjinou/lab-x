@@ -28,9 +28,11 @@ package cn.edu.zju.labx.objects.board
 		protected function displayDoubleSlitInterferenceImage(theta:Number):void
 		{
 			var distance:Number=InterferenceLogic.doubleSlitInterferenceLogic(theta, LabXConstant.WAVE_LENGTH);
-//			trace(distance);
+			trace("distance"+distance);
 
 			distance/=300;
+			if (distance == 0)
+				distance = depth;
 			var numOfColumns:Number=depth / distance / 2;
 			var bmp:BitmapData=new BitmapData(depth, height, false, 0x0);
 			for (var i:Number=0; i < numOfColumns; i++)
