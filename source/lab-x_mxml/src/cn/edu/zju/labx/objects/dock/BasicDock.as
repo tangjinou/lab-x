@@ -13,6 +13,7 @@ package cn.edu.zju.labx.objects.dock
 	public class BasicDock 
 	{   
 		private var _material:MaterialObject3D;
+		private var materialsList:MaterialsList=new MaterialsList();
 		private var body:Cylinder;
 		private var bottom:Cube;
 		private var effectLayer:ViewportLayer;
@@ -35,7 +36,7 @@ package cn.edu.zju.labx.objects.dock
 		}
 		
 		public function createDisplayObject():void{
-            var materialsList:MaterialsList=new MaterialsList();
+            
 			materialsList.addMaterial(_material, "front");
 			materialsList.addMaterial(_material, "back");
 			materialsList.addMaterial(_material, "left");
