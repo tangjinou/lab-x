@@ -13,7 +13,7 @@ package cn.edu.zju.labx.experiment
 	
 	import mx.collections.ArrayCollection;
 	
-	public class FirstExperiment extends AbsractExperiment
+	public class FirstExperiment extends AbstractExperiment
 	{
 		public function FirstExperiment()
 		{

@@ -14,7 +14,7 @@ package cn.edu.zju.labx.experiment
 	
 	import mx.collections.ArrayCollection;
 
-	public class AbsractExperiment implements IExperiment
+	public class AbstractExperiment implements IExperiment
 	{   
 		protected var  equipmentList:ArrayCollection;
 		
@@ -23,7 +23,7 @@ package cn.edu.zju.labx.experiment
 		protected var  defaultEquipment_size:int=0;
 		
 		
-		public function AbsractExperiment(){
+		public function AbstractExperiment(){
 		    equipmentList = new ArrayCollection();
 		    state = new OptimizeMovingState();
 		}
