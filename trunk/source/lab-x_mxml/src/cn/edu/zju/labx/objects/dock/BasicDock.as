@@ -2,9 +2,11 @@ package cn.edu.zju.labx.objects.dock
 {
 	import cn.edu.zju.labx.core.LabXConstant;
 	import cn.edu.zju.labx.objects.LabXObject;
+	import cn.edu.zju.labx.core.manager.StageObjectsManager;
 	
 	import org.papervision3d.core.proto.MaterialObject3D;
 	import org.papervision3d.objects.primitives.Cylinder;
+	import org.papervision3d.view.layer.ViewportLayer;
 
 	public class BasicDock 
 	{   
@@ -16,6 +18,7 @@ package cn.edu.zju.labx.objects.dock
 		
 		private var body:Cylinder;
 		private var bottom:Cylinder;
+		private var effectLayer:ViewportLayer;
 		
 		/**
 		 *  the parent who created the Dock
@@ -42,16 +45,12 @@ package cn.edu.zju.labx.objects.dock
 		 */
 		public function update():void{
 			
-			/*   
-			 *   Will
-			 *
-			 *   here: will create new dock, should be add the layermanager
-			 * 
-			 */ 
 			if(body!=null)
 			  {  
 			  	 body.removeChild(bottom);
-			     _parent.removeChild(body);
+			     _parent.removeChild(body); 
+			     StageObjectsManager.getDefault.layerManager.equipmentLayer.removeLayer(effectLayer);
+			     effectLayer = null;
 			  }
 		    DOCK_NOG_H = _parent.y + LabXConstant.DOCK_NOG_H;
 		    /*Because, the parent will change it's scale*/
@@ -64,12 +63,10 @@ package cn.edu.zju.labx.objects.dock
             bottom.y = body.y - 10 + LabXConstant.DOCK_BOTTOM_H;
 		    _parent.addChild(body);
 		    
-		    
-		    
-		    
-//		    var effectLayer:ViewportLayer=new ViewportLayer(StageObjectsManager.getDefault.mainView.viewport, null);
-//			effectLayer.addDisplayObject3D(displayObject, true);
-//			effectLayer.blendMode=BlendMode.HARDLIGHT;
+		    effectLayer=new ViewportLayer(StageObjectsManager.getDefault.mainView.viewport, null);
+			effectLayer.addDisplayObject3D(body, true);
+			StageObjectsManager.getDefault.layerManager.equipmentLayer.addLayer(effectLayer);
+
 		    
 //		    d.moveDown(DOCK_NOG_H / 2 );
 
