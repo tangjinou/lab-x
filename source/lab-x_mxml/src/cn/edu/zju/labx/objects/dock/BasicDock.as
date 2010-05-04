@@ -32,7 +32,7 @@ package cn.edu.zju.labx.objects.dock
 		{   
 			_parent = parent;
 			_material = material;
-			createDisplayObject();
+//			createDisplayObject();
 		}
 		
 		public function createDisplayObject():void{
@@ -64,16 +64,16 @@ package cn.edu.zju.labx.objects.dock
 			
 			if(body!=null)
 			  {  
-			  	 body.removeChild(bottom);
+//			  	 body.removeChild(bottom);
 			     _parent.removeChild(body); 
 			     StageObjectsManager.getDefault.layerManager.equipmentLayer.removeLayer(effectLayer);
 			     effectLayer = null;
 			  }
 		    
 		    body = new Cylinder(_material,LabXConstant.DOCK_NOG_R,DOCK_NOG_H,4,3);
-		    body.addChild(bottom);
+//		    body.addChild(bottom);
             body.moveDown(DOCK_NOG_H / 2);
-            bottom.y = body.y - 10 + LabXConstant.DOCK_BOTTOM_H;
+//          bottom.y = body.y - 10 + LabXConstant.DOCK_BOTTOM_H;
 		    _parent.addChild(body);
 		    effectLayer=new ViewportLayer(StageObjectsManager.getDefault.mainView.viewport, null);
 			effectLayer.addDisplayObject3D(body, true);
