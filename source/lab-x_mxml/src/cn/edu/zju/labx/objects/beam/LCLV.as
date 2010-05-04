@@ -121,14 +121,13 @@ package cn.edu.zju.labx.objects.beam
 		public function changeFunction(event:Event,str:String):void{
 		    if(str == "add"){
 		       radio_index = LCLV_RADIO_ADD;
-		    }else if(str == ""){
+		    }else if(str == "subtract"){
 		       radio_index = LCLV_RADIO_SUBTRACT;
-		    }else if(str == ""){
+		    }else if(str == "differential"){
 		       radio_index = LCLV_RADIO_DIFFERENTIAL;
 		    }else{
                radio_index = LCLV_RADIO_ADD;		    
 		    }
 		}
-
 	}
 }
