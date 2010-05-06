@@ -1,7 +1,6 @@
 package cn.edu.zju.labx.experiment
 {
 	import cn.edu.zju.labx.core.LabXConstant;
-	import cn.edu.zju.labx.core.OptimizeMovingState;
 	import cn.edu.zju.labx.core.manager.ExperimentManager;
 	import cn.edu.zju.labx.objects.LabXObject;
 	import cn.edu.zju.labx.objects.beam.BeamSplitter;
@@ -10,8 +9,6 @@ package cn.edu.zju.labx.experiment
 	import cn.edu.zju.labx.objects.lightSource.LightSource;
 	
 	import com.greensock.TweenLite;
-	
-	import mx.collections.ArrayCollection;
 	
 	public class SecondExperiment extends AbstractExperiment
 	{
@@ -90,7 +87,7 @@ package cn.edu.zju.labx.experiment
 		}
 		
 		override public function getExperimentID():int{
-				return LabXConstant.EXPERIMENT_SECOND;
+				return ExperimentFactory.EXPERIMENT_SECOND;
 		}
 		
 	}

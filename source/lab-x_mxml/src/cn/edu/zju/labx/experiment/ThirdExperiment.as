@@ -74,7 +74,7 @@ package cn.edu.zju.labx.experiment
 		}
 		
 		override public function getExperimentID():int{
-		    return LabXConstant.EXPERIMENT_THIRD;
+		    return ExperimentFactory.EXPERIMENT_THIRD;
 		}
 		
 	}

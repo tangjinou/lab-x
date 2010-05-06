@@ -3,7 +3,15 @@ package cn.edu.zju.labx.experiment
 	import cn.edu.zju.labx.core.LabXConstant;
 	
 	public class ExperimentFactory
-	{
+	{    
+		/**
+		 * Experiment Definition
+		*/
+		public static const EXPERIMENT_FIRST:int=1;
+		public static const EXPERIMENT_SECOND:int=2;
+		public static const EXPERIMENT_THIRD:int=3;
+		public static const EXPERIMENT_FORTH:int=4;
+		
 		/*************************************************************************
 		 * Sigleton Method to make sure there are only one ExperimentManager
 		 * in an application
@@ -25,18 +33,17 @@ package cn.edu.zju.labx.experiment
 		public function createExperiment(experimentIndex:Number):IExperiment{
 		  switch (experimentIndex)
 			{
-				case LabXConstant.EXPERIMENT_FIRST:
+				case ExperimentFactory.EXPERIMENT_FIRST:
 					     return  new FirstExperiment();
-				case LabXConstant.EXPERIMENT_SECOND:
+				case ExperimentFactory.EXPERIMENT_SECOND:
                          return  new SecondExperiment();
-				case LabXConstant.EXPERIMENT_THIRD:
+				case ExperimentFactory.EXPERIMENT_THIRD:
 					     return  new ThirdExperiment();
-				case LabXConstant.EXPERIMENT_FORTH:
+				case ExperimentFactory.EXPERIMENT_FORTH:
 					     return  new FourthExperiment();
 			}
 			return null;
 		}
-		
 		
 
 	}

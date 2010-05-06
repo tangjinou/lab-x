@@ -3,6 +3,7 @@ package
 	import cn.edu.zju.labx.core.LabXConstant;
 	import cn.edu.zju.labx.core.UserInputHandler;
 	import cn.edu.zju.labx.core.manager.StageObjectsManager;
+	import cn.edu.zju.labx.experiment.ExperimentFactory;
 	import cn.edu.zju.labx.objects.Grid;
 	import cn.edu.zju.labx.objects.desk.Desk;
 	
@@ -71,7 +72,7 @@ package
 		/**
 		 * For select the experiment
 		 */
-		public function experimentSelected(experimentId:Number=LabXConstant.EXPERIMENT_FIRST):void
+		public function experimentSelected(experimentId:Number=ExperimentFactory.EXPERIMENT_FIRST):void
 		{
 			StageObjectsManager.getDefault.experimentManager.createExperimentEquipments(experimentId);
 		}
