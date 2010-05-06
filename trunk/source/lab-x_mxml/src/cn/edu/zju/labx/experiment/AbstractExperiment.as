@@ -13,7 +13,12 @@ package cn.edu.zju.labx.experiment
 	import com.greensock.TweenLite;
 	
 	import mx.collections.ArrayCollection;
-
+    
+    /**
+    *  This is abstract class of experiment, if you want 
+    *  
+    *  to create the new experiment, please extends it. 
+    */ 
 	public class AbstractExperiment implements IExperiment
 	{   
 		protected var  equipmentList:ArrayCollection;

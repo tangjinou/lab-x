@@ -9,13 +9,14 @@
 				height="146">
 	<mx:Script>
 		<![CDATA[
+			import cn.edu.zju.labx.experiment.ExperimentFactory;
 			import cn.edu.zju.labx.core.LabXConstant;
 			import mx.collections.ArrayCollection;
 			import mx.managers.PopUpManager;
 			private var rotate_stage_status:Boolean;
 
 			[Bindable]
-			public static var exps:ArrayCollection=new ArrayCollection([{label: "实验一:全息光栅的设计.制备和性能测试", data: LabXConstant.EXPERIMENT_FIRST}, {label: "实验二:全息透镜的制备及应用", data: LabXConstant.EXPERIMENT_SECOND}, {label: "实验三:光学的图像相加,相减", data: LabXConstant.EXPERIMENT_THIRD}, {label: "实验四:液晶光阀用于光学图像实时加,减，微分", data: LabXConstant.EXPERIMENT_FORTH}]);
+			public static var exps:ArrayCollection=new ArrayCollection([{label: "实验一:全息光栅的设计.制备和性能测试", data: ExperimentFactory.EXPERIMENT_FIRST}, {label: "实验二:全息透镜的制备及应用", data: ExperimentFactory.EXPERIMENT_SECOND}, {label: "实验三:光学的图像相加,相减", data: ExperimentFactory.EXPERIMENT_THIRD}, {label: "实验四:液晶光阀用于光学图像实时加,减，微分", data: ExperimentFactory.EXPERIMENT_FORTH}]);
 
 			public function init():void
 			{

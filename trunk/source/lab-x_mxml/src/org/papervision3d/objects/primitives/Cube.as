@@ -119,7 +119,7 @@ package org.papervision3d.objects.primitives {
 		public function Cube( materials:MaterialsList, width:Number=500, depth:Number=500, height:Number=500, segmentsS:int=1, segmentsT:int=1, segmentsH:int=1, insideFaces:int=0, excludeFaces:int=0 )
 		{
 			super( materials.getMaterialByName( "all" ), new Array(), new Array(), null );
-			
+			 
 			this.materials = materials;
 			
 			this.insideFaces  = insideFaces;

@@ -10,8 +10,9 @@ package cn.edu.zju.labx.experiment
 	import cn.edu.zju.labx.objects.lightSource.LightSource;
 	
 	import com.greensock.TweenLite;
-	import flash.events.Event;
+	
 	import flash.events.MouseEvent;
+	
 	import mx.controls.Label;
 	import mx.controls.RadioButton;
 	
@@ -147,11 +148,10 @@ package cn.edu.zju.labx.experiment
 				}
 			}
 			override public function getExperimentID():int{
-		   		 return LabXConstant.EXPERIMENT_FORTH;
+		   		 return ExperimentFactory.EXPERIMENT_FORTH;
 			}	
 		
 			override public  function remove():void{
-			    
 			    super.remove();
 			    /**
 			     *  should remove the objects in the special_bar_box
