@@ -18,6 +18,10 @@ package cn.edu.zju.labx.experiment
     *  This is abstract class of experiment, if you want 
     *  
     *  to create the new experiment, please extends it. 
+    * 
+    *  the new experiment should be create in the class
+    * 
+    *  ExperimentFactory
     */ 
 	public class AbstractExperiment implements IExperiment
 	{   

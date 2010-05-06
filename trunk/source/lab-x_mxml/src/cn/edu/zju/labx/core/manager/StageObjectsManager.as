@@ -179,6 +179,18 @@ package cn.edu.zju.labx.core.manager
          
          private var stageObjectList:ArrayCollection = new ArrayCollection();
          
+         /**
+         *  could get the LabXObject by the classname;
+         */ 
+         public function getLabXObject(classname:Class):LabXObject{
+              for(var i:int=0;i<objectAllSavedList.length;i++){
+                  var obj:LabXObject = objectAllSavedList.getItemAt(i) as LabXObject;              
+                  if (obj is classname){
+                       return obj;
+                  }
+              }
+              return null;
+         }
          
          public  function clear():void{
             objectAllSavedList.removeAll();
