@@ -1,6 +1,7 @@
 package cn.edu.zju.labx.objects.board
 {
-	import cn.edu.zju.labx.core.LabXConstant;
+	import cn.edu.zju.labx.core.manager.StageObjectsManager;
+	import cn.edu.zju.labx.objects.beam.LCLV;
 	import cn.edu.zju.labx.objects.ray.Ray;
 	
 	import flash.display.BitmapData;
@@ -28,24 +29,41 @@ package cn.edu.zju.labx.objects.board
 		{
 			if (!(obj is ArrayCollection))
 				return;
-			
-			var imageInfo:ArrayCollection = obj as ArrayCollection;
+			switch(getFunctionIndexOfLCLV()){
+			   case LCLV.LCLV_RADIO_ADD :  
+			                    imageAdd(obj);
+			                    break;
+			   case LCLV.LCLV_RADIO_SUBTRACT:
+			                    break;
+			   case LCLV.LCLV_RADIO_DIFFERENTIAL:
+			                    break;
+			   default: break;
+			}
+			super.removeCursor();
+		}
+		
+		private function getFunctionIndexOfLCLV():int{
+		    var lclv:LCLV = StageObjectsManager.getDefault.getLabXObject(LCLV) as LCLV;
+		    if(lclv == null){
+		      return LCLV.LCLV_RADIO_ADD;
+		    }
+		    return lclv.radio_index;
+		}
+		
+		private function imageAdd(obj:Object):void{
+		    var imageInfo:ArrayCollection = obj as ArrayCollection;
 			var bmp:BitmapData=new BitmapData(depth, height, true, 0x0);
 			for each (var shape:Shape in imageInfo)
 			{
 				bmp.draw(shape, shape.transform.matrix);
 			}
 			var imageMaterial:BitmapMaterial=new BitmapMaterial(bmp);
-
 			var compMaterial:CompositeMaterial=new CompositeMaterial();
 			compMaterial.addMaterial(material);
 			compMaterial.addMaterial(imageMaterial);
 			compMaterial.interactive=true;
-
 			new_material=compMaterial;
-
 			cube.replaceMaterialByName(new_material, "left");
-			super.removeCursor();
 		}
 
 		override public function isOnTheRay(ray:Ray):Boolean
