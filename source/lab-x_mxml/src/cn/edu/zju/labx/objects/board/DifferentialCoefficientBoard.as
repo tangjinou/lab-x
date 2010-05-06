@@ -34,8 +34,10 @@ package cn.edu.zju.labx.objects.board
 			                    imageAdd(obj);
 			                    break;
 			   case LCLV.LCLV_RADIO_SUBTRACT:
+			   					imageSubtract(obj);
 			                    break;
 			   case LCLV.LCLV_RADIO_DIFFERENTIAL:
+			                    imageDifferential(obj);
 			                    break;
 			   default: break;
 			}
@@ -64,6 +66,15 @@ package cn.edu.zju.labx.objects.board
 			compMaterial.interactive=true;
 			new_material=compMaterial;
 			cube.replaceMaterialByName(new_material, "left");
+		}
+		
+		private function  imageSubtract(obj:Object):void{
+			
+			
+		}
+		
+		private function  imageDifferential(obj:Object):void{
+			
 		}
 
 		override public function isOnTheRay(ray:Ray):Boolean
