@@ -10,9 +10,8 @@ package cn.edu.zju.labx.experiment
 	import cn.edu.zju.labx.objects.lightSource.LightSource;
 	
 	import com.greensock.TweenLite;
-	
+	import flash.events.Event;
 	import flash.events.MouseEvent;
-	
 	import mx.controls.Label;
 	import mx.controls.RadioButton;
 	
@@ -20,13 +19,13 @@ package cn.edu.zju.labx.experiment
 	
 	public class FourthExperiment extends AbstractExperiment
 	{   
+		/**This reference should be recorded**/
 		private var lclv:LCLV;
 		
 		public function FourthExperiment()
 		{
 			super();
 		}
-		
 		override public function createExperimentEquipments():void{
 			
 			createSpecialBarBox();
@@ -146,10 +145,18 @@ package cn.edu.zju.labx.experiment
 				{
 					TweenLite.to(labXObject, LabXConstant.MOVE_DELAY, {x: 400, z: -230, rotationY: 90});
 				}
-					
 			}
 			override public function getExperimentID():int{
 		   		 return LabXConstant.EXPERIMENT_FORTH;
 			}	
+		
+			override public  function remove():void{
+			    
+			    super.remove();
+			    /**
+			     *  should remove the objects in the special_bar_box
+			    */ 
+			    StageObjectsManager.getDefault.special_bar_box.removeAllChildren();
+			}
 	}
 }
