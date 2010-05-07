@@ -12,6 +12,9 @@ package cn.edu.zju.labx.experiment
 		public static const EXPERIMENT_THIRD:int=3;
 		public static const EXPERIMENT_FORTH:int=4;
 		
+		public static const PRE_STEP_ONE_EXPERIMENT:int=101;
+		public static const PRE_STEP_TWO_EXPERIMENT:int=102;
+		
 		/*************************************************************************
 		 * Sigleton Method to make sure there are only one ExperimentManager
 		 * in an application
@@ -41,6 +44,10 @@ package cn.edu.zju.labx.experiment
 					     return  new ThirdExperiment();
 				case ExperimentFactory.EXPERIMENT_FORTH:
 					     return  new FourthExperiment();
+				case ExperimentFactory.PRE_STEP_ONE_EXPERIMENT:
+						return new PreStepOneExperiment();
+				case ExperimentFactory.PRE_STEP_TWO_EXPERIMENT:
+						return new PreStepTwoExperiment();
 			}
 			return null;
 		}
