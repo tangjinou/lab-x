@@ -82,13 +82,12 @@ package cn.edu.zju.labx.core.manager
 			equipmentLayer.sortMode=ViewportLayerSortMode.Z_SORT;
 
 			var bf:BlurFilter=new BlurFilter(3, 3, 1);
-//			var growFilterBlueIn:GlowFilter = new GlowFilter(0x00ffff, 2, 20, 10, 2, 3, true, false);
-			var growFilterBlue:GlowFilter=new GlowFilter(0x00ffff, 2, 16, 10, 3, 9, false, false);
-//			var dropShadow:DropShadowFilter = new DropShadowFilter(0, 360, 0x000fff, 1, 70, 70, 5, 3, false, false, false);
+			var growFilterBlue:GlowFilter=new GlowFilter(0x00ffff, 2, 6, 6, 3, 6, false, false);
+			/*GlowFilter(color:uint = 0xFF0000, alpha:Number = 1.0, blurX:Number = 6.0, blurY:Number = 6.0, strength:Number = 2, quality:int = 1, inner:Boolean = false, knockout:Boolean = false)*/
 			var dropShadowBlue:DropShadowFilter=new DropShadowFilter(0, 360, 0x000fff, 1, 50, 50, 3, 2, false, false, false);
 			rayEffectBlue = [growFilterBlue, dropShadowBlue];
 			var growFilterYellowIn:GlowFilter = new GlowFilter(0xFDD017, 2, 20, 10, 2, 3, true, false);
-			var growFilterYellow:GlowFilter = new GlowFilter(0xFDD017, 2, 8, 8, 3, 9, false, false);
+			var growFilterYellow:GlowFilter = new GlowFilter(0xFDD017, 2, 6, 6, 3, 6, false, false);
 			var dropShadowYellow:DropShadowFilter = new DropShadowFilter(0, 360, 0xFDD017, 1, 50, 50, 3, 2, false, false, false);
 			rayEffectYellow = [growFilterYellowIn, growFilterYellow, dropShadowYellow];
 		}
