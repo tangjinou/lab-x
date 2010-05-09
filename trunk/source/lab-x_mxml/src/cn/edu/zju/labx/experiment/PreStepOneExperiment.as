@@ -25,7 +25,7 @@ package cn.edu.zju.labx.experiment
 			lightSource.rotationY += Math.floor((Math.random() - 0.5) * 20);//random range (-10, 10)
 			lightSource.rotationZ += Math.floor((Math.random() - 0.5) * 20);//random range (-10, 10)
 			
-			equipmentList.addItem(ExperimentManager.createMachZehnderInterfBoard("接收屏"));
+			equipmentList.addItem(ExperimentManager.createLightSourceReceiverBoard("接收屏"));
 		}
 		
 		override public function moveExperimentEquipmentOptimize(labXObject:LabXObject):void
