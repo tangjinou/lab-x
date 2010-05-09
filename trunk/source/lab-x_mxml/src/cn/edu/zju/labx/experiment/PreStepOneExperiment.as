@@ -8,7 +8,7 @@ package cn.edu.zju.labx.experiment
 	 * This experiment is aimed to let the student to learn how 
 	 * to ajust the <b>lightsource</b> state
 	 */
-	public class PreStepOneExperiment extends AbstractExperiment
+	public class PreStepOneExperiment extends AbstractPreStepExperiment
 	{
 		
 		
@@ -37,6 +37,6 @@ package cn.edu.zju.labx.experiment
 		{
 			return ExperimentFactory.PRE_STEP_ONE_EXPERIMENT;
 		}
-
+		
 	}
 }
