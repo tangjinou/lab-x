@@ -10,7 +10,7 @@ package cn.edu.zju.labx.experiment
 	 * This experiment is aim to let the student learn how to ajust convex lens.
 	 *
 	 */
-	public class PreStepTwoExperiment extends AbstractExperiment
+	public class PreStepTwoExperiment extends AbstractPreStepExperiment
 	{
 		public function PreStepTwoExperiment()
 		{
