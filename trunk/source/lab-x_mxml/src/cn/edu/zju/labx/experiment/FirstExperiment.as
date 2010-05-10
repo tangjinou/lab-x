@@ -11,7 +11,8 @@ package cn.edu.zju.labx.experiment
 	import com.greensock.TweenLite;
 	
 	public class FirstExperiment extends AbstractExperiment
-	{
+	{   
+		
 		public function FirstExperiment()
 		{
 			super();
@@ -50,6 +51,7 @@ package cn.edu.zju.labx.experiment
 			lens4.scale=0.7;
 			equipmentList.addItem(lens4);
 			equipmentList.addItem(ExperimentManager.createDoubleSlitInterfBoard("接收屏"));
+			
 		}
 		override public function moveExperimentEquipmentOptimize(labXObject:LabXObject):void{
 		        if (labXObject.name == "激光光源")

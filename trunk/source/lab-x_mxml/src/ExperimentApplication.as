@@ -65,7 +65,7 @@ package
 			addChild(stats);
 			startRendering();
 
-//			experimentSelected(LabXConstant.EXPERIMENT_FIRST);
+			experimentSelected(ExperimentFactory.EXPERIMENT_FIRST);
 		}
 
 

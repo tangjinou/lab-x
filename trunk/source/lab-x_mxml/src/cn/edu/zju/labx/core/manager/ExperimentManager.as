@@ -12,12 +12,13 @@ package cn.edu.zju.labx.core.manager
 	import cn.edu.zju.labx.objects.beam.ObjectPlane;
 	import cn.edu.zju.labx.objects.beam.ParallelCrystal;
 	import cn.edu.zju.labx.objects.beam.PolarizationBeamSplitter;
+	import cn.edu.zju.labx.objects.beam.TrangleObjectPlane;
 	import cn.edu.zju.labx.objects.board.DifferentialCoefficientBoard;
 	import cn.edu.zju.labx.objects.board.DoubleSlitInterfBoard;
 	import cn.edu.zju.labx.objects.board.FourierDisplayBoard;
+	import cn.edu.zju.labx.objects.board.LightSourceReceiverBoard;
 	import cn.edu.zju.labx.objects.board.MachZehnderInterfBoard;
 	import cn.edu.zju.labx.objects.board.ParallelBeamDetector;
-	import cn.edu.zju.labx.objects.board.LightSourceReceiverBoard;
 	import cn.edu.zju.labx.objects.lens.ConvexLens;
 	import cn.edu.zju.labx.objects.lens.FourierLens;
 	import cn.edu.zju.labx.objects.lens.Lens;
@@ -379,6 +380,14 @@ package cn.edu.zju.labx.core.manager
 		}
 		
 		
+		/**
+		 *  create a ttype plane
+		 */
+		public static function createTrangleObjectPlane(name:String="物", material:MaterialObject3D=null, objMaterial:MaterialObject3D=null):TrangleObjectPlane
+		{
+			material=material || new ColorMaterial(0x262626, 1, true);
+			return new TrangleObjectPlane(name, material, objMaterial);
+		}
 
 		/**
 		 *  remove the last experiment's equipments
