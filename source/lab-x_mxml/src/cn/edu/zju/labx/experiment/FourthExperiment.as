@@ -54,8 +54,8 @@ package cn.edu.zju.labx.experiment
 			/**should be recorded*/
 			lclv = ExperimentManager.createLCLV("液晶光阀");
 			equipmentList.addItem(lclv);
-			equipmentList.addItem(ExperimentManager.createArrowObjectPlane("物1", null, new ColorMaterial(0x00FFFF)));
-			equipmentList.addItem(ExperimentManager.createArrowObjectPlane("物2", null, new ColorMaterial(0xFFFF00)));
+			equipmentList.addItem(ExperimentManager.createArrowObjectPlane("物2", null, new ColorMaterial(0x00FFFF)));
+			equipmentList.addItem(ExperimentManager.createTrangleObjectPlane("物1", null, new ColorMaterial(0x00FFFF)));
 
 			var lens4:Lens=ExperimentManager.createConvexLens("成像透镜2", 80);
 			equipmentList.addItem(lens4);

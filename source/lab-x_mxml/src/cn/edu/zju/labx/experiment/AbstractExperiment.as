@@ -5,10 +5,6 @@ package cn.edu.zju.labx.experiment
 	import cn.edu.zju.labx.core.manager.ExperimentManager;
 	import cn.edu.zju.labx.core.manager.StageObjectsManager;
 	import cn.edu.zju.labx.objects.LabXObject;
-	import cn.edu.zju.labx.objects.beam.BeamSplitter;
-	import cn.edu.zju.labx.objects.beam.Mirror;
-	import cn.edu.zju.labx.objects.lens.Lens;
-	import cn.edu.zju.labx.objects.lightSource.LightSource;
 	
 	import com.greensock.TweenLite;
 	
@@ -31,6 +27,7 @@ package cn.edu.zju.labx.experiment
 		
 		protected var  defaultEquipment_size:int=0;
 		
+		protected var configuteXML:XML;
 		
 		public function AbstractExperiment(){
 		    equipmentList = new ArrayCollection();
