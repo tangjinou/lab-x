@@ -8,7 +8,7 @@ package cn.edu.zju.labx.experiment
 	import cn.edu.zju.labx.objects.beam.PolarizationBeamSplitter;
 	import cn.edu.zju.labx.objects.lens.Lens;
 	import cn.edu.zju.labx.objects.lightSource.LightSource;
-	
+	import cn.edu.zju.labx.objects.board.DifferentialCoefficientBoard;
 	import com.greensock.TweenLite;
 	
 	import flash.events.MouseEvent;
@@ -49,7 +49,9 @@ package cn.edu.zju.labx.experiment
 			var lens3:Lens=ExperimentManager.createConvexLens("成像透镜1", 40);
 			equipmentList.addItem(lens3);
 
-			equipmentList.addItem(ExperimentManager.createDifferentialCoefficientBoard("接收屏"));
+			var board:DifferentialCoefficientBoard = ExperimentManager.createDifferentialCoefficientBoard("接收屏");
+			StageObjectsManager.getDefault.setResultObject(board);
+			equipmentList.addItem(board);
 			
 			/**should be recorded*/
 			lclv = ExperimentManager.createLCLV("液晶光阀");

@@ -2,6 +2,8 @@ package cn.edu.zju.labx.experiment
 {
 	import cn.edu.zju.labx.core.LabXConstant;
 	import cn.edu.zju.labx.core.manager.ExperimentManager;
+	import cn.edu.zju.labx.core.manager.StageObjectsManager;
+	import cn.edu.zju.labx.objects.board.MachZehnderInterfBoard;
 	import cn.edu.zju.labx.objects.LabXObject;
 	import cn.edu.zju.labx.objects.beam.BeamSplitter;
 	import cn.edu.zju.labx.objects.beam.Mirror;
@@ -43,7 +45,10 @@ package cn.edu.zju.labx.experiment
 			var lens4:Lens=ExperimentManager.createConvexLens("透镜", 400);
 			lens4.scale=0.8;
 			equipmentList.addItem(lens4);
-			equipmentList.addItem(ExperimentManager.createMachZehnderInterfBoard("接收屏"));
+			
+			var board:MachZehnderInterfBoard = ExperimentManager.createMachZehnderInterfBoard("接收屏");
+			StageObjectsManager.getDefault.setResultObject(board);
+			equipmentList.addItem(board);
 		}
 		
 		override public function moveExperimentEquipmentOptimize(labXObject:LabXObject):void{
