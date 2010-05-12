@@ -2,9 +2,11 @@ package cn.edu.zju.labx.experiment
 {
 	import cn.edu.zju.labx.core.LabXConstant;
 	import cn.edu.zju.labx.core.manager.ExperimentManager;
+	import cn.edu.zju.labx.core.manager.StageObjectsManager;
 	import cn.edu.zju.labx.objects.LabXObject;
 	import cn.edu.zju.labx.objects.lens.Lens;
 	import cn.edu.zju.labx.objects.lightSource.LightSource;
+	import cn.edu.zju.labx.objects.board.FourierDisplayBoard;
 	
 	import com.greensock.TweenLite;
 	
@@ -33,7 +35,10 @@ package cn.edu.zju.labx.experiment
 
 			equipmentList.addItem(ExperimentManager.createObjectPlane("输入面"));
 			equipmentList.addItem(ExperimentManager.createFourierGrating("傅立叶光栅"));
-			equipmentList.addItem(ExperimentManager.createFourierBoard("接收屏"));
+
+			var board:FourierDisplayBoard = ExperimentManager.createFourierBoard("接收屏");
+			StageObjectsManager.getDefault.setResultObject(board);
+			equipmentList.addItem(board);
 
 				
 		}
