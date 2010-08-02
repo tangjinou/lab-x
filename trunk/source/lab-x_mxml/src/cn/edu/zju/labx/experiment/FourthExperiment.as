@@ -72,12 +72,14 @@ package cn.edu.zju.labx.experiment
 			private function createLCLVRadioButtons():void{
 				var lclv_radio_label:Label = new Label();
 				lclv_radio_label.text = "LCLV 选项";
+				lclv_radio_label.setStyle("color","#FFFFFF");
 				StageObjectsManager.getDefault.special_bar_box.addChild(lclv_radio_label);
 				
 			    var lclv_radio_add:RadioButton = new RadioButton();
 			    lclv_radio_add.groupName = "lclv_radio";
 			    lclv_radio_add.id = "lclv_radio_add";
 			    lclv_radio_add.label = "add";
+			    lclv_radio_add.setStyle("color","#FFFFFF");
 			    lclv_radio_add.selected = true;
 			    lclv_radio_add.addEventListener(MouseEvent.CLICK, function (e:MouseEvent){
 			    			lclv.changeFunction(e,lclv_radio_add.label);
@@ -88,6 +90,7 @@ package cn.edu.zju.labx.experiment
 			    lclv_radio_subtract.groupName = "lclv_radio";
 			    lclv_radio_subtract.id = "lclv_radio_subtract";
 			    lclv_radio_subtract.label = "subtract";
+			    lclv_radio_subtract.setStyle("color","#FFFFFF");
 			    lclv_radio_subtract.addEventListener(MouseEvent.CLICK, function (e:MouseEvent){
 			    			lclv.changeFunction(e,lclv_radio_subtract.label);
 			    		});
@@ -97,6 +100,7 @@ package cn.edu.zju.labx.experiment
 			    lclv_radio_differential.groupName = "lclv_radio";
 			    lclv_radio_differential.id = "lclv_radio_differential";
 			    lclv_radio_differential.label = "differential";
+			    lclv_radio_differential.setStyle("color","#FFFFFF");
 			    lclv_radio_differential.addEventListener(MouseEvent.CLICK, function (e:MouseEvent){
 			    			lclv.changeFunction(e,lclv_radio_differential.label);
 			    		});
