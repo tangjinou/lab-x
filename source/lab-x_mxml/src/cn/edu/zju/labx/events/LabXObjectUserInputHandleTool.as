@@ -120,6 +120,7 @@ package cn.edu.zju.labx.events
 						accelerateKeyPress();
 						break;
 				}
+				trace("transform:"+labXObject.transform.toString());
 			}
 		}
 		

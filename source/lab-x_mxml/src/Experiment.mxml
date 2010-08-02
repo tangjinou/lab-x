@@ -251,7 +251,7 @@
 		 <mx:Label id="resultLabel" x="0" y="0"/>
 	 </mx:Panel>
 	 
-	 <mx:Panel y="0" width="326" height="148" layout="absolute" color="#AAAAAA" horizontalCenter="29" borderColor="#A4A8A1" alpha="0.79" title="公告栏">
+	 <mx:Panel y="0" width="326" height="148" layout="absolute" color="#AAAAAA" horizontalCenter="29" borderColor="#A4A8A1" alpha="0.79" title="公告栏" visible="true">
 	     <mx:TextArea  x="0" y="0" width="306" height="106" editable="false" id="message_box" fontSize="12" backgroundColor="#A69B9B" cornerRadius="1" borderStyle="solid" borderColor="#F31207" color="0x070707" themeColor="#F0FF00" alpha="1.0" borderThickness="2"/>
 	     <mx:Label text="LabX" width="60" color="#DFF4F4" fontFamily="Arial" fontWeight="bold" fontSize="21" x="236" y="68"/>
 	 </mx:Panel>
