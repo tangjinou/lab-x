@@ -64,7 +64,7 @@ package cn.edu.zju.labx.objects.board
 			materialsList.addMaterial(material, "right");
 			materialsList.addMaterial(material, "top");
 			materialsList.addMaterial(material, "bottom");
-			cube=new Cube(materialsList, width, depth, height);
+			cube=new Cube(materialsList, width, depth, height, 1, 4, 4);
 			this.addChild(cube);
 
 			effectLayer.addDisplayObject3D(cube, true);
