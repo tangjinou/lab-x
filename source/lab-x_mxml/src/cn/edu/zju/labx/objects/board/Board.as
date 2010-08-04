@@ -58,12 +58,14 @@ package cn.edu.zju.labx.objects.board
 			var materialsList:MaterialsList=new MaterialsList();
 			leftMaterial=material.clone();
 			leftMaterial.interactive=true;
-			materialsList.addMaterial(material, "front");
-			materialsList.addMaterial(material, "back");
+			var frameMaterial:MaterialObject3D = material.clone();
+			frameMaterial.fillColor = 0x0000FF;
+			materialsList.addMaterial(frameMaterial, "front");
+			materialsList.addMaterial(frameMaterial, "back");
 			materialsList.addMaterial(leftMaterial, "left");
 			materialsList.addMaterial(material, "right");
-			materialsList.addMaterial(material, "top");
-			materialsList.addMaterial(material, "bottom");
+			materialsList.addMaterial(frameMaterial, "top");
+			materialsList.addMaterial(frameMaterial, "bottom");
 			cube=new Cube(materialsList, width, depth, height, 1, 4, 4);
 			this.addChild(cube);
 
@@ -165,7 +167,7 @@ package cn.edu.zju.labx.objects.board
 			handleRay(oldRay);
 			super.onRayHandle(oldRay);
 		}
-		
+
 		protected function handleRay(oldRay:Ray):void
 		{
 			//Do Nothing
