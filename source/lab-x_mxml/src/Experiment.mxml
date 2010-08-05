@@ -260,23 +260,23 @@
 	 <mx:VBox id="coordainate_bar_box">
 	 	 <mx:HBox>
 	 	        <mx:Label text="选中物体" color="#FC0F03"/>
-	 	 		<mx:Text  id ="object_selected" color="#0000FF" text="无"/>
+	 	 		<mx:Text  id ="object_selected" color="#FFFFFF" text="无"/>
 	 	 </mx:HBox>
 	     <mx:HBox>
 	 			<mx:Label text="坐标：x" color="#FC0F03"/>
-	 			<mx:Text  id ="coordainate_x" color="#0000FF" text="0"/>
+	 			<mx:Text  id ="coordainate_x" color="#FFFFFF" text="0"/>
 	 			<mx:Label text="y" color="#FC0F03"/>
-	 			<mx:Text  id ="coordainate_y" color="#0000FF" text="0"/>
+	 			<mx:Text  id ="coordainate_y" color="#FFFFFF" text="0"/>
 	 			<mx:Label text="z" color="#FC0F03"/>
-	 			<mx:Text  id ="coordainate_z" color="#0000FF" text="0"/>
+	 			<mx:Text  id ="coordainate_z" color="#FFFFFF" text="0"/>
 	 	 </mx:HBox>
 	 	 <mx:HBox>
 	 			<mx:Label text="角度：α" color="#FC0F03"/>
-	 			<mx:Text  id ="rotate_x" color="#0000FF" text="0"/>
+	 			<mx:Text  id ="rotate_x" color="#FFFFFF" text="0"/>
 	 			<mx:Label text="β" color="#FC0F03"/>
-	 			<mx:Text  id ="rotate_y" color="#0000FF" text="0"/>
+	 			<mx:Text  id ="rotate_y" color="#FFFFFF" text="0"/>
 	 			<mx:Label text="γ" color="#FC0F03"/>
-	 			<mx:Text  id ="rotate_z" color="#0000FF" text="0"/>
+	 			<mx:Text  id ="rotate_z" color="#FFFFFF" text="0"/>
 	 	 </mx:HBox>
 	 </mx:VBox>
 	 
