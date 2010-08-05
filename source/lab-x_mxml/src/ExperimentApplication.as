@@ -6,6 +6,7 @@ package
 	import cn.edu.zju.labx.experiment.ExperimentFactory;
 	import cn.edu.zju.labx.objects.Grid;
 	import cn.edu.zju.labx.objects.desk.Desk;
+	import cn.edu.zju.labx.objects.Axis;
 	
 	import flash.events.Event;
 	import flash.events.MouseEvent;
@@ -30,6 +31,7 @@ package
 		private var light:PointLight3D;
 		public var originPivot:DisplayObject3D;
 		private var desk:Desk;
+		private var axis:Axis;
 
 		private var equipmentLayer:ViewportLayer;
 
@@ -54,6 +56,8 @@ package
 
 
 			grid=new Grid();
+			
+			axis = new Axis();
 
 			light=new PointLight3D(true);
 			light.x=200;
@@ -142,6 +146,7 @@ package
 		{
 			desk.destroy();
 			grid.destroy();
+			axis.destroy();
 		}
 
 	}
